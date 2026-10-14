@@ -1,0 +1,15 @@
+{
+ "id": "house_robber",
+ "entry": "house_robber.rs",
+ "description": "description.md",
+ "main_fn": "rob",
+ "editable_regions": {
+  "helpers": "between `// <helpers>` and `// </helpers>`: helper spec fns and exec helpers",
+  "proofs": "between `// <proofs>` and `// </proofs>`: lemmas (proof fns)",
+  "code": "between `// <code>` and `// </code>`: exactly one block `{ ... }`, the body of the function under spec"
+ },
+ "fixed": "Everything outside the three editable regions is fixed: the `use` lines, the <preamble> block (definitions, spec fns, and any exec fns given there), the <spec> block (signature, requires, ensures of the function under test), fn main, and all marker comments. Compared token-wise; comments and whitespace are ignored.",
+ "source": "data/algoveri/algoveri_data/house_robber/verus_spec.rs",
+ "source_sha256": "a1de5530b6436a9ec7c2a51a034b7e3268cda9f5baf0e84c8052be98d5a87f01",
+ "patches": []
+}

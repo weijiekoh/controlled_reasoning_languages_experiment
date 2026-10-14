@@ -1,0 +1,73 @@
+{
+ "problem": "django__django-11885",
+ "bench": "swe",
+ "condition": "bare",
+ "effort": "low",
+ "model": "claude-sonnet-5-5",
+ "batch": "swe_sonnet",
+ "dry_run": false,
+ "outcome": "solved",
+ "verify_pass": true,
+ "verify_stage": "ok",
+ "verify_detail": "resolved (run_id cotml-20261014012225-33406bbb)",
+ "num_turns": 8,
+ "input_tokens": 16,
+ "output_tokens": 2233,
+ "thinking_tokens": 579,
+ "cache_read_tokens": 28278,
+ "cache_creation_tokens": 5148,
+ "usage_source": "result",
+ "total_cost_usd": 0.038059800000000005,
+ "duration_s": 31.0,
+ "agent_duration_ms": 30187,
+ "lean_compile_count": 4,
+ "search_tactic_uses": 0,
+ "search_tactic_in_final": false,
+ "tool_calls": {
+  "Bash": 7
+ },
+ "proof_chars": 1669,
+ "proof_lines": 31,
+ "statement_prefix_changed": false,
+ "stop_reason": "end_turn",
+ "result_subtype": "success",
+ "terminal_reason": "completed",
+ "is_error": false,
+ "api_error_status": null,
+ "permission_denials": 0,
+ "agent_said_give_up": false,
+ "final_text": "`Collector.collect()` in `django/db/models/deletion.py` now combines fast-delete querysets that target the same model into one `DELETE ... WHERE a IN (...) OR b IN (...)`. `test_fast_delete_combined_relationships` now passes, and the `delete` and `delete_regress` suites pass (64 tests, 3 skipped). I didn't run the rest of the Django test suite.\n\nCombining happens inside `collect()`, within one pass over a single model's reverse relations. The key is the related model plus the batch number. My first attempt merged everything per model at delete time. That broke `test_large_delete` (22 queries instead of the 25 it expects) because it also merged querysets from different batches. Keeping the batch number in the key preserves the existing batching limits.\n\nFast-delete querysets that come from different `collect()` calls aren't merged with each other.",
+ "timed_out": false,
+ "docker_rc": 0,
+ "limits": {
+  "max_turns": 50,
+  "max_budget_usd": 4.0,
+  "timeout_min": 25.0
+ },
+ "network": "cotml-egress",
+ "proxy": true,
+ "claude_version": "2.1.296",
+ "model_usage": {
+  "claude-sonnet-5-5": {
+   "inputTokens": 16,
+   "outputTokens": 2233,
+   "cacheReadInputTokens": 28278,
+   "cacheCreationInputTokens": 5148,
+   "webSearchRequests": 0,
+   "costUSD": 0.038059800000000005,
+   "contextWindow": 1000000,
+   "maxOutputTokens": 128000,
+   "thinkingTokens": 579,
+   "canonicalModel": "claude-sonnet-5-5",
+   "provider": "firstParty",
+   "costBasis": "list"
+  }
+ },
+ "started_at": "2026-10-14T08:21:53+00:00",
+ "framing": "debug",
+ "patch_files": [
+  "django/db/models/deletion.py"
+ ],
+ "touched_test_files": [],
+ "untracked_files": []
+}

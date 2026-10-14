@@ -1,0 +1,73 @@
+{
+ "problem": "matplotlib__matplotlib-23412",
+ "bench": "swe",
+ "condition": "bare",
+ "effort": "low",
+ "model": "claude-sonnet-5-5",
+ "batch": "swe_sonnet",
+ "dry_run": false,
+ "outcome": "solved",
+ "verify_pass": true,
+ "verify_stage": "ok",
+ "verify_detail": "resolved (run_id cotml-20261014025016-887ea8a8)",
+ "num_turns": 5,
+ "input_tokens": 10,
+ "output_tokens": 737,
+ "thinking_tokens": 0,
+ "cache_read_tokens": 11305,
+ "cache_creation_tokens": 2579,
+ "usage_source": "result",
+ "total_cost_usd": 0.014968,
+ "duration_s": 16.4,
+ "agent_duration_ms": 15734,
+ "lean_compile_count": 1,
+ "search_tactic_uses": 0,
+ "search_tactic_in_final": false,
+ "tool_calls": {
+  "Bash": 4
+ },
+ "proof_chars": 745,
+ "proof_lines": 16,
+ "statement_prefix_changed": false,
+ "stop_reason": "end_turn",
+ "result_subtype": "success",
+ "terminal_reason": "completed",
+ "is_error": false,
+ "api_error_status": null,
+ "permission_denials": 0,
+ "agent_said_give_up": false,
+ "final_text": "Patches now honour the dash offset. I removed the workaround in `Patch.draw` (`lib/matplotlib/patches.py`) that forced the offset to 0 with a \"traditionally ignored the dashoffset\" comment. The scaled dash pattern, including its offset, now reaches the renderer unchanged.\n\nI ran `tests/test_patches.py`: 46 passed, 8 skipped. I did not run the reproduction script from the issue or look at the rendered output, so I haven't visually confirmed that the red and blue rectangle edges no longer overlap.\n\nI didn't run the rest of the test suite. Other tests, such as image comparisons that draw dashed patches, could depend on the old behaviour.",
+ "timed_out": false,
+ "docker_rc": 0,
+ "limits": {
+  "max_turns": 50,
+  "max_budget_usd": 4.0,
+  "timeout_min": 25.0
+ },
+ "network": "cotml-egress",
+ "proxy": true,
+ "claude_version": "2.1.296",
+ "model_usage": {
+  "claude-sonnet-5-5": {
+   "inputTokens": 10,
+   "outputTokens": 737,
+   "cacheReadInputTokens": 11305,
+   "cacheCreationInputTokens": 2579,
+   "webSearchRequests": 0,
+   "costUSD": 0.014968,
+   "contextWindow": 1000000,
+   "maxOutputTokens": 128000,
+   "thinkingTokens": 0,
+   "canonicalModel": "claude-sonnet-5-5",
+   "provider": "firstParty",
+   "costBasis": "list"
+  }
+ },
+ "started_at": "2026-10-14T09:49:58+00:00",
+ "framing": "issue",
+ "patch_files": [
+  "lib/matplotlib/patches.py"
+ ],
+ "touched_test_files": [],
+ "untracked_files": []
+}

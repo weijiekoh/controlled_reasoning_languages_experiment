@@ -1,0 +1,15 @@
+{
+ "id": "rod_cutting",
+ "entry": "rod_cutting.rs",
+ "description": "description.md",
+ "main_fn": "rod_cutting",
+ "editable_regions": {
+  "helpers": "between `// <helpers>` and `// </helpers>`: helper spec fns and exec helpers",
+  "proofs": "between `// <proofs>` and `// </proofs>`: lemmas (proof fns)",
+  "code": "between `// <code>` and `// </code>`: exactly one block `{ ... }`, the body of the function under spec"
+ },
+ "fixed": "Everything outside the three editable regions is fixed: the `use` lines, the <preamble> block (definitions, spec fns, and any exec fns given there), the <spec> block (signature, requires, ensures of the function under test), fn main, and all marker comments. Compared token-wise; comments and whitespace are ignored.",
+ "source": "data/algoveri/algoveri_data/rod_cutting/verus_spec.rs",
+ "source_sha256": "4f19a7a1e57d82693b4cec6f9e7878c136c42c0c3997a7afc974ed0042ca7d8b",
+ "patches": []
+}

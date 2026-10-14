@@ -1,0 +1,25 @@
+  by_contra hne
+  push_neg at hne
+  have hinj : ∀ r : R, algebraMap R S r = 0 → r = 0 := by
+    intro r hr
+    have : r • (1:S) = 0 := by rw [Algebra.smul_def, hr, zero_mul]
+    rcases smul_eq_zero.mp this with h | h
+    · exact h
+    · exact absurd h one_ne_zero
+  have hfin : (minimalPrimes S).Finite := Ideal.finite_minimalPrimes_of_isNoetherianRing S
+  have h1 : ∀ p : minimalPrimes S, ∃ a : R, a ≠ 0 ∧ algebraMap R S a ∈ p.1 := by
+    intro p
+    obtain ⟨a, ha, ha0⟩ := Submodule.exists_mem_ne_zero_of_ne_bot (hne p)
+    exact ⟨a, ha0, ha⟩
+  choose f hf0 hf using h1
+  haveI : Fintype (minimalPrimes S) := hfin.fintype
+  have hprod : ∏ p, f p ≠ 0 := Finset.prod_ne_zero_iff.mpr (fun p _ => hf0 p)
+  have hmem : algebraMap R S (∏ p, f p) ∈ nilradical S := by
+    rw [← Ideal.sInf_minimalPrimes, Submodule.mem_sInf]
+    intro P hP
+    obtain ⟨c, hc⟩ := Finset.dvd_prod_of_mem f (Finset.mem_univ ⟨P, hP⟩)
+    rw [hc, map_mul]
+    exact Ideal.mul_mem_right _ _ (hf ⟨P, hP⟩)
+  obtain ⟨n, hn⟩ := hmem
+  rw [← map_pow] at hn
+  exact hprod (pow_eq_zero_iff'.mp (hinj _ hn)).1

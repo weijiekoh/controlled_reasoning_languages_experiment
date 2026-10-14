@@ -1,0 +1,30 @@
+diff --git a/sklearn/utils/_set_output.py b/sklearn/utils/_set_output.py
+index 335773c6a..35689fbab 100755
+--- a/sklearn/utils/_set_output.py
++++ b/sklearn/utils/_set_output.py
+@@ -55,13 +55,24 @@ def _wrap_in_pandas_container(
+     if isinstance(data_to_wrap, pd.DataFrame):
+         if columns is not None:
+             data_to_wrap.columns = columns
+-        if index is not None:
++        # Only override the index when it is compatible with the output
++        # (e.g. aggregating transformers change the number of samples).
++        if index is not None and len(index) == data_to_wrap.shape[0]:
+             data_to_wrap.index = index
+         return data_to_wrap
+ 
++    if index is not None and len(index) != _num_samples_or_none(data_to_wrap):
++        index = None
+     return pd.DataFrame(data_to_wrap, index=index, columns=columns)
+ 
+ 
++def _num_samples_or_none(data):
++    try:
++        return len(data)
++    except TypeError:
++        return None
++
++
+ def _get_output_config(method, estimator=None):
+     """Get output config based on estimator and global configuration.
+ 

@@ -1,0 +1,53 @@
+diff --git a/pylint/lint/pylinter.py b/pylint/lint/pylinter.py
+index 53345a6b..a679990a 100644
+--- a/pylint/lint/pylinter.py
++++ b/pylint/lint/pylinter.py
+@@ -564,29 +564,44 @@ class PyLinter(
+             if not msg.may_be_emitted():
+                 self._msgs_state[msg.msgid] = False
+ 
+-    @staticmethod
+-    def _discover_files(files_or_modules: Sequence[str]) -> Iterator[str]:
++    def _is_ignored_path(self, path: str) -> bool:
++        """Return True if a file or directory path should be skipped."""
++        basename = os.path.basename(os.path.normpath(path))
++        return (
++            basename in self.config.ignore
++            or any(p.match(basename) for p in self.config.ignore_patterns)
++            or any(p.match(os.path.normpath(path)) for p in self.config.ignore_paths)
++        )
++
++    def _discover_files(self, files_or_modules: Sequence[str]) -> Iterator[str]:
+         """Discover python modules and packages in sub-directory.
+ 
+         Returns iterator of paths to discovered modules and packages.
++        Ignored files and directories are skipped.
+         """
+         for something in files_or_modules:
+             if os.path.isdir(something) and not os.path.isfile(
+                 os.path.join(something, "__init__.py")
+             ):
+                 skip_subtrees: list[str] = []
+-                for root, _, files in os.walk(something):
++                for root, dirs, files in os.walk(something):
++                    # Prune ignored sub-directories so their contents are not visited.
++                    dirs[:] = [
++                        d for d in dirs if not self._is_ignored_path(os.path.join(root, d))
++                    ]
+                     if any(root.startswith(s) for s in skip_subtrees):
+                         # Skip subtree of already discovered package.
+                         continue
+                     if "__init__.py" in files:
+                         skip_subtrees.append(root)
+-                        yield root
++                        if not self._is_ignored_path(root):
++                            yield root
+                     else:
+                         yield from (
+                             os.path.join(root, file)
+                             for file in files
+                             if file.endswith(".py")
++                            and not self._is_ignored_path(os.path.join(root, file))
+                         )
+             else:
+                 yield something

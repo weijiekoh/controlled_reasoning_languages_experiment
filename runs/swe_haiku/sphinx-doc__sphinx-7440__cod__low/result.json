@@ -1,0 +1,73 @@
+{
+ "problem": "sphinx-doc__sphinx-7440",
+ "bench": "swe",
+ "condition": "cod",
+ "effort": "low",
+ "model": "claude-haiku-5-5",
+ "batch": "swe_haiku",
+ "dry_run": false,
+ "outcome": "solved",
+ "verify_pass": true,
+ "verify_stage": "ok",
+ "verify_detail": "resolved (run_id cotml-20261014011431-9534954c)",
+ "num_turns": 8,
+ "input_tokens": 18,
+ "output_tokens": 3868,
+ "thinking_tokens": 1251,
+ "cache_read_tokens": 45148,
+ "cache_creation_tokens": 9547,
+ "usage_source": "result",
+ "total_cost_usd": 0.003580655,
+ "duration_s": 26.1,
+ "agent_duration_ms": 25589,
+ "lean_compile_count": 4,
+ "search_tactic_uses": 0,
+ "search_tactic_in_final": false,
+ "tool_calls": {
+  "Bash": 7
+ },
+ "proof_chars": 2678,
+ "proof_lines": 56,
+ "statement_prefix_changed": false,
+ "stop_reason": "end_turn",
+ "result_subtype": "success",
+ "terminal_reason": "completed",
+ "is_error": false,
+ "api_error_status": null,
+ "permission_denials": 0,
+ "agent_said_give_up": false,
+ "final_text": "Glossary terms that differ only in case (like `MySQL` and `mysql`) no longer trigger the \"duplicate term description\" warning. `tests/test_domain_std.py::test_glossary` now passes.\n\nThe fix is in `sphinx/domains/std.py`:\n\n- **Duplicate check:** `make_glossary_term` now registers the term with its original case instead of lowercasing it, so the two spellings are separate entries.\n- **Reference lookup:** `:term:` references still match case-insensitively. An exact match is tried first, then a case-insensitive scan (new helper `_find_term_case_insensitive`). This is used both in `_resolve_obj_xref` and `resolve_any_xref`.\n\nThe other tests in `tests/test_domain_std.py` pass, except `test_productionlist`. That test also fails on the untouched code, so my change didn't cause it. I did not run the full test suite.",
+ "timed_out": false,
+ "docker_rc": 0,
+ "limits": {
+  "max_turns": 50,
+  "max_budget_usd": 2.0,
+  "timeout_min": 25.0
+ },
+ "network": "cotml-egress",
+ "proxy": true,
+ "claude_version": "2.1.296",
+ "model_usage": {
+  "claude-haiku-5-5": {
+   "inputTokens": 18,
+   "outputTokens": 3868,
+   "cacheReadInputTokens": 45148,
+   "cacheCreationInputTokens": 9547,
+   "webSearchRequests": 0,
+   "costUSD": 0.003580655,
+   "contextWindow": 1000000,
+   "maxOutputTokens": 128000,
+   "thinkingTokens": 1251,
+   "canonicalModel": "claude-haiku-5-5",
+   "provider": "firstParty",
+   "costBasis": "list"
+  }
+ },
+ "started_at": "2026-10-14T08:14:04+00:00",
+ "framing": "debug",
+ "patch_files": [
+  "sphinx/domains/std.py"
+ ],
+ "touched_test_files": [],
+ "untracked_files": []
+}

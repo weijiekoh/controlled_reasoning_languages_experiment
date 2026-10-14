@@ -1,0 +1,73 @@
+{
+ "problem": "matplotlib__matplotlib-23314",
+ "bench": "swe",
+ "condition": "bare",
+ "effort": "low",
+ "model": "claude-sonnet-5-5",
+ "batch": "swe_sonnet",
+ "dry_run": false,
+ "outcome": "solved",
+ "verify_pass": true,
+ "verify_stage": "ok",
+ "verify_detail": "resolved (run_id cotml-20261014024949-798d680f)",
+ "num_turns": 4,
+ "input_tokens": 8,
+ "output_tokens": 498,
+ "thinking_tokens": 0,
+ "cache_read_tokens": 4764,
+ "cache_creation_tokens": 2982,
+ "usage_source": "result",
+ "total_cost_usd": 0.0129274,
+ "duration_s": 23.4,
+ "agent_duration_ms": 22387,
+ "lean_compile_count": 1,
+ "search_tactic_uses": 0,
+ "search_tactic_in_final": false,
+ "tool_calls": {
+  "Bash": 3
+ },
+ "proof_chars": 438,
+ "proof_lines": 11,
+ "statement_prefix_changed": false,
+ "stop_reason": "end_turn",
+ "result_subtype": "success",
+ "terminal_reason": "completed",
+ "is_error": false,
+ "api_error_status": null,
+ "permission_denials": 0,
+ "agent_said_give_up": false,
+ "final_text": "`set_visible(False)` now hides a 3D subplot. `Axes3D.draw` in `lib/mpl_toolkits/mplot3d/axes3d.py` returns immediately when the axes isn't visible, so nothing gets drawn.\n\nI did not run your reproduction script or check the hidden subplot visually. I ran the existing 3D test file, `lib/mpl_toolkits/tests/test_mplot3d.py`, and all 116 tests pass. I did not add a new test for this case.",
+ "timed_out": false,
+ "docker_rc": 0,
+ "limits": {
+  "max_turns": 50,
+  "max_budget_usd": 4.0,
+  "timeout_min": 25.0
+ },
+ "network": "cotml-egress",
+ "proxy": true,
+ "claude_version": "2.1.296",
+ "model_usage": {
+  "claude-sonnet-5-5": {
+   "inputTokens": 8,
+   "outputTokens": 498,
+   "cacheReadInputTokens": 4764,
+   "cacheCreationInputTokens": 2982,
+   "webSearchRequests": 0,
+   "costUSD": 0.0129274,
+   "contextWindow": 1000000,
+   "maxOutputTokens": 128000,
+   "thinkingTokens": 0,
+   "canonicalModel": "claude-sonnet-5-5",
+   "provider": "firstParty",
+   "costBasis": "list"
+  }
+ },
+ "started_at": "2026-10-14T09:49:24+00:00",
+ "framing": "issue",
+ "patch_files": [
+  "lib/mpl_toolkits/mplot3d/axes3d.py"
+ ],
+ "touched_test_files": [],
+ "untracked_files": []
+}

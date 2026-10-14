@@ -1,0 +1,342 @@
+fn apply_push(f: &mut Vec<Vec<i64>>, e: &mut Vec<i64>, u: usize, v: usize, d: i64)
+    requires
+        dims(old(f)@, old(f)@.len() as int),
+        old(e)@.len() == old(f)@.len(),
+        u < old(f).len(), v < old(f).len(), u != v,
+        forall |x: int| 0 <= x < old(f)@.len() ==> #[trigger] old(e)@[x] as int == csum(old(f)@.len() as int, mf(old(f)@), x),
+        0 <= d <= 2000000000,
+        -2000000000 <= old(e)@[u as int] <= 2000000000,
+        -2000000000 <= old(e)@[v as int] <= 2000000000,
+        -100000 <= old(f)@[u as int]@[v as int] <= 100000,
+        -100000 <= old(f)@[v as int]@[u as int] <= 100000,
+        old(f)@[u as int]@[v as int] + d <= 100000,
+        old(f)@[v as int]@[u as int] - d >= -100000,
+    ensures
+        dims(f@, f@.len() as int),
+        f@.len() == old(f)@.len(),
+        e@.len() == old(e)@.len(),
+        forall |a: int, b: int| 0 <= a < f@.len() && 0 <= b < f@.len() && !(a == u && b == v) && !(a == v && b == u)
+            ==> #[trigger] f@[a]@[b] == old(f)@[a]@[b],
+        f@[u as int]@[v as int] as int == old(f)@[u as int]@[v as int] as int + d,
+        f@[v as int]@[u as int] as int == old(f)@[v as int]@[u as int] as int - d,
+        forall |x: int| 0 <= x < f@.len() && x != u && x != v ==> #[trigger] e@[x] == old(e)@[x],
+        e@[u as int] as int == old(e)@[u as int] as int - d,
+        e@[v as int] as int == old(e)@[v as int] as int + d,
+        forall |x: int| 0 <= x < f@.len() ==> #[trigger] e@[x] as int == csum(f@.len() as int, mf(f@), x),
+{
+    let ghost n = f@.len() as int;
+    let ghost f0 = f@;
+    let mut ru = f[u].clone();
+    let x1 = ru[v] + d;
+    ru.set(v, x1);
+    f.set(u, ru);
+    let mut rv = f[v].clone();
+    let x2 = rv[u] - d;
+    rv.set(u, x2);
+    f.set(v, rv);
+    let eu = e[u] - d;
+    e.set(u, eu);
+    let ev = e[v] + d;
+    e.set(v, ev);
+    proof {
+        let g1 = mf(f0);
+        let g2 = mf(f@);
+        assert forall |a: int, b: int| 0 <= a < n && 0 <= b < n && !(a == u && b == v) && !(a == v && b == u)
+            implies #[trigger] g2(a,b) == g1(a,b) by {}
+        assert(g2(u as int, v as int) == g1(u as int, v as int) + d);
+        assert(g2(v as int, u as int) == g1(v as int, u as int) - d);
+        assert forall |x: int| 0 <= x < n implies #[trigger] e@[x] as int == csum(n, g2, x) by {
+            push_cols(n, g1, g2, u as int, v as int, d as int, x);
+        }
+    }
+}
+
+fn build_cap(graph: &CapacityGraph) -> (cm: Vec<Vec<i64>>)
+    requires graph.well_formed(), capacities_bounded(graph.view()),
+    ensures dims(cm@, graph.adj.len() as int), cap_ok(graph.view(), mf(cm@)),
+{
+    let n = graph.adj.len();
+    let mut cm: Vec<Vec<i64>> = Vec::new();
+    let mut r = 0usize;
+    while r < n
+        invariant cm@.len() == r, r <= n,
+            forall |a: int| 0 <= a < r ==> #[trigger] cm@[a]@.len() == n,
+            forall |a: int, b: int| 0 <= a < r && 0 <= b < n ==> #[trigger] cm@[a]@[b] == 0,
+        decreases n - r
+    {
+        cm.push(zero_vec(n));
+        r += 1;
+    }
+    let ghost g = graph.view();
+    let mut u = 0usize;
+    while u < n
+        invariant
+            n == graph.adj.len(), g == graph.view(), u <= n,
+            graph.well_formed(), capacities_bounded(g),
+            dims(cm@, n as int),
+            forall |a: int| 0 <= a < u ==> capr(g, mf(cm@), a, g[a].len() as int),
+            forall |a: int, b: int| u <= a < n && 0 <= b < n ==> #[trigger] cm@[a]@[b] == 0,
+        decreases n - u
+    {
+        let m = graph.adj[u].len();
+        let mut j = 0usize;
+        assert(g[u as int].len() == m);
+        assert(capr(g, mf(cm@), u as int, 0)) by {
+            assert forall |v: int| 0 <= v < g.len() implies #[trigger] capr_at(g, mf(cm@), u as int, 0, v) by {
+                assert(mf(cm@)(u as int, v) == 0);
+            }
+        }
+        while j < m
+            invariant
+                n == graph.adj.len(), g == graph.view(), u < n, m == graph.adj[u as int].len(), j <= m,
+                graph.well_formed(), capacities_bounded(g),
+                dims(cm@, n as int),
+                forall |a: int| 0 <= a < u ==> capr(g, mf(cm@), a, g[a].len() as int),
+                forall |a: int, b: int| u < a < n && 0 <= b < n ==> #[trigger] cm@[a]@[b] == 0,
+                capr(g, mf(cm@), u as int, j as int),
+            decreases m - j
+        {
+            let ghost cm0 = cm@;
+            let (v0, c0) = graph.adj[u][j];
+            assert(g[u as int][j as int].0 == v0 as int);
+            assert(g[u as int][j as int].1 == c0 as int);
+            assert(0 <= g[u as int][j as int].0 < g.len());
+            let mut row = cm[u].clone();
+            row.set(v0, c0);
+            cm.set(u, row);
+            proof {
+                assert forall |a: int| 0 <= a < u implies capr(g, mf(cm@), a, g[a].len() as int) by {
+                    assert(cm@[a] == cm0[a]);
+                    assert forall |v: int| 0 <= v < g.len() implies #[trigger] capr_at(g, mf(cm@), a, g[a].len() as int, v) by {
+                        assert(mf(cm@)(a,v) == mf(cm0)(a,v));
+                        assert(capr_at(g, mf(cm0), a, g[a].len() as int, v));
+                        capr_at_congr(g, mf(cm0), mf(cm@), a, g[a].len() as int, v);
+                    }
+                }
+                assert forall |v: int| 0 <= v < g.len() implies #[trigger] capr_at(g, mf(cm@), u as int, j as int + 1, v) by {
+                    if v == v0 as int {
+                        assert(mf(cm@)(u as int, v) == c0 as int);
+                        capr_at_new(g, mf(cm@), u as int, j as int, v);
+                    } else {
+                        assert(mf(cm@)(u as int, v) == mf(cm0)(u as int, v));
+                        assert(capr_at(g, mf(cm0), u as int, j as int, v));
+                        capr_at_congr(g, mf(cm0), mf(cm@), u as int, j as int, v);
+                        capr_at_ext(g, mf(cm@), u as int, j as int, v);
+                    }
+                }
+            }
+            j += 1;
+        }
+        u += 1;
+    }
+    proof {
+        assert forall |a: int, b: int| 0 <= a < g.len() && 0 <= b < g.len() implies
+            (has_capacity(g, a, b, #[trigger] mf(cm@)(a,b))
+             || (mf(cm@)(a,b) == 0 && forall |cc: int| !(#[trigger] has_capacity(g, a, b, cc)))) by {
+            assert(capr_at(g, mf(cm@), a, g[a].len() as int, b));
+            if exists |i: int| 0 <= i < g[a].len() && #[trigger] g[a][i].0 == b && g[a][i].1 == mf(cm@)(a,b) {
+                let i = choose |i: int| 0 <= i < g[a].len() && #[trigger] g[a][i].0 == b && g[a][i].1 == mf(cm@)(a,b);
+                assert(has_capacity(g, a, b, mf(cm@)(a,b)));
+            } else {
+                assert(mf(cm@)(a,b) == 0);
+                assert forall |cc: int| !(#[trigger] has_capacity(g, a, b, cc)) by {
+                    if has_capacity(g, a, b, cc) {
+                        let i = choose |i: int| 0 <= a < g.len() && 0 <= i < g[a].len() && #[trigger] g[a][i].0 == b && g[a][i].1 == cc;
+                        assert(g[a][i].0 != b);
+                    }
+                }
+            }
+        }
+    }
+    cm
+}
+
+fn zero_vec(n: usize) -> (r: Vec<i64>)
+    ensures r@.len() == n, forall |i: int| 0 <= i < n ==> #[trigger] r@[i] == 0,
+{
+    let mut r: Vec<i64> = Vec::new();
+    let mut i = 0usize;
+    while i < n
+        invariant r@.len() == i, i <= n, forall |k: int| 0 <= k < i ==> #[trigger] r@[k] == 0,
+        decreases n - i
+    {
+        r.push(0);
+        i += 1;
+    }
+    r
+}
+
+fn init_state(cm: &Vec<Vec<i64>>, n: usize, s: usize, t: usize) -> (r: (Vec<Vec<i64>>, Vec<i64>, Vec<i64>))
+    requires
+        dims(cm@, n as int), s < n, t < n, s != t, n <= 1000,
+        forall |a: int, b: int| 0 <= a < n && 0 <= b < n ==> 0 <= #[trigger] cm@[a]@[b] <= 100000,
+    ensures
+        dims(r.0@, n as int), r.1@.len() == n, r.2@.len() == n,
+        good(n as int, s as int, t as int, mf(r.0@), mf(cm@), mv(r.2@), mv(r.1@)),
+{
+    let mut f: Vec<Vec<i64>> = Vec::new();
+    let mut r = 0usize;
+    while r < n
+        invariant f@.len() == r, r <= n,
+            forall |a: int| 0 <= a < r ==> #[trigger] f@[a]@.len() == n,
+            forall |a: int, b: int| 0 <= a < r && 0 <= b < n ==> #[trigger] f@[a]@[b] == 0,
+        decreases n - r
+    {
+        f.push(zero_vec(n));
+        r += 1;
+    }
+    let mut e = zero_vec(n);
+    let mut h = zero_vec(n);
+    h.set(s, n as i64);
+    proof {
+        assert forall |x: int| 0 <= x < n implies #[trigger] e@[x] as int == csum(n as int, mf(f@), x) by {
+            assert forall |w: int| 0 <= w < n implies #[trigger] mf(f@)(w, x) == 0 by {}
+            sum_zero(n as int, |w: int| mf(f@)(w, x));
+            assert(csum(n as int, mf(f@), x) == ssum(n as int, |w: int| mf(f@)(w, x)));
+        }
+    }
+    let mut v = 0usize;
+    while v < n
+        invariant
+            v <= n, dims(f@, n as int), e@.len() == n, h@.len() == n, s < n, t < n, s != t, n <= 1000,
+            dims(cm@, n as int),
+            forall |a: int, b: int| 0 <= a < n && 0 <= b < n ==> 0 <= #[trigger] cm@[a]@[b] <= 100000,
+            forall |x: int| 0 <= x < n ==> #[trigger] h@[x] as int == (if x == s as int { n as int } else { 0int }),
+            forall |x: int| 0 <= x < n ==> #[trigger] e@[x] as int == csum(n as int, mf(f@), x),
+            forall |a: int, b: int| 0 <= a < n && 0 <= b < n ==> #[trigger] f@[a]@[b] as int == -(f@[b]@[a] as int),
+            forall |a: int, b: int| 0 <= a < n && 0 <= b < n ==> #[trigger] f@[a]@[b] <= cm@[a]@[b],
+            forall |a: int, b: int| 0 <= a < n && 0 <= b < n && #[trigger] f@[a]@[b] < cm@[a]@[b] ==>
+                (h@[a] as int <= h@[b] as int + 1 || (a == s as int && b >= v)),
+            forall |x: int| 0 <= x < n && x != s ==> #[trigger] e@[x] >= 0,
+            forall |x: int| v <= x < n ==> #[trigger] f@[s as int]@[x] == 0,
+            forall |x: int| 0 <= x < v && x != s ==> #[trigger] f@[s as int]@[x] == cm@[s as int]@[x],
+        decreases n - v
+    {
+        if v != s {
+            let d = cm[s][v];
+            proof {
+                let fs = mf(f@);
+                let cs = mf(cm@);
+                assert forall |x: int| 0 <= x < n implies -100000000 <= #[trigger] e@[x] as int <= 100000000 by {
+                    csum_bound_from(n as int, fs, cs, x);
+                }
+                assert(f@[v as int]@[s as int] == 0);
+            }
+            let ghost f0 = f@;
+            let ghost e0 = e@;
+            apply_push(&mut f, &mut e, s, v, d);
+            proof {
+                assert forall |x: int| 0 <= x < n implies #[trigger] e@[x] as int == csum(n as int, mf(f@), x) by {}
+                assert forall |a: int, b: int| 0 <= a < n && 0 <= b < n implies #[trigger] f@[a]@[b] as int == -(f@[b]@[a] as int) by {
+                    if a == s as int && b == v as int {} else if a == v as int && b == s as int {} else {
+                        assert(f@[a]@[b] == f0[a]@[b]);
+                        assert(f@[b]@[a] == f0[b]@[a]);
+                    }
+                }
+                assert forall |a: int, b: int| 0 <= a < n && 0 <= b < n implies #[trigger] f@[a]@[b] <= cm@[a]@[b] by {
+                    if a == s as int && b == v as int {} else if a == v as int && b == s as int {} else {
+                        assert(f@[a]@[b] == f0[a]@[b]);
+                    }
+                }
+                assert forall |a: int, b: int| 0 <= a < n && 0 <= b < n && #[trigger] f@[a]@[b] < cm@[a]@[b] implies
+                    (h@[a] as int <= h@[b] as int + 1 || (a == s as int && b >= v + 1)) by {
+                    if a == s as int && b == v as int {} else if a == v as int && b == s as int {
+                        assert(h@[a] as int == 0);
+                    } else {
+                        assert(f@[a]@[b] == f0[a]@[b]);
+                    }
+                }
+                assert forall |x: int| 0 <= x < n && x != s implies #[trigger] e@[x] >= 0 by {
+                    if x == v as int {} else { assert(e@[x] == e0[x]); }
+                }
+                assert forall |x: int| v + 1 <= x < n implies #[trigger] f@[s as int]@[x] == 0 by {
+                    assert(f@[s as int]@[x] == f0[s as int]@[x]);
+                }
+                assert forall |x: int| 0 <= x < v + 1 && x != s implies #[trigger] f@[s as int]@[x] == cm@[s as int]@[x] by {
+                    if x < v { assert(f@[s as int]@[x] == f0[s as int]@[x]); }
+                }
+            }
+        } else {
+            proof {
+                assert(f@[s as int]@[s as int] == 0);
+                assert forall |a: int, b: int| 0 <= a < n && 0 <= b < n && #[trigger] f@[a]@[b] < cm@[a]@[b] implies
+                    (h@[a] as int <= h@[b] as int + 1 || (a == s as int && b >= v + 1)) by {
+                    if a == s as int && b == s as int { assert(h@[a] as int <= h@[b] as int + 1); }
+                }
+            }
+        }
+        v += 1;
+    }
+    proof {
+        let fs = mf(f@); let cs = mf(cm@); let hs = mv(h@); let es = mv(e@);
+        assert(good0(n as int, s as int, t as int, fs, cs, hs, es)) by {
+            assert forall |a: int, b: int| 0 <= a < n && 0 <= b < n && #[trigger] fs(a,b) < cs(a,b) implies hs(a) <= hs(b) + 1 by {}
+        }
+        assert forall |x: int| 0 <= x < n implies #[trigger] hs(x) <= 2 * n - 1 by {}
+    }
+    (f, e, h)
+}
+
+fn find_active(e: &Vec<i64>, n: usize, s: usize, t: usize) -> (r: usize)
+    requires e@.len() == n, s < n, t < n,
+    ensures r <= n,
+        r < n ==> r != s && r != t && e@[r as int] > 0,
+        r == n ==> forall |x: int| 0 <= x < n && x != s && x != t ==> #[trigger] e@[x] <= 0,
+{
+    let mut i = 0usize;
+    while i < n
+        invariant i <= n, e@.len() == n,
+            forall |x: int| 0 <= x < i && x != s && x != t ==> #[trigger] e@[x] <= 0,
+        decreases n - i
+    {
+        if i != s && i != t && e[i] > 0 { return i; }
+        i += 1;
+    }
+    n
+}
+
+fn find_adm(f: &Vec<Vec<i64>>, cm: &Vec<Vec<i64>>, h: &Vec<i64>, n: usize, u: usize) -> (r: usize)
+    requires dims(f@, n as int), dims(cm@, n as int), h@.len() == n, u < n,
+        forall |x: int| 0 <= x < n ==> 0 <= #[trigger] h@[x] <= 2000,
+    ensures r <= n,
+        r < n ==> f@[u as int]@[r as int] < cm@[u as int]@[r as int] && h@[u as int] == h@[r as int] + 1,
+        r == n ==> forall |w: int| 0 <= w < n ==>
+            !(#[trigger] f@[u as int]@[w] < cm@[u as int]@[w] && h@[u as int] == h@[w] + 1),
+{
+    let mut i = 0usize;
+    while i < n
+        invariant i <= n, dims(f@, n as int), dims(cm@, n as int), h@.len() == n, u < n,
+            forall |x: int| 0 <= x < n ==> 0 <= #[trigger] h@[x] <= 2000,
+            forall |w: int| 0 <= w < i ==>
+                !(#[trigger] f@[u as int]@[w] < cm@[u as int]@[w] && h@[u as int] == h@[w] + 1),
+        decreases n - i
+    {
+        if f[u][i] < cm[u][i] && h[u] == h[i] + 1 { return i; }
+        i += 1;
+    }
+    n
+}
+
+fn find_min(f: &Vec<Vec<i64>>, cm: &Vec<Vec<i64>>, h: &Vec<i64>, n: usize, u: usize) -> (r: usize)
+    requires dims(f@, n as int), dims(cm@, n as int), h@.len() == n, u < n,
+    ensures r <= n,
+        r < n ==> f@[u as int]@[r as int] < cm@[u as int]@[r as int]
+            && forall |w: int| 0 <= w < n && #[trigger] f@[u as int]@[w] < cm@[u as int]@[w] ==> h@[r as int] <= h@[w],
+        r == n ==> forall |w: int| 0 <= w < n ==> !(#[trigger] f@[u as int]@[w] < cm@[u as int]@[w]),
+{
+    let mut best = n;
+    let mut i = 0usize;
+    while i < n
+        invariant i <= n, best <= n, dims(f@, n as int), dims(cm@, n as int), h@.len() == n, u < n,
+            best < n ==> (best < i && f@[u as int]@[best as int] < cm@[u as int]@[best as int]
+                && forall |w: int| 0 <= w < i && #[trigger] f@[u as int]@[w] < cm@[u as int]@[w] ==> h@[best as int] <= h@[w]),
+            best == n ==> forall |w: int| 0 <= w < i ==> !(#[trigger] f@[u as int]@[w] < cm@[u as int]@[w]),
+        decreases n - i
+    {
+        if f[u][i] < cm[u][i] {
+            if best == n || h[i] < h[best] { best = i; }
+        }
+        i += 1;
+    }
+    best
+}

@@ -1,0 +1,1 @@
+{"time": "2026-10-13T17:24:35", "argv": ["--dry-run", "--bench", "minif2f", "--problems", "aime_1983_p1", "--condition", "bare", "--effort", "medium", "--max-turns", "60", "--max-budget-usd", "3", "--timeout-min", "30", "--parallel", "1", "--out", "runs/dryrun2/"], "model": "claude-sonnet-5-5"}

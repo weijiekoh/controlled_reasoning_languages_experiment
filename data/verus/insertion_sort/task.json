@@ -1,0 +1,15 @@
+{
+ "id": "insertion_sort",
+ "entry": "insertion_sort.rs",
+ "description": "description.md",
+ "main_fn": "insertion_sort",
+ "editable_regions": {
+  "helpers": "between `// <helpers>` and `// </helpers>`: helper spec fns and exec helpers",
+  "proofs": "between `// <proofs>` and `// </proofs>`: lemmas (proof fns)",
+  "code": "between `// <code>` and `// </code>`: exactly one block `{ ... }`, the body of the function under spec"
+ },
+ "fixed": "Everything outside the three editable regions is fixed: the `use` lines, the <preamble> block (definitions, spec fns, and any exec fns given there), the <spec> block (signature, requires, ensures of the function under test), fn main, and all marker comments. Compared token-wise; comments and whitespace are ignored.",
+ "source": "data/algoveri/algoveri_data/insertion_sort/verus_spec.rs",
+ "source_sha256": "94b7e766483367cc400abe5960a368751d410b9027c8fa039afa81f0dd97ae77",
+ "patches": []
+}

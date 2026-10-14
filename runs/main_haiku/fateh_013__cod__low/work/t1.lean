@@ -1,0 +1,11 @@
+import Mathlib
+open Matrix
+#check @Sylow.card_eq_card_quotient_normalizer
+#check @Sylow.card_eq_index_normalizer
+#check @Sylow.mk
+#check @Sylow.ofCard
+#check @Matrix.GeneralLinearGroup.card_fieldGL
+#check @Matrix.card_GL_field
+#check @Subgroup.card_mul_index
+#check @Sylow.mk'
+#check @Sylow.ext

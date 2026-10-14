@@ -1,0 +1,38 @@
+by
+  by_contra hcon
+  push_neg at hcon
+  obtain ⟨hf, hg⟩ := hcon
+  obtain ⟨O, z, hz, hO⟩ := hfg
+  set m := n - 1 with hm
+  set H : Polynomial ℂ := f.map (algebraMap ℝ ℂ) + Polynomial.C Complex.I * g.map (algebraMap ℝ ℂ) with hH
+  have hHeval : ∀ k : ℕ, H.eval (k:ℂ) = (f.eval (k:ℝ) : ℂ) + Complex.I * (g.eval (k:ℝ) : ℂ) := by
+    intro k
+    simp only [hH, eval_add, eval_mul, eval_C, eval_natCast_map]
+    simp
+  have hHd : H.natDegree < m := by
+    refine lt_of_le_of_lt (natDegree_add_le _ _) (max_lt ?_ ?_)
+    · exact lt_of_le_of_lt natDegree_map_le hf
+    · exact lt_of_le_of_lt (natDegree_C_mul_le _ _) (lt_of_le_of_lt natDegree_map_le hg)
+  have hzero := fwdDiff_iter_eq_zero_of_degree_lt (R := ℂ) hHd
+  have h0 := congrFun hzero 1
+  rw [fwdDiff_iter_eq_sum_shift] at h0
+  simp only [Pi.zero_apply] at h0
+  set ω : ℂ := Complex.exp (2 * Real.pi * Complex.I / (n:ℂ)) with hω
+  have hprim : IsPrimitiveRoot ω n := Complex.isPrimitiveRoot_exp n (by omega)
+  have hω1 : ω - 1 ≠ 0 := sub_ne_zero.mpr (hprim.ne_one (by omega))
+  have hωne : ω ≠ 0 := by
+    intro h; rw [h] at hprim; exact absurd (hprim.pow_eq_one) (by simp [hprim.ne_zero (by omega)] )
+  have hterm : ∀ k ∈ Finset.range (m+1), ((-1:ℤ)^(m-k) * (m.choose k : ℤ)) • H.eval ((1:ℂ) + (k:ℕ) • (1:ℂ))
+      = ((-1:ℤ)^(m-k) * (m.choose k : ℤ)) • (O + z * ω^(k+1)) := by
+    intro k hk
+    have hk' : k + 1 ≤ n := by
+      have := Finset.mem_range.mp hk; omega
+    have hk1 : (1:ℂ) + (k:ℕ) • (1:ℂ) = ((k+1 : ℕ) : ℂ) := by
+      simp [nsmul_eq_mul]; ring
+    rw [hk1, hHeval, ← Complex.ofReal_natCast]
+    have hmem : (k+1) ∈ Icc 1 n := by constructor <;> omega
+    have := hO (k+1) hmem
+    push_cast at this ⊢
+    rw [show ((k:ℂ)+1) = ((k+1 : ℕ) : ℂ) by push_cast; ring] at *
+    sorry
+  sorry

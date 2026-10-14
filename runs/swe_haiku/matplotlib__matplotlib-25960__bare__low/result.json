@@ -1,0 +1,73 @@
+{
+ "problem": "matplotlib__matplotlib-25960",
+ "bench": "swe",
+ "condition": "bare",
+ "effort": "low",
+ "model": "claude-haiku-5-5",
+ "batch": "swe_haiku",
+ "dry_run": false,
+ "outcome": "gave_up",
+ "verify_pass": false,
+ "verify_stage": "tests",
+ "verify_detail": "FAIL_TO_PASS 1/1; PASS_TO_PASS 133/137 failing: lib/matplotlib/tests/test_figure.py::test_subfigure[png], lib/matplotlib/tests/test_figure.py::test_subfigure_double[png], lib/matplotlib/tests/test_figure.py::test_subfigure_spanning",
+ "num_turns": 15,
+ "input_tokens": 32,
+ "output_tokens": 7210,
+ "thinking_tokens": 3081,
+ "cache_read_tokens": 122338,
+ "cache_creation_tokens": 13906,
+ "usage_source": "result",
+ "total_cost_usd": 0.00656983,
+ "duration_s": 97.4,
+ "agent_duration_ms": 96650,
+ "lean_compile_count": 3,
+ "search_tactic_uses": 0,
+ "search_tactic_in_final": false,
+ "tool_calls": {
+  "Bash": 14
+ },
+ "proof_chars": 2022,
+ "proof_lines": 42,
+ "statement_prefix_changed": false,
+ "stop_reason": "end_turn",
+ "result_subtype": "success",
+ "terminal_reason": "completed",
+ "is_error": false,
+ "api_error_status": null,
+ "permission_denials": 0,
+ "agent_said_give_up": false,
+ "final_text": "The fix is in place, but four existing tests now fail. They encode the old, buggy layout, so I've left them alone.\n\n**Root cause:** `SubFigure._set_position` in `lib/matplotlib/figure.py` computed each subfigure's relative bounding box from the width and height ratios alone. It never looked at the GridSpec's `wspace` and `hspace`, so the spacing was always ignored.\n\n**Change:** The method now computes cell positions with the same separator math that `GridSpecBase.get_grid_positions` uses. Spacing comes from the GridSpec's subplot params, falling back to the figure's and then rcParams. I did not touch any test files or commit.\n\n**Verification:**\n- `wspace=0, hspace=0` now gives abutting subfigures (e.g. `(0,240,320,240)`, `(320,240,320,240)`), and `wspace=hspace=0.5` gives visible gaps.\n- `test_figure.py`, `test_gridspec.py` and `test_subplots.py` pass except for four `test_figure.py` cases, which all passed before the change:\n  - `test_subfigure_spanning` asserts a subfigure bottom of 320 px. With the default `hspace`, the correct value is now about 338.8 px.\n  - `test_subfigure_scatter_size[png]` and `test_subfigure_double[png]` fail image comparison (RMS 28.2 and 0.86).\n  - `test_subfigure[png]` also fails image comparison.\n\nBecause the default `wspace`/`hspace` now take effect, any subfigure layout with default spacing shifts. The expected values and reference images in those four tests need regenerating; that's a test-side update I couldn't make under the rules here.",
+ "timed_out": false,
+ "docker_rc": 0,
+ "limits": {
+  "max_turns": 50,
+  "max_budget_usd": 2.0,
+  "timeout_min": 25.0
+ },
+ "network": "cotml-egress",
+ "proxy": true,
+ "claude_version": "2.1.296",
+ "model_usage": {
+  "claude-haiku-5-5": {
+   "inputTokens": 32,
+   "outputTokens": 7210,
+   "cacheReadInputTokens": 122338,
+   "cacheCreationInputTokens": 13906,
+   "webSearchRequests": 0,
+   "costUSD": 0.00656983,
+   "contextWindow": 1000000,
+   "maxOutputTokens": 128000,
+   "thinkingTokens": 3081,
+   "canonicalModel": "claude-haiku-5-5",
+   "provider": "firstParty",
+   "costBasis": "list"
+  }
+ },
+ "started_at": "2026-10-14T09:26:33+00:00",
+ "framing": "issue",
+ "patch_files": [
+  "lib/matplotlib/figure.py"
+ ],
+ "touched_test_files": [],
+ "untracked_files": []
+}

@@ -1,0 +1,73 @@
+{
+ "problem": "sphinx-doc__sphinx-7440",
+ "bench": "swe",
+ "condition": "bare",
+ "effort": "low",
+ "model": "claude-sonnet-5-5",
+ "batch": "swe_sonnet",
+ "dry_run": false,
+ "outcome": "solved",
+ "verify_pass": true,
+ "verify_stage": "ok",
+ "verify_detail": "resolved (run_id cotml-20261014012445-b5cfe83b)",
+ "num_turns": 7,
+ "input_tokens": 14,
+ "output_tokens": 1400,
+ "thinking_tokens": 73,
+ "cache_read_tokens": 20178,
+ "cache_creation_tokens": 4506,
+ "usage_source": "result",
+ "total_cost_usd": 0.0273108,
+ "duration_s": 21.1,
+ "agent_duration_ms": 20480,
+ "lean_compile_count": 2,
+ "search_tactic_uses": 0,
+ "search_tactic_in_final": false,
+ "tool_calls": {
+  "Bash": 6
+ },
+ "proof_chars": 2082,
+ "proof_lines": 43,
+ "statement_prefix_changed": false,
+ "stop_reason": "end_turn",
+ "result_subtype": "success",
+ "terminal_reason": "completed",
+ "is_error": false,
+ "api_error_status": null,
+ "permission_denials": 0,
+ "agent_said_give_up": false,
+ "final_text": "Glossary terms are now case-sensitive, so `MySQL` and `mysql` no longer trigger the \"duplicate term description\" warning. `tests/test_domain_std.py::test_glossary` now passes. I didn't build the phpMyAdmin docs from the issue.\n\n**What changed (all in `sphinx/domains/std.py`):**\n- Terms are stored with their original case instead of being lowercased when noted.\n- The `:term:` role no longer lowercases its target.\n- When resolving a reference, Sphinx looks for an exact-case match first. If there isn't one, it falls back to the lowercase form. Existing references that relied on the old case-insensitive matching should keep working.\n\n`test_productionlist` still fails in `tests/test_domain_std.py` (`assert 3 == 2`). It fails the same way without my change, so I left it alone. I only ran `tests/test_domain_std.py`, not the rest of the suite.",
+ "timed_out": false,
+ "docker_rc": 0,
+ "limits": {
+  "max_turns": 50,
+  "max_budget_usd": 4.0,
+  "timeout_min": 25.0
+ },
+ "network": "cotml-egress",
+ "proxy": true,
+ "claude_version": "2.1.296",
+ "model_usage": {
+  "claude-sonnet-5-5": {
+   "inputTokens": 14,
+   "outputTokens": 1400,
+   "cacheReadInputTokens": 20178,
+   "cacheCreationInputTokens": 4506,
+   "webSearchRequests": 0,
+   "costUSD": 0.0273108,
+   "contextWindow": 1000000,
+   "maxOutputTokens": 128000,
+   "thinkingTokens": 73,
+   "canonicalModel": "claude-sonnet-5-5",
+   "provider": "firstParty",
+   "costBasis": "list"
+  }
+ },
+ "started_at": "2026-10-14T08:24:23+00:00",
+ "framing": "debug",
+ "patch_files": [
+  "sphinx/domains/std.py"
+ ],
+ "touched_test_files": [],
+ "untracked_files": []
+}

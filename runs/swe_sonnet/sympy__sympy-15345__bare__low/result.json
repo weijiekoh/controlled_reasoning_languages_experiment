@@ -1,0 +1,73 @@
+{
+ "problem": "sympy__sympy-15345",
+ "bench": "swe",
+ "condition": "bare",
+ "effort": "low",
+ "model": "claude-sonnet-5-5",
+ "batch": "swe_sonnet",
+ "dry_run": false,
+ "outcome": "solved",
+ "verify_pass": true,
+ "verify_stage": "ok",
+ "verify_detail": "resolved (run_id cotml-20261014012518-4888ad75)",
+ "num_turns": 3,
+ "input_tokens": 8,
+ "output_tokens": 646,
+ "thinking_tokens": 0,
+ "cache_read_tokens": 6115,
+ "cache_creation_tokens": 1598,
+ "usage_source": "result",
+ "total_cost_usd": 0.0110825,
+ "duration_s": 12.2,
+ "agent_duration_ms": 11349,
+ "lean_compile_count": 0,
+ "search_tactic_uses": 0,
+ "search_tactic_in_final": false,
+ "tool_calls": {
+  "Bash": 2
+ },
+ "proof_chars": 646,
+ "proof_lines": 16,
+ "statement_prefix_changed": false,
+ "stop_reason": "end_turn",
+ "result_subtype": "success",
+ "terminal_reason": "completed",
+ "is_error": false,
+ "api_error_status": null,
+ "permission_denials": 0,
+ "agent_said_give_up": false,
+ "final_text": "`mathematica_code(Max(x, 2))` now returns `Max[2, x]`, which is valid Mathematica. It isn't the `'Max[x,2]'` from the issue: the arguments come out as `2, x` because SymPy sorts them, and there is a space after the comma.\n\nI added `_print_Max` and `_print_Min` to `sympy/printing/mathematica.py`. They print `Max[...]` and `Min[...]` with square brackets.\n\nI only ran the issue's example by hand. I did not run `test_Function` or the rest of the test suite. The existing `test_Function` in `sympy/printing/tests/test_mathematica.py` expects `\"Max[x, y, z]*Min[y, z]\"`, which matches the new format.",
+ "timed_out": false,
+ "docker_rc": 0,
+ "limits": {
+  "max_turns": 50,
+  "max_budget_usd": 4.0,
+  "timeout_min": 25.0
+ },
+ "network": "cotml-egress",
+ "proxy": true,
+ "claude_version": "2.1.296",
+ "model_usage": {
+  "claude-sonnet-5-5": {
+   "inputTokens": 8,
+   "outputTokens": 646,
+   "cacheReadInputTokens": 6115,
+   "cacheCreationInputTokens": 1598,
+   "webSearchRequests": 0,
+   "costUSD": 0.0110825,
+   "contextWindow": 1000000,
+   "maxOutputTokens": 128000,
+   "thinkingTokens": 0,
+   "canonicalModel": "claude-sonnet-5-5",
+   "provider": "firstParty",
+   "costBasis": "list"
+  }
+ },
+ "started_at": "2026-10-14T08:25:05+00:00",
+ "framing": "debug",
+ "patch_files": [
+  "sympy/printing/mathematica.py"
+ ],
+ "touched_test_files": [],
+ "untracked_files": []
+}

@@ -1,0 +1,7 @@
+## version
+2.1.296 (Claude Code)
+## lean
+/work/putnam_2011_a5.lean:14:8: warning: declaration uses `sorry`
+## lean_rc 0 1791947155.316144320 1791947163.153182897
+## isolation
+## end

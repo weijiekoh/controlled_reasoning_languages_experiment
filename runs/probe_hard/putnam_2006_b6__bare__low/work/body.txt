@@ -1,0 +1,82 @@
+  have hk0 : (0:ℝ) < k := by exact_mod_cast (by omega : 0 < k)
+  set p : ℝ := 1 + 1/k with hp
+  have hp1 : 1 ≤ p := by rw [hp]; have : (0:ℝ) < 1/k := by positivity
+                         linarith
+  have hpos : ∀ n, 0 < a n := by
+    intro n; induction n with
+    | zero => exact ha0
+    | succ n ih => rw [ha]; have : 0 < 1/((a n)^((1 : ℝ)/k)) := by positivity
+                   linarith
+  set b : ℕ → ℝ := fun n => (a n)^p with hb
+  have bpos : ∀ n, 0 < b n := fun n => Real.rpow_pos_of_pos (hpos n) _
+  have hrec : ∀ n, b (n+1) = b n * (1 + 1/b n)^p := by
+    intro n
+    have h1 : a (n+1) = a n * (1 + 1/b n) := by
+      rw [ha]
+      have : a n * (1/b n) = 1/((a n)^((1:ℝ)/k)) := by
+        simp only [hb, hp]
+        rw [Real.rpow_add (hpos n), Real.rpow_one]
+        field_simp
+      rw [mul_add, mul_one, this]
+    show (a (n+1))^p = _
+    rw [h1, Real.mul_rpow (hpos n).le (by have := bpos n; positivity)]
+  have hd : ∀ n, p ≤ b (n+1) - b n := by
+    intro n
+    have := one_add_mul_self_le_rpow_one_add (s := 1/b n) (by have := bpos n; have : 0 < 1/b n := by positivity
+                                                             linarith) hp1
+    rw [hrec]
+    have h2 := bpos n
+    have : b n * (1 + p * (1/b n)) ≤ b n * (1 + 1/b n)^p := by gcongr
+    have e : b n * (1 + p * (1/b n)) = b n + p := by field_simp
+    linarith
+  have hge : ∀ n:ℕ, b 0 + n * p ≤ b n := by
+    intro n; induction n with
+    | zero => simp
+    | succ n ih => have := hd n; push_cast; linarith
+  have hbt : Tendsto b atTop atTop := by
+    have : Tendsto (fun n:ℕ => b 0 + n * p) atTop atTop := by
+      apply tendsto_atTop_add_const_left
+      exact Tendsto.atTop_mul_const (by linarith) tendsto_natCast_atTop_atTop
+    exact tendsto_atTop_mono hge this
+  have hder : HasDerivAt (fun x:ℝ => (1+x)^p) p 0 := by
+    have := (Real.hasDerivAt_rpow_const (x := 1) (p := p) (Or.inl one_ne_zero))
+    have h3 := (this.comp_add_const 0 1) 
+    simpa using (by simpa using h3 : HasDerivAt (fun x:ℝ => (1+x)^p) (p * 1^(p-1)) 0)
+  have hsl := hder.tendsto_slope_zero_right
+  have hinv : Tendsto (fun n => 1 / b n) atTop (𝓝[>] 0) := by
+    apply tendsto_nhdsWithin_iff.2
+    refine ⟨?_, Eventually.of_forall fun n => by have := bpos n; simp [this]⟩
+    simpa using hbt.inv_tendsto_atTop
+  have hlim := hsl.comp hinv
+  have hdt : Tendsto (fun n => b (n+1) - b n) atTop (𝓝 p) := by
+    refine hlim.congr fun n => ?_
+    have := (bpos n).ne'
+    simp only [Function.comp, hrec n]
+    simp
+    field_simp
+    ring
+  have hc := hdt.cesaro
+  have hsum : ∀ n:ℕ, ∑ i ∈ Finset.range n, (b (i+1) - b i) = b n - b 0 := fun n =>
+    Finset.sum_range_sub b n
+  have hbn : Tendsto (fun n:ℕ => b n / n) atTop (𝓝 p) := by
+    have h0 : Tendsto (fun n:ℕ => b 0 / (n:ℝ)) atTop (𝓝 0) :=
+      tendsto_const_nhds.div_atTop tendsto_natCast_atTop_atTop
+    have := hc.add h0
+    simp only [add_zero] at this
+    refine this.congr' ?_
+    filter_upwards [eventually_gt_atTop 0] with n hn
+    rw [hsum]
+    have : (n:ℝ) ≠ 0 := by positivity
+    field_simp
+    ring
+  have hpow := hbn.pow k
+  have hfin : (putnam_2006_b6_solution k) = p ^ k := by
+    simp only [putnam_2006_b6_solution, hp]; congr 1; field_simp
+  rw [hfin]
+  refine hpow.congr' ?_
+  filter_upwards [eventually_gt_atTop 0] with n hn
+  have hn' : (0:ℝ) < n := by exact_mod_cast hn
+  simp only [hb]
+  rw [div_pow, ← Real.rpow_natCast, ← Real.rpow_mul (hpos n).le]
+  congr 2
+  rw [hp]; field_simp

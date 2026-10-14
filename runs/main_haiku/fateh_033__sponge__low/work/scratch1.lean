@@ -1,0 +1,12 @@
+import Mathlib
+open Polynomial
+#check @Nat.card_perm
+#check @Polynomial.card_rootSet_eq_natDegree
+#check @Polynomial.Gal.galAction_isPretransitive
+#check @MulAction.card_orbit_mul_card_stabilizer_eq_card_group
+#check @MulAction.orbit_eq_univ
+#check @Polynomial.mem_rootSet
+#check @Polynomial.Gal.galAction_apply
+#check @Irreducible.separable
+#check @SplittingField.splits
+#check @Polynomial.natDegree_eq_of_degree_eq_some

@@ -1,0 +1,73 @@
+{
+ "problem": "sympy__sympy-13551",
+ "bench": "swe",
+ "condition": "bare",
+ "effort": "low",
+ "model": "claude-sonnet-5-5",
+ "batch": "swe_sonnet",
+ "dry_run": false,
+ "outcome": "solved",
+ "verify_pass": true,
+ "verify_stage": "ok",
+ "verify_detail": "resolved (run_id cotml-20261014025616-44f59192)",
+ "num_turns": 5,
+ "input_tokens": 10,
+ "output_tokens": 1355,
+ "thinking_tokens": 94,
+ "cache_read_tokens": 10455,
+ "cache_creation_tokens": 3019,
+ "usage_source": "result",
+ "total_cost_usd": 0.022163000000000002,
+ "duration_s": 43.5,
+ "agent_duration_ms": 42973,
+ "lean_compile_count": 1,
+ "search_tactic_uses": 0,
+ "search_tactic_in_final": false,
+ "tool_calls": {
+  "Bash": 4
+ },
+ "proof_chars": 1042,
+ "proof_lines": 26,
+ "statement_prefix_changed": false,
+ "stop_reason": "end_turn",
+ "result_subtype": "success",
+ "terminal_reason": "completed",
+ "is_error": false,
+ "api_error_status": null,
+ "permission_denials": 0,
+ "agent_said_give_up": false,
+ "final_text": "`Product(n + 1/2**k, [k, 0, n-1]).doit()` no longer returns the wrong closed form. It now stays unevaluated as `Product(n + 2**(-k), (k, 0, n - 1))`, so `p.subs(n, 2)` gives `Product(2 + 2**(-k), (k, 0, 1))`. That evaluates to the correct 15/2. I didn't add a q-Pochhammer closed form.\n\n**Cause:** the `term.is_Add` branch of `_eval_product` in `sympy/concrete/products.py` split a sum into numerator and denominator and multiplied the separate products. That isn't valid for a product of sums.\n\n**Fix:** that branch now returns `None` (leaving the product unevaluated) when the denominator is a plain number. If the denominator involves `k`, the branch still computes numerator and denominator products as before and returns `None` if either can't be evaluated.\n\n**Tests:**\n- `python bin/test sympy/concrete/tests/test_products.py`: 18 passed.\n- `python bin/test sympy/concrete`: 107 passed, 1 expected failure, 7 exceptions.\n  - The 7 exceptions are a `DeprecationWarning` from `collections.Iterable` in `sympy/tensor/indexed.py`, which I did not touch.\n  - I only looked at the end of the output, so I haven't checked that all 7 come from that warning.\n  - I didn't run the suite without my change to compare.\n\nI didn't add a regression test for this case, since the rules say not to touch the test directories.\n\nThe condition I wrote for the number case, `if q.is_Number and q is not S.One or q is S.One:`, is clumsier than it needs to be. It amounts to \"return `None` whenever the denominator is a number\".",
+ "timed_out": false,
+ "docker_rc": 0,
+ "limits": {
+  "max_turns": 50,
+  "max_budget_usd": 4.0,
+  "timeout_min": 25.0
+ },
+ "network": "cotml-egress",
+ "proxy": true,
+ "claude_version": "2.1.296",
+ "model_usage": {
+  "claude-sonnet-5-5": {
+   "inputTokens": 10,
+   "outputTokens": 1355,
+   "cacheReadInputTokens": 10455,
+   "cacheCreationInputTokens": 3019,
+   "webSearchRequests": 0,
+   "costUSD": 0.022163000000000002,
+   "contextWindow": 1000000,
+   "maxOutputTokens": 128000,
+   "thinkingTokens": 94,
+   "canonicalModel": "claude-sonnet-5-5",
+   "provider": "firstParty",
+   "costBasis": "list"
+  }
+ },
+ "started_at": "2026-10-14T09:55:32+00:00",
+ "framing": "issue",
+ "patch_files": [
+  "sympy/concrete/products.py"
+ ],
+ "touched_test_files": [],
+ "untracked_files": []
+}

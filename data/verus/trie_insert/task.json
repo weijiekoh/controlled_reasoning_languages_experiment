@@ -1,0 +1,15 @@
+{
+ "id": "trie_insert",
+ "entry": "trie_insert.rs",
+ "description": "description.md",
+ "main_fn": "insert",
+ "editable_regions": {
+  "helpers": "between `// <helpers>` and `// </helpers>`: helper spec fns and exec helpers",
+  "proofs": "between `// <proofs>` and `// </proofs>`: lemmas (proof fns)",
+  "code": "between `// <code>` and `// </code>`: exactly one block `{ ... }`, the body of the function under spec"
+ },
+ "fixed": "Everything outside the three editable regions is fixed: the `use` lines, the <preamble> block (definitions, spec fns, and any exec fns given there), the <spec> block (signature, requires, ensures of the function under test), fn main, and all marker comments. Compared token-wise; comments and whitespace are ignored.",
+ "source": "data/algoveri/algoveri_data/trie_insert/verus_spec.rs",
+ "source_sha256": "6238361f1d1e6fb01819941da54f0979a618993fd285dcac0619e2a8d2b78f53",
+ "patches": []
+}

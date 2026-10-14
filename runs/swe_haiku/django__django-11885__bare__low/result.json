@@ -1,0 +1,73 @@
+{
+ "problem": "django__django-11885",
+ "bench": "swe",
+ "condition": "bare",
+ "effort": "low",
+ "model": "claude-haiku-5-5",
+ "batch": "swe_haiku",
+ "dry_run": false,
+ "outcome": "solved",
+ "verify_pass": true,
+ "verify_stage": "ok",
+ "verify_detail": "resolved (run_id cotml-20261014010325-2c63eb1c)",
+ "num_turns": 12,
+ "input_tokens": 26,
+ "output_tokens": 7945,
+ "thinking_tokens": 4175,
+ "cache_read_tokens": 85223,
+ "cache_creation_tokens": 13809,
+ "usage_source": "result",
+ "total_cost_usd": 0.006553454999999999,
+ "duration_s": 55.0,
+ "agent_duration_ms": 53977,
+ "lean_compile_count": 6,
+ "search_tactic_uses": 0,
+ "search_tactic_in_final": false,
+ "tool_calls": {
+  "Bash": 11
+ },
+ "proof_chars": 3409,
+ "proof_lines": 71,
+ "statement_prefix_changed": false,
+ "stop_reason": "end_turn",
+ "result_subtype": "success",
+ "terminal_reason": "completed",
+ "is_error": false,
+ "api_error_status": null,
+ "permission_denials": 0,
+ "agent_said_give_up": false,
+ "final_text": "`test_fast_delete_combined_relationships` now passes, and the full `delete`, `delete_regress`, `generic_relations` and `model_forms` suites pass too.\n\n**The change** (in `django/db/models/deletion.py`): when the collector runs fast deletes, querysets for the same model that come from *different* related fields are now merged with OR into a single `DELETE`. For example, `SecondReferrer` rows matched by `referrer_id` and by `other_referrer` are removed in one query.\n\n**A deliberate limit:** querysets from the *same* field are not merged. My first attempt merged all fast-delete querysets per model, which made `test_large_delete` and `test_large_delete_related` fail (22 queries instead of the expected 25). Those tests pin the existing per-batch count for a single foreign key, and I didn't want to edit tests to match. So batches of one field stay separate, and only cross-field combining happens. That covers the issue's `Person`/`Entry` examples, but it doesn't reduce the per-batch queries for a single large FK.\n\nChanges are uncommitted in the working tree.",
+ "timed_out": false,
+ "docker_rc": 0,
+ "limits": {
+  "max_turns": 50,
+  "max_budget_usd": 2.0,
+  "timeout_min": 25.0
+ },
+ "network": "cotml-egress",
+ "proxy": true,
+ "claude_version": "2.1.296",
+ "model_usage": {
+  "claude-haiku-5-5": {
+   "inputTokens": 26,
+   "outputTokens": 7945,
+   "cacheReadInputTokens": 85223,
+   "cacheCreationInputTokens": 13809,
+   "webSearchRequests": 0,
+   "costUSD": 0.006553454999999999,
+   "contextWindow": 1000000,
+   "maxOutputTokens": 128000,
+   "thinkingTokens": 4175,
+   "canonicalModel": "claude-haiku-5-5",
+   "provider": "firstParty",
+   "costBasis": "list"
+  }
+ },
+ "started_at": "2026-10-14T08:02:28+00:00",
+ "framing": "debug",
+ "patch_files": [
+  "django/db/models/deletion.py"
+ ],
+ "touched_test_files": [],
+ "untracked_files": []
+}

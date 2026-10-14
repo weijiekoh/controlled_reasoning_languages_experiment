@@ -1,0 +1,47 @@
+diff --git a/lib/matplotlib/contour.py b/lib/matplotlib/contour.py
+index 144eadeae2..580a0eaf02 100644
+--- a/lib/matplotlib/contour.py
++++ b/lib/matplotlib/contour.py
+@@ -1117,6 +1117,15 @@ class ContourSet(cm.ScalarMappable, ContourLabeler):
+ 
+         return lev[i0:i1]
+ 
++    def _autodetect_bool_levels(self, z, remaining_args):
++        """
++        For boolean *z* with default levels, use levels that separate
++        the False and True regions: [0.5] for contour, [0, 0.5, 1] for contourf.
++        """
++        if (self.levels is None and len(remaining_args) == 0
++                and np.asarray(z).dtype == bool):
++            self.levels = [0, .5, 1] if self.filled else [.5]
++
+     def _process_contour_level_args(self, args):
+         """
+         Determine the contour levels and store in self.levels.
+@@ -1447,11 +1456,14 @@ class QuadContourSet(ContourSet):
+             fn = 'contour'
+         nargs = len(args)
+         if nargs <= 2:
++            z_orig = ma.asarray(args[0])
++            self._autodetect_bool_levels(z_orig, args[1:])
+             z = ma.asarray(args[0], dtype=np.float64)
+             x, y = self._initialize_x_y(z)
+             args = args[1:]
+         elif nargs <= 4:
+             x, y, z = self._check_xyz(args[:3], kwargs)
++            self._autodetect_bool_levels(ma.asarray(args[2]), args[3:])
+             args = args[3:]
+         else:
+             raise _api.nargs_error(fn, takes="from 1 to 4", given=nargs)
+diff --git a/lib/matplotlib/tri/_tricontour.py b/lib/matplotlib/tri/_tricontour.py
+index c403ebae70..b2d476d226 100644
+--- a/lib/matplotlib/tri/_tricontour.py
++++ b/lib/matplotlib/tri/_tricontour.py
+@@ -54,6 +54,7 @@ class TriContourSet(ContourSet):
+         tri, args, kwargs = Triangulation.get_from_args_and_kwargs(*args,
+                                                                    **kwargs)
+         z = np.ma.asarray(args[0])
++        self._autodetect_bool_levels(z, args[1:])
+         if z.shape != tri.x.shape:
+             raise ValueError('z array must have same length as triangulation x'
+                              ' and y arrays')

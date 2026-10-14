@@ -1,0 +1,73 @@
+{
+ "problem": "pylint-dev__pylint-6528",
+ "bench": "swe",
+ "condition": "bare",
+ "effort": "low",
+ "model": "claude-haiku-5-5",
+ "batch": "swe_haiku",
+ "dry_run": false,
+ "outcome": "solved",
+ "verify_pass": true,
+ "verify_stage": "ok",
+ "verify_detail": "resolved (run_id cotml-20261014000947-7ae4e4a2)",
+ "num_turns": 7,
+ "input_tokens": 16,
+ "output_tokens": 3480,
+ "thinking_tokens": 1175,
+ "cache_read_tokens": 34152,
+ "cache_creation_tokens": 7507,
+ "usage_source": "result",
+ "total_cost_usd": 0.003021495,
+ "duration_s": 44.7,
+ "agent_duration_ms": 43676,
+ "lean_compile_count": 2,
+ "search_tactic_uses": 0,
+ "search_tactic_in_final": false,
+ "tool_calls": {
+  "Bash": 6
+ },
+ "proof_chars": 2480,
+ "proof_lines": 51,
+ "statement_prefix_changed": false,
+ "stop_reason": "end_turn",
+ "result_subtype": "success",
+ "terminal_reason": "completed",
+ "is_error": false,
+ "api_error_status": null,
+ "permission_denials": 0,
+ "agent_said_give_up": false,
+ "final_text": "Recursive mode now honours `--ignore`, `--ignore-paths` and `--ignore-patterns`. The fix is in `pylint/lint/pylinter.py`, and the `tests/lint` suite passes (68 passed, 2 skipped).\n\nI reproduced the issue's scenario in a scratch directory with `.a/foo.py` and `bar.py`:\n\n- **No ignore flag:** `foo.py` is still linted. This repo's default `ignore-patterns` is `^\\.#` (emacs locks), not the `^\\.` the issue assumed, so `.a` isn't skipped by default. Changing that default is a separate decision, so I left it alone.\n- **`--ignore=.a`, `--ignore-paths=.a`, `--ignore-patterns=^\\.a`:** `foo.py` is skipped in all three.\n\nThe change: `_discover_files` was a static method that walked directories without consulting any ignore settings. It is now an instance method that prunes ignored subdirectories during `os.walk` and filters out ignored files and packages. Ignore-paths patterns are matched against the normalised path, so `./.a/foo.py` matches `.a`.\n\nI did not add tests, per the rules.",
+ "timed_out": false,
+ "docker_rc": 0,
+ "limits": {
+  "max_turns": 50,
+  "max_budget_usd": 2.0,
+  "timeout_min": 25.0
+ },
+ "network": "cotml-egress",
+ "proxy": true,
+ "claude_version": "2.1.296",
+ "model_usage": {
+  "claude-haiku-5-5": {
+   "inputTokens": 16,
+   "outputTokens": 3480,
+   "cacheReadInputTokens": 34152,
+   "cacheCreationInputTokens": 7507,
+   "webSearchRequests": 0,
+   "costUSD": 0.003021495,
+   "contextWindow": 1000000,
+   "maxOutputTokens": 128000,
+   "thinkingTokens": 1175,
+   "canonicalModel": "claude-haiku-5-5",
+   "provider": "firstParty",
+   "costBasis": "list"
+  }
+ },
+ "started_at": "2026-10-14T07:09:00+00:00",
+ "framing": "issue",
+ "patch_files": [
+  "pylint/lint/pylinter.py"
+ ],
+ "touched_test_files": [],
+ "untracked_files": []
+}

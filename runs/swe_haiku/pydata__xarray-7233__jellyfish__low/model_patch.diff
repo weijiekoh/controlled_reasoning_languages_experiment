@@ -1,0 +1,13 @@
+diff --git a/xarray/core/rolling.py b/xarray/core/rolling.py
+index c194ec08..195efc2c 100644
+--- a/xarray/core/rolling.py
++++ b/xarray/core/rolling.py
+@@ -974,7 +974,7 @@ class Coarsen(CoarsenArithmetic, Generic[T_Xarray]):
+                 reshaped[key] = var
+ 
+         should_be_coords = set(window_dim) & set(self.obj.coords)
+-        result = reshaped.set_coords(should_be_coords)
++        result = reshaped.set_coords(set(obj.coords) | should_be_coords)
+         if isinstance(self.obj, DataArray):
+             return self.obj._from_temp_dataset(result)
+         else:

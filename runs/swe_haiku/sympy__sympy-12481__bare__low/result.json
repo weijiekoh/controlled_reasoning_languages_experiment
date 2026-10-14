@@ -1,0 +1,73 @@
+{
+ "problem": "sympy__sympy-12481",
+ "bench": "swe",
+ "condition": "bare",
+ "effort": "low",
+ "model": "claude-haiku-5-5",
+ "batch": "swe_haiku",
+ "dry_run": false,
+ "outcome": "solved",
+ "verify_pass": true,
+ "verify_stage": "ok",
+ "verify_detail": "resolved (run_id cotml-20261014024104-2efca825)",
+ "num_turns": 6,
+ "input_tokens": 14,
+ "output_tokens": 1831,
+ "thinking_tokens": 300,
+ "cache_read_tokens": 17463,
+ "cache_creation_tokens": 3579,
+ "usage_source": "result",
+ "total_cost_usd": 0.001538905,
+ "duration_s": 14.3,
+ "agent_duration_ms": 13559,
+ "lean_compile_count": 1,
+ "search_tactic_uses": 0,
+ "search_tactic_in_final": false,
+ "tool_calls": {
+  "Bash": 5
+ },
+ "proof_chars": 794,
+ "proof_lines": 17,
+ "statement_prefix_changed": false,
+ "stop_reason": "end_turn",
+ "result_subtype": "success",
+ "terminal_reason": "completed",
+ "is_error": false,
+ "api_error_status": null,
+ "permission_denials": 0,
+ "agent_said_give_up": false,
+ "final_text": "The change resolves the issue, but one existing test now fails, and it encodes the behaviour the issue asks to remove.\n\n**Change:** In `sympy/combinatorics/permutations.py`, the `Permutation` constructor no longer rejects repeated elements when the input is cycle notation. The repeated-element check now applies only to array form. Cycles are already composed left to right through `Cycle`, so the constructor now returns the result.\n\n**Verification:**\n- `Permutation([[0,1],[0,1]])` now gives the identity, with array form `[0, 1]`.\n- `bin/test sympy/combinatorics/tests/test_permutations.py`: 8 passed, 1 failed. Pytest isn't installed, so I used the project's own runner.\n\n**The failing test:** `test_args` at line 352 asserts `raises(ValueError, lambda: Permutation([[1], [1, 2]]))`. That is the same kind of non-disjoint input the issue wants accepted, so the assertion now conflicts with the requested behaviour. I did not edit it because the rules forbid changing test files. It should be updated to expect the identity-style result, or removed, by whoever owns the test suite.",
+ "timed_out": false,
+ "docker_rc": 0,
+ "limits": {
+  "max_turns": 50,
+  "max_budget_usd": 2.0,
+  "timeout_min": 25.0
+ },
+ "network": "cotml-egress",
+ "proxy": true,
+ "claude_version": "2.1.296",
+ "model_usage": {
+  "claude-haiku-5-5": {
+   "inputTokens": 14,
+   "outputTokens": 1831,
+   "cacheReadInputTokens": 17463,
+   "cacheCreationInputTokens": 3579,
+   "webSearchRequests": 0,
+   "costUSD": 0.001538905,
+   "contextWindow": 1000000,
+   "maxOutputTokens": 128000,
+   "thinkingTokens": 300,
+   "canonicalModel": "claude-haiku-5-5",
+   "provider": "firstParty",
+   "costBasis": "list"
+  }
+ },
+ "started_at": "2026-10-14T09:40:49+00:00",
+ "framing": "issue",
+ "patch_files": [
+  "sympy/combinatorics/permutations.py"
+ ],
+ "touched_test_files": [],
+ "untracked_files": []
+}

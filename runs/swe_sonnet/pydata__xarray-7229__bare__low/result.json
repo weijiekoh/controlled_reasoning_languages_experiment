@@ -1,0 +1,73 @@
+{
+ "problem": "pydata__xarray-7229",
+ "bench": "swe",
+ "condition": "bare",
+ "effort": "low",
+ "model": "claude-sonnet-5-5",
+ "batch": "swe_sonnet",
+ "dry_run": false,
+ "outcome": "gave_up",
+ "verify_pass": false,
+ "verify_stage": "tests",
+ "verify_detail": "FAIL_TO_PASS 0/1 failing: xarray/tests/test_computation.py::test_where_attrs; PASS_TO_PASS 280/280",
+ "num_turns": 5,
+ "input_tokens": 10,
+ "output_tokens": 1241,
+ "thinking_tokens": 159,
+ "cache_read_tokens": 12963,
+ "cache_creation_tokens": 3473,
+ "usage_source": "result",
+ "total_cost_usd": 0.0224088,
+ "duration_s": 28.8,
+ "agent_duration_ms": 28110,
+ "lean_compile_count": 1,
+ "search_tactic_uses": 0,
+ "search_tactic_in_final": false,
+ "tool_calls": {
+  "Bash": 4
+ },
+ "proof_chars": 1007,
+ "proof_lines": 27,
+ "statement_prefix_changed": false,
+ "stop_reason": "end_turn",
+ "result_subtype": "success",
+ "terminal_reason": "completed",
+ "is_error": false,
+ "api_error_status": null,
+ "permission_denials": 0,
+ "agent_said_give_up": false,
+ "final_text": "I changed `xr.where(..., keep_attrs=True)` so it no longer overwrites coordinate attributes with the variable's attributes. The change is in `xarray/core/computation.py`. The two existing `where` tests pass. I didn't run your `air_temperature` example because it needs a download, and I didn't add a test for this case.\n\n**Cause:** with `keep_attrs=True`, `where` passed a callable that always returned `x.attrs`. `apply_ufunc` uses that callable for every object it merges, coordinates included, so each coordinate got the variable's attributes.\n\n**Fix:** `where` now calls `apply_ufunc` with `keep_attrs=\"override\"`. It then sets `result.attrs` to a copy of `x.attrs` afterwards. Only the top-level attributes come from `x`, and coordinates keep their own.\n\n**Limitations:**\n- I haven't checked that `Dataset` results keep per-variable attributes correctly.\n- With `\"override\"`, coordinate attributes are taken from the first argument that has them. In `xr.where(cond, x, y)` that is `cond`, not `x`.\n\nI only ran the tests filtered to `where` in `test_computation.py`, not the full suite.",
+ "timed_out": false,
+ "docker_rc": 0,
+ "limits": {
+  "max_turns": 50,
+  "max_budget_usd": 4.0,
+  "timeout_min": 25.0
+ },
+ "network": "cotml-egress",
+ "proxy": true,
+ "claude_version": "2.1.296",
+ "model_usage": {
+  "claude-sonnet-5-5": {
+   "inputTokens": 10,
+   "outputTokens": 1241,
+   "cacheReadInputTokens": 12963,
+   "cacheCreationInputTokens": 3473,
+   "webSearchRequests": 0,
+   "costUSD": 0.0224088,
+   "contextWindow": 1000000,
+   "maxOutputTokens": 128000,
+   "thinkingTokens": 159,
+   "canonicalModel": "claude-sonnet-5-5",
+   "provider": "firstParty",
+   "costBasis": "list"
+  }
+ },
+ "started_at": "2026-10-14T09:52:02+00:00",
+ "framing": "issue",
+ "patch_files": [
+  "xarray/core/computation.py"
+ ],
+ "touched_test_files": [],
+ "untracked_files": []
+}

@@ -1,0 +1,73 @@
+{
+ "problem": "sphinx-doc__sphinx-7757",
+ "bench": "swe",
+ "condition": "bare",
+ "effort": "low",
+ "model": "claude-haiku-5-5",
+ "batch": "swe_haiku",
+ "dry_run": false,
+ "outcome": "solved",
+ "verify_pass": true,
+ "verify_stage": "ok",
+ "verify_detail": "resolved (run_id cotml-20261014001252-b263ae4a)",
+ "num_turns": 4,
+ "input_tokens": 10,
+ "output_tokens": 1527,
+ "thinking_tokens": 247,
+ "cache_read_tokens": 9918,
+ "cache_creation_tokens": 3178,
+ "usage_source": "result",
+ "total_cost_usd": 0.00126093,
+ "duration_s": 15.6,
+ "agent_duration_ms": 14657,
+ "lean_compile_count": 1,
+ "search_tactic_uses": 0,
+ "search_tactic_in_final": false,
+ "tool_calls": {
+  "Bash": 3
+ },
+ "proof_chars": 1841,
+ "proof_lines": 37,
+ "statement_prefix_changed": false,
+ "stop_reason": "end_turn",
+ "result_subtype": "success",
+ "terminal_reason": "completed",
+ "is_error": false,
+ "api_error_status": null,
+ "permission_denials": 0,
+ "agent_said_give_up": false,
+ "final_text": "I fixed the missing default values for positional-only arguments. `foo(a, b=0, /, c=1)` now renders with its defaults, and the related tests pass (63 passed in `tests/test_util_inspect.py` and `tests/test_domain_py.py`).\n\nThe bug was in `signature_from_str` in `sphinx/util/inspect.py`. Python's AST stores defaults for the last N positional parameters across positional-only and regular arguments together. The code applied `args.defaults` only to `args.args`, so defaults belonging to positional-only parameters were lost. I now build one list of positional parameters (`posonlyargs + args`), align the defaults to its tail, and assign `POSITIONAL_ONLY` or `POSITIONAL_OR_KEYWORD` by position.\n\nI did not add a test for this case. The changes are uncommitted in the working tree.",
+ "timed_out": false,
+ "docker_rc": 0,
+ "limits": {
+  "max_turns": 50,
+  "max_budget_usd": 2.0,
+  "timeout_min": 25.0
+ },
+ "network": "cotml-egress",
+ "proxy": true,
+ "claude_version": "2.1.296",
+ "model_usage": {
+  "claude-haiku-5-5": {
+   "inputTokens": 10,
+   "outputTokens": 1527,
+   "cacheReadInputTokens": 9918,
+   "cacheCreationInputTokens": 3178,
+   "webSearchRequests": 0,
+   "costUSD": 0.00126093,
+   "contextWindow": 1000000,
+   "maxOutputTokens": 128000,
+   "thinkingTokens": 247,
+   "canonicalModel": "claude-haiku-5-5",
+   "provider": "firstParty",
+   "costBasis": "list"
+  }
+ },
+ "started_at": "2026-10-14T07:12:35+00:00",
+ "framing": "issue",
+ "patch_files": [
+  "sphinx/util/inspect.py"
+ ],
+ "touched_test_files": [],
+ "untracked_files": []
+}

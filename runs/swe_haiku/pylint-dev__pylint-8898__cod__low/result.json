@@ -1,0 +1,73 @@
+{
+ "problem": "pylint-dev__pylint-8898",
+ "bench": "swe",
+ "condition": "cod",
+ "effort": "low",
+ "model": "claude-haiku-5-5",
+ "batch": "swe_haiku",
+ "dry_run": false,
+ "outcome": "solved",
+ "verify_pass": true,
+ "verify_stage": "ok",
+ "verify_detail": "resolved (run_id cotml-20261014023417-ce2a412e)",
+ "num_turns": 5,
+ "input_tokens": 12,
+ "output_tokens": 2075,
+ "thinking_tokens": 440,
+ "cache_read_tokens": 20804,
+ "cache_creation_tokens": 5366,
+ "usage_source": "result",
+ "total_cost_usd": 0.0019174900000000002,
+ "duration_s": 18.6,
+ "agent_duration_ms": 17965,
+ "lean_compile_count": 1,
+ "search_tactic_uses": 0,
+ "search_tactic_in_final": false,
+ "tool_calls": {
+  "Bash": 4
+ },
+ "proof_chars": 1436,
+ "proof_lines": 40,
+ "statement_prefix_changed": false,
+ "stop_reason": "end_turn",
+ "result_subtype": "success",
+ "terminal_reason": "completed",
+ "is_error": false,
+ "api_error_status": null,
+ "permission_denials": 0,
+ "agent_said_give_up": false,
+ "final_text": "The one failing test, `test_csv_regex_error`, asserts the buggy behaviour: it expects `(foo{1,3})` to be split and rejected. The fix makes that pattern valid, so the test now fails by design. I can't edit test files under the rules, so I'll leave it and report it.\n\n**Change made:** In `pylint/config/argument.py`, `regexp_csv` values are now split by a new `_split_regexp_csv` helper instead of a plain comma split. Commas inside a `{...}` quantifier, and escaped characters, are no longer treated as separators. Verified:\n\n```\n'(foo{1,3}), bar,baz{2,}' -> [re.compile('(foo{1,3})'), re.compile('bar'), re.compile('baz{2,}')]\n```\n\n**Test results:** `tests/config` gives 74 passed, 1 failed. The failure is `test_csv_regex_error`, which asserts that `--bad-names-rgx=(foo{1,3})` errors with `(foo{1` as an invalid pattern. That is exactly the mangling the issue reports, so that test should be updated (for example, to expect `(foo{1,3})` to be accepted, or to use a genuinely invalid pattern). I did not change it because the rules forbid modifying test files.\n\nNot done: a way to escape a literal comma in the option, which the issue also mentions. The current fix covers the reported case (commas in quantifiers) but a bare comma such as `a,b` in a regex still splits, so the issue is only partly addressed for that case.",
+ "timed_out": false,
+ "docker_rc": 0,
+ "limits": {
+  "max_turns": 50,
+  "max_budget_usd": 2.0,
+  "timeout_min": 25.0
+ },
+ "network": "cotml-egress",
+ "proxy": true,
+ "claude_version": "2.1.296",
+ "model_usage": {
+  "claude-haiku-5-5": {
+   "inputTokens": 12,
+   "outputTokens": 2075,
+   "cacheReadInputTokens": 20804,
+   "cacheCreationInputTokens": 5366,
+   "webSearchRequests": 0,
+   "costUSD": 0.0019174900000000002,
+   "contextWindow": 1000000,
+   "maxOutputTokens": 128000,
+   "thinkingTokens": 440,
+   "canonicalModel": "claude-haiku-5-5",
+   "provider": "firstParty",
+   "costBasis": "list"
+  }
+ },
+ "started_at": "2026-10-14T09:33:58+00:00",
+ "framing": "issue",
+ "patch_files": [
+  "pylint/config/argument.py"
+ ],
+ "touched_test_files": [],
+ "untracked_files": []
+}

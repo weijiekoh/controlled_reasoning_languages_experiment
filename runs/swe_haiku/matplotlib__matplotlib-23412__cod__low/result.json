@@ -1,0 +1,73 @@
+{
+ "problem": "matplotlib__matplotlib-23412",
+ "bench": "swe",
+ "condition": "cod",
+ "effort": "low",
+ "model": "claude-haiku-5-5",
+ "batch": "swe_haiku",
+ "dry_run": false,
+ "outcome": "solved",
+ "verify_pass": true,
+ "verify_stage": "ok",
+ "verify_detail": "resolved (run_id cotml-20261014022234-926593b5)",
+ "num_turns": 4,
+ "input_tokens": 10,
+ "output_tokens": 913,
+ "thinking_tokens": 0,
+ "cache_read_tokens": 13089,
+ "cache_creation_tokens": 3533,
+ "usage_source": "result",
+ "total_cost_usd": 0.001030015,
+ "duration_s": 16.6,
+ "agent_duration_ms": 15890,
+ "lean_compile_count": 1,
+ "search_tactic_uses": 0,
+ "search_tactic_in_final": false,
+ "tool_calls": {
+  "Bash": 3
+ },
+ "proof_chars": 745,
+ "proof_lines": 16,
+ "statement_prefix_changed": false,
+ "stop_reason": "end_turn",
+ "result_subtype": "success",
+ "terminal_reason": "completed",
+ "is_error": false,
+ "api_error_status": null,
+ "permission_denials": 0,
+ "agent_said_give_up": false,
+ "final_text": "I removed the code in `Patch.draw` that forced the dash offset to zero, so patch edges now honor dash offsets like `ls=(10, (10, 10))`.\n\nThe change is in `lib/matplotlib/patches.py`: the `draw` method used to wrap drawing in `cbook._setattr_cm(self, _dash_pattern=(0, ...))` with the comment \"Patch has traditionally ignored the dashoffset.\" I dropped that wrapper, leaving only the `_bind_draw_path_function` context.\n\nI didn't run the issue's reproduction script, so the visual result is unverified. The existing `test_patches.py` and `test_lines.py` suites pass (79 passed, 14 skipped). Any image-comparison tests that baselined the old zero-offset behaviour would show up in the wider suite, and I did not run that.",
+ "timed_out": false,
+ "docker_rc": 0,
+ "limits": {
+  "max_turns": 50,
+  "max_budget_usd": 2.0,
+  "timeout_min": 25.0
+ },
+ "network": "cotml-egress",
+ "proxy": true,
+ "claude_version": "2.1.296",
+ "model_usage": {
+  "claude-haiku-5-5": {
+   "inputTokens": 10,
+   "outputTokens": 913,
+   "cacheReadInputTokens": 13089,
+   "cacheCreationInputTokens": 3533,
+   "webSearchRequests": 0,
+   "costUSD": 0.001030015,
+   "contextWindow": 1000000,
+   "maxOutputTokens": 128000,
+   "thinkingTokens": 0,
+   "canonicalModel": "claude-haiku-5-5",
+   "provider": "firstParty",
+   "costBasis": "list"
+  }
+ },
+ "started_at": "2026-10-14T09:22:16+00:00",
+ "framing": "issue",
+ "patch_files": [
+  "lib/matplotlib/patches.py"
+ ],
+ "touched_test_files": [],
+ "untracked_files": []
+}

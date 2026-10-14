@@ -1,0 +1,10 @@
+import Mathlib
+open Polynomial
+#check @card_rootsOfUnity_eq_iff_exists_isPrimitiveRoot
+#check @IsPrimitiveRoot.card_rootsOfUnity
+#check @rootsOfUnity_isCyclic
+#check @HasEnoughRootsOfUnity.natCard_rootsOfUnity
+#check @Polynomial.mem_rootSet_of_ne
+#check @natDegree_X_pow_sub_C
+#check @IsCyclic.card_pow_eq_one_le
+#check @Subgroup.card_subgroup_dvd_card

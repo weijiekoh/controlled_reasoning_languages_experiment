@@ -1,0 +1,7 @@
+  have hfp : ∀ c ∈ Fintype.piFinset (fun i => Finset.range (b i)), (f c).parts =
+      (∑ i : Fin 98, Multiset.replicate (c i) ((i.val+2)!)) +
+        Multiset.replicate (100! - ∑ i : Fin 98, c i * (i.val+2)!) 1 := by
+    intro c hc
+    have h := hS c hc
+    show (dite _ _ _ : Nat.Partition 100!).parts = _
+    rw [dif_pos h]

@@ -1,0 +1,73 @@
+{
+ "problem": "sphinx-doc__sphinx-7910",
+ "bench": "swe",
+ "condition": "bare",
+ "effort": "low",
+ "model": "claude-sonnet-5-5",
+ "batch": "swe_sonnet",
+ "dry_run": false,
+ "outcome": "solved",
+ "verify_pass": true,
+ "verify_stage": "ok",
+ "verify_detail": "resolved (run_id cotml-20261014025502-6d8ab6b2)",
+ "num_turns": 4,
+ "input_tokens": 8,
+ "output_tokens": 871,
+ "thinking_tokens": 0,
+ "cache_read_tokens": 6606,
+ "cache_creation_tokens": 1877,
+ "usage_source": "result",
+ "total_cost_usd": 0.0140791,
+ "duration_s": 9.8,
+ "agent_duration_ms": 9146,
+ "lean_compile_count": 1,
+ "search_tactic_uses": 0,
+ "search_tactic_in_final": false,
+ "tool_calls": {
+  "Bash": 3
+ },
+ "proof_chars": 1151,
+ "proof_lines": 26,
+ "statement_prefix_changed": false,
+ "stop_reason": "end_turn",
+ "result_subtype": "success",
+ "terminal_reason": "completed",
+ "is_error": false,
+ "api_error_status": null,
+ "permission_denials": 0,
+ "agent_said_give_up": false,
+ "final_text": "Decorated `__init__` methods should now be documented when `napoleon_include_init_with_doc = True`. I haven't reproduced the original tensorpack case, and I didn't add a test for a decorated `__init__`. The existing napoleon tests pass (16 passed).\n\nThe fix is in `sphinx/ext/napoleon/__init__.py`. For a method whose class has a simple (non-nested) name, the code looked the class up in `obj.__globals__`. A `functools.wraps` wrapper has its own `__globals__`, which doesn't contain the class, so Sphinx concluded the method wasn't owned by the class and skipped it.\n\nI removed that branch. The code now always finds the class by importing `obj.__module__` and walking the dotted `__qualname__` path. This is what it already did for nested classes. `functools.wraps` copies `__module__` and `__qualname__` onto the wrapper, so the lookup works for decorated methods.\n\nOne thing to be aware of: if the wrapper's `__module__` points somewhere other than where the class lives, the import lookup still fails and the method is skipped. That is the same failure mode nested classes already had.",
+ "timed_out": false,
+ "docker_rc": 0,
+ "limits": {
+  "max_turns": 50,
+  "max_budget_usd": 4.0,
+  "timeout_min": 25.0
+ },
+ "network": "cotml-egress",
+ "proxy": true,
+ "claude_version": "2.1.296",
+ "model_usage": {
+  "claude-sonnet-5-5": {
+   "inputTokens": 8,
+   "outputTokens": 871,
+   "cacheReadInputTokens": 6606,
+   "cacheCreationInputTokens": 1877,
+   "webSearchRequests": 0,
+   "costUSD": 0.0140791,
+   "contextWindow": 1000000,
+   "maxOutputTokens": 128000,
+   "thinkingTokens": 0,
+   "canonicalModel": "claude-sonnet-5-5",
+   "provider": "firstParty",
+   "costBasis": "list"
+  }
+ },
+ "started_at": "2026-10-14T09:54:52+00:00",
+ "framing": "issue",
+ "patch_files": [
+  "sphinx/ext/napoleon/__init__.py"
+ ],
+ "touched_test_files": [],
+ "untracked_files": []
+}

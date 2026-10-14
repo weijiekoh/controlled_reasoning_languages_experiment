@@ -1,0 +1,73 @@
+{
+ "problem": "sympy__sympy-16886",
+ "bench": "swe",
+ "condition": "bare",
+ "effort": "low",
+ "model": "claude-sonnet-5-5",
+ "batch": "swe_sonnet",
+ "dry_run": false,
+ "outcome": "solved",
+ "verify_pass": true,
+ "verify_stage": "ok",
+ "verify_detail": "resolved (run_id cotml-20261014025631-cf9a8954)",
+ "num_turns": 3,
+ "input_tokens": 8,
+ "output_tokens": 262,
+ "thinking_tokens": 0,
+ "cache_read_tokens": 5373,
+ "cache_creation_tokens": 606,
+ "usage_source": "result",
+ "total_cost_usd": 0.004688299999999999,
+ "duration_s": 5.3,
+ "agent_duration_ms": 4710,
+ "lean_compile_count": 0,
+ "search_tactic_uses": 0,
+ "search_tactic_in_final": false,
+ "tool_calls": {
+  "Bash": 2
+ },
+ "proof_chars": 462,
+ "proof_lines": 13,
+ "statement_prefix_changed": false,
+ "stop_reason": "end_turn",
+ "result_subtype": "success",
+ "terminal_reason": "completed",
+ "is_error": false,
+ "api_error_status": null,
+ "permission_denials": 0,
+ "agent_said_give_up": false,
+ "final_text": "I fixed the Morse mapping for \"1\" in `sympy/crypto/crypto.py` (line 1523). The entry was `\"----\": \"1\"` and is now `\".----\": \"1\"`. I didn't run any tests, so the change is untested.",
+ "timed_out": false,
+ "docker_rc": 0,
+ "limits": {
+  "max_turns": 50,
+  "max_budget_usd": 4.0,
+  "timeout_min": 25.0
+ },
+ "network": "cotml-egress",
+ "proxy": true,
+ "claude_version": "2.1.296",
+ "model_usage": {
+  "claude-sonnet-5-5": {
+   "inputTokens": 8,
+   "outputTokens": 262,
+   "cacheReadInputTokens": 5373,
+   "cacheCreationInputTokens": 606,
+   "webSearchRequests": 0,
+   "costUSD": 0.004688299999999999,
+   "contextWindow": 1000000,
+   "maxOutputTokens": 128000,
+   "thinkingTokens": 0,
+   "canonicalModel": "claude-sonnet-5-5",
+   "provider": "firstParty",
+   "costBasis": "list"
+  }
+ },
+ "started_at": "2026-10-14T09:56:24+00:00",
+ "framing": "issue",
+ "patch_files": [
+  "sympy/crypto/crypto.py"
+ ],
+ "touched_test_files": [],
+ "untracked_files": []
+}

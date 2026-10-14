@@ -1,0 +1,73 @@
+{
+ "problem": "pydata__xarray-7229",
+ "bench": "swe",
+ "condition": "jellyfish",
+ "effort": "low",
+ "model": "claude-haiku-5-5",
+ "batch": "swe_haiku",
+ "dry_run": false,
+ "outcome": "gave_up",
+ "verify_pass": false,
+ "verify_stage": "tests",
+ "verify_detail": "FAIL_TO_PASS 0/1 failing: xarray/tests/test_computation.py::test_where_attrs; PASS_TO_PASS 280/280",
+ "num_turns": 9,
+ "input_tokens": 20,
+ "output_tokens": 4915,
+ "thinking_tokens": 2141,
+ "cache_read_tokens": 64634,
+ "cache_creation_tokens": 8348,
+ "usage_source": "result",
+ "total_cost_usd": 0.0041493400000000005,
+ "duration_s": 78.2,
+ "agent_duration_ms": 77576,
+ "lean_compile_count": 3,
+ "search_tactic_uses": 0,
+ "search_tactic_in_final": false,
+ "tool_calls": {
+  "Bash": 8
+ },
+ "proof_chars": 1491,
+ "proof_lines": 34,
+ "statement_prefix_changed": false,
+ "stop_reason": "end_turn",
+ "result_subtype": "success",
+ "terminal_reason": "completed",
+ "is_error": false,
+ "api_error_status": null,
+ "permission_denials": 0,
+ "agent_said_give_up": false,
+ "final_text": "`xr.where(..., keep_attrs=True)` now keeps coordinate attributes. The example from the issue returns `{'standard_name': 'time', 'long_name': 'Time'}` for `.time.attrs`, and the result's own attrs still come from `x`.\n\n**Cause:** `where()` passed a callable `keep_attrs` (returning `x.attrs`) to `apply_ufunc`. `apply_ufunc` uses that same callable to merge coordinate attributes, so every coordinate was overwritten with the data variable's attributes. The callable gets no context that would tell the two cases apart.\n\n**Fix** (in `xarray/core/computation.py`, `where()`): when `keep_attrs` is `True`, `apply_ufunc` now merges with `\"override\"`, which keeps coordinate attributes. The result's attributes are then set explicitly from `x`. Other `keep_attrs` values are passed through unchanged.\n\n**Verification:** a small reproduction matches the expected output, and the `test_dataarray.py`, `test_dataset.py` and `test_computation.py` suites pass. I didn't run the full test suite. I did not add tests.\n\nOne behaviour to be aware of: with `keep_attrs=True`, coordinate attributes now come from the first argument (`cond`) rather than being dropped. In the usual case `cond` shares the coordinates of `x`, so this matches the issue's expectation.",
+ "timed_out": false,
+ "docker_rc": 0,
+ "limits": {
+  "max_turns": 50,
+  "max_budget_usd": 2.0,
+  "timeout_min": 25.0
+ },
+ "network": "cotml-egress",
+ "proxy": true,
+ "claude_version": "2.1.296",
+ "model_usage": {
+  "claude-haiku-5-5": {
+   "inputTokens": 20,
+   "outputTokens": 4915,
+   "cacheReadInputTokens": 64634,
+   "cacheCreationInputTokens": 8348,
+   "webSearchRequests": 0,
+   "costUSD": 0.0041493400000000005,
+   "contextWindow": 1000000,
+   "maxOutputTokens": 128000,
+   "thinkingTokens": 2141,
+   "canonicalModel": "claude-haiku-5-5",
+   "provider": "firstParty",
+   "costBasis": "list"
+  }
+ },
+ "started_at": "2026-10-14T09:31:25+00:00",
+ "framing": "issue",
+ "patch_files": [
+  "xarray/core/computation.py"
+ ],
+ "touched_test_files": [],
+ "untracked_files": []
+}

@@ -1,0 +1,59 @@
+  have hdet : IsUnit Q.det := by
+    rw [isUnit_iff_ne_zero, Ne, ← Matrix.exists_mulVec_eq_zero_iff]
+    rintro ⟨v, hv, h⟩
+    have := hQ_pos_def (WithLp.toLp 2 v) (by simpa using hv)
+    simp [Matrix.toEuclideanLin_apply, h] at this
+  have h1 : Q * Q⁻¹ = 1 := Matrix.mul_nonsing_inv _ hdet
+  have h2 : Q⁻¹ * Q = 1 := Matrix.nonsing_inv_mul _ hdet
+  have hL : ∀ x, Matrix.toEuclideanLin Q (Matrix.toEuclideanLin Q⁻¹ x) = x := by
+    intro x
+    simp [Matrix.toEuclideanLin_apply, Matrix.mulVec_mulVec, h1]
+  have hL' : ∀ x, Matrix.toEuclideanLin Q⁻¹ (Matrix.toEuclideanLin Q x) = x := by
+    intro x
+    simp [Matrix.toEuclideanLin_apply, Matrix.mulVec_mulVec, h2]
+  have hsa : ∀ u v, ⟪u, Matrix.toEuclideanLin Q v⟫ = ⟪Matrix.toEuclideanLin Q u, v⟫ := by
+    intro u v
+    simp only [Matrix.toEuclideanLin_apply, EuclideanSpace.inner_eq_star_dotProduct]
+    simp [Matrix.dotProduct_mulVec, dotProduct_comm]
+    rw [dotProduct_comm, Matrix.dotProduct_mulVec, ← Matrix.mulVec_transpose, hQ_symm.eq, dotProduct_comm]
+  have hnn : ∀ y : EuclideanSpace ℝ (Fin n), 0 ≤ ⟪y, (Matrix.toEuclideanLin Q) y⟫ := by
+    intro y
+    by_cases hy : y = 0
+    · simp [hy]
+    · exact (hQ_pos_def y hy).le
+  constructor
+  · intro h i
+    set a0 := a i with ha
+    set L := Matrix.toEuclideanLin Q with hLd
+    by_cases h0 : a0 = 0
+    · simp [h0]
+    have hs : 0 < ⟪a0, L a0⟫ := hQ_pos_def a0 h0
+    set s := ⟪a0, L a0⟫ with hsd
+    have hr := Real.sqrt_pos.mpr hs
+    have hr2 := Real.sq_sqrt hs.le
+    set r := Real.sqrt s
+    have hx : (r⁻¹ • L a0) ∈ {x : EuclideanSpace ℝ (Fin n) |
+        ⟪x, (Matrix.toEuclideanLin Q⁻¹) x⟫ ≤ (1 : ℝ)} := by
+      show ⟪r⁻¹ • L a0, (Matrix.toEuclideanLin Q⁻¹) (r⁻¹ • L a0)⟫ ≤ 1
+      rw [map_smul, hL', inner_smul_left, inner_smul_right, ← hsa, real_inner_comm]
+      simp only [conj_trivial]
+      rw [← hsd]
+      field_simp
+      nlinarith
+    have := (h hx i).2
+    rw [inner_smul_right, ← hsa] at this
+    rw [← hsd] at this
+    have : r⁻¹ * s = r := by field_simp; nlinarith
+    nlinarith
+  · intro h x hx i
+    have hx' : ⟪x, (Matrix.toEuclideanLin Q⁻¹) x⟫ ≤ 1 := hx
+    have e1 := hnn (Matrix.toEuclideanLin Q⁻¹ x - a i)
+    have e2 := hnn (Matrix.toEuclideanLin Q⁻¹ x + a i)
+    have hh := h i
+    have c1 : ⟪Matrix.toEuclideanLin Q⁻¹ x, x⟫ = ⟪x, Matrix.toEuclideanLin Q⁻¹ x⟫ := real_inner_comm _ _
+    have c2 : ⟪Matrix.toEuclideanLin Q⁻¹ x, Matrix.toEuclideanLin Q (a i)⟫ = ⟪a i, x⟫ := by
+      rw [← hsa, hL, real_inner_comm]
+    have c4 : ⟪a i, Matrix.toEuclideanLin Q (Matrix.toEuclideanLin Q⁻¹ x)⟫ = ⟪a i, x⟫ := by rw [hL]
+    simp only [map_sub, map_add, inner_sub_left, inner_sub_right, inner_add_left, inner_add_right] at e1 e2
+    rw [c1, c2, c4] at e1 e2
+    constructor <;> nlinarith

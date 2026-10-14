@@ -1,0 +1,23 @@
+import Mathlib
+
+lemma nsq {I : Type} (p : I → ℕ) (hp : ∀ i, (p i).Prime) (h_inj : p.Injective)
+    (T : Finset I) (hT : T.Nonempty) : ¬ IsSquare (∏ i ∈ T, p i) := by
+  classical
+  rintro ⟨k, hk⟩
+  obtain ⟨i, hi⟩ := hT
+  have h1 : p i ∣ k * k := by
+    rw [← hk]; exact Finset.dvd_prod_of_mem _ hi
+  have h2 : p i ∣ k := by
+    rcases (Nat.Prime.dvd_mul (hp i)).1 h1 with h | h <;> exact h
+  obtain ⟨m, hm⟩ := h2
+  have h3 : ∏ l ∈ T, p l = p i * ∏ l ∈ T.erase i, p l := (Finset.mul_prod_erase T p hi).symm
+  have h4 : p i * ∏ l ∈ T.erase i, p l = p i * (p i * m * m) := by
+    rw [← h3, hk, hm]; ring
+  have h5 : ∏ l ∈ T.erase i, p l = p i * m * m := Nat.eq_of_mul_eq_mul_left (hp i).pos h4
+  have h6 : p i ∣ ∏ l ∈ T.erase i, p l := by rw [h5]; exact ⟨m * m, by ring⟩
+  rw [Prime.dvd_finsetProd_iff (hp i).prime] at h6
+  obtain ⟨l, hl, hdl⟩ := h6
+  rw [Nat.prime_dvd_prime_iff_eq (hp i) (hp l)] at hdl
+  have := h_inj hdl
+  have := (Finset.mem_erase.1 hl).1
+  simp_all

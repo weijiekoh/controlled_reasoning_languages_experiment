@@ -1,0 +1,73 @@
+{
+ "problem": "sympy__sympy-15345",
+ "bench": "swe",
+ "condition": "bare",
+ "effort": "low",
+ "model": "claude-haiku-5-5",
+ "batch": "swe_haiku",
+ "dry_run": false,
+ "outcome": "solved",
+ "verify_pass": true,
+ "verify_stage": "ok",
+ "verify_detail": "resolved (run_id cotml-20261014011509-435145eb)",
+ "num_turns": 6,
+ "input_tokens": 14,
+ "output_tokens": 1979,
+ "thinking_tokens": 429,
+ "cache_read_tokens": 18860,
+ "cache_creation_tokens": 3965,
+ "usage_source": "result",
+ "total_cost_usd": 0.001675125,
+ "duration_s": 14.8,
+ "agent_duration_ms": 14108,
+ "lean_compile_count": 1,
+ "search_tactic_uses": 0,
+ "search_tactic_in_final": false,
+ "tool_calls": {
+  "Bash": 5
+ },
+ "proof_chars": 742,
+ "proof_lines": 16,
+ "statement_prefix_changed": false,
+ "stop_reason": "end_turn",
+ "result_subtype": "success",
+ "terminal_reason": "completed",
+ "is_error": false,
+ "api_error_status": null,
+ "permission_denials": 0,
+ "agent_said_give_up": false,
+ "final_text": "I fixed the Mathematica printer so `Max` and `Min` print with square brackets, and `test_Function` now passes along with the rest of `test_mathematica.py`.\n\nThe change is in `sympy/printing/mathematica.py`: I added `_print_Max` and `_print_Min` methods to `MCodePrinter`. Previously these fell through to the generic printer, which emitted `Max(2, x)`.\n\n`mathematica_code(Max(x,2))` now gives `Max[2, x]`, not `Max[x,2]` as the issue suggested. SymPy stores Max arguments in canonical order, so `2` comes before `x`. Either form is valid Mathematica, and the existing test only checks the `Max[x, y, z]` case.\n\npytest isn't installed in the environment, so I ran the test functions directly with a small Python loop rather than through pytest. I didn't commit anything.",
+ "timed_out": false,
+ "docker_rc": 0,
+ "limits": {
+  "max_turns": 50,
+  "max_budget_usd": 2.0,
+  "timeout_min": 25.0
+ },
+ "network": "cotml-egress",
+ "proxy": true,
+ "claude_version": "2.1.296",
+ "model_usage": {
+  "claude-haiku-5-5": {
+   "inputTokens": 14,
+   "outputTokens": 1979,
+   "cacheReadInputTokens": 18860,
+   "cacheCreationInputTokens": 3965,
+   "webSearchRequests": 0,
+   "costUSD": 0.001675125,
+   "contextWindow": 1000000,
+   "maxOutputTokens": 128000,
+   "thinkingTokens": 429,
+   "canonicalModel": "claude-haiku-5-5",
+   "provider": "firstParty",
+   "costBasis": "list"
+  }
+ },
+ "started_at": "2026-10-14T08:14:54+00:00",
+ "framing": "debug",
+ "patch_files": [
+  "sympy/printing/mathematica.py"
+ ],
+ "touched_test_files": [],
+ "untracked_files": []
+}

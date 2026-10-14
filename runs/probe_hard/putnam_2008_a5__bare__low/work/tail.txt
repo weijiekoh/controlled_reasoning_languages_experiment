@@ -1,0 +1,20 @@
+      rw [show (1+(k:ℂ)) = Complex.ofRealHom ((k:ℝ)+1) by simp [add_comm], eval₂_at_apply, eval₂_at_apply]
+      simp
+    have e2 : Complex.exp (Complex.I * 2 * Real.pi * ((k+1:ℕ):ℂ) / n) = ω ^ (k+1) := by
+      rw [hω, ← Complex.exp_nat_mul]; congr 1; push_cast; ring
+    rw [smul_eq_mul, e, this]
+    push_cast at e2 ⊢
+    rw [e2]; ring
+  have hprim : IsPrimitiveRoot ω n := Complex.isPrimitiveRoot_exp n (by omega)
+  have hω1 : ω - 1 ≠ 0 := sub_ne_zero.mpr (hprim.ne_one (by omega))
+  have hω0 : ω ≠ 0 := hprim.ne_zero (by omega)
+  simp only [Pi.zero_apply] at h0
+  rw [Finset.sum_congr rfl hval, Finset.sum_add_distrib, ← Finset.mul_sum, ← Finset.mul_sum] at h0
+  have S1 : ∑ k ∈ Finset.range (n - 1 + 1), (-1 : ℂ) ^ (n - 1 - k) * ((n - 1).choose k : ℂ) = 0 := by
+    have := add_pow (1:ℂ) (-1) (n-1)
+    rw [show (1:ℂ) + -1 = 0 by norm_num, zero_pow (by omega)] at this
+    rw [this]; apply Finset.sum_congr rfl; intro k _; simp
+  have S2 : ∑ k ∈ Finset.range (n - 1 + 1), ((-1 : ℂ) ^ (n - 1 - k) * ((n - 1).choose k : ℂ)) * ω ^ k = (ω - 1) ^ (n-1) := by
+    rw [sub_eq_add_neg, add_pow]; apply Finset.sum_congr rfl; intro k _; ring
+  rw [S1, S2, zero_mul, zero_add] at h0
+  exact mul_ne_zero (mul_ne_zero hz hω0) (pow_ne_zero _ hω1) h0

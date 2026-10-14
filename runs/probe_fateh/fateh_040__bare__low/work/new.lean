@@ -1,0 +1,106 @@
+import Mathlib
+
+open Polynomial
+
+/--
+Let $K$ be the splitting field of a irreducible quintic polynomial $f(x) \in \mathbb{Q} [x]$
+and let $\{\alpha_1, \dots, \alpha_5\}$ be zeros of $f(x)$ in $K$. Show that if $\mathbb{Q}
+(\alpha_1, \alpha_2, \alpha_3) \neq K$, then $\\mathrm{Gal}(K/\mathbb{Q}) \cong S_5$.
+-/
+theorem nonempty_gal_mulEquiv_perm_fin_five {f : ℚ[X]} {K : Type} [Field K] [Algebra ℚ K]
+    [IsSplittingField ℚ K f] (hf1 : Irreducible f) (hf2 : f.natDegree = 5) (a₁ a₂ a₃ : K)
+    (ha1 : a₁ ∈ rootSet f K ∧ a₂ ∈ rootSet f K ∧ a₃ ∈ rootSet f K)
+    (ha2 : a₁ ≠ a₂ ∧ a₂ ≠ a₃ ∧ a₃ ≠ a₁)
+    (h : IntermediateField.adjoin ℚ {a₁, a₂, a₃} ≠ ⊤) :
+    Nonempty (f.Gal ≃* (Equiv.Perm <| Fin 5)) := by
+  classical
+  haveI : Fact (Polynomial.map (algebraMap ℚ K) f).Splits := ⟨IsSplittingField.splits K f⟩
+  haveI : FiniteDimensional ℚ K := IsSplittingField.finiteDimensional K f
+  haveI : IsGalois ℚ K := IsGalois.of_separable_splitting_field (p := f) (Irreducible.separable hf1)
+  have hcard : Fintype.card (f.rootSet K) = 5 := by
+    rw [Polynomial.card_rootSet_eq_natDegree (Irreducible.separable hf1) (IsSplittingField.splits K f), hf2]
+  haveI : MulAction.IsPretransitive f.Gal (f.rootSet K) := Polynomial.Gal.galAction_isPretransitive f K hf1
+  let e : (f.rootSet K) ≃ Fin 5 := Fintype.equivFinOfCardEq hcard
+  let ψ : f.Gal →* Equiv.Perm (Fin 5) :=
+    (Equiv.permCongrHom e).toMonoidHom.comp (Polynomial.Gal.galActionHom f K)
+  have hψ : Function.Injective ψ := by
+    intro x y hxy
+    apply Polynomial.Gal.galActionHom_injective f K
+    exact (Equiv.permCongr e).injective hxy
+  haveI : Fintype f.Gal := Fintype.ofFinite _
+  have h5 : 5 ∣ Fintype.card f.Gal := by
+    obtain ⟨r⟩ : Nonempty (f.rootSet K) := by
+      rw [← Fintype.card_pos_iff, hcard]; norm_num
+    have := MulAction.card_orbit_mul_card_stabilizer_eq_card_group f.Gal r
+    rw [← this]
+    apply Dvd.dvd.mul_right
+    rw [← hcard]
+    have h := MulAction.orbit_eq_univ f.Gal r
+    simp only [Fintype.card_eq_nat_card]
+    rw [← Nat.card_univ, ← h]
+  haveI : Fact (Nat.Prime 5) := ⟨by norm_num⟩
+  obtain ⟨g, hg⟩ := exists_prime_orderOf_dvd_card 5 h5
+  have hog : orderOf (ψ g) = 5 := by rw [orderOf_injective ψ hψ]; exact hg
+  have hcyc : (ψ g).IsCycle :=
+    Equiv.Perm.isCycle_of_prime_order' (by rw [hog]; norm_num) (by rw [hog]; simp)
+  have hsupp : (ψ g).support = Finset.univ := by
+    apply Finset.eq_univ_of_card
+    rw [← hcyc.orderOf, hog]; simp
+  -- nontrivial fixer
+  obtain ⟨t, ht1, ht2⟩ : ∃ t : K ≃ₐ[ℚ] K, t ≠ 1 ∧ ∀ x ∈ IntermediateField.adjoin ℚ {a₁, a₂, a₃}, t x = x := by
+    by_contra hcon
+    push_neg at hcon
+    apply h
+    have : (IntermediateField.adjoin ℚ {a₁, a₂, a₃}).fixingSubgroup = ⊥ := by
+      rw [eq_bot_iff]
+      intro t ht
+      by_contra hne
+      obtain ⟨x, hx, hx2⟩ := hcon t hne
+      exact hx2 (ht ⟨x, hx⟩)
+    rw [← IsGalois.fixedField_fixingSubgroup (IntermediateField.adjoin ℚ {a₁, a₂, a₃}), this]
+    exact IntermediateField.fixedField_bot
+  have hfix : ∀ a (ha : a ∈ f.rootSet K), a ∈ ({a₁, a₂, a₃} : Set K) → ψ (Polynomial.Gal.restrict f K t) (e ⟨a, ha⟩) = e ⟨a, ha⟩ := by
+    intro a ha hmem
+    have h1 : ψ (Polynomial.Gal.restrict f K t) (e ⟨a, ha⟩) = e ((Polynomial.Gal.galActionHom f K (Polynomial.Gal.restrict f K t)) ⟨a, ha⟩) := by
+      simp [ψ, Equiv.permCongrHom]
+    rw [h1]
+    congr 1
+    apply Subtype.ext
+    rw [Polynomial.Gal.galActionHom_restrict]
+    exact ht2 a (IntermediateField.subset_adjoin _ _ hmem)
+  have hrt : Polynomial.Gal.restrict f K t ≠ 1 := by
+    intro h1; apply ht1
+    have hr : ∀ a ∈ f.rootSet K, t a = a := by
+      intro a ha
+      have := congrArg (fun q => ((q ⟨a, ha⟩ : f.rootSet K) : K)) (congrArg (Polynomial.Gal.galActionHom f K) h1)
+      simpa [Polynomial.Gal.galActionHom_restrict] using this
+    have hle : Algebra.adjoin ℚ (f.rootSet K) ≤ AlgHom.equalizer (t : K →ₐ[ℚ] K) (AlgHom.id ℚ K) :=
+      Algebra.adjoin_le (fun a ha => hr a ha)
+    rw [IsSplittingField.adjoin_rootSet K f] at hle
+    ext x
+    exact hle (Algebra.mem_top) |>.trans (by simp)
+  have hmem : ∀ a, a ∈ f.rootSet K → a ∈ ({a₁, a₂, a₃} : Set K) → ∃ _ : a ∈ f.rootSet K, True := fun a h _ => ⟨h, trivial⟩
+  obtain ⟨h1, h2, h3⟩ := ha1
+  obtain ⟨n12, n23, n31⟩ := ha2
+  have hsw : ∃ a b, a ≠ b ∧ ψ (Polynomial.Gal.restrict f K t) = Equiv.swap a b := by
+    have key : ∀ σ : Equiv.Perm (Fin 5), σ ≠ 1 → ∀ x y z : Fin 5, x≠y → y≠z → z≠x → σ x = x → σ y = y → σ z = z → ∃ a b, a ≠ b ∧ σ = Equiv.swap a b := by
+      set_option maxRecDepth 100000 in decide
+    refine key _ ?_ (e ⟨a₁, h1⟩) (e ⟨a₂, h2⟩) (e ⟨a₃, h3⟩) ?_ ?_ ?_ (hfix _ h1 (by simp)) (hfix _ h2 (by simp)) (hfix _ h3 (by simp))
+    · intro h0; apply hrt; apply hψ; rw [h0, map_one]
+    · intro hh; have := e.injective hh; simp at this; exact n12 this
+    · intro hh; have := e.injective hh; simp at this; exact n23 this
+    · intro hh; have := e.injective hh; simp at this; exact n31 this
+  obtain ⟨x, y, hxy, hs⟩ := hsw
+  have hcl := Equiv.Perm.closure_prime_cycle_swap (σ := ψ g) (τ := ψ (Polynomial.Gal.restrict f K t))
+    (by rw [Fintype.card_fin]; norm_num) hcyc hsupp (by rw [hs]; exact ⟨x, y, hxy, rfl⟩)
+  have hsurj : Function.Surjective ψ := by
+    intro p
+    have : p ∈ ψ.range := by
+      have hle : Subgroup.closure {ψ g, ψ (Polynomial.Gal.restrict f K t)} ≤ ψ.range := by
+        rw [Subgroup.closure_le]
+        rintro _ (rfl | rfl)
+        · exact ⟨g, rfl⟩
+        · exact ⟨_, rfl⟩
+      exact hle (by rw [hcl]; trivial)
+    exact this
+  exact ⟨MulEquiv.ofBijective ψ ⟨hψ, hsurj⟩⟩

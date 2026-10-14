@@ -1,0 +1,18 @@
+diff --git a/sphinx/domains/python.py b/sphinx/domains/python.py
+index 000e2e8d3..0dc2608cb 100644
+--- a/sphinx/domains/python.py
++++ b/sphinx/domains/python.py
+@@ -1144,8 +1144,11 @@ class PythonDomain(Domain):
+             else:
+                 objtypes = self.objtypes_for_role(type)
+             if objtypes is not None:
+-                if modname and classname:
+-                    fullname = modname + '.' + classname + '.' + name
++                if classname:
++                    if modname:
++                        fullname = modname + '.' + classname + '.' + name
++                    else:
++                        fullname = classname + '.' + name
+                     if fullname in self.objects and self.objects[fullname].objtype in objtypes:
+                         newname = fullname
+                 if not newname:

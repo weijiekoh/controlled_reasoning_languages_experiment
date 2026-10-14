@@ -1,0 +1,16 @@
+import Mathlib
+open Polynomial
+#check @Equiv.Perm.subgroup_eq_top_of_isPreprimitive_of_isSwap_mem
+#check @MulAction.IsPreprimitive.of_prime_card
+#check @Equiv.Perm.surjective_of_isSwap_of_isPretransitive
+#check @Equiv.Perm.closure_of_isSwap_of_isPretransitive
+#check @Polynomial.Gal.galActionHom_injective
+#check @Polynomial.Gal.galAction_isPretransitive
+#check @Polynomial.Gal.galActionHom
+#check @Polynomial.card_rootSet_eq_natDegree
+#check @IntermediateField.fixedField_fixingSubgroup
+#check @IntermediateField.fixingSubgroup_fixedField
+#check @IsGalois.of_separable_splitting_field
+#check @IsSplittingField.algEquiv
+#check @Polynomial.Gal.restrictNormal
+#check @Irreducible.separable

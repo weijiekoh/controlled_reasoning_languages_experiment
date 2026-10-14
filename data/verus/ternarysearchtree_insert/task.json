@@ -1,0 +1,15 @@
+{
+ "id": "ternarysearchtree_insert",
+ "entry": "ternarysearchtree_insert.rs",
+ "description": "description.md",
+ "main_fn": "insert",
+ "editable_regions": {
+  "helpers": "between `// <helpers>` and `// </helpers>`: helper spec fns and exec helpers",
+  "proofs": "between `// <proofs>` and `// </proofs>`: lemmas (proof fns)",
+  "code": "between `// <code>` and `// </code>`: exactly one block `{ ... }`, the body of the function under spec"
+ },
+ "fixed": "Everything outside the three editable regions is fixed: the `use` lines, the <preamble> block (definitions, spec fns, and any exec fns given there), the <spec> block (signature, requires, ensures of the function under test), fn main, and all marker comments. Compared token-wise; comments and whitespace are ignored.",
+ "source": "data/algoveri/algoveri_data/ternarysearchtree_insert/verus_spec.rs",
+ "source_sha256": "ce4194dd19bc6041c718fd920417dfdaab34997112a80675b0b10ef8dee3e3bc",
+ "patches": []
+}

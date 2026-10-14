@@ -1,0 +1,73 @@
+{
+ "problem": "django__django-15930",
+ "bench": "swe",
+ "condition": "cod",
+ "effort": "low",
+ "model": "claude-haiku-5-5",
+ "batch": "swe_haiku",
+ "dry_run": false,
+ "outcome": "solved",
+ "verify_pass": true,
+ "verify_stage": "ok",
+ "verify_detail": "resolved (run_id cotml-20261014010748-72c2e70c)",
+ "num_turns": 8,
+ "input_tokens": 18,
+ "output_tokens": 2193,
+ "thinking_tokens": 496,
+ "cache_read_tokens": 33232,
+ "cache_creation_tokens": 5143,
+ "usage_source": "result",
+ "total_cost_usd": 0.002073495,
+ "duration_s": 17.0,
+ "agent_duration_ms": 16375,
+ "lean_compile_count": 4,
+ "search_tactic_uses": 0,
+ "search_tactic_in_final": false,
+ "tool_calls": {
+  "Bash": 7
+ },
+ "proof_chars": 800,
+ "proof_lines": 15,
+ "statement_prefix_changed": false,
+ "stop_reason": "end_turn",
+ "result_subtype": "success",
+ "terminal_reason": "completed",
+ "is_error": false,
+ "api_error_status": null,
+ "permission_denials": 0,
+ "agent_said_give_up": false,
+ "final_text": "The `Case()` crash with `~Q(pk__in=[])` is fixed. The target test `test_annotate_with_full_when` now passes, and the `expressions_case` and `expressions` suites pass (270 tests, OK).\n\n**Cause:** `~Q(pk__in=[])` always matches, so `WhereNode` compiles it to an empty string `\"\"` rather than raising an exception. `When.as_sql` put that empty string straight into the template, producing `CASE WHEN THEN ...`.\n\n**Fix** (in `django/db/models/expressions.py`, `When.as_sql`): if the compiled condition is empty, substitute `compiler.compile(Value(True))` so the `WHEN` clause becomes a valid always-true condition.\n\nI did not commit; the change is in the working tree.",
+ "timed_out": false,
+ "docker_rc": 0,
+ "limits": {
+  "max_turns": 50,
+  "max_budget_usd": 2.0,
+  "timeout_min": 25.0
+ },
+ "network": "cotml-egress",
+ "proxy": true,
+ "claude_version": "2.1.296",
+ "model_usage": {
+  "claude-haiku-5-5": {
+   "inputTokens": 18,
+   "outputTokens": 2193,
+   "cacheReadInputTokens": 33232,
+   "cacheCreationInputTokens": 5143,
+   "webSearchRequests": 0,
+   "costUSD": 0.002073495,
+   "contextWindow": 1000000,
+   "maxOutputTokens": 128000,
+   "thinkingTokens": 496,
+   "canonicalModel": "claude-haiku-5-5",
+   "provider": "firstParty",
+   "costBasis": "list"
+  }
+ },
+ "started_at": "2026-10-14T08:07:30+00:00",
+ "framing": "debug",
+ "patch_files": [
+  "django/db/models/expressions.py"
+ ],
+ "touched_test_files": [],
+ "untracked_files": []
+}

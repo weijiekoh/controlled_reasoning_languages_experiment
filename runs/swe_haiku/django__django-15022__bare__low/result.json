@@ -1,0 +1,73 @@
+{
+ "problem": "django__django-15022",
+ "bench": "swe",
+ "condition": "bare",
+ "effort": "low",
+ "model": "claude-haiku-5-5",
+ "batch": "swe_haiku",
+ "dry_run": false,
+ "outcome": "solved",
+ "verify_pass": true,
+ "verify_stage": "ok",
+ "verify_detail": "resolved (run_id cotml-20261014010545-a507655a)",
+ "num_turns": 6,
+ "input_tokens": 14,
+ "output_tokens": 2005,
+ "thinking_tokens": 535,
+ "cache_read_tokens": 25713,
+ "cache_creation_tokens": 5481,
+ "usage_source": "result",
+ "total_cost_usd": 0.001946155,
+ "duration_s": 17.9,
+ "agent_duration_ms": 17262,
+ "lean_compile_count": 3,
+ "search_tactic_uses": 0,
+ "search_tactic_in_final": false,
+ "tool_calls": {
+  "Bash": 5
+ },
+ "proof_chars": 1316,
+ "proof_lines": 26,
+ "statement_prefix_changed": false,
+ "stop_reason": "end_turn",
+ "result_subtype": "success",
+ "terminal_reason": "completed",
+ "is_error": false,
+ "api_error_status": null,
+ "permission_denials": 0,
+ "agent_said_give_up": false,
+ "final_text": "The admin changelist search now adds one join per relation rather than one per search word, and the `admin_changelist` suite passes (73 tests, 6 skipped, 0 failures). That suite contains all three named tests.\n\nThe cause was in `get_search_results` in `django/contrib/admin/options.py`: it called `queryset.filter(...)` once for each search term, and each call could add a new join over the multi-valued `clientoffice` relation. The change collects the per-term OR clauses and applies them together in a single `filter()` call, ANDed across terms. The matching logic is unchanged; only the number of filter calls differs.\n\nI didn't modify any test files and didn't commit.",
+ "timed_out": false,
+ "docker_rc": 0,
+ "limits": {
+  "max_turns": 50,
+  "max_budget_usd": 2.0,
+  "timeout_min": 25.0
+ },
+ "network": "cotml-egress",
+ "proxy": true,
+ "claude_version": "2.1.296",
+ "model_usage": {
+  "claude-haiku-5-5": {
+   "inputTokens": 14,
+   "outputTokens": 2005,
+   "cacheReadInputTokens": 25713,
+   "cacheCreationInputTokens": 5481,
+   "webSearchRequests": 0,
+   "costUSD": 0.001946155,
+   "contextWindow": 1000000,
+   "maxOutputTokens": 128000,
+   "thinkingTokens": 535,
+   "canonicalModel": "claude-haiku-5-5",
+   "provider": "firstParty",
+   "costBasis": "list"
+  }
+ },
+ "started_at": "2026-10-14T08:05:26+00:00",
+ "framing": "debug",
+ "patch_files": [
+  "django/contrib/admin/options.py"
+ ],
+ "touched_test_files": [],
+ "untracked_files": []
+}

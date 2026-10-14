@@ -1,0 +1,73 @@
+{
+ "problem": "pydata__xarray-6938",
+ "bench": "swe",
+ "condition": "cod",
+ "effort": "low",
+ "model": "claude-haiku-5-5",
+ "batch": "swe_haiku",
+ "dry_run": false,
+ "outcome": "gave_up",
+ "verify_pass": false,
+ "verify_stage": "tests",
+ "verify_detail": "FAIL_TO_PASS 0/1 failing: xarray/tests/test_variable.py::TestIndexVariable::test_to_index_variable_copy; PASS_TO_PASS 430/430",
+ "num_turns": 5,
+ "input_tokens": 12,
+ "output_tokens": 1884,
+ "thinking_tokens": 456,
+ "cache_read_tokens": 20805,
+ "cache_creation_tokens": 5003,
+ "usage_source": "result",
+ "total_cost_usd": 0.001776625,
+ "duration_s": 32.5,
+ "agent_duration_ms": 31930,
+ "lean_compile_count": 2,
+ "search_tactic_uses": 0,
+ "search_tactic_in_final": false,
+ "tool_calls": {
+  "Bash": 4
+ },
+ "proof_chars": 901,
+ "proof_lines": 21,
+ "statement_prefix_changed": false,
+ "stop_reason": "end_turn",
+ "result_subtype": "success",
+ "terminal_reason": "completed",
+ "is_error": false,
+ "api_error_status": null,
+ "permission_denials": 0,
+ "agent_said_give_up": false,
+ "final_text": "`Dataset.swap_dims()` no longer modifies the original object. The issue's example now leaves `ds2['lev']` with dimension `('z',)` after `swap_dims` is applied.\n\n**Cause:** `IndexVariable.to_index_variable()` returns `self` rather than a new object. `swap_dims` then set `var.dims = dims` on that shared object, which changed the caller's variable.\n\n**Fix:** in `xarray/core/dataset.py`, both branches of the loop in `Dataset.swap_dims` now shallow-copy before reassigning dims:\n- `v.to_index_variable().copy(deep=False)`\n- `v.to_base_variable().copy(deep=False)`\n\nThe shallow copy shares the underlying data, so there is no memory cost beyond the new wrapper.\n\n**Tests:** `xarray/tests/test_dataset.py` and `xarray/tests/test_dataarray.py` pass (808 passed, 2 skipped, 7 xfailed, 2 xpassed). I did not add a regression test, since the rules bar changes to test files.",
+ "timed_out": false,
+ "docker_rc": 0,
+ "limits": {
+  "max_turns": 50,
+  "max_budget_usd": 2.0,
+  "timeout_min": 25.0
+ },
+ "network": "cotml-egress",
+ "proxy": true,
+ "claude_version": "2.1.296",
+ "model_usage": {
+  "claude-haiku-5-5": {
+   "inputTokens": 12,
+   "outputTokens": 1884,
+   "cacheReadInputTokens": 20805,
+   "cacheCreationInputTokens": 5003,
+   "webSearchRequests": 0,
+   "costUSD": 0.001776625,
+   "contextWindow": 1000000,
+   "maxOutputTokens": 128000,
+   "thinkingTokens": 456,
+   "canonicalModel": "claude-haiku-5-5",
+   "provider": "firstParty",
+   "costBasis": "list"
+  }
+ },
+ "started_at": "2026-10-14T09:30:55+00:00",
+ "framing": "issue",
+ "patch_files": [
+  "xarray/core/dataset.py"
+ ],
+ "touched_test_files": [],
+ "untracked_files": []
+}

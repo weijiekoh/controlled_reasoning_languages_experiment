@@ -1,0 +1,8 @@
+Prove the Lean 4 theorem in `/work/fatex_022.lean`.
+
+Rules:
+- Replace the single `sorry` in the theorem with a proof. Change nothing else: keep the imports, the theorem statement, and any `_solution` definition exactly as they are. Keep the file name.
+- Do not add `axiom` declarations. Do not use `sorry`, `admit`, `native_decide`, `#eval`, or metaprogramming.
+- Compile with `lean /work/fatex_022.lean`. Lean 4 and Mathlib are installed. Mathlib source files are not available; only compiled files are. `lake` and network access are not available. You may create scratch files in `/work`.
+- Stop when the file compiles with no errors and no "declaration uses `sorry`" warning.
+- If you conclude that you cannot finish the proof, say "I give up" and stop.

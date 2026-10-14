@@ -1,0 +1,73 @@
+{
+ "problem": "pylint-dev__pylint-6528",
+ "bench": "swe",
+ "condition": "bare",
+ "effort": "low",
+ "model": "claude-sonnet-5-5",
+ "batch": "swe_sonnet",
+ "dry_run": false,
+ "outcome": "solved",
+ "verify_pass": true,
+ "verify_stage": "ok",
+ "verify_detail": "resolved (run_id cotml-20261014011851-c117913a)",
+ "num_turns": 8,
+ "input_tokens": 16,
+ "output_tokens": 2018,
+ "thinking_tokens": 186,
+ "cache_read_tokens": 29999,
+ "cache_creation_tokens": 4874,
+ "usage_source": "result",
+ "total_cost_usd": 0.0353969,
+ "duration_s": 47.7,
+ "agent_duration_ms": 47120,
+ "lean_compile_count": 3,
+ "search_tactic_uses": 0,
+ "search_tactic_in_final": false,
+ "tool_calls": {
+  "Bash": 7
+ },
+ "proof_chars": 1816,
+ "proof_lines": 38,
+ "statement_prefix_changed": false,
+ "stop_reason": "end_turn",
+ "result_subtype": "success",
+ "terminal_reason": "completed",
+ "is_error": false,
+ "api_error_status": null,
+ "permission_denials": 0,
+ "agent_said_give_up": false,
+ "final_text": "Pylint now honours `--ignore`, `--ignore-paths` and `--ignore-patterns` in `--recursive=y` mode. I checked this on a small `.a/foo.py` plus `bar.py` example, but I didn't add a test for it.\n\nThe change is in `pylint/lint/pylinter.py`. `_discover_files` is now an instance method, and a new `_is_ignored` helper skips ignored directories and files while walking the tree. A directory or file is skipped if its base name is in `--ignore`, matches an `--ignore-patterns` regex, or its normalised path matches an `--ignore-paths` regex.\n\n- **Explicit ignores:** all three options hide `.a/foo.py` and still lint `bar.py`.\n- **Default settings:** a plain `pylint --recursive=y .` still lints `.a/foo.py`. The issue expects it to be skipped because it assumes a default of `^\\.`. The default in this checkout is `^\\.#` (emacs lock files), so `.a` doesn't match. I left that default alone.\n- **Tests:** I ran `tests/lint` and `tests/test_self.py`. 185 passed and 2 failed: `test_generate_toml_config` and `test_generate_toml_config_disable_symbolic_names`. I didn't look into those two and haven't confirmed whether they also fail without my change.",
+ "timed_out": false,
+ "docker_rc": 0,
+ "limits": {
+  "max_turns": 50,
+  "max_budget_usd": 4.0,
+  "timeout_min": 25.0
+ },
+ "network": "cotml-egress",
+ "proxy": true,
+ "claude_version": "2.1.296",
+ "model_usage": {
+  "claude-sonnet-5-5": {
+   "inputTokens": 16,
+   "outputTokens": 2018,
+   "cacheReadInputTokens": 29999,
+   "cacheCreationInputTokens": 4874,
+   "webSearchRequests": 0,
+   "costUSD": 0.0353969,
+   "contextWindow": 1000000,
+   "maxOutputTokens": 128000,
+   "thinkingTokens": 186,
+   "canonicalModel": "claude-sonnet-5-5",
+   "provider": "firstParty",
+   "costBasis": "list"
+  }
+ },
+ "started_at": "2026-10-14T08:18:03+00:00",
+ "framing": "issue",
+ "patch_files": [
+  "pylint/lint/pylinter.py"
+ ],
+ "touched_test_files": [],
+ "untracked_files": []
+}

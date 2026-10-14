@@ -1,0 +1,22 @@
+isolation check: ok (no .lean files outside /work)
+20 runs, 0 done, 20 to run, parallel 5
+[1/20] fateh_017__bare__low: solved (ok) turns=4 out_tok=896 cost=0.0131042 18.4s
+[2/20] fateh_005__bare__low: solved (ok) turns=5 out_tok=1154 cost=0.0167712 25.1s
+[3/20] fateh_009__bare__low: solved (ok) turns=6 out_tok=2338 cost=0.0323853 32.3s
+[4/20] fateh_011__bare__low: solved (ok) turns=6 out_tok=1924 cost=0.0285148 40.9s
+[5/20] fateh_024__bare__low: solved (ok) turns=4 out_tok=1033 cost=0.014453099999999997 21.2s
+[6/20] fateh_033__bare__low: solved (ok) turns=12 out_tok=9221 cost=0.1452265 105.2s
+[7/20] fateh_013__bare__low: solved (ok) turns=21 out_tok=23295 cost=0.35588010000000003 260.9s
+[8/20] fateh_021__bare__low: solved (ok) turns=8 out_tok=6516 cost=0.0881306 251.1s
+[9/20] fateh_057__bare__low: solved (ok) turns=9 out_tok=3480 cost=0.0501163 67.6s
+[10/20] fateh_040__bare__low: solved (ok) turns=19 out_tok=11648 cost=0.20011610000000002 270.4s
+[11/20] fateh_039__bare__low: solved (ok) turns=22 out_tok=12842 cost=0.2202725 231.3s
+[12/20] fateh_070__bare__low: solved (ok) turns=8 out_tok=8808 cost=0.1333109 99.7s
+[13/20] fateh_068__bare__low: solved (ok) turns=18 out_tok=18261 cost=0.2719076999999999 196.5s
+[14/20] fateh_071__bare__low: solved (ok) turns=9 out_tok=2858 cost=0.0429617 55.5s
+[15/20] fateh_079__bare__low: solved (ok) turns=6 out_tok=3996 cost=0.0561227 49.7s
+[16/20] fateh_082__bare__low: solved (ok) turns=14 out_tok=3165 cost=0.050591 48.1s
+[17/20] fateh_092__bare__low: solved (ok) turns=10 out_tok=6267 cost=0.0882605 77.7s
+[18/20] fateh_066__bare__low: solved (ok) turns=8 out_tok=8603 cost=0.12222400000000001 91.9s
+[19/20] fateh_036__bare__low: solved (ok) turns=37 out_tok=66628 cost=1.0791746 710.9s
+[20/20] fateh_067__bare__low: gave_up (safeverify) turns=14 out_tok=9283 cost=0.1433197 136.1s

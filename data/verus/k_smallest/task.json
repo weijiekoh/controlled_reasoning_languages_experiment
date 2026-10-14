@@ -1,0 +1,15 @@
+{
+ "id": "k_smallest",
+ "entry": "k_smallest.rs",
+ "description": "description.md",
+ "main_fn": "quick_select",
+ "editable_regions": {
+  "helpers": "between `// <helpers>` and `// </helpers>`: helper spec fns and exec helpers",
+  "proofs": "between `// <proofs>` and `// </proofs>`: lemmas (proof fns)",
+  "code": "between `// <code>` and `// </code>`: exactly one block `{ ... }`, the body of the function under spec"
+ },
+ "fixed": "Everything outside the three editable regions is fixed: the `use` lines, the <preamble> block (definitions, spec fns, and any exec fns given there), the <spec> block (signature, requires, ensures of the function under test), fn main, and all marker comments. Compared token-wise; comments and whitespace are ignored.",
+ "source": "data/algoveri/algoveri_data/k_smallest/verus_spec.rs",
+ "source_sha256": "1d8e8a79e3a61d8dfa79da000827eed18f22a4eaaa4466ad247da19556f5c040",
+ "patches": []
+}

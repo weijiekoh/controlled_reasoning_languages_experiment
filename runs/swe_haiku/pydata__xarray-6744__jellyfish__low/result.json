@@ -1,0 +1,73 @@
+{
+ "problem": "pydata__xarray-6744",
+ "bench": "swe",
+ "condition": "jellyfish",
+ "effort": "low",
+ "model": "claude-haiku-5-5",
+ "batch": "swe_haiku",
+ "dry_run": false,
+ "outcome": "solved",
+ "verify_pass": true,
+ "verify_stage": "ok",
+ "verify_detail": "resolved (run_id cotml-20261014011231-933e3e90)",
+ "num_turns": 4,
+ "input_tokens": 10,
+ "output_tokens": 2229,
+ "thinking_tokens": 1032,
+ "cache_read_tokens": 17762,
+ "cache_creation_tokens": 5113,
+ "usage_source": "result",
+ "total_cost_usd": 0.001932245,
+ "duration_s": 82.9,
+ "agent_duration_ms": 82256,
+ "lean_compile_count": 1,
+ "search_tactic_uses": 0,
+ "search_tactic_in_final": false,
+ "tool_calls": {
+  "Bash": 3
+ },
+ "proof_chars": 1289,
+ "proof_lines": 27,
+ "statement_prefix_changed": false,
+ "stop_reason": "end_turn",
+ "result_subtype": "success",
+ "terminal_reason": "completed",
+ "is_error": false,
+ "api_error_status": null,
+ "permission_denials": 0,
+ "agent_said_give_up": false,
+ "final_text": "The iterator now honours `center=True`, and the full rolling test file passes (1818 passed, 32 skipped, 4 xpassed), including the three target tests.\n\n**Change:** In `DataArrayRolling.__iter__` (`xarray/core/rolling.py`), the window bounds were always computed as trailing windows. For centered rolling, each label `i` now gets the slice starting at `i - window // 2` with length `window`, clipped to the array bounds. The non-centered path is unchanged.\n\nI checked the iterator against the vectorised `.mean()` for window sizes 2, 3 and 4 on the issue's example, and the results match, including the NaN positions at the edges. I did not change any test files and did not commit.",
+ "timed_out": false,
+ "docker_rc": 0,
+ "limits": {
+  "max_turns": 50,
+  "max_budget_usd": 2.0,
+  "timeout_min": 25.0
+ },
+ "network": "cotml-egress",
+ "proxy": true,
+ "claude_version": "2.1.296",
+ "model_usage": {
+  "claude-haiku-5-5": {
+   "inputTokens": 10,
+   "outputTokens": 2229,
+   "cacheReadInputTokens": 17762,
+   "cacheCreationInputTokens": 5113,
+   "webSearchRequests": 0,
+   "costUSD": 0.001932245,
+   "contextWindow": 1000000,
+   "maxOutputTokens": 128000,
+   "thinkingTokens": 1032,
+   "canonicalModel": "claude-haiku-5-5",
+   "provider": "firstParty",
+   "costBasis": "list"
+  }
+ },
+ "started_at": "2026-10-14T08:11:07+00:00",
+ "framing": "debug",
+ "patch_files": [
+  "xarray/core/rolling.py"
+ ],
+ "touched_test_files": [],
+ "untracked_files": []
+}

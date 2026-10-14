@@ -1,0 +1,45 @@
+import Mathlib
+
+namespace Problem24
+
+/--
+The field $K = \mathbb{Q}(\sqrt{p_1}, \dots, \sqrt{p_r})$
+for a finite list of integers $p_1, \dots, p_r$.
+-/
+abbrev RatAdjoinSqrt {I : Type} (p : I → ℕ) : Type :=
+  Algebra.adjoin ℚ (Set.range (fun i ↦ Real.sqrt (p i)))
+
+/--
+Let $p_1, \dots, p_r$ be $r$ different prime numbers.
+Prove that the Galois group of $K =\mathbb{Q}(\sqrt{p_1}, \dots, \sqrt{p_r})$ over $\mathbb{Q}$
+is $(\mathbb{Z}/2\mathbb{Z})^r$, here $\mathbb{Z}/2\mathbb{Z}$ is the cyclic group of order 2.
+-/
+theorem galoisGroup_iso_of_distinct_primes {I : Type} [Finite I] (p : I → ℕ)
+    (hp : ∀ (i : I), (p i).Prime) (h_inj : p.Injective) :
+    Nonempty ((RatAdjoinSqrt p ≃ₐ[ℚ] RatAdjoinSqrt p) ≃* (Multiplicative (I → (ZMod 2)))) := by
+  classical
+  have := Fintype.ofFinite I
+  have nsq : ∀ (T : Finset I), T.Nonempty → ¬ IsSquare (∏ i ∈ T, p i) := by
+    intro T hT
+    rintro ⟨k, hk⟩
+    obtain ⟨i, hi⟩ := hT
+    have h1 : p i ∣ k * k := by
+      rw [← hk]; exact Finset.dvd_prod_of_mem _ hi
+    have h2 : p i ∣ k := by
+      rcases (Nat.Prime.dvd_mul (hp i)).1 h1 with h | h <;> exact h
+    obtain ⟨m, hm⟩ := h2
+    have h3 : ∏ l ∈ T, p l = p i * ∏ l ∈ T.erase i, p l := (Finset.mul_prod_erase T p hi).symm
+    have h4 : p i * ∏ l ∈ T.erase i, p l = p i * (p i * m * m) := by
+      rw [← h3, hk, hm]; ring
+    have h5 : ∏ l ∈ T.erase i, p l = p i * m * m := Nat.eq_of_mul_eq_mul_left (hp i).pos h4
+    have h6 : p i ∣ ∏ l ∈ T.erase i, p l := by rw [h5]; exact ⟨m * m, by ring⟩
+    rw [Prime.dvd_finsetProd_iff (hp i).prime] at h6
+    obtain ⟨l, hl, hdl⟩ := h6
+    rw [Nat.prime_dvd_prime_iff_eq (hp i) (hp l)] at hdl
+    have := h_inj hdl
+    have := (Finset.mem_erase.1 hl).1
+    simp_all
+  have fixedLemma : ∀ (x : RatAdjoinSqrt p), (∀ σ : RatAdjoinSqrt p ≃ₐ[ℚ] RatAdjoinSqrt p, σ x = x) →
+      ∃ q : ℚ, (x : ℝ) = q := by
+    intro x hx
+    open Polynomial in

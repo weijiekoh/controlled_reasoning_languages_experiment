@@ -1,0 +1,2 @@
+  have hsp : Polynomial.IsSplittingField ℚ K' f := by
+    refine IntermediateField.isSplittingField_iff.2 ⟨h1, h2⟩

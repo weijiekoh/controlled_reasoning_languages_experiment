@@ -1,0 +1,15 @@
+{
+ "id": "longest_common_subsequence",
+ "entry": "longest_common_subsequence.rs",
+ "description": "description.md",
+ "main_fn": "solve_longest_common_subsequence",
+ "editable_regions": {
+  "helpers": "between `// <helpers>` and `// </helpers>`: helper spec fns and exec helpers",
+  "proofs": "between `// <proofs>` and `// </proofs>`: lemmas (proof fns)",
+  "code": "between `// <code>` and `// </code>`: exactly one block `{ ... }`, the body of the function under spec"
+ },
+ "fixed": "Everything outside the three editable regions is fixed: the `use` lines, the <preamble> block (definitions, spec fns, and any exec fns given there), the <spec> block (signature, requires, ensures of the function under test), fn main, and all marker comments. Compared token-wise; comments and whitespace are ignored.",
+ "source": "data/algoveri/algoveri_data/longest_common_subsequence/verus_spec.rs",
+ "source_sha256": "6cb1586819ab81110e002e40f1b42d0016114ddcc8d30aebea27736aa44c7fb1",
+ "patches": []
+}

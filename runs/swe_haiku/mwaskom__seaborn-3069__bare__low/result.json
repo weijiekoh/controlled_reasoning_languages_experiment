@@ -1,0 +1,73 @@
+{
+ "problem": "mwaskom__seaborn-3069",
+ "bench": "swe",
+ "condition": "bare",
+ "effort": "low",
+ "model": "claude-haiku-5-5",
+ "batch": "swe_haiku",
+ "dry_run": false,
+ "outcome": "solved",
+ "verify_pass": true,
+ "verify_stage": "ok",
+ "verify_detail": "resolved (run_id cotml-20261014011024-5818ed40)",
+ "num_turns": 7,
+ "input_tokens": 16,
+ "output_tokens": 2974,
+ "thinking_tokens": 1143,
+ "cache_read_tokens": 37051,
+ "cache_creation_tokens": 7516,
+ "usage_source": "result",
+ "total_cost_usd": 0.00279861,
+ "duration_s": 96.9,
+ "agent_duration_ms": 96293,
+ "lean_compile_count": 3,
+ "search_tactic_uses": 0,
+ "search_tactic_in_final": false,
+ "tool_calls": {
+  "Bash": 6
+ },
+ "proof_chars": 1096,
+ "proof_lines": 23,
+ "statement_prefix_changed": false,
+ "stop_reason": "end_turn",
+ "result_subtype": "success",
+ "terminal_reason": "completed",
+ "is_error": false,
+ "api_error_status": null,
+ "permission_denials": 0,
+ "agent_said_give_up": false,
+ "final_text": "Nominal scales now draw the same way categorical plots do, and both target tests pass.\n\nThe change is in `Plotter._finalize_figure` in `seaborn/_core/plot.py`. For each subplot axis whose scale is a `Nominal` (including inferred ones):\n- The limits are set to \u00b10.5 around the first and last tick, and the y axis is inverted.\n- The grid is turned off on that axis.\n\nA user-supplied `.limit()` is applied after this, so it still overrides the default limits, as the second half of each test checks.\n\nAcross `tests/_core/test_plot.py`, the only change in failures versus the untouched repo is that the two target tests now pass. The other 74 failures were already there and come from a pandas incompatibility in this environment, not from this change.\n\nTwo things I did not do:\n- The grid is always hidden on nominal axes. There is no way for a user or theme to force it back on yet, which the issue raises as an open question.\n- I used the axis tick positions to find the category range rather than the scale object, so the logic does not live in `Nominal` itself.",
+ "timed_out": false,
+ "docker_rc": 0,
+ "limits": {
+  "max_turns": 50,
+  "max_budget_usd": 2.0,
+  "timeout_min": 25.0
+ },
+ "network": "cotml-egress",
+ "proxy": true,
+ "claude_version": "2.1.296",
+ "model_usage": {
+  "claude-haiku-5-5": {
+   "inputTokens": 16,
+   "outputTokens": 2974,
+   "cacheReadInputTokens": 37051,
+   "cacheCreationInputTokens": 7516,
+   "webSearchRequests": 0,
+   "costUSD": 0.00279861,
+   "contextWindow": 1000000,
+   "maxOutputTokens": 128000,
+   "thinkingTokens": 1143,
+   "canonicalModel": "claude-haiku-5-5",
+   "provider": "firstParty",
+   "costBasis": "list"
+  }
+ },
+ "started_at": "2026-10-14T08:08:47+00:00",
+ "framing": "debug",
+ "patch_files": [
+  "seaborn/_core/plot.py"
+ ],
+ "touched_test_files": [],
+ "untracked_files": []
+}

@@ -1,0 +1,2 @@
+ M sympy/tensor/array/dense_ndim_array.py
+ M sympy/tensor/array/sparse_ndim_array.py

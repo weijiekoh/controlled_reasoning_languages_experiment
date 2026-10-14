@@ -1,0 +1,15 @@
+{
+ "id": "bst_delete",
+ "entry": "bst_delete.rs",
+ "description": "description.md",
+ "main_fn": "delete",
+ "editable_regions": {
+  "helpers": "between `// <helpers>` and `// </helpers>`: helper spec fns and exec helpers",
+  "proofs": "between `// <proofs>` and `// </proofs>`: lemmas (proof fns)",
+  "code": "between `// <code>` and `// </code>`: exactly one block `{ ... }`, the body of the function under spec"
+ },
+ "fixed": "Everything outside the three editable regions is fixed: the `use` lines, the <preamble> block (definitions, spec fns, and any exec fns given there), the <spec> block (signature, requires, ensures of the function under test), fn main, and all marker comments. Compared token-wise; comments and whitespace are ignored.",
+ "source": "data/algoveri/algoveri_data/bst_delete/verus_spec.rs",
+ "source_sha256": "7479a67eea09d38e94abb80b8f116409635c3e705729fa8dfa590966d51a8f3d",
+ "patches": []
+}

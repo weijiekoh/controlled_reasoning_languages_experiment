@@ -1,0 +1,73 @@
+{
+ "problem": "sphinx-doc__sphinx-9602",
+ "bench": "swe",
+ "condition": "cod",
+ "effort": "low",
+ "model": "claude-haiku-5-5",
+ "batch": "swe_haiku",
+ "dry_run": false,
+ "outcome": "gave_up",
+ "verify_pass": false,
+ "verify_stage": "tests",
+ "verify_detail": "FAIL_TO_PASS 0/1 failing: tests/test_domain_py.py::test_parse_annotation_Literal; PASS_TO_PASS 45/45",
+ "num_turns": 10,
+ "input_tokens": 22,
+ "output_tokens": 2700,
+ "thinking_tokens": 669,
+ "cache_read_tokens": 47845,
+ "cache_creation_tokens": 6541,
+ "usage_source": "result",
+ "total_cost_usd": 0.002648275,
+ "duration_s": 30.4,
+ "agent_duration_ms": 29797,
+ "lean_compile_count": 4,
+ "search_tactic_uses": 0,
+ "search_tactic_in_final": false,
+ "tool_calls": {
+  "Bash": 9
+ },
+ "proof_chars": 1076,
+ "proof_lines": 20,
+ "statement_prefix_changed": false,
+ "stop_reason": "end_turn",
+ "result_subtype": "success",
+ "terminal_reason": "completed",
+ "is_error": false,
+ "api_error_status": null,
+ "permission_denials": 0,
+ "agent_said_give_up": false,
+ "final_text": "I changed how literal values in annotations are rendered, so `Literal[True]` and similar no longer produce `py:class` cross-references. The fix is in `sphinx/domains/python.py`, inside `_parse_annotation`.\n\nConstants were previously emitted as plain text, and the later pass turned every text node into a cross-reference. Now:\n- **Strings** become `desc_sig_literal_string` nodes.\n- **Booleans** become `desc_sig_keyword` nodes.\n- **Numbers** become `desc_sig_literal_number` nodes.\n- **Other constants** stay as plain text, but use `repr()`.\n\n`None` is deliberately left on the old path, because existing tests expect it to remain a cross-reference.\n\nI ran `tests/test_domain_py.py`, `tests/test_pycode_ast.py`, `tests/test_util_typing.py` and `tests/test_ext_autodoc.py`. All pass except `test_cython`, which also fails on the unmodified checkout, so it predates this change.\n\nI did not reproduce the issue's example project end to end, so the nitpick build itself is untested. The change is not yet covered by a new test for `Literal` values.",
+ "timed_out": false,
+ "docker_rc": 0,
+ "limits": {
+  "max_turns": 50,
+  "max_budget_usd": 2.0,
+  "timeout_min": 25.0
+ },
+ "network": "cotml-egress",
+ "proxy": true,
+ "claude_version": "2.1.296",
+ "model_usage": {
+  "claude-haiku-5-5": {
+   "inputTokens": 22,
+   "outputTokens": 2700,
+   "cacheReadInputTokens": 47845,
+   "cacheCreationInputTokens": 6541,
+   "webSearchRequests": 0,
+   "costUSD": 0.002648275,
+   "contextWindow": 1000000,
+   "maxOutputTokens": 128000,
+   "thinkingTokens": 669,
+   "canonicalModel": "claude-haiku-5-5",
+   "provider": "firstParty",
+   "costBasis": "list"
+  }
+ },
+ "started_at": "2026-10-14T09:40:07+00:00",
+ "framing": "issue",
+ "patch_files": [
+  "sphinx/domains/python.py"
+ ],
+ "touched_test_files": [],
+ "untracked_files": []
+}

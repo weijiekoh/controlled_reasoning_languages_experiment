@@ -1,0 +1,7 @@
+isolation check: ok (no .lean files outside /work)
+10 runs, 5 done, 5 to run, parallel 5
+[1/5] putnam_2018_b3__bare__low: solved (ok) turns=9 out_tok=13979 cost=0.1968749 123.2s
+[2/5] putnam_2021_a5__bare__low: solved (ok) turns=17 out_tok=10096 cost=0.16976869999999997 134.9s
+[3/5] putnam_2008_b3__bare__low: solved (ok) turns=9 out_tok=8203 cost=0.1270932 113.3s
+[4/5] putnam_2010_a6__bare__low: solved (ok) turns=13 out_tok=19747 cost=0.2810549 197.8s
+[5/5] putnam_2003_b4__bare__low: solved (ok) turns=5 out_tok=4520 cost=0.0639787 42.7s

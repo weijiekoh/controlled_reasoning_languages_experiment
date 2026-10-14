@@ -1,0 +1,15 @@
+{
+ "id": "integer_exponential",
+ "entry": "integer_exponential.rs",
+ "description": "description.md",
+ "main_fn": "exponentiation",
+ "editable_regions": {
+  "helpers": "between `// <helpers>` and `// </helpers>`: helper spec fns and exec helpers",
+  "proofs": "between `// <proofs>` and `// </proofs>`: lemmas (proof fns)",
+  "code": "between `// <code>` and `// </code>`: exactly one block `{ ... }`, the body of the function under spec"
+ },
+ "fixed": "Everything outside the three editable regions is fixed: the `use` lines, the <preamble> block (definitions, spec fns, and any exec fns given there), the <spec> block (signature, requires, ensures of the function under test), fn main, and all marker comments. Compared token-wise; comments and whitespace are ignored.",
+ "source": "data/algoveri/algoveri_data/integer_exponential/verus_spec.rs",
+ "source_sha256": "860840f118ee1010e866ac680d55588aacbc37bd7ccde1ebaab7d660b4931f69",
+ "patches": []
+}

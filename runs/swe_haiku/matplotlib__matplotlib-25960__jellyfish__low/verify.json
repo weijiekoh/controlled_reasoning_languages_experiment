@@ -1,0 +1,1 @@
+{"pass": false, "stage": "tests", "detail": "FAIL_TO_PASS 0/1 failing: lib/matplotlib/tests/test_figure.py::test_subfigures_wspace_hspace; PASS_TO_PASS 131/137 failing: lib/matplotlib/tests/test_figure.py::test_subfigure[png], lib/matplotlib/tests/test_figure.py::test_subfigure_tightbbox, lib/matplotlib/tests/test_figure.py::test_subfigure_ss[png]", "seconds": 95.4}

@@ -1,0 +1,9 @@
+import Mathlib
+open Polynomial
+#check @card_nthRoots_subgroup_units
+#check @IsPrimitiveRoot.card_nthRoots_one
+#check @IsCyclic.card_pow_eq_one_le
+#check @exists_prime_orderOf_dvd_card'
+#check @IsPrimitiveRoot.card_rootsOfUnity
+#check @Polynomial.card_nthRoots
+#check @FiniteField.isCyclic_units

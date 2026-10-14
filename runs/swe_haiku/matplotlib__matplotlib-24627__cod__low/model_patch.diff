@@ -1,0 +1,34 @@
+diff --git a/lib/matplotlib/axes/_base.py b/lib/matplotlib/axes/_base.py
+index 90b0bf117e..2461a7d3d6 100644
+--- a/lib/matplotlib/axes/_base.py
++++ b/lib/matplotlib/axes/_base.py
+@@ -1284,6 +1284,14 @@ class _AxesBase(martist.Artist):
+         xaxis_visible = self.xaxis.get_visible()
+         yaxis_visible = self.yaxis.get_visible()
+ 
++        # Decouple all existing children from this Axes.
++        for child in self._children:
++            if hasattr(child, 'axes') and child.axes is self:
++                child.axes = None
++            if hasattr(child, 'figure') and child.figure is not None:
++                child.figure = None
++        self._children = []
++
+         for axis in self._axis_map.values():
+             axis.clear()  # Also resets the scale to linear.
+         for spine in self.spines.values():
+diff --git a/lib/matplotlib/figure.py b/lib/matplotlib/figure.py
+index 6c18ba1a64..d3aead85f0 100644
+--- a/lib/matplotlib/figure.py
++++ b/lib/matplotlib/figure.py
+@@ -949,6 +949,10 @@ default: %(va)s
+             ax.clear()
+             self.delaxes(ax)  # Remove ax from self._axstack.
+ 
++        for artist in self.artists + self.lines + self.patches + self.texts \
++                + self.images + self.legends:
++            if getattr(artist, 'figure', None) is self:
++                artist.figure = None
+         self.artists = []
+         self.lines = []
+         self.patches = []

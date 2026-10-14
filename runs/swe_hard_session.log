@@ -1,0 +1,222 @@
+=== 01:30 pulling hard-set images (docker mode first, ipv4 fallback)
+=== 02:16 hard set: Haiku bare,cod,jellyfish
+isolation check: skipped (swe)
+144 runs, 0 done, 144 to run, parallel 6
+[1/144] astropy__astropy-14096__bare__low: solved (ok) turns=4 out_tok=1317 cost=0.0013252799999999999 14.1s
+[2/144] astropy__astropy-14096__cod__low: solved (ok) turns=4 out_tok=1741 cost=0.0015932199999999998 15.4s
+[3/144] astropy__astropy-14096__jellyfish__low: solved (ok) turns=4 out_tok=1953 cost=0.00189593 17.1s
+[4/144] astropy__astropy-13977__bare__low: gave_up (tests) turns=5 out_tok=2235 cost=0.002307795 38.4s
+[5/144] astropy__astropy-13977__jellyfish__low: gave_up (tests) turns=5 out_tok=2666 cost=0.002713425 38.9s
+[6/144] astropy__astropy-13977__cod__low: gave_up (tests) turns=6 out_tok=2298 cost=0.0023910949999999998 49.3s
+[7/144] astropy__astropy-7671__bare__low: solved (ok) turns=3 out_tok=1060 cost=0.0010448599999999999 9.5s
+[8/144] astropy__astropy-7671__cod__low: solved (ok) turns=5 out_tok=1295 cost=0.00125616 9.7s
+[9/144] astropy__astropy-7671__jellyfish__low: solved (ok) turns=4 out_tok=1880 cost=0.00167337 13.4s
+[10/144] astropy__astropy-14369__cod__low: gave_up (tests) turns=5 out_tok=3845 cost=0.002891445 22.5s
+[11/144] astropy__astropy-14369__bare__low: gave_up (tests) turns=4 out_tok=6199 cost=0.004917225 33.9s
+[12/144] astropy__astropy-14369__jellyfish__low: gave_up (tests) turns=8 out_tok=6103 cost=0.004959575 40.2s
+[13/144] matplotlib__matplotlib-23314__bare__low: solved (ok) turns=6 out_tok=1254 cost=0.001249735 27.1s
+[14/144] matplotlib__matplotlib-23314__cod__low: solved (ok) turns=4 out_tok=805 cost=0.00069164 23.5s
+[15/144] matplotlib__matplotlib-23314__jellyfish__low: solved (ok) turns=6 out_tok=1788 cost=0.00155627 30.3s
+[16/144] matplotlib__matplotlib-23412__bare__low: solved (ok) turns=5 out_tok=1225 cost=0.0011719349999999998 20.8s
+[17/144] matplotlib__matplotlib-23412__cod__low: solved (ok) turns=4 out_tok=913 cost=0.001030015 16.6s
+[18/144] matplotlib__matplotlib-14623__cod__low: solved (ok) turns=11 out_tok=3116 cost=0.002873415 158.6s
+[19/144] matplotlib__matplotlib-14623__jellyfish__low: solved (ok) turns=7 out_tok=3288 cost=0.00291446 153.3s
+[20/144] matplotlib__matplotlib-23412__jellyfish__low: solved (ok) turns=6 out_tok=1657 cost=0.001608885 24.8s
+[21/144] matplotlib__matplotlib-14623__bare__low: solved (ok) turns=15 out_tok=3958 cost=0.00398917 244.2s
+[22/144] matplotlib__matplotlib-25287__cod__low: solved (ok) turns=6 out_tok=1346 cost=0.00134711 27.8s
+[23/144] matplotlib__matplotlib-24627__bare__low: solved (ok) turns=6 out_tok=2542 cost=0.002259915 109.7s
+[24/144] matplotlib__matplotlib-24627__jellyfish__low: solved (ok) turns=8 out_tok=2648 cost=0.0024626000000000006 109.6s
+[25/144] matplotlib__matplotlib-24627__cod__low: solved (ok) turns=8 out_tok=2789 cost=0.0025222200000000004 198.4s
+[26/144] matplotlib__matplotlib-25287__jellyfish__low: solved (ok) turns=10 out_tok=2507 cost=0.0025772349999999998 110.3s
+[27/144] matplotlib__matplotlib-25287__bare__low: solved (ok) turns=10 out_tok=2847 cost=0.0025588799999999995 222.6s
+[28/144] matplotlib__matplotlib-25960__bare__low: gave_up (tests) turns=15 out_tok=7210 cost=0.00656983 97.4s
+[29/144] psf__requests-1921__bare__low: solved (ok) turns=5 out_tok=1193 cost=0.001053005 12.9s
+[30/144] psf__requests-1921__cod__low: solved (ok) turns=5 out_tok=1272 cost=0.001057135 12.3s
+[31/144] matplotlib__matplotlib-25960__jellyfish__low: gave_up (tests) turns=12 out_tok=5691 cost=0.00545451 67.2s
+[32/144] psf__requests-6028__bare__low: solved (ok) turns=7 out_tok=3253 cost=0.0027814000000000003 22.3s
+[33/144] psf__requests-6028__cod__low: solved (ok) turns=5 out_tok=1924 cost=0.00158218 31.4s
+[34/144] psf__requests-1921__jellyfish__low: solved (ok) turns=6 out_tok=1608 cost=0.00137547 14.4s
+[35/144] psf__requests-6028__jellyfish__low: solved (ok) turns=7 out_tok=2863 cost=0.002287725 21.1s
+[36/144] pydata__xarray-3095__bare__low: solved (ok) turns=4 out_tok=953 cost=0.001041285 13.4s
+[37/144] pydata__xarray-3095__cod__low: solved (ok) turns=4 out_tok=978 cost=0.001058075 13.6s
+[38/144] matplotlib__matplotlib-25960__cod__low: solved (ok) turns=16 out_tok=9792 cost=0.00885452 145.8s
+[39/144] pydata__xarray-3095__jellyfish__low: solved (ok) turns=4 out_tok=1181 cost=0.0013124850000000002 14.5s
+[40/144] pydata__xarray-6938__bare__low: gave_up (tests) turns=5 out_tok=1933 cost=0.0017965049999999999 31.5s
+[41/144] pydata__xarray-6938__cod__low: gave_up (tests) turns=5 out_tok=1884 cost=0.001776625 32.5s
+[42/144] pydata__xarray-7229__cod__low: gave_up (tests) turns=7 out_tok=3283 cost=0.003006725 46.7s
+[43/144] pydata__xarray-7229__bare__low: gave_up (tests) turns=11 out_tok=7149 cost=0.00576527 76.6s
+[44/144] pydata__xarray-7229__jellyfish__low: gave_up (tests) turns=9 out_tok=4915 cost=0.0041493400000000005 78.2s
+[45/144] pydata__xarray-6938__jellyfish__low: gave_up (tests) turns=10 out_tok=3210 cost=0.003176365 106.6s
+[46/144] pydata__xarray-7233__bare__low: solved (ok) turns=5 out_tok=965 cost=0.00110203 82.4s
+[47/144] pydata__xarray-7233__cod__low: solved (ok) turns=6 out_tok=1039 cost=0.0011519149999999999 82.3s
+[48/144] pylint-dev__pylint-7080__bare__low: solved (ok) turns=8 out_tok=3068 cost=0.004954795 24.0s
+[49/144] pylint-dev__pylint-7080__jellyfish__low: gave_up (tests) turns=5 out_tok=1841 cost=0.0032420450000000003 14.9s
+[50/144] pydata__xarray-7233__jellyfish__low: solved (ok) turns=6 out_tok=1126 cost=0.001379655 83.1s
+[51/144] pylint-dev__pylint-8898__cod__low: solved (ok) turns=5 out_tok=2075 cost=0.0019174900000000002 18.6s
+[52/144] pylint-dev__pylint-8898__bare__low: solved (ok) turns=6 out_tok=2023 cost=0.0019821300000000003 22.0s
+[53/144] pylint-dev__pylint-8898__jellyfish__low: solved (ok) turns=5 out_tok=2354 cost=0.002291825 20.3s
+[54/144] pytest-dev__pytest-5631__bare__low: solved (ok) turns=4 out_tok=708 cost=0.000692455 6.2s
+[55/144] pytest-dev__pytest-5631__cod__low: solved (ok) turns=4 out_tok=588 cost=0.000629395 6.2s
+[56/144] pylint-dev__pylint-7080__cod__low: gave_up (tests) turns=8 out_tok=3972 cost=0.005612279999999999 73.7s
+[57/144] pytest-dev__pytest-7236__bare__low: solved (ok) turns=5 out_tok=1477 cost=0.00150763 12.8s
+[58/144] pytest-dev__pytest-7236__cod__low: solved (ok) turns=6 out_tok=1919 cost=0.0017857650000000001 16.3s
+[59/144] pytest-dev__pytest-6202__cod__low: solved (ok) turns=6 out_tok=1559 cost=0.0015161049999999998 37.5s
+[60/144] pytest-dev__pytest-5631__jellyfish__low: solved (ok) turns=8 out_tok=2335 cost=0.002131425 57.2s
+[61/144] pytest-dev__pytest-6202__bare__low: solved (ok) turns=6 out_tok=1332 cost=0.00131897 56.5s
+[62/144] pytest-dev__pytest-7236__jellyfish__low: solved (ok) turns=5 out_tok=1753 cost=0.0017170900000000001 13.3s
+[63/144] scikit-learn__scikit-learn-13135__bare__low: solved (ok) turns=4 out_tok=1035 cost=0.001248125 8.7s
+[64/144] pytest-dev__pytest-6202__jellyfish__low: solved (ok) turns=7 out_tok=1839 cost=0.0018096200000000003 63.7s
+[65/144] scikit-learn__scikit-learn-13135__cod__low: solved (ok) turns=4 out_tok=840 cost=0.0011372399999999999 7.4s
+[66/144] scikit-learn__scikit-learn-13135__jellyfish__low: solved (ok) turns=4 out_tok=1059 cost=0.00123377 8.0s
+[67/144] scikit-learn__scikit-learn-13328__bare__low: solved (ok) turns=5 out_tok=1006 cost=0.0010887499999999999 9.9s
+[68/144] scikit-learn__scikit-learn-13328__cod__low: solved (ok) turns=5 out_tok=1075 cost=0.0011108350000000001 9.9s
+[69/144] scikit-learn__scikit-learn-14141__bare__low: solved (ok) turns=3 out_tok=519 cost=0.0005122999999999999 6.5s
+[70/144] scikit-learn__scikit-learn-13328__jellyfish__low: solved (ok) turns=7 out_tok=1322 cost=0.0014259100000000003 10.7s
+[71/144] scikit-learn__scikit-learn-14141__cod__low: solved (ok) turns=5 out_tok=572 cost=0.0005178800000000001 6.4s
+[72/144] scikit-learn__scikit-learn-14141__jellyfish__low: solved (ok) turns=4 out_tok=685 cost=0.000676975 7.3s
+[73/144] scikit-learn__scikit-learn-25747__bare__low: gave_up (tests) turns=5 out_tok=2077 cost=0.002093785 14.5s
+[74/144] scikit-learn__scikit-learn-25747__cod__low: gave_up (tests) turns=4 out_tok=2304 cost=0.002165415 15.7s
+[75/144] scikit-learn__scikit-learn-26323__bare__low: solved (ok) turns=4 out_tok=1045 cost=0.001198035 10.7s
+[76/144] scikit-learn__scikit-learn-26323__cod__low: solved (ok) turns=4 out_tok=1062 cost=0.001115115 10.3s
+[77/144] scikit-learn__scikit-learn-25747__jellyfish__low: gave_up (tests) turns=5 out_tok=2579 cost=0.002681275 17.6s
+[78/144] scikit-learn__scikit-learn-26323__jellyfish__low: solved (ok) turns=6 out_tok=1588 cost=0.001674845 16.1s
+[79/144] sphinx-doc__sphinx-10466__bare__low: solved (ok) turns=5 out_tok=1264 cost=0.00125672 12.4s
+[80/144] sphinx-doc__sphinx-10466__jellyfish__low: solved (ok) turns=5 out_tok=1183 cost=0.00119845 11.3s
+[81/144] sphinx-doc__sphinx-10466__cod__low: solved (ok) turns=6 out_tok=1353 cost=0.0014438300000000001 12.4s
+[82/144] sphinx-doc__sphinx-11445__jellyfish__low: solved (ok) turns=4 out_tok=1545 cost=0.00133804 17.9s
+[83/144] sphinx-doc__sphinx-7910__bare__low: solved (ok) turns=5 out_tok=1431 cost=0.001216005 11.7s
+[84/144] sphinx-doc__sphinx-7910__cod__low: solved (ok) turns=4 out_tok=1070 cost=0.000969295 8.2s
+[85/144] sphinx-doc__sphinx-11445__cod__low: solved (ok) turns=9 out_tok=1821 cost=0.001655145 56.6s
+[86/144] sphinx-doc__sphinx-11445__bare__low: solved (ok) turns=8 out_tok=2356 cost=0.002114335 64.2s
+[87/144] sphinx-doc__sphinx-7910__jellyfish__low: solved (ok) turns=10 out_tok=4157 cost=0.00338925 33.2s
+[88/144] sphinx-doc__sphinx-8621__bare__low: solved (ok) turns=7 out_tok=3916 cost=0.003167665 28.5s
+[89/144] sphinx-doc__sphinx-8621__jellyfish__low: solved (ok) turns=6 out_tok=3669 cost=0.003082305 27.0s
+[90/144] sphinx-doc__sphinx-9281__bare__low: solved (ok) turns=3 out_tok=663 cost=0.00061798 6.6s
+[91/144] sphinx-doc__sphinx-8638__bare__low: gave_up (tests) turns=8 out_tok=3853 cost=0.003511285 36.2s
+[92/144] sphinx-doc__sphinx-9281__cod__low: solved (ok) turns=6 out_tok=987 cost=0.0009130550000000001 15.3s
+[93/144] sphinx-doc__sphinx-8638__jellyfish__low: gave_up (tests) turns=8 out_tok=5455 cost=0.004356545 44.7s
+[94/144] sphinx-doc__sphinx-8638__cod__low: gave_up (tests) turns=11 out_tok=7323 cost=0.006181885 54.9s
+[95/144] sphinx-doc__sphinx-8621__cod__low: solved (ok) turns=6 out_tok=4599 cost=0.0036568699999999996 91.1s
+[96/144] sphinx-doc__sphinx-9281__jellyfish__low: solved (ok) turns=7 out_tok=1668 cost=0.001512565 19.1s
+[97/144] sphinx-doc__sphinx-9602__bare__low: gave_up (tests) turns=10 out_tok=4729 cost=0.00409781 31.7s
+[98/144] sphinx-doc__sphinx-9602__jellyfish__low: gave_up (tests) turns=9 out_tok=3267 cost=0.003317205 21.7s
+[99/144] sphinx-doc__sphinx-9698__jellyfish__low: solved (ok) turns=6 out_tok=1241 cost=0.001207345 12.9s
+[100/144] sphinx-doc__sphinx-9698__bare__low: solved (ok) turns=7 out_tok=1136 cost=0.00112612 19.3s
+[101/144] sphinx-doc__sphinx-9602__cod__low: gave_up (tests) turns=10 out_tok=2700 cost=0.002648275 30.4s
+[102/144] sphinx-doc__sphinx-9698__cod__low: solved (ok) turns=6 out_tok=916 cost=0.0009373900000000001 18.0s
+[103/144] sympy__sympy-12481__bare__low: solved (ok) turns=6 out_tok=1831 cost=0.001538905 14.3s
+[104/144] sympy__sympy-12481__cod__low: solved (ok) turns=7 out_tok=2299 cost=0.00192521 16.7s
+[105/144] sympy__sympy-12481__jellyfish__low: solved (ok) turns=9 out_tok=2752 cost=0.0024159050000000003 17.9s
+[106/144] sympy__sympy-12489__jellyfish__low: gave_up (tests) turns=6 out_tok=2406 cost=0.00204975 16.6s
+[107/144] sympy__sympy-12489__cod__low: gave_up (tests) turns=6 out_tok=2049 cost=0.002197045 39.9s
+[108/144] sympy__sympy-12489__bare__low: gave_up (tests) turns=7 out_tok=3452 cost=0.0028256199999999996 45.6s
+[109/144] sympy__sympy-13798__bare__low: gave_up (tests) turns=6 out_tok=1443 cost=0.00127937 13.1s
+[110/144] sympy__sympy-13798__cod__low: gave_up (tests) turns=6 out_tok=1668 cost=0.00143319 13.7s
+[111/144] sympy__sympy-13798__jellyfish__low: gave_up (tests) turns=7 out_tok=1860 cost=0.0016636999999999997 14.9s
+[112/144] sympy__sympy-15017__bare__low: solved (ok) turns=9 out_tok=2547 cost=0.0021972100000000002 21.0s
+[113/144] sympy__sympy-13551__cod__low: solved (ok) turns=7 out_tok=2746 cost=0.002273855 73.0s
+[114/144] sympy__sympy-15017__jellyfish__low: solved (ok) turns=6 out_tok=1903 cost=0.0016274450000000002 14.8s
+[115/144] sympy__sympy-13551__jellyfish__low: solved (ok) turns=10 out_tok=3776 cost=0.00318491 76.7s
+[116/144] sympy__sympy-15017__cod__low: gave_up (tests) turns=9 out_tok=2557 cost=0.0021863499999999997 34.2s
+[117/144] sympy__sympy-15349__bare__low: solved (ok) turns=7 out_tok=2385 cost=0.001902395 16.0s
+[118/144] sympy__sympy-13551__bare__low: solved (ok) turns=6 out_tok=3081 cost=0.002581135 102.4s
+[119/144] sympy__sympy-15349__cod__low: solved (ok) turns=7 out_tok=2393 cost=0.001881695 15.9s
+[120/144] sympy__sympy-15349__jellyfish__low: solved (ok) turns=7 out_tok=2540 cost=0.0020409 16.6s
+[121/144] sympy__sympy-15875__cod__low: solved (ok) turns=6 out_tok=2421 cost=0.00181098 20.2s
+[122/144] sympy__sympy-15875__bare__low: solved (ok) turns=6 out_tok=2335 cost=0.0017598949999999998 30.3s
+[123/144] sympy__sympy-16597__cod__low: gave_up (no_patch) turns=9 out_tok=3325 cost=0.002651145 31.9s
+[124/144] sympy__sympy-16886__bare__low: solved (ok) turns=6 out_tok=799 cost=0.000690335 9.3s
+[125/144] sympy__sympy-16886__cod__low: solved (ok) turns=6 out_tok=698 cost=0.000651055 8.7s
+[126/144] sympy__sympy-16597__bare__low: gave_up (tests) turns=10 out_tok=4629 cost=0.00370423 53.8s
+[127/144] sympy__sympy-16886__jellyfish__low: solved (ok) turns=7 out_tok=972 cost=0.00098951 12.3s
+[128/144] sympy__sympy-15875__jellyfish__low: solved (ok) turns=9 out_tok=3148 cost=0.0025858450000000002 87.3s
+[129/144] sympy__sympy-20916__bare__low: gave_up (tests) turns=9 out_tok=3945 cost=0.003303985 27.1s
+[130/144] sympy__sympy-18698__bare__low: gave_up (tests) turns=14 out_tok=5472 cost=0.0051791300000000005 39.9s
+[131/144] sympy__sympy-18698__cod__low: gave_up (tests) turns=10 out_tok=7001 cost=0.005810045 50.2s
+[132/144] sympy__sympy-20916__cod__low: gave_up (tests) turns=13 out_tok=4556 cost=0.004598385000000002 35.3s
+[133/144] sympy__sympy-20916__jellyfish__low: gave_up (tests) turns=12 out_tok=3480 cost=0.0034205950000000002 30.6s
+[134/144] sympy__sympy-22456__bare__low: gave_up (no_patch) turns=8 out_tok=4826 cost=0.003885405 39.5s
+[135/144] sympy__sympy-21930__cod__low: gave_up (tests) turns=6 out_tok=1881 cost=0.00145618 42.4s
+[136/144] sympy__sympy-21930__jellyfish__low: gave_up (tests) turns=6 out_tok=2382 cost=0.001777175 35.6s
+[137/144] sympy__sympy-22456__cod__low: gave_up (no_patch) turns=7 out_tok=4701 cost=0.0037732300000000002 33.2s
+[138/144] sympy__sympy-22456__jellyfish__low: gave_up (no_patch) turns=8 out_tok=3577 cost=0.002819295 29.5s
+[139/144] sympy__sympy-22714__bare__low: solved (ok) turns=6 out_tok=2385 cost=0.002069825 19.1s
+[140/144] sympy__sympy-18698__jellyfish__low: gave_up (tests) turns=16 out_tok=11967 cost=0.011121790000000001 175.2s
+[141/144] sympy__sympy-21930__bare__low: gave_up (tests) turns=13 out_tok=5390 cost=0.004565110000000001 117.3s
+[142/144] sympy__sympy-16597__jellyfish__low: gave_up (tests) turns=19 out_tok=6762 cost=0.006052860000000001 274.8s
+[143/144] sympy__sympy-22714__cod__low: solved (ok) turns=6 out_tok=1631 cost=0.001391275 47.6s
+[144/144] sympy__sympy-22714__jellyfish__low: solved (ok) turns=8 out_tok=3307 cost=0.0028332800000000005 51.9s
+=== 02:49 hard set: Sonnet bare
+isolation check: skipped (swe)
+48 runs, 0 done, 48 to run, parallel 6
+[1/48] astropy__astropy-7671__bare__low: solved (ok) turns=4 out_tok=779 cost=0.0174494 10.0s
+[2/48] matplotlib__matplotlib-23412__bare__low: solved (ok) turns=5 out_tok=737 cost=0.014968 16.4s
+[3/48] astropy__astropy-14369__bare__low: solved (ok) turns=7 out_tok=1635 cost=0.0335448 24.5s
+[4/48] astropy__astropy-13977__bare__low: gave_up (tests) turns=4 out_tok=784 cost=0.0275639 13.1s
+[5/48] astropy__astropy-14096__bare__low: solved (ok) turns=3 out_tok=838 cost=0.017627300000000002 12.2s
+[6/48] matplotlib__matplotlib-14623__bare__low: solved (ok) turns=6 out_tok=1339 cost=0.0315879 17.6s
+[7/48] psf__requests-6028__bare__low: solved (ok) turns=5 out_tok=1137 cost=0.020244699999999997 15.7s
+[8/48] matplotlib__matplotlib-23314__bare__low: solved (ok) turns=4 out_tok=498 cost=0.0129274 23.4s
+[9/48] psf__requests-1921__bare__low: solved (ok) turns=5 out_tok=633 cost=0.012266599999999999 8.8s
+[10/48] pydata__xarray-3095__bare__low: solved (ok) turns=5 out_tok=849 cost=0.0173775 12.6s
+[11/48] pydata__xarray-6938__bare__low: gave_up (tests) turns=4 out_tok=661 cost=0.0139969 9.2s
+[12/48] pydata__xarray-7229__bare__low: gave_up (tests) turns=5 out_tok=1241 cost=0.0224088 28.8s
+[13/48] pydata__xarray-7233__bare__low: solved (ok) turns=5 out_tok=602 cost=0.012886700000000001 14.4s
+[14/48] matplotlib__matplotlib-25287__bare__low: solved (ok) turns=2 out_tok=469 cost=0.0089122 5.4s
+[15/48] pytest-dev__pytest-5631__bare__low: solved (ok) turns=3 out_tok=415 cost=0.0093221 6.7s
+[16/48] pylint-dev__pylint-7080__bare__low: solved (ok) turns=8 out_tok=1836 cost=0.063767 31.1s
+[17/48] matplotlib__matplotlib-24627__bare__low: solved (ok) turns=6 out_tok=1327 cost=0.029006 51.6s
+[18/48] pytest-dev__pytest-7236__bare__low: solved (ok) turns=4 out_tok=778 cost=0.015226799999999999 9.7s
+[19/48] pylint-dev__pylint-8898__bare__low: gave_up (tests) turns=5 out_tok=1306 cost=0.0249963 39.7s
+[20/48] scikit-learn__scikit-learn-13135__bare__low: solved (ok) turns=3 out_tok=413 cost=0.013486 7.8s
+[21/48] scikit-learn__scikit-learn-13328__bare__low: solved (ok) turns=4 out_tok=519 cost=0.013743600000000002 8.2s
+[22/48] scikit-learn__scikit-learn-14141__bare__low: solved (ok) turns=4 out_tok=425 cost=0.0069882 7.7s
+[23/48] matplotlib__matplotlib-25960__bare__low: gave_up (tests) turns=11 out_tok=3774 cost=0.06653389999999999 131.3s
+[24/48] scikit-learn__scikit-learn-26323__bare__low: solved (ok) turns=4 out_tok=566 cost=0.013787800000000001 10.6s
+[25/48] scikit-learn__scikit-learn-25747__bare__low: gave_up (tests) turns=4 out_tok=1218 cost=0.0274645 16.5s
+[26/48] sphinx-doc__sphinx-10466__bare__low: solved (ok) turns=4 out_tok=632 cost=0.0132273 10.8s
+[27/48] pytest-dev__pytest-6202__bare__low: solved (ok) turns=6 out_tok=807 cost=0.0158897 67.7s
+[28/48] sphinx-doc__sphinx-11445__bare__low: solved (ok) turns=4 out_tok=691 cost=0.0129273 8.8s
+[29/48] sphinx-doc__sphinx-7910__bare__low: solved (ok) turns=4 out_tok=871 cost=0.0140791 9.8s
+[30/48] sphinx-doc__sphinx-8621__bare__low: solved (ok) turns=4 out_tok=683 cost=0.012750599999999999 8.3s
+[31/48] sphinx-doc__sphinx-9281__bare__low: solved (ok) turns=5 out_tok=775 cost=0.015384100000000001 14.4s
+[32/48] sphinx-doc__sphinx-9602__bare__low: gave_up (tests) turns=4 out_tok=1083 cost=0.0192949 15.7s
+[33/48] sphinx-doc__sphinx-9698__bare__low: solved (ok) turns=4 out_tok=408 cost=0.008451 7.1s
+[34/48] sphinx-doc__sphinx-8638__bare__low: solved (ok) turns=8 out_tok=1559 cost=0.0306349 28.3s
+[35/48] sympy__sympy-13798__bare__low: gave_up (tests) turns=4 out_tok=853 cost=0.014363499999999998 11.5s
+[36/48] sympy__sympy-15349__bare__low: solved (ok) turns=4 out_tok=711 cost=0.0139951 9.7s
+[37/48] sympy__sympy-12481__bare__low: solved (ok) turns=6 out_tok=1048 cost=0.020370600000000003 40.5s
+[38/48] sympy__sympy-12489__bare__low: gave_up (tests) turns=6 out_tok=1231 cost=0.0222257 41.6s
+[39/48] sympy__sympy-13551__bare__low: solved (ok) turns=5 out_tok=1355 cost=0.022163000000000002 43.5s
+[40/48] sympy__sympy-16886__bare__low: solved (ok) turns=3 out_tok=262 cost=0.004688299999999999 5.3s
+[41/48] sympy__sympy-15875__bare__low: solved (ok) turns=6 out_tok=1136 cost=0.0189829 18.7s
+[42/48] sympy__sympy-15017__bare__low: gave_up (tests) turns=20 out_tok=3666 cost=0.0826012 74.6s
+[43/48] sympy__sympy-18698__bare__low: solved (ok) turns=6 out_tok=1773 cost=0.028370799999999998 24.4s
+[44/48] sympy__sympy-20916__bare__low: gave_up (tests) turns=7 out_tok=1054 cost=0.0212292 23.3s
+[45/48] sympy__sympy-21930__bare__low: gave_up (tests) turns=4 out_tok=780 cost=0.014429400000000002 10.8s
+[46/48] sympy__sympy-22714__bare__low: solved (ok) turns=3 out_tok=503 cost=0.009971800000000001 8.2s
+[47/48] sympy__sympy-16597__bare__low: gave_up (tests) turns=9 out_tok=1848 cost=0.0331874 340.5s
+[48/48] sympy__sympy-22456__bare__low: solved (ok) turns=24 out_tok=7430 cost=0.1324695 525.9s
+=== 03:06 analysis
+# Summary
+
+| model | bench | cond | effort | n | pass | 95% CI | mean out tok | median out tok | mean cost | mean turns | untouched | attempted-fail | hit_cap | timeout | error |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| Haiku 5.5 | swe | bare | low | 96 | 81% | [72%, 88%] | 2494 | 2008 | $0.002 | 6.9 | 1 | 17 | 0 | 0 | 0 |
+| Haiku 5.5 | swe | cod | low | 96 | 81% | [72%, 88%] | 2462 | 1902 | $0.002 | 7.1 | 2 | 16 | 0 | 0 | 0 |
+| Haiku 5.5 | swe | jellyfish | low | 96 | 79% | [70%, 86%] | 2688 | 2230 | $0.003 | 7.1 | 1 | 19 | 0 | 0 | 0 |
+| Sonnet 5.5 | swe | bare | low | 96 | 85% | [77%, 91%] | 1100 | 841 | $0.022 | 5.6 | 0 | 14 | 0 | 0 | 0 |
+
+# Paired comparisons vs bare (same model, bench, effort, problem)
+
+| model | bench | effort | cond | common n | bare pass | cond pass | discordant (bare only / cond only) | McNemar p | both-solved n | median token ratio cond/bare | sign-test p | median cost ratio |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| Haiku 5.5 | swe | low | cod | 96 | 81% | 81% | 2 / 2 | 1.000 | 76 | 1.03 | 0.422 | 1.00 |
+| Haiku 5.5 | swe | low | jellyfish | 96 | 81% | 79% | 3 / 1 | 0.625 | 75 | 1.19 | 0.000 | 1.16 |
+
+wrote analysis/swe/ (384 runs)
+bench    cond    effort    n lines/run compliance  top tags
+swe      bare    low     192       5.6       0.0%  
+swe      cod     low      96       6.8       0.0%  
+swe      jellyfish low      96       9.7      22.4%  GOAL:40, FACT:34, PLAN:30, DEF:30, RESULT:28
+=== 03:06 hard session complete

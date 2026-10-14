@@ -1,0 +1,4 @@
+    have e11 : ((g⁻¹ : GL (Fin 2) (ZMod p)) : Matrix (Fin 2) (Fin 2) (ZMod p)) 1 1 * (g : Matrix (Fin 2) (Fin 2) (ZMod p)) 1 1 = 1 := by
+      have e := congrFun (congrFun h2 1) 1
+      simp only [Matrix.mul_apply, Fin.sum_univ_two, hx10, zero_mul, zero_add] at e
+      exact e

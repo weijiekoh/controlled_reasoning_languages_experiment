@@ -1,0 +1,73 @@
+{
+ "problem": "pydata__xarray-6938",
+ "bench": "swe",
+ "condition": "bare",
+ "effort": "low",
+ "model": "claude-sonnet-5-5",
+ "batch": "swe_sonnet",
+ "dry_run": false,
+ "outcome": "gave_up",
+ "verify_pass": false,
+ "verify_stage": "tests",
+ "verify_detail": "FAIL_TO_PASS 0/1 failing: xarray/tests/test_variable.py::TestIndexVariable::test_to_index_variable_copy; PASS_TO_PASS 430/430",
+ "num_turns": 4,
+ "input_tokens": 8,
+ "output_tokens": 661,
+ "thinking_tokens": 0,
+ "cache_read_tokens": 8034,
+ "cache_creation_tokens": 2627,
+ "usage_source": "result",
+ "total_cost_usd": 0.0139969,
+ "duration_s": 9.2,
+ "agent_duration_ms": 8664,
+ "lean_compile_count": 0,
+ "search_tactic_uses": 0,
+ "search_tactic_in_final": false,
+ "tool_calls": {
+  "Bash": 3
+ },
+ "proof_chars": 901,
+ "proof_lines": 21,
+ "statement_prefix_changed": false,
+ "stop_reason": "end_turn",
+ "result_subtype": "success",
+ "terminal_reason": "completed",
+ "is_error": false,
+ "api_error_status": null,
+ "permission_denials": 0,
+ "agent_said_give_up": false,
+ "final_text": "I fixed the bug in `Dataset.swap_dims` in `xarray/core/dataset.py`. The method was changing `.dims` on a variable that was still shared with the original object. It now makes a shallow copy of each variable before setting the new dims.\n\nI re-ran the issue's example on a smaller dataset and `ds2.lev.dims` stays `('z',)` after `swap_dims`. I didn't run the project's test suite, so I haven't checked for regressions.\n\nI didn't change `xarray/core/dataarray.py`.",
+ "timed_out": false,
+ "docker_rc": 0,
+ "limits": {
+  "max_turns": 50,
+  "max_budget_usd": 4.0,
+  "timeout_min": 25.0
+ },
+ "network": "cotml-egress",
+ "proxy": true,
+ "claude_version": "2.1.296",
+ "model_usage": {
+  "claude-sonnet-5-5": {
+   "inputTokens": 8,
+   "outputTokens": 661,
+   "cacheReadInputTokens": 8034,
+   "cacheCreationInputTokens": 2627,
+   "webSearchRequests": 0,
+   "costUSD": 0.0139969,
+   "contextWindow": 1000000,
+   "maxOutputTokens": 128000,
+   "thinkingTokens": 0,
+   "canonicalModel": "claude-sonnet-5-5",
+   "provider": "firstParty",
+   "costBasis": "list"
+  }
+ },
+ "started_at": "2026-10-14T09:51:43+00:00",
+ "framing": "issue",
+ "patch_files": [
+  "xarray/core/dataset.py"
+ ],
+ "touched_test_files": [],
+ "untracked_files": []
+}

@@ -1,0 +1,21 @@
+# 20 tasks: random.Random(20261013).shuffle(sorted(verus_ok)), first 20, sorted
+bracket_matching
+bst_zigzag
+dijkstra
+discrete_logarithm
+edmond_karp
+integer_exponential
+llrbt_delete
+llrbt_flipcolor
+llrbt_rotateleft
+longest_increasing_subsequence
+max_matching
+push_relabel
+queue_dequeue
+ringbuffer_dequeue
+ringbuffer_enqueue
+rod_cutting
+topological_sort
+trie_delete
+unionfind_find
+unionfind_linkroots

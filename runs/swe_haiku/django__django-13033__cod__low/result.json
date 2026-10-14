@@ -1,0 +1,73 @@
+{
+ "problem": "django__django-13033",
+ "bench": "swe",
+ "condition": "cod",
+ "effort": "low",
+ "model": "claude-haiku-5-5",
+ "batch": "swe_haiku",
+ "dry_run": false,
+ "outcome": "solved",
+ "verify_pass": true,
+ "verify_stage": "ok",
+ "verify_detail": "resolved (run_id cotml-20261014000247-2a3495eb)",
+ "num_turns": 5,
+ "input_tokens": 12,
+ "output_tokens": 1411,
+ "thinking_tokens": 385,
+ "cache_read_tokens": 21832,
+ "cache_creation_tokens": 4522,
+ "usage_source": "result",
+ "total_cost_usd": 0.0014902700000000001,
+ "duration_s": 18.5,
+ "agent_duration_ms": 17333,
+ "lean_compile_count": 3,
+ "search_tactic_uses": 0,
+ "search_tactic_in_final": false,
+ "tool_calls": {
+  "Bash": 4
+ },
+ "proof_chars": 885,
+ "proof_lines": 13,
+ "statement_prefix_changed": false,
+ "stop_reason": "end_turn",
+ "result_subtype": "success",
+ "terminal_reason": "completed",
+ "is_error": false,
+ "api_error_status": null,
+ "permission_denials": 0,
+ "agent_said_give_up": false,
+ "final_text": "I changed one line in `django/db/models/sql/compiler.py` (in `find_ordering_name`, around line 730). The `ordering`, `queries` and `model_inheritance_regress` suites pass (443 tests, OK). I did not add a regression test for the issue's exact model, and I did not run the SQL from the report to confirm the output.\n\n**Cause:** when ordering by a relation path such as `record__root_id`, the compiler checked whether the final field's `attname` equalled the full name. That never matched, so it fell through to the related model's default ordering. For a self-referencing FK, that meant an extra join to `OneModel` and its `-id` ordering being applied.\n\n**Fix:** compare the `attname` against the last path piece (`pieces[-1]`) instead of the full name. Now `record__root_id` is treated as a direct column reference, so the redundant join is trimmed and the explicit ordering is used.\n\nI did not commit anything.",
+ "timed_out": false,
+ "docker_rc": 0,
+ "limits": {
+  "max_turns": 50,
+  "max_budget_usd": 2.0,
+  "timeout_min": 25.0
+ },
+ "network": "cotml-egress",
+ "proxy": true,
+ "claude_version": "2.1.296",
+ "model_usage": {
+  "claude-haiku-5-5": {
+   "inputTokens": 12,
+   "outputTokens": 1411,
+   "cacheReadInputTokens": 21832,
+   "cacheCreationInputTokens": 4522,
+   "webSearchRequests": 0,
+   "costUSD": 0.0014902700000000001,
+   "contextWindow": 1000000,
+   "maxOutputTokens": 128000,
+   "thinkingTokens": 385,
+   "canonicalModel": "claude-haiku-5-5",
+   "provider": "firstParty",
+   "costBasis": "list"
+  }
+ },
+ "started_at": "2026-10-14T07:02:26+00:00",
+ "framing": "issue",
+ "patch_files": [
+  "django/db/models/sql/compiler.py"
+ ],
+ "touched_test_files": [],
+ "untracked_files": []
+}

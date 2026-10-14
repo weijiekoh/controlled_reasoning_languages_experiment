@@ -1,0 +1,46 @@
+  classical
+  haveI : Fact (Polynomial.map (algebraMap ℚ K) f).Splits := ⟨IsSplittingField.splits K f⟩
+  haveI : FiniteDimensional ℚ K := IsSplittingField.finiteDimensional K f
+  haveI : IsGalois ℚ K := IsGalois.of_separable_splitting_field (p := f) (Irreducible.separable hf1)
+  have hcard : Fintype.card (f.rootSet K) = 5 := by
+    rw [Polynomial.card_rootSet_eq_natDegree (Irreducible.separable hf1) (IsSplittingField.splits K f), hf2]
+  haveI : MulAction.IsPretransitive f.Gal (f.rootSet K) := Polynomial.Gal.galAction_isPretransitive f K hf1
+  let e : (f.rootSet K) ≃ Fin 5 := Fintype.equivFinOfCardEq hcard
+  let ψ : f.Gal →* Equiv.Perm (Fin 5) :=
+    (Equiv.permCongrHom e).toMonoidHom.comp (Polynomial.Gal.galActionHom f K)
+  have hψ : Function.Injective ψ := by
+    intro x y hxy
+    apply Polynomial.Gal.galActionHom_injective f K
+    exact (Equiv.permCongr e).injective hxy
+  haveI : Fintype f.Gal := Fintype.ofFinite _
+  have h5 : 5 ∣ Fintype.card f.Gal := by
+    obtain ⟨r⟩ : Nonempty (f.rootSet K) := by
+      rw [← Fintype.card_pos_iff, hcard]; norm_num
+    have := MulAction.card_orbit_mul_card_stabilizer_eq_card_group f.Gal r
+    rw [← this]
+    apply Dvd.dvd.mul_right
+    rw [← hcard]
+    have h := MulAction.orbit_eq_univ f.Gal r
+    simp only [Fintype.card_eq_nat_card]
+    rw [← Nat.card_univ, ← h]; rfl
+  haveI : Fact (Nat.Prime 5) := ⟨by norm_num⟩
+  obtain ⟨g, hg⟩ := exists_prime_orderOf_dvd_card 5 h5
+  have hog : orderOf (ψ g) = 5 := by rw [orderOf_injective ψ hψ]; exact hg
+  have hcyc : (ψ g).IsCycle :=
+    Equiv.Perm.isCycle_of_prime_order' (by rw [hog]; norm_num) (by rw [hog]; simp)
+  have hsupp : (ψ g).support = Finset.univ := by
+    apply Finset.eq_univ_of_card
+    rw [← hcyc.orderOf, hog]; simp
+  -- nontrivial fixer
+  obtain ⟨t, ht1, ht2⟩ : ∃ t : f.Gal, t ≠ 1 ∧ ∀ x ∈ IntermediateField.adjoin ℚ {a₁, a₂, a₃}, t x = x := by
+    by_contra hcon
+    push_neg at hcon
+    apply h
+    have : (IntermediateField.adjoin ℚ {a₁, a₂, a₃}).fixingSubgroup = ⊥ := by
+      rw [eq_bot_iff]
+      intro t ht
+      by_contra hne
+      obtain ⟨x, hx, hx2⟩ := hcon t hne
+      exact hx2 (ht ⟨x, hx⟩)
+    rw [← IsGalois.fixedField_fixingSubgroup (IntermediateField.adjoin ℚ {a₁, a₂, a₃}), this]
+    exact IntermediateField.fixedField_bot

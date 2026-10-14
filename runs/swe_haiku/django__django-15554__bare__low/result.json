@@ -1,0 +1,73 @@
+{
+ "problem": "django__django-15554",
+ "bench": "swe",
+ "condition": "bare",
+ "effort": "low",
+ "model": "claude-haiku-5-5",
+ "batch": "swe_haiku",
+ "dry_run": false,
+ "outcome": "solved",
+ "verify_pass": true,
+ "verify_stage": "ok",
+ "verify_detail": "resolved (run_id cotml-20261014010707-9b5e7bc8)",
+ "num_turns": 18,
+ "input_tokens": 38,
+ "output_tokens": 8908,
+ "thinking_tokens": 4291,
+ "cache_read_tokens": 185524,
+ "cache_creation_tokens": 18441,
+ "usage_source": "result",
+ "total_cost_usd": 0.008618164999999999,
+ "duration_s": 77.0,
+ "agent_duration_ms": 76364,
+ "lean_compile_count": 8,
+ "search_tactic_uses": 0,
+ "search_tactic_in_final": false,
+ "tool_calls": {
+  "Bash": 17
+ },
+ "proof_chars": 1075,
+ "proof_lines": 23,
+ "statement_prefix_changed": false,
+ "stop_reason": "end_turn",
+ "result_subtype": "success",
+ "terminal_reason": "completed",
+ "is_error": false,
+ "api_error_status": null,
+ "permission_denials": 0,
+ "agent_said_give_up": false,
+ "final_text": "Multiple `FilteredRelation`s over the same relation now each get their own JOIN, so the issue's `relation_zone` / `relation_all` pattern works. `test_multiple` passes, and so do the `filtered_relation`, `queries`, `expressions`, `select_related`, `model_inheritance_regress` and `m2m_through` suites.\n\n**Cause:** `Query.join()` reused any existing join with the same table and parent, ignoring `filtered_relation`. The second `FilteredRelation` was therefore silently attached to the first one's alias.\n\n**Fix (`django/db/models/sql/query.py`):** Filtered joins now only reuse an existing join with an identical filter, compared with full equality. Plain joins keep the old behaviour. That matters because a `FilteredRelation`'s condition builds plain joins that must still reuse the filtered alias from its path.\n\nI also tried a simpler version that dropped the lenient matching entirely. It broke the condition resolution (`no such column: T4.title`), so I kept the split.\n\nI didn't run the issue's exact queryset against a database; the reproduction was the `test_multiple` pattern. The `aliases` test module reports an import error, but it fails the same way on the untouched baseline.",
+ "timed_out": false,
+ "docker_rc": 0,
+ "limits": {
+  "max_turns": 50,
+  "max_budget_usd": 2.0,
+  "timeout_min": 25.0
+ },
+ "network": "cotml-egress",
+ "proxy": true,
+ "claude_version": "2.1.296",
+ "model_usage": {
+  "claude-haiku-5-5": {
+   "inputTokens": 38,
+   "outputTokens": 8908,
+   "cacheReadInputTokens": 185524,
+   "cacheCreationInputTokens": 18441,
+   "webSearchRequests": 0,
+   "costUSD": 0.008618164999999999,
+   "contextWindow": 1000000,
+   "maxOutputTokens": 128000,
+   "thinkingTokens": 4291,
+   "canonicalModel": "claude-haiku-5-5",
+   "provider": "firstParty",
+   "costBasis": "list"
+  }
+ },
+ "started_at": "2026-10-14T08:05:48+00:00",
+ "framing": "debug",
+ "patch_files": [
+  "django/db/models/sql/query.py"
+ ],
+ "touched_test_files": [],
+ "untracked_files": []
+}

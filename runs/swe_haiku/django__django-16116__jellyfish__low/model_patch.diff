@@ -1,0 +1,14 @@
+diff --git a/django/core/management/commands/makemigrations.py b/django/core/management/commands/makemigrations.py
+index 2e97d9064b..8d3a08b60e 100644
+--- a/django/core/management/commands/makemigrations.py
++++ b/django/core/management/commands/makemigrations.py
+@@ -248,6 +248,9 @@ class Command(BaseCommand):
+                 else:
+                     self.log("No changes detected")
+         else:
++            if check_changes and not self.dry_run:
++                # --check only reports missing migrations; don't write them.
++                sys.exit(1)
+             if self.update:
+                 self.write_to_last_migration_files(changes)
+             else:

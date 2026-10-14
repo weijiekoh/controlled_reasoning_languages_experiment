@@ -1,0 +1,73 @@
+{
+ "problem": "pydata__xarray-4687",
+ "bench": "swe",
+ "condition": "jellyfish",
+ "effort": "low",
+ "model": "claude-haiku-5-5",
+ "batch": "swe_haiku",
+ "dry_run": false,
+ "outcome": "solved",
+ "verify_pass": true,
+ "verify_stage": "ok",
+ "verify_detail": "resolved (run_id cotml-20261014011138-3213f455)",
+ "num_turns": 8,
+ "input_tokens": 18,
+ "output_tokens": 3717,
+ "thinking_tokens": 1034,
+ "cache_read_tokens": 61195,
+ "cache_creation_tokens": 8726,
+ "usage_source": "result",
+ "total_cost_usd": 0.003563,
+ "duration_s": 48.4,
+ "agent_duration_ms": 47770,
+ "lean_compile_count": 3,
+ "search_tactic_uses": 0,
+ "search_tactic_in_final": false,
+ "tool_calls": {
+  "Bash": 7
+ },
+ "proof_chars": 1507,
+ "proof_lines": 41,
+ "statement_prefix_changed": false,
+ "stop_reason": "end_turn",
+ "result_subtype": "success",
+ "terminal_reason": "completed",
+ "is_error": false,
+ "api_error_status": null,
+ "permission_denials": 0,
+ "agent_said_give_up": false,
+ "final_text": "`xr.where` now accepts `keep_attrs` and can keep attributes, and `test_where_attrs` passes along with the rest of `test_computation.py` (248 passed, 1 skipped).\n\nThe change is in `xarray/core/computation.py`:\n- `where(cond, x, y, keep_attrs=None)` gained the parameter. When it is `None`, it falls back to the global `keep_attrs` option, which defaults to `False`, so existing behaviour is unchanged unless you opt in.\n- The ufunc runs with `keep_attrs=\"drop\"`. When attributes are requested, they are copied from `x` if it is an xarray object, otherwise from `y`. Taking them from `cond` (what `apply_ufunc` would do) would have been wrong.\n- Local imports of `DataArray` and `Dataset` were added inside the function to avoid a circular import.\n\nThe issue's example, `xr.where(da == 0, -1, da, keep_attrs=True).attrs`, now returns `{'foo': 'bar'}`.\n\nTwo things I did not address:\n- Attributes are still dropped by default. The issue's expected output implies they should be kept without asking, so changing the default is a judgement call I left out.\n- The dtype change the first issue mentions (`int8` becoming `int64`) is untouched.\n\nI did not commit anything.",
+ "timed_out": false,
+ "docker_rc": 0,
+ "limits": {
+  "max_turns": 50,
+  "max_budget_usd": 2.0,
+  "timeout_min": 25.0
+ },
+ "network": "cotml-egress",
+ "proxy": true,
+ "claude_version": "2.1.296",
+ "model_usage": {
+  "claude-haiku-5-5": {
+   "inputTokens": 18,
+   "outputTokens": 3717,
+   "cacheReadInputTokens": 61195,
+   "cacheCreationInputTokens": 8726,
+   "webSearchRequests": 0,
+   "costUSD": 0.003563,
+   "contextWindow": 1000000,
+   "maxOutputTokens": 128000,
+   "thinkingTokens": 1034,
+   "canonicalModel": "claude-haiku-5-5",
+   "provider": "firstParty",
+   "costBasis": "list"
+  }
+ },
+ "started_at": "2026-10-14T08:10:49+00:00",
+ "framing": "debug",
+ "patch_files": [
+  "xarray/core/computation.py"
+ ],
+ "touched_test_files": [],
+ "untracked_files": []
+}

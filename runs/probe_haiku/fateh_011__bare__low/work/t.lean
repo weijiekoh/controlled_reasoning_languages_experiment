@@ -1,0 +1,17 @@
+import Mathlib
+open Subgroup
+#check @MulAut.conj
+#check @Subgroup.normalizer
+#check @ConjAct.unitOf
+#check @ZMod.unitsEquivAutAddZMod
+#check @MulEquiv.autCongr
+#check @Subgroup.card_subgroup_dvd_card
+#check @Subgroup.index_centralizer
+#check @Subgroup.centralizer
+#check @Subgroup.normal_le_normalizer
+#check @ConjAct.toConjAct
+#check @Subgroup.Normal.conj_mem
+#check @MonoidHom.ker
+#check @Subgroup.index_dvd_card
+#check @Subgroup.card_dvd_of_le
+#check @Nat.card_eq_card_quotient_mul_card_subgroup

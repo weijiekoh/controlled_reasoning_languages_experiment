@@ -1,0 +1,19 @@
+diff --git a/django/db/models/sql/query.py b/django/db/models/sql/query.py
+index 6629a1fd51..4f81fb0b94 100644
+--- a/django/db/models/sql/query.py
++++ b/django/db/models/sql/query.py
+@@ -1055,6 +1055,14 @@ class Query(BaseExpression):
+             )
+         return clone
+ 
++    def get_group_by_cols(self, alias=None):
++        if alias:
++            return [Ref(alias, self)]
++        external_cols = self.get_external_cols()
++        if any(col.possibly_multivalued for col in external_cols):
++            return [self]
++        return external_cols
++
+     def get_external_cols(self):
+         exprs = chain(self.annotations.values(), self.where.children)
+         return [

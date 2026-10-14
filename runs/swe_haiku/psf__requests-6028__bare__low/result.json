@@ -1,0 +1,73 @@
+{
+ "problem": "psf__requests-6028",
+ "bench": "swe",
+ "condition": "bare",
+ "effort": "low",
+ "model": "claude-haiku-5-5",
+ "batch": "swe_haiku",
+ "dry_run": false,
+ "outcome": "solved",
+ "verify_pass": true,
+ "verify_stage": "ok",
+ "verify_detail": "resolved (run_id cotml-20261014023010-c94e8cef)",
+ "num_turns": 7,
+ "input_tokens": 16,
+ "output_tokens": 3253,
+ "thinking_tokens": 1032,
+ "cache_read_tokens": 35105,
+ "cache_creation_tokens": 6418,
+ "usage_source": "result",
+ "total_cost_usd": 0.0027814000000000003,
+ "duration_s": 22.3,
+ "agent_duration_ms": 21679,
+ "lean_compile_count": 4,
+ "search_tactic_uses": 0,
+ "search_tactic_in_final": false,
+ "tool_calls": {
+  "Bash": 6
+ },
+ "proof_chars": 486,
+ "proof_lines": 14,
+ "statement_prefix_changed": false,
+ "stop_reason": "end_turn",
+ "result_subtype": "success",
+ "terminal_reason": "completed",
+ "is_error": false,
+ "api_error_status": null,
+ "permission_denials": 0,
+ "agent_said_give_up": false,
+ "final_text": "I fixed the proxy credential loss in `requests/utils.py`, in `prepend_scheme_if_needed`.\n\n**Cause:** the function rebuilt the URL from `parsed.netloc` and dropped the `user:password@` part. That is why `http://user:pass@proxy:8080` became `http://proxy:8080`, so no `Proxy-Authorization` header was sent and the proxy returned 407. The adapter always passes proxy URLs through this function, so every authenticated proxy was affected.\n\n**Fix:** the function now re-attaches the `auth` component that `parse_url` already extracts before building the URL:\n\n```python\nif auth:\n    netloc = '@'.join([auth, netloc])\n```\n\n**Verification:**\n- `prepend_scheme_if_needed('http://user:pass@proxy.com:8080', 'http')` now returns the URL with credentials intact; the original returned it without them.\n- The test suite shows the same pass/fail/error counts before and after the change (`tests/test_utils.py`: 6 failed, 187 passed, 8 errors; proxy tests in `tests/test_requests.py`: 2 failed, 5 passed, 8 errors). The failures are pre-existing and come from the environment (e.g. `NO_PROXY` handling), not from this change.\n- I did not add tests, since the rules bar modifying test files.\n\n**Not addressed:** a scheme-less proxy with credentials, such as `user:pass@proxy:8080`, is still misparsed (the `user` part is taken as a scheme). This happens on the original code too, and the issue's example uses a URL with a scheme, so I left it alone.\n\nI did not commit; the change is in the working tree.",
+ "timed_out": false,
+ "docker_rc": 0,
+ "limits": {
+  "max_turns": 50,
+  "max_budget_usd": 2.0,
+  "timeout_min": 25.0
+ },
+ "network": "cotml-egress",
+ "proxy": true,
+ "claude_version": "2.1.296",
+ "model_usage": {
+  "claude-haiku-5-5": {
+   "inputTokens": 16,
+   "outputTokens": 3253,
+   "cacheReadInputTokens": 35105,
+   "cacheCreationInputTokens": 6418,
+   "webSearchRequests": 0,
+   "costUSD": 0.0027814000000000003,
+   "contextWindow": 1000000,
+   "maxOutputTokens": 128000,
+   "thinkingTokens": 1032,
+   "canonicalModel": "claude-haiku-5-5",
+   "provider": "firstParty",
+   "costBasis": "list"
+  }
+ },
+ "started_at": "2026-10-14T09:29:46+00:00",
+ "framing": "issue",
+ "patch_files": [
+  "requests/utils.py"
+ ],
+ "touched_test_files": [],
+ "untracked_files": []
+}

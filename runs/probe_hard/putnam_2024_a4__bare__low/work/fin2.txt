@@ -1,0 +1,14 @@
+  have fin : ∀ P : ℤ, 11 ≤ P → ∀ a0 a1 a2 a3 m : ℤ, 0 ≤ a0 → a0 ≤ 3 → 0 ≤ a1 → a1 ≤ 3 →
+      0 ≤ a2 → a2 ≤ 3 → 0 ≤ a3 → a3 ≤ 3 → a1 ≠ a0 → a2 ≠ a0 → a3 ≠ a0 → a1 ≠ a2 →
+      a1 ≠ a3 → a2 ≠ a3 → (a3 - a0) * (a1 - a0) - (a2 - a0) ^ 2 = P * m → False := by
+    intro P hP a0 a1 a2 a3 m h0 h0' h1 h1' h2 h2' h3 h3' d10 d20 d30 d12 d13 d23 hm
+    interval_cases a0 <;> interval_cases a1 <;> interval_cases a2 <;> interval_cases a3 <;>
+      first
+      | omega
+      | (have h5 : m = 0 ∨ m = 1 ∨ m = -1 ∨ 2 ≤ m ∨ m ≤ -2 := by omega
+         rcases h5 with h | h | h | h | h
+         · subst h; omega
+         · subst h; omega
+         · subst h; omega
+         · nlinarith
+         · nlinarith)

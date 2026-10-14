@@ -1,0 +1,73 @@
+{
+ "problem": "django__django-16901",
+ "bench": "swe",
+ "condition": "jellyfish",
+ "effort": "low",
+ "model": "claude-haiku-5-5",
+ "batch": "swe_haiku",
+ "dry_run": false,
+ "outcome": "solved",
+ "verify_pass": true,
+ "verify_stage": "ok",
+ "verify_detail": "resolved (run_id cotml-20261014010829-f98a41e3)",
+ "num_turns": 5,
+ "input_tokens": 12,
+ "output_tokens": 1579,
+ "thinking_tokens": 510,
+ "cache_read_tokens": 22267,
+ "cache_creation_tokens": 3836,
+ "usage_source": "result",
+ "total_cost_usd": 0.0014928699999999999,
+ "duration_s": 11.7,
+ "agent_duration_ms": 11089,
+ "lean_compile_count": 1,
+ "search_tactic_uses": 0,
+ "search_tactic_in_final": false,
+ "tool_calls": {
+  "Bash": 4
+ },
+ "proof_chars": 896,
+ "proof_lines": 20,
+ "statement_prefix_changed": false,
+ "stop_reason": "end_turn",
+ "result_subtype": "success",
+ "terminal_reason": "completed",
+ "is_error": false,
+ "api_error_status": null,
+ "permission_denials": 0,
+ "agent_said_give_up": false,
+ "final_text": "The fallback for databases without native XOR now computes parity, so `a ^ b ^ c` is true when an odd number of arguments are true. The `xor_lookups` suite runs 7 tests and all pass, including `test_filter_multiple`.\n\nThe bug was in `django/db/models/sql/where.py`. The fallback SQL was `(a OR b OR c \u2026) AND (a + b + c + \u2026) = 1`, which means exactly one. I changed the right-hand side to `(sum) % 2 = 1`, and updated the comment to match. I used the expression's `%` operator, so no new import was needed.\n\nI didn't run the broader test suite or inspect the generated SQL on PostgreSQL. Changes are uncommitted in the working tree.",
+ "timed_out": false,
+ "docker_rc": 0,
+ "limits": {
+  "max_turns": 50,
+  "max_budget_usd": 2.0,
+  "timeout_min": 25.0
+ },
+ "network": "cotml-egress",
+ "proxy": true,
+ "claude_version": "2.1.296",
+ "model_usage": {
+  "claude-haiku-5-5": {
+   "inputTokens": 12,
+   "outputTokens": 1579,
+   "cacheReadInputTokens": 22267,
+   "cacheCreationInputTokens": 3836,
+   "webSearchRequests": 0,
+   "costUSD": 0.0014928699999999999,
+   "contextWindow": 1000000,
+   "maxOutputTokens": 128000,
+   "thinkingTokens": 510,
+   "canonicalModel": "claude-haiku-5-5",
+   "provider": "firstParty",
+   "costBasis": "list"
+  }
+ },
+ "started_at": "2026-10-14T08:08:16+00:00",
+ "framing": "debug",
+ "patch_files": [
+  "django/db/models/sql/where.py"
+ ],
+ "touched_test_files": [],
+ "untracked_files": []
+}

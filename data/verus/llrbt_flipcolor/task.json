@@ -1,0 +1,15 @@
+{
+ "id": "llrbt_flipcolor",
+ "entry": "llrbt_flipcolor.rs",
+ "description": "description.md",
+ "main_fn": "flip_colors",
+ "editable_regions": {
+  "helpers": "between `// <helpers>` and `// </helpers>`: helper spec fns and exec helpers",
+  "proofs": "between `// <proofs>` and `// </proofs>`: lemmas (proof fns)",
+  "code": "between `// <code>` and `// </code>`: exactly one block `{ ... }`, the body of the function under spec"
+ },
+ "fixed": "Everything outside the three editable regions is fixed: the `use` lines, the <preamble> block (definitions, spec fns, and any exec fns given there), the <spec> block (signature, requires, ensures of the function under test), fn main, and all marker comments. Compared token-wise; comments and whitespace are ignored.",
+ "source": "data/algoveri/algoveri_data/llrbt_flipcolor/verus_spec.rs",
+ "source_sha256": "e30c7c98c4c8f4ba3f23efd3c73ec6c74627feaf3619a2d4fc1cebec6f53c11d",
+ "patches": []
+}

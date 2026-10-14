@@ -1,0 +1,15 @@
+{
+ "id": "trial_division_naive",
+ "entry": "trial_division_naive.rs",
+ "description": "description.md",
+ "main_fn": "check_prime",
+ "editable_regions": {
+  "helpers": "between `// <helpers>` and `// </helpers>`: helper spec fns and exec helpers",
+  "proofs": "between `// <proofs>` and `// </proofs>`: lemmas (proof fns)",
+  "code": "between `// <code>` and `// </code>`: exactly one block `{ ... }`, the body of the function under spec"
+ },
+ "fixed": "Everything outside the three editable regions is fixed: the `use` lines, the <preamble> block (definitions, spec fns, and any exec fns given there), the <spec> block (signature, requires, ensures of the function under test), fn main, and all marker comments. Compared token-wise; comments and whitespace are ignored.",
+ "source": "data/algoveri/algoveri_data/trial_division_naive/verus_spec.rs",
+ "source_sha256": "d9abdb93b9c9c93777209901de725444ecae8f4fa0020718c2fbe71f57b4f9ac",
+ "patches": []
+}

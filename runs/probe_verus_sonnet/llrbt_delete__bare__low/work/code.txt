@@ -1,0 +1,21 @@
+    {
+        match tree {
+            None => None,
+            Some(_) => {
+                let ghost t0 = tree;
+                let rb = x_setc(tree, false);
+                proof { setc_facts(t0, false); ok_parts(rb); }
+                let h = if x_rd(x_lf(&rb)) { rb } else { x_setc(rb, true) };
+                proof {
+                    if !rd(lf(rb)) { setc_facts(rb, true); }
+                    ok_parts(rb);
+                }
+                let r = del(h, v);
+                let ghost r0 = r;
+                proof {
+                    if r0 is Some { setc_facts(r0, false); }
+                }
+                x_setc(r, false)
+            }
+        }
+    }

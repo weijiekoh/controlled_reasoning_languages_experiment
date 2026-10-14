@@ -1,0 +1,15 @@
+{
+ "id": "ringbuffer_dequeue",
+ "entry": "ringbuffer_dequeue.rs",
+ "description": "description.md",
+ "main_fn": "dequeue",
+ "editable_regions": {
+  "helpers": "between `// <helpers>` and `// </helpers>`: helper spec fns and exec helpers",
+  "proofs": "between `// <proofs>` and `// </proofs>`: lemmas (proof fns)",
+  "code": "between `// <code>` and `// </code>`: exactly one block `{ ... }`, the body of the function under spec"
+ },
+ "fixed": "Everything outside the three editable regions is fixed: the `use` lines, the <preamble> block (definitions, spec fns, and any exec fns given there), the <spec> block (signature, requires, ensures of the function under test), fn main, and all marker comments. Compared token-wise; comments and whitespace are ignored.",
+ "source": "data/algoveri/algoveri_data/ringbuffer_dequeue/verus_spec.rs",
+ "source_sha256": "6815f91ba3d2191d1094fb321d68a1bc639990c51e0f4e7a275a5b2e1f68444b",
+ "patches": []
+}

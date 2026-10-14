@@ -1,0 +1,257 @@
+23:48 waiting: 16 images missing for problems/swe_issue.txt (pull alive: 1)
+23:50 waiting: 13 images missing for problems/swe_issue.txt (pull alive: 1)
+23:52 waiting: 7 images missing for problems/swe_issue.txt (pull alive: 1)
+23:54 waiting: 4 images missing for problems/swe_issue.txt (pull alive: 1)
+23:56 waiting: 1 images missing for problems/swe_issue.txt (pull alive: 1)
+=== 23:58 probe issue (Haiku bare, 6 tasks)
+isolation check: skipped (swe)
+6 runs, 0 done, 6 to run, parallel 6
+[1/6] astropy__astropy-14309__bare__low: EXCEPTION RuntimeError('/testbed not clean at base_commit: head=8998d784246caa629b200f36af88dac6d20c0380 cdb66059a2feb44ee49021874605ba90801f9986  status=[]')
+[2/6] django__django-11179__bare__low: solved (ok) turns=3 out_tok=735 cost=0.00078831 13.8s
+[3/6] django__django-11551__bare__low: solved (ok) turns=6 out_tok=1481 cost=0.00171452 18.4s
+[4/6] django__django-13033__bare__low: solved (ok) turns=5 out_tok=1586 cost=0.001773355 20.4s
+[5/6] django__django-11451__bare__low: solved (ok) turns=6 out_tok=766 cost=0.0010495699999999999 28.7s
+[6/6] django__django-13925__bare__low: solved (ok) turns=8 out_tok=3111 cost=0.003059855 34.3s
+=== 23:59 probe issue done:
+bench  cond  effort  n  err  pass    95% CI           mean_out  med_out  mean_cost  mean_turns  srch_solved  srch_final  solved  gave_up  hit_cap  timeout  error
+-----  ----  ------  -  ---  ------  ---------------  --------  -------  ---------  ----------  -----------  ----------  ------  -------  -------  -------  -----
+swe    bare  low     5  0    100.0%  [56.6%, 100.0%]  1536      1481     0.002      5.6         0%           0%          5       0        0        0        0    
+isolation check: skipped (swe)
+72 runs, 5 done, 67 to run, parallel 6
+[1/67] astropy__astropy-14309__jellyfish__low: EXCEPTION RuntimeError('/testbed not clean at base_commit: head=8998d784246caa629b200f36af88dac6d20c0380 cdb66059a2feb44ee49021874605ba90801f9986  status=[]')
+[2/67] astropy__astropy-14309__bare__low: EXCEPTION RuntimeError('/testbed not clean at base_commit: head=8998d784246caa629b200f36af88dac6d20c0380 cdb66059a2feb44ee49021874605ba90801f9986  status=[]')
+[3/67] astropy__astropy-14309__cod__low: EXCEPTION RuntimeError('/testbed not clean at base_commit: head=8998d784246caa629b200f36af88dac6d20c0380 cdb66059a2feb44ee49021874605ba90801f9986  status=[]')
+Terminated                 $H --out runs/swe_haiku/ --condition bare,cod,jellyfish --problems problems/swe_issue.txt
+23:59 waiting: 16 images missing for problems/swe_debug.txt (pull alive: 1)
+=== 00:00 probe issue (Haiku bare, 6 tasks)
+isolation check: skipped (swe)
+6 runs, 5 done, 1 to run, parallel 6
+[1/1] astropy__astropy-14309__bare__low: solved (ok) turns=4 out_tok=716 cost=0.0009973 11.4s
+=== 00:01 probe issue done:
+bench  cond  effort  n  err  pass    95% CI           mean_out  med_out  mean_cost  mean_turns  srch_solved  srch_final  solved  gave_up  hit_cap  timeout  error
+-----  ----  ------  -  ---  ------  ---------------  --------  -------  ---------  ----------  -----------  ----------  ------  -------  -------  -------  -----
+swe    bare  low     6  0    100.0%  [61.0%, 100.0%]  1399      1124     0.002      5.3         0%           0%          6       0        0        0        0    
+isolation check: skipped (swe)
+72 runs, 6 done, 66 to run, parallel 6
+[1/66] django__django-11451__cod__low: solved (ok) turns=6 out_tok=991 cost=0.0009069150000000001 11.6s
+[2/66] django__django-11451__jellyfish__low: solved (ok) turns=4 out_tok=795 cost=0.0007064600000000001 16.4s
+[3/66] django__django-11179__jellyfish__low: solved (ok) turns=5 out_tok=967 cost=0.0008455200000000001 14.6s
+[4/66] django__django-11179__cod__low: solved (ok) turns=7 out_tok=1164 cost=0.00098255 16.5s
+[5/66] django__django-11551__cod__low: solved (ok) turns=8 out_tok=1819 cost=0.00160557 17.8s
+[6/66] django__django-11551__jellyfish__low: solved (ok) turns=6 out_tok=1673 cost=0.00147825 15.0s
+[7/66] astropy__astropy-14309__cod__low: solved (ok) turns=4 out_tok=810 cost=0.001013245 15.1s
+[8/66] django__django-13033__cod__low: solved (ok) turns=5 out_tok=1411 cost=0.0014902700000000001 18.5s
+[9/66] django__django-13033__jellyfish__low: solved (ok) turns=6 out_tok=2171 cost=0.00214937 22.1s
+[10/66] astropy__astropy-14309__jellyfish__low: solved (ok) turns=4 out_tok=999 cost=0.00118087 16.5s
+[11/66] django__django-13964__cod__low: solved (ok) turns=6 out_tok=1236 cost=0.001385575 15.7s
+[12/66] django__django-13964__bare__low: solved (ok) turns=7 out_tok=1779 cost=0.001596845 19.7s
+[13/66] django__django-13925__cod__low: solved (ok) turns=8 out_tok=2691 cost=0.00249673 22.7s
+[14/66] django__django-13925__jellyfish__low: solved (ok) turns=6 out_tok=3349 cost=0.0026850249999999997 23.0s
+[15/66] django__django-13964__jellyfish__low: solved (ok) turns=7 out_tok=1514 cost=0.001481825 21.5s
+[16/66] django__django-15127__bare__low: solved (ok) turns=8 out_tok=1923 cost=0.0017332050000000002 27.4s
+[17/66] django__django-15127__cod__low: solved (ok) turns=7 out_tok=1946 cost=0.001872155 17.1s
+[18/66] django__django-15127__jellyfish__low: solved (ok) turns=7 out_tok=2360 cost=0.0020171650000000005 29.4s
+[19/66] django__django-16116__bare__low: solved (ok) turns=6 out_tok=1473 cost=0.0014903 19.3s
+[20/66] django__django-16116__cod__low: solved (ok) turns=5 out_tok=1450 cost=0.0014885350000000002 19.9s
+[21/66] django__django-16116__jellyfish__low: solved (ok) turns=6 out_tok=1930 cost=0.00167409 23.7s
+[22/66] django__django-16661__bare__low: solved (ok) turns=7 out_tok=2831 cost=0.0021707 39.9s
+[23/66] django__django-16661__cod__low: solved (ok) turns=6 out_tok=2928 cost=0.0023201650000000003 27.1s
+[24/66] django__django-17084__bare__low: solved (ok) turns=6 out_tok=2262 cost=0.0019192849999999997 22.1s
+[25/66] django__django-16661__jellyfish__low: solved (ok) turns=8 out_tok=4444 cost=0.0034528249999999996 29.2s
+[26/66] django__django-17084__jellyfish__low: solved (ok) turns=9 out_tok=3509 cost=0.002924505 27.4s
+[27/66] django__django-17084__cod__low: solved (ok) turns=22 out_tok=7682 cost=0.007452225 65.4s
+[28/66] matplotlib__matplotlib-24970__cod__low: solved (ok) turns=4 out_tok=1530 cost=0.00127611 20.3s
+[29/66] matplotlib__matplotlib-24970__jellyfish__low: solved (ok) turns=5 out_tok=2019 cost=0.00164582 22.6s
+[30/66] matplotlib__matplotlib-24970__bare__low: solved (ok) turns=9 out_tok=3076 cost=0.002704495 57.0s
+[31/66] psf__requests-1724__bare__low: solved (ok) turns=8 out_tok=1476 cost=0.0018964399999999999 17.9s
+[32/66] psf__requests-1724__cod__low: solved (ok) turns=5 out_tok=1142 cost=0.00149244 14.5s
+[33/66] psf__requests-1724__jellyfish__low: solved (ok) turns=7 out_tok=1630 cost=0.0019192900000000001 17.3s
+[34/66] matplotlib__matplotlib-26113__bare__low: solved (ok) turns=4 out_tok=1454 cost=0.0017240250000000001 16.2s
+[35/66] matplotlib__matplotlib-26113__cod__low: solved (ok) turns=5 out_tok=2090 cost=0.0022016600000000002 21.9s
+[36/66] scikit-learn__scikit-learn-13779__bare__low: solved (ok) turns=6 out_tok=1102 cost=0.001052505 17.6s
+[37/66] matplotlib__matplotlib-26113__jellyfish__low: solved (ok) turns=7 out_tok=2103 cost=0.0023059400000000002 23.3s
+[38/66] scikit-learn__scikit-learn-13779__cod__low: solved (ok) turns=6 out_tok=1269 cost=0.001129015 12.9s
+[39/66] pylint-dev__pylint-6528__bare__low: solved (ok) turns=7 out_tok=3480 cost=0.003021495 44.7s
+[40/66] scikit-learn__scikit-learn-13779__jellyfish__low: solved (ok) turns=6 out_tok=1212 cost=0.00116935 14.4s
+[41/66] scikit-learn__scikit-learn-14496__bare__low: solved (ok) turns=3 out_tok=637 cost=0.00073919 11.5s
+[42/66] scikit-learn__scikit-learn-14496__cod__low: solved (ok) turns=3 out_tok=533 cost=0.000676555 9.4s
+[43/66] scikit-learn__scikit-learn-14496__jellyfish__low: solved (ok) turns=3 out_tok=830 cost=0.0009523250000000001 12.0s
+[44/66] pylint-dev__pylint-6528__jellyfish__low: solved (ok) turns=8 out_tok=4400 cost=0.004178894999999999 97.3s
+[45/66] sphinx-doc__sphinx-7454__bare__low: gave_up (tests) turns=6 out_tok=2770 cost=0.0024924350000000003 26.1s
+[46/66] pylint-dev__pylint-6528__cod__low: solved (ok) turns=17 out_tok=7527 cost=0.007259455 155.4s
+[47/66] sphinx-doc__sphinx-7454__cod__low: gave_up (tests) turns=14 out_tok=4513 cost=0.0045625250000000004 38.5s
+[48/66] sphinx-doc__sphinx-7454__jellyfish__low: gave_up (tests) turns=7 out_tok=2364 cost=0.002254755 20.8s
+[49/66] sphinx-doc__sphinx-7757__bare__low: solved (ok) turns=4 out_tok=1527 cost=0.00126093 15.6s
+[50/66] sphinx-doc__sphinx-7757__cod__low: solved (ok) turns=4 out_tok=1346 cost=0.00114533 12.6s
+[51/66] sphinx-doc__sphinx-7757__jellyfish__low: solved (ok) turns=5 out_tok=1747 cost=0.00147163 17.4s
+[52/66] sympy__sympy-13877__bare__low: solved (ok) turns=11 out_tok=4880 cost=0.005483784999999999 49.1s
+[53/66] sympy__sympy-13877__cod__low: solved (ok) turns=10 out_tok=3347 cost=0.0032623500000000002 59.0s
+[54/66] sympy__sympy-13877__jellyfish__low: gave_up (tests) turns=9 out_tok=3739 cost=0.00353115 57.7s
+[55/66] sympy__sympy-21379__bare__low: gave_up (tests) turns=7 out_tok=2632 cost=0.0022978250000000003 42.8s
+[56/66] sympy__sympy-21379__cod__low: solved (ok) turns=8 out_tok=2635 cost=0.002429615 24.9s
+[57/66] sympy__sympy-21379__jellyfish__low: gave_up (tests) turns=7 out_tok=3033 cost=0.002576955 36.7s
+[58/66] sympy__sympy-23534__bare__low: solved (ok) turns=7 out_tok=1267 cost=0.001223825 13.8s
+[59/66] sympy__sympy-23534__cod__low: solved (ok) turns=6 out_tok=928 cost=0.0010255149999999998 10.9s
+[60/66] sympy__sympy-23534__jellyfish__low: solved (ok) turns=5 out_tok=996 cost=0.0011045999999999999 18.2s
+[61/66] sympy__sympy-24562__bare__low: solved (ok) turns=7 out_tok=2783 cost=0.0024001200000000004 21.1s
+[62/66] sympy__sympy-24562__cod__low: solved (ok) turns=5 out_tok=1863 cost=0.0013914650000000001 24.9s
+[63/66] sympy__sympy-24562__jellyfish__low: solved (ok) turns=7 out_tok=1978 cost=0.0016312050000000002 16.5s
+[64/66] scikit-learn__scikit-learn-14710__bare__low: gave_up (tests) turns=7 out_tok=2367 cost=0.0032181099999999997 901.7s
+[65/66] scikit-learn__scikit-learn-14710__cod__low: gave_up (tests) turns=6 out_tok=2161 cost=0.0036041599999999995 1240.5s
+[66/66] scikit-learn__scikit-learn-14710__jellyfish__low: solved (ok) turns=6 out_tok=55 cost=None 1500.2s
+=== 01:02 probe debug (Haiku bare, 6 tasks)
+isolation check: skipped (swe)
+6 runs, 0 done, 6 to run, parallel 6
+[1/6] django__django-14315__bare__low: solved (ok) turns=4 out_tok=1373 cost=0.00157492 10.8s
+[2/6] django__django-13023__bare__low: solved (ok) turns=9 out_tok=1823 cost=0.002134735 18.7s
+[3/6] astropy__astropy-8872__bare__low: solved (ok) turns=5 out_tok=1552 cost=0.001544185 19.2s
+[4/6] django__django-13297__bare__low: solved (ok) turns=5 out_tok=2792 cost=0.0023949449999999995 23.7s
+[5/6] django__django-11885__bare__low: solved (ok) turns=12 out_tok=7945 cost=0.006553454999999999 55.0s
+[6/6] django__django-14351__bare__low: solved (ok) turns=18 out_tok=8419 cost=0.00891998 56.6s
+=== 01:03 probe debug done:
+swe    bare       low     30  0    90.0%  [74.4%, 96.5%]  2401      1801     0.002      6.8         0%           0%          27      3        0        0        0    
+swe    cod        low     24  0    91.7%  [74.2%, 97.7%]  2292      1674     0.002      7.4         0%           0%          22      2        0        0        0    
+swe    jellyfish  low     24  0    87.5%  [69.0%, 95.7%]  2076      1954     0.002      6.2         0%           0%          21      3        0        0        0    
+isolation check: skipped (swe)
+72 runs, 6 done, 66 to run, parallel 6
+[1/66] django__django-13023__cod__low: solved (ok) turns=9 out_tok=1738 cost=0.001810475 13.1s
+[2/66] django__django-13023__jellyfish__low: solved (ok) turns=8 out_tok=1922 cost=0.00250598 17.2s
+[3/66] astropy__astropy-8872__cod__low: solved (ok) turns=5 out_tok=1675 cost=0.0016162750000000001 19.1s
+[4/66] astropy__astropy-8872__jellyfish__low: solved (ok) turns=5 out_tok=1576 cost=0.001794955 19.5s
+[5/66] django__django-11885__jellyfish__low: gave_up (tests) turns=7 out_tok=3301 cost=0.003383075 24.0s
+[6/66] django__django-14315__cod__low: solved (ok) turns=4 out_tok=1369 cost=0.0015063300000000002 9.7s
+[7/66] django__django-14315__jellyfish__low: solved (ok) turns=5 out_tok=1549 cost=0.001857765 11.5s
+[8/66] django__django-11885__cod__low: solved (ok) turns=9 out_tok=6057 cost=0.004982075000000001 61.7s
+[9/66] django__django-13297__cod__low: solved (ok) turns=6 out_tok=2623 cost=0.002315045 24.1s
+[10/66] django__django-13297__jellyfish__low: solved (ok) turns=6 out_tok=3546 cost=0.0027895249999999997 27.5s
+[11/66] django__django-14351__cod__low: solved (ok) turns=13 out_tok=3809 cost=0.00515729 28.2s
+[12/66] django__django-14771__bare__low: solved (ok) turns=4 out_tok=937 cost=0.0009493449999999999 9.9s
+[13/66] django__django-14771__cod__low: solved (ok) turns=5 out_tok=919 cost=0.0009657350000000001 7.7s
+[14/66] django__django-14771__jellyfish__low: solved (ok) turns=4 out_tok=1299 cost=0.00127155 9.0s
+[15/66] django__django-15022__bare__low: solved (ok) turns=6 out_tok=2005 cost=0.001946155 17.9s
+[16/66] django__django-14351__jellyfish__low: solved (ok) turns=11 out_tok=7105 cost=0.007193065 45.2s
+[17/66] django__django-15022__jellyfish__low: solved (ok) turns=8 out_tok=2619 cost=0.002580855 36.0s
+[18/66] django__django-15022__cod__low: solved (ok) turns=7 out_tok=2243 cost=0.002007725 51.7s
+[19/66] django__django-15916__bare__low: solved (ok) turns=7 out_tok=2339 cost=0.0020757049999999997 17.2s
+[20/66] django__django-15554__bare__low: solved (ok) turns=18 out_tok=8908 cost=0.008618164999999999 77.0s
+[21/66] django__django-15916__jellyfish__low: solved (ok) turns=6 out_tok=2660 cost=0.002315785 19.3s
+[22/66] django__django-15916__cod__low: solved (ok) turns=9 out_tok=4052 cost=0.003431815 25.6s
+[23/66] django__django-15930__bare__low: solved (ok) turns=6 out_tok=2010 cost=0.0018389200000000002 15.2s
+[24/66] django__django-15554__cod__low: solved (ok) turns=24 out_tok=10909 cost=0.011245619999999998 93.4s
+[25/66] django__django-15930__cod__low: solved (ok) turns=8 out_tok=2193 cost=0.002073495 17.0s
+[26/66] django__django-16642__cod__low: solved (ok) turns=5 out_tok=834 cost=0.0007877050000000001 7.3s
+[27/66] django__django-15930__jellyfish__low: solved (ok) turns=7 out_tok=2520 cost=0.00228553 18.3s
+[28/66] django__django-16642__bare__low: solved (ok) turns=6 out_tok=1605 cost=0.001376265 12.9s
+[29/66] django__django-15554__jellyfish__low: solved (ok) turns=27 out_tok=16322 cost=0.016909524999999998 104.4s
+[30/66] django__django-16642__jellyfish__low: solved (ok) turns=6 out_tok=2263 cost=0.0018022700000000003 13.2s
+[31/66] django__django-16901__bare__low: solved (ok) turns=5 out_tok=1245 cost=0.0011086050000000001 9.9s
+[32/66] django__django-16901__cod__low: solved (ok) turns=7 out_tok=1413 cost=0.001221245 10.3s
+[33/66] django__django-16901__jellyfish__low: solved (ok) turns=5 out_tok=1579 cost=0.0014928699999999999 11.7s
+[34/66] matplotlib__matplotlib-24870__bare__low: solved (ok) turns=6 out_tok=2432 cost=0.00233671 19.9s
+[35/66] matplotlib__matplotlib-24870__cod__low: solved (ok) turns=6 out_tok=2614 cost=0.002351665 21.3s
+[36/66] matplotlib__matplotlib-24870__jellyfish__low: solved (ok) turns=6 out_tok=2780 cost=0.0024722700000000004 23.8s
+[37/66] pallets__flask-5014__bare__low: solved (ok) turns=3 out_tok=484 cost=0.0005168500000000001 6.0s
+[38/66] pallets__flask-5014__cod__low: solved (ok) turns=3 out_tok=560 cost=0.000560495 4.9s
+[39/66] pallets__flask-5014__jellyfish__low: solved (ok) turns=6 out_tok=1080 cost=0.001058515 9.0s
+[40/66] mwaskom__seaborn-3069__jellyfish__low: solved (ok) turns=9 out_tok=3699 cost=0.00359529 85.6s
+[41/66] mwaskom__seaborn-3069__cod__low: solved (ok) turns=8 out_tok=3760 cost=0.003861215 97.1s
+[42/66] mwaskom__seaborn-3069__bare__low: solved (ok) turns=7 out_tok=2974 cost=0.00279861 96.9s
+[43/66] pydata__xarray-4687__cod__low: solved (ok) turns=8 out_tok=2953 cost=0.0029067949999999998 49.5s
+[44/66] pydata__xarray-4687__jellyfish__low: solved (ok) turns=8 out_tok=3717 cost=0.003563 48.4s
+[45/66] pydata__xarray-4687__bare__low: solved (ok) turns=13 out_tok=4775 cost=0.004687930000000001 75.1s
+[46/66] pytest-dev__pytest-7571__bare__low: solved (ok) turns=4 out_tok=1555 cost=0.001454875 10.6s
+[47/66] pytest-dev__pytest-7571__cod__low: solved (ok) turns=4 out_tok=1189 cost=0.0013354349999999998 10.1s
+[48/66] pytest-dev__pytest-7571__jellyfish__low: solved (ok) turns=4 out_tok=1335 cost=0.0012824450000000001 9.0s
+[49/66] sphinx-doc__sphinx-10323__bare__low: solved (ok) turns=5 out_tok=916 cost=0.001105525 10.0s
+[50/66] sphinx-doc__sphinx-10323__cod__low: solved (ok) turns=5 out_tok=854 cost=0.00104225 9.1s
+[51/66] pydata__xarray-6744__jellyfish__low: solved (ok) turns=4 out_tok=2229 cost=0.001932245 82.9s
+[52/66] pydata__xarray-6744__bare__low: solved (ok) turns=6 out_tok=2457 cost=0.002227545 87.1s
+[53/66] sphinx-doc__sphinx-10323__jellyfish__low: solved (ok) turns=5 out_tok=937 cost=0.001151285 9.8s
+[54/66] sphinx-doc__sphinx-7440__cod__low: solved (ok) turns=8 out_tok=3868 cost=0.003580655 26.1s
+[55/66] sphinx-doc__sphinx-7440__jellyfish__low: solved (ok) turns=8 out_tok=3503 cost=0.0033724949999999997 25.4s
+[56/66] sympy__sympy-15345__bare__low: solved (ok) turns=6 out_tok=1979 cost=0.001675125 14.8s
+[57/66] sympy__sympy-13647__jellyfish__low: solved (ok) turns=6 out_tok=1699 cost=0.002083395 13.8s
+[58/66] sympy__sympy-13647__bare__low: solved (ok) turns=9 out_tok=2640 cost=0.0026438750000000004 60.1s
+[59/66] sphinx-doc__sphinx-7440__bare__low: solved (ok) turns=8 out_tok=3459 cost=0.003268775 80.2s
+[60/66] sympy__sympy-15345__cod__low: solved (ok) turns=10 out_tok=2379 cost=0.0020687699999999997 18.4s
+[61/66] sympy__sympy-20590__bare__low: solved (ok) turns=8 out_tok=1275 cost=0.001240615 13.5s
+[62/66] sympy__sympy-15345__jellyfish__low: solved (ok) turns=7 out_tok=2231 cost=0.00192179 17.0s
+[63/66] sympy__sympy-13647__cod__low: solved (ok) turns=13 out_tok=3299 cost=0.0031930900000000004 94.3s
+[64/66] pydata__xarray-6744__cod__low: solved (ok) turns=8 out_tok=3475 cost=0.0031376550000000005 228.1s
+[65/66] sympy__sympy-20590__cod__low: solved (ok) turns=9 out_tok=1530 cost=0.0014905449999999998 21.0s
+[66/66] sympy__sympy-20590__jellyfish__low: solved (ok) turns=7 out_tok=1262 cost=0.001303095 12.3s
+isolation check: skipped (swe)
+24 runs, 0 done, 24 to run, parallel 6
+[1/24] django__django-11451__bare__low: solved (ok) turns=4 out_tok=516 cost=0.0134041 8.1s
+[2/24] django__django-13925__bare__low: solved (ok) turns=4 out_tok=897 cost=0.0215201 12.0s
+[3/24] django__django-13033__bare__low: solved (ok) turns=4 out_tok=666 cost=0.0196256 11.1s
+[4/24] django__django-11179__bare__low: solved (ok) turns=5 out_tok=676 cost=0.0151213 11.8s
+[5/24] django__django-11551__bare__low: solved (ok) turns=7 out_tok=1365 cost=0.0314194 17.7s
+[6/24] django__django-13964__bare__low: solved (ok) turns=5 out_tok=577 cost=0.0137089 8.8s
+[7/24] django__django-15127__bare__low: solved (ok) turns=4 out_tok=564 cost=0.010076 8.8s
+[8/24] django__django-16661__bare__low: solved (ok) turns=4 out_tok=982 cost=0.0167576 13.5s
+[9/24] django__django-17084__bare__low: solved (ok) turns=5 out_tok=838 cost=0.018212100000000002 10.5s
+[10/24] django__django-16116__bare__low: solved (ok) turns=8 out_tok=1341 cost=0.0255346 22.2s
+[11/24] astropy__astropy-14309__bare__low: solved (ok) turns=4 out_tok=522 cost=0.0173345 29.2s
+[12/24] scikit-learn__scikit-learn-14496__bare__low: solved (ok) turns=3 out_tok=420 cost=0.011403700000000001 6.1s
+[13/24] scikit-learn__scikit-learn-13779__bare__low: solved (ok) turns=5 out_tok=868 cost=0.013805399999999999 12.4s
+[14/24] psf__requests-1724__bare__low: solved (ok) turns=5 out_tok=574 cost=0.017118 8.8s
+[15/24] matplotlib__matplotlib-24970__bare__low: solved (ok) turns=4 out_tok=858 cost=0.016703 13.1s
+[16/24] sphinx-doc__sphinx-7454__bare__low: solved (ok) turns=8 out_tok=1236 cost=0.029596400000000002 18.3s
+[17/24] pylint-dev__pylint-6528__bare__low: solved (ok) turns=8 out_tok=2018 cost=0.0353969 47.7s
+[18/24] sphinx-doc__sphinx-7757__bare__low: solved (ok) turns=4 out_tok=1075 cost=0.0201582 13.0s
+[19/24] sympy__sympy-23534__bare__low: solved (ok) turns=5 out_tok=504 cost=0.0109602 10.1s
+[20/24] sympy__sympy-24562__bare__low: solved (ok) turns=6 out_tok=1247 cost=0.0206664 20.9s
+[21/24] sympy__sympy-13877__bare__low: solved (ok) turns=7 out_tok=1373 cost=0.032042600000000004 31.8s
+[22/24] sympy__sympy-21379__bare__low: solved (ok) turns=5 out_tok=1063 cost=0.0203396 16.0s
+[23/24] matplotlib__matplotlib-26113__bare__low: solved (ok) turns=4 out_tok=705 cost=0.0214742 7.9s
+[24/24] scikit-learn__scikit-learn-14710__bare__low: gave_up (tests) turns=3 out_tok=844 cost=0.0198565 39.8s
+isolation check: skipped (swe)
+24 runs, 0 done, 24 to run, parallel 6
+[1/24] django__django-13023__bare__low: solved (ok) turns=4 out_tok=509 cost=0.0090177 7.6s
+[2/24] astropy__astropy-8872__bare__low: solved (ok) turns=4 out_tok=757 cost=0.015189400000000002 16.2s
+[3/24] django__django-13297__bare__low: solved (ok) turns=5 out_tok=902 cost=0.0167232 19.8s
+[4/24] django__django-14315__bare__low: solved (ok) turns=11 out_tok=1843 cost=0.0400335 24.1s
+[5/24] django__django-14351__bare__low: solved (ok) turns=10 out_tok=1804 cost=0.0470958 27.5s
+[6/24] django__django-11885__bare__low: solved (ok) turns=8 out_tok=2233 cost=0.038059800000000005 31.0s
+[7/24] django__django-14771__bare__low: solved (ok) turns=4 out_tok=758 cost=0.014884199999999998 9.2s
+[8/24] django__django-16642__bare__low: solved (ok) turns=3 out_tok=414 cost=0.0089092 7.7s
+[9/24] django__django-15930__bare__low: solved (ok) turns=6 out_tok=964 cost=0.017747699999999998 13.7s
+[10/24] django__django-15916__bare__low: solved (ok) turns=6 out_tok=1234 cost=0.022603699999999997 17.4s
+[11/24] django__django-16901__bare__low: solved (ok) turns=4 out_tok=684 cost=0.014049 9.8s
+[12/24] django__django-15022__bare__low: solved (ok) turns=6 out_tok=805 cost=0.0162844 32.6s
+[13/24] django__django-15554__bare__low: solved (ok) turns=13 out_tok=3934 cost=0.081868 45.7s
+[14/24] pallets__flask-5014__bare__low: solved (ok) turns=3 out_tok=326 cost=0.0061342 6.0s
+[15/24] pytest-dev__pytest-7571__bare__low: solved (ok) turns=4 out_tok=855 cost=0.0136812 8.6s
+[16/24] sphinx-doc__sphinx-10323__bare__low: solved (ok) turns=4 out_tok=655 cost=0.013461499999999998 12.9s
+[17/24] matplotlib__matplotlib-24870__bare__low: solved (ok) turns=5 out_tok=1556 cost=0.026255499999999998 21.6s
+[18/24] sphinx-doc__sphinx-7440__bare__low: solved (ok) turns=7 out_tok=1400 cost=0.0273108 21.1s
+[19/24] sympy__sympy-13647__bare__low: solved (ok) turns=5 out_tok=671 cost=0.0146429 12.0s
+[20/24] pydata__xarray-4687__bare__low: solved (ok) turns=7 out_tok=1578 cost=0.0328405 30.2s
+[21/24] pydata__xarray-6744__bare__low: solved (ok) turns=4 out_tok=708 cost=0.0130107 22.4s
+[22/24] sympy__sympy-15345__bare__low: solved (ok) turns=3 out_tok=646 cost=0.0110825 12.2s
+[23/24] sympy__sympy-20590__bare__low: solved (ok) turns=7 out_tok=822 cost=0.0145319 13.7s
+[24/24] mwaskom__seaborn-3069__bare__low: solved (ok) turns=9 out_tok=1897 cost=0.034687800000000005 236.7s
+=== 01:27 analysis
+# Summary
+
+| model | bench | cond | effort | n | pass | 95% CI | mean out tok | median out tok | mean cost | mean turns | untouched | attempted-fail | hit_cap | timeout | error |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| Haiku 5.5 | swe | bare | low | 48 | 94% | [83%, 98%] | 2417 | 1951 | $0.002 | 6.9 | 0 | 3 | 0 | 0 | 0 |
+| Haiku 5.5 | swe | cod | low | 48 | 96% | [86%, 99%] | 2528 | 1904 | $0.002 | 7.7 | 0 | 2 | 0 | 0 | 0 |
+| Haiku 5.5 | swe | jellyfish | low | 48 | 92% | [80%, 97%] | 2553 | 2061 | $0.002 | 6.8 | 0 | 4 | 0 | 0 | 0 |
+| Sonnet 5.5 | swe | bare | low | 48 | 98% | [89%, 100%] | 1035 | 850 | $0.021 | 5.5 | 0 | 1 | 0 | 0 | 0 |
+
+# Paired comparisons vs bare (same model, bench, effort, problem)
+
+| model | bench | effort | cond | common n | bare pass | cond pass | discordant (bare only / cond only) | McNemar p | both-solved n | median token ratio cond/bare | sign-test p | median cost ratio |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| Haiku 5.5 | swe | low | cod | 48 | 94% | 96% | 0 / 1 | 1.000 | 45 | 1.03 | 0.766 | 1.01 |
+| Haiku 5.5 | swe | low | jellyfish | 48 | 94% | 92% | 2 / 1 | 1.000 | 43 | 1.14 | 0.001 | 1.15 |
+
+wrote analysis/swe/ (192 runs)
+bench    cond    effort    n lines/run compliance  top tags
+swe      bare    low      96       5.6       0.0%  
+swe      cod     low      48       7.1       0.0%  
+swe      jellyfish low      48       9.3      20.7%  GOAL:20, FACT:17, PLAN:13, DEF:12, RESULT:11
+=== 01:28 session complete

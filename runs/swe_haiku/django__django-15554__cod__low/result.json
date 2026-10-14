@@ -1,0 +1,73 @@
+{
+ "problem": "django__django-15554",
+ "bench": "swe",
+ "condition": "cod",
+ "effort": "low",
+ "model": "claude-haiku-5-5",
+ "batch": "swe_haiku",
+ "dry_run": false,
+ "outcome": "solved",
+ "verify_pass": true,
+ "verify_stage": "ok",
+ "verify_detail": "resolved (run_id cotml-20261014010727-7f84f76d)",
+ "num_turns": 24,
+ "input_tokens": 50,
+ "output_tokens": 10909,
+ "thinking_tokens": 5008,
+ "cache_read_tokens": 302637,
+ "cache_creation_tokens": 22078,
+ "usage_source": "result",
+ "total_cost_usd": 0.011245619999999998,
+ "duration_s": 93.4,
+ "agent_duration_ms": 92705,
+ "lean_compile_count": 15,
+ "search_tactic_uses": 0,
+ "search_tactic_in_final": false,
+ "tool_calls": {
+  "Bash": 23
+ },
+ "proof_chars": 956,
+ "proof_lines": 21,
+ "statement_prefix_changed": false,
+ "stop_reason": "end_turn",
+ "result_subtype": "success",
+ "terminal_reason": "completed",
+ "is_error": false,
+ "api_error_status": null,
+ "permission_denials": 0,
+ "agent_said_give_up": false,
+ "final_text": "`test_multiple` now passes, and so do the rest of the `filtered_relation` suite and the related suites I ran (1387 tests across aggregation, annotations, queries, lookup, basic, expressions, many_to_one, many_to_many, select_related, null_queries, and others).\n\n**Cause:** `Join.equals()` ignored `filtered_relation` entirely when deciding whether an existing join could be reused. So when a second `FilteredRelation` went through the same path (`myrelation__nested`), `Query.join()` reused the first one's JOIN and the second filter was silently dropped. That is the behaviour the issue describes.\n\n**Fix** (`django/db/models/sql/datastructures.py`): `equals()` still ignores the filter in general, but a join is no longer reused when it is filtered through a *different* `FilteredRelation` alias. An unfiltered join still reuses an existing filtered join, which the `FilteredRelation` condition relies on (its inner `book__\u2026` lookups are resolved with `reuse=set(path)`).\n\nI tried two other approaches first and rejected them: switching `Query.join()` to full `==`, and comparing aliases symmetrically. Both broke about 24 existing tests because they stopped the condition's inner lookups from reusing their own filtered join.\n\nI did not add a regression test for the multi-filter case from the issue, since the rules say not to modify test files. The working tree has the change uncommitted.",
+ "timed_out": false,
+ "docker_rc": 0,
+ "limits": {
+  "max_turns": 50,
+  "max_budget_usd": 2.0,
+  "timeout_min": 25.0
+ },
+ "network": "cotml-egress",
+ "proxy": true,
+ "claude_version": "2.1.296",
+ "model_usage": {
+  "claude-haiku-5-5": {
+   "inputTokens": 50,
+   "outputTokens": 10909,
+   "cacheReadInputTokens": 302637,
+   "cacheCreationInputTokens": 22078,
+   "webSearchRequests": 0,
+   "costUSD": 0.011245619999999998,
+   "contextWindow": 1000000,
+   "maxOutputTokens": 128000,
+   "thinkingTokens": 5008,
+   "canonicalModel": "claude-haiku-5-5",
+   "provider": "firstParty",
+   "costBasis": "list"
+  }
+ },
+ "started_at": "2026-10-14T08:05:52+00:00",
+ "framing": "debug",
+ "patch_files": [
+  "django/db/models/sql/datastructures.py"
+ ],
+ "touched_test_files": [],
+ "untracked_files": []
+}

@@ -1,0 +1,73 @@
+{
+ "problem": "astropy__astropy-14309",
+ "bench": "swe",
+ "condition": "bare",
+ "effort": "low",
+ "model": "claude-sonnet-5-5",
+ "batch": "swe_sonnet",
+ "dry_run": false,
+ "outcome": "solved",
+ "verify_pass": true,
+ "verify_stage": "ok",
+ "verify_detail": "resolved (run_id cotml-20261014011718-e97eeb4d)",
+ "num_turns": 4,
+ "input_tokens": 8,
+ "output_tokens": 522,
+ "thinking_tokens": 0,
+ "cache_read_tokens": 7810,
+ "cache_creation_tokens": 4527,
+ "usage_source": "result",
+ "total_cost_usd": 0.0173345,
+ "duration_s": 29.2,
+ "agent_duration_ms": 28312,
+ "lean_compile_count": 0,
+ "search_tactic_uses": 0,
+ "search_tactic_in_final": false,
+ "tool_calls": {
+  "Bash": 3
+ },
+ "proof_chars": 572,
+ "proof_lines": 13,
+ "statement_prefix_changed": false,
+ "stop_reason": "end_turn",
+ "result_subtype": "success",
+ "terminal_reason": "completed",
+ "is_error": false,
+ "api_error_status": null,
+ "permission_denials": 0,
+ "agent_said_give_up": false,
+ "final_text": "I fixed the `IndexError` in `is_fits` in `astropy/io/fits/connect.py`. The last line now checks `len(args) > 0` before it looks at `args[0]`. When no extra arguments are passed, it returns `False`.\n\nI reran the issue's example with a `.ecsv` path. `identify_format(\"write\", Table, \"a.ecsv\", None, [], {})` now returns `['ascii.ecsv']` instead of raising. I didn't run the project's test suite, so the change isn't checked against it.",
+ "timed_out": false,
+ "docker_rc": 0,
+ "limits": {
+  "max_turns": 50,
+  "max_budget_usd": 4.0,
+  "timeout_min": 25.0
+ },
+ "network": "cotml-egress",
+ "proxy": true,
+ "claude_version": "2.1.296",
+ "model_usage": {
+  "claude-sonnet-5-5": {
+   "inputTokens": 8,
+   "outputTokens": 522,
+   "cacheReadInputTokens": 7810,
+   "cacheCreationInputTokens": 4527,
+   "webSearchRequests": 0,
+   "costUSD": 0.0173345,
+   "contextWindow": 1000000,
+   "maxOutputTokens": 128000,
+   "thinkingTokens": 0,
+   "canonicalModel": "claude-sonnet-5-5",
+   "provider": "firstParty",
+   "costBasis": "list"
+  }
+ },
+ "started_at": "2026-10-14T08:16:47+00:00",
+ "framing": "issue",
+ "patch_files": [
+  "astropy/io/fits/connect.py"
+ ],
+ "touched_test_files": [],
+ "untracked_files": []
+}

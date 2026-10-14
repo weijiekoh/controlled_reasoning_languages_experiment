@@ -1,0 +1,26 @@
+diff --git a/src/_pytest/unittest.py b/src/_pytest/unittest.py
+index 773f545af..092d310f9 100644
+--- a/src/_pytest/unittest.py
++++ b/src/_pytest/unittest.py
+@@ -205,6 +205,12 @@ class TestCaseFunction(Function):
+         expecting_failure_class = getattr(self, "__unittest_expecting_failure__", False)
+         return bool(expecting_failure_class or expecting_failure_method)
+ 
++    def _is_skipped(self):
++        return bool(
++            getattr(self._testcase.__class__, "__unittest_skip__", False)
++            or getattr(self.obj, "__unittest_skip__", False)
++        )
++
+     def runtest(self):
+         from _pytest.debugging import maybe_wrap_pytest_function_for_tracing
+ 
+@@ -220,7 +226,7 @@ class TestCaseFunction(Function):
+             # arguably we could always postpone tearDown(), but this changes the moment where the
+             # TestCase instance interacts with the results object, so better to only do it
+             # when absolutely needed
+-            if self.config.getoption("usepdb"):
++            if self.config.getoption("usepdb") and not self._is_skipped():
+                 self._explicit_tearDown = self._testcase.tearDown
+                 setattr(self._testcase, "tearDown", lambda *args: None)
+ 

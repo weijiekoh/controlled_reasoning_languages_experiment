@@ -1,0 +1,73 @@
+{
+ "problem": "pylint-dev__pylint-8898",
+ "bench": "swe",
+ "condition": "jellyfish",
+ "effort": "low",
+ "model": "claude-haiku-5-5",
+ "batch": "swe_haiku",
+ "dry_run": false,
+ "outcome": "solved",
+ "verify_pass": true,
+ "verify_stage": "ok",
+ "verify_detail": "resolved (run_id cotml-20261014023430-b695c7b3)",
+ "num_turns": 5,
+ "input_tokens": 12,
+ "output_tokens": 2354,
+ "thinking_tokens": 782,
+ "cache_read_tokens": 30925,
+ "cache_creation_tokens": 6435,
+ "usage_source": "result",
+ "total_cost_usd": 0.002291825,
+ "duration_s": 20.3,
+ "agent_duration_ms": 19493,
+ "lean_compile_count": 1,
+ "search_tactic_uses": 0,
+ "search_tactic_in_final": false,
+ "tool_calls": {
+  "Bash": 4
+ },
+ "proof_chars": 785,
+ "proof_lines": 16,
+ "statement_prefix_changed": false,
+ "stop_reason": "end_turn",
+ "result_subtype": "success",
+ "terminal_reason": "completed",
+ "is_error": false,
+ "api_error_status": null,
+ "permission_denials": 0,
+ "agent_said_give_up": false,
+ "final_text": "The fix works. The one failing test, `test_csv_regex_error`, encodes the old bug: it expects `(foo{1,3})` to be split into an invalid `(foo{1` pattern. That input is now a valid regex, so the test's expectation is stale. I can't edit test files, so I'm reporting it rather than changing it.\n\n**Summary**\n\nThe issue is resolved in `pylint/config/argument.py`. `_regexp_csv_transfomer` used to split the option value on every comma, which broke quantifiers like `{1,3}`. It now splits only on commas that are not inside a `{...}` quantifier, then strips whitespace and drops empty entries, as before.\n\n- `(foo{1,3})` now parses as one valid pattern, so the crash in the issue no longer happens.\n- `a, b{1,2}, c` parses as `['a', 'b{1,2}', 'c']`.\n\n**Test status**\n\n`tests/config`: 74 passed, 1 failed. The failure is `tests/config/test_config.py::test_csv_regex_error`. It passes `--bad-names-rgx=(foo{1,3})` and asserts the old mangled error message (`(foo{1 ...missing )`). That assertion documents the bug this issue reports, so it needs updating to a genuinely invalid pattern (for example `--bad-names-rgx=(foo`) or removing. I did not change it because the rules forbid modifying test files.\n\nLimitation: the splitter is a regex lookahead, so a comma inside a `{...}` quantifier is protected, but other comma-containing constructs are still split. I did not add a general escape mechanism as the issue suggested. I did not commit.",
+ "timed_out": false,
+ "docker_rc": 0,
+ "limits": {
+  "max_turns": 50,
+  "max_budget_usd": 2.0,
+  "timeout_min": 25.0
+ },
+ "network": "cotml-egress",
+ "proxy": true,
+ "claude_version": "2.1.296",
+ "model_usage": {
+  "claude-haiku-5-5": {
+   "inputTokens": 12,
+   "outputTokens": 2354,
+   "cacheReadInputTokens": 30925,
+   "cacheCreationInputTokens": 6435,
+   "webSearchRequests": 0,
+   "costUSD": 0.002291825,
+   "contextWindow": 1000000,
+   "maxOutputTokens": 128000,
+   "thinkingTokens": 782,
+   "canonicalModel": "claude-haiku-5-5",
+   "provider": "firstParty",
+   "costBasis": "list"
+  }
+ },
+ "started_at": "2026-10-14T09:34:09+00:00",
+ "framing": "issue",
+ "patch_files": [
+  "pylint/config/argument.py"
+ ],
+ "touched_test_files": [],
+ "untracked_files": []
+}

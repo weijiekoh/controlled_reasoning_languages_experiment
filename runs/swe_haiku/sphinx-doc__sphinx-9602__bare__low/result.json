@@ -1,0 +1,73 @@
+{
+ "problem": "sphinx-doc__sphinx-9602",
+ "bench": "swe",
+ "condition": "bare",
+ "effort": "low",
+ "model": "claude-haiku-5-5",
+ "batch": "swe_haiku",
+ "dry_run": false,
+ "outcome": "gave_up",
+ "verify_pass": false,
+ "verify_stage": "tests",
+ "verify_detail": "FAIL_TO_PASS 0/1 failing: tests/test_domain_py.py::test_parse_annotation_Literal; PASS_TO_PASS 45/45",
+ "num_turns": 10,
+ "input_tokens": 22,
+ "output_tokens": 4729,
+ "thinking_tokens": 1994,
+ "cache_read_tokens": 53736,
+ "cache_creation_tokens": 9550,
+ "usage_source": "result",
+ "total_cost_usd": 0.00409781,
+ "duration_s": 31.7,
+ "agent_duration_ms": 31063,
+ "lean_compile_count": 2,
+ "search_tactic_uses": 0,
+ "search_tactic_in_final": false,
+ "tool_calls": {
+  "Bash": 9
+ },
+ "proof_chars": 2673,
+ "proof_lines": 53,
+ "statement_prefix_changed": false,
+ "stop_reason": "end_turn",
+ "result_subtype": "success",
+ "terminal_reason": "completed",
+ "is_error": false,
+ "api_error_status": null,
+ "permission_denials": 0,
+ "agent_said_give_up": false,
+ "final_text": "The nitpick warnings are gone. `Literal[True]` and `Literal[False]` now render without creating `py:class` references, and the Python domain and typing tests pass (68 passed, 2 skipped).\n\n**Cause:** `_parse_annotation` in `sphinx/domains/python.py` turns every bare name in a signature annotation into a cross-reference. That includes the `True` inside `Literal[True]`, which is a value, not a class.\n\n**Fix:** When unparsing the contents of a `Literal[...]` subscript, the parser now emits the values as non-reference nodes:\n- Constants are rendered with `repr()` as literal-string signature nodes.\n- Names and dotted names are emitted as `desc_sig_name` nodes.\n- The subscript is detected by a bare `Literal` or an attribute ending in `.Literal`, so `typing.Literal[...]` and `Literal[...]` are both covered.\n\nI reproduced the issue with a minimal project containing the overloaded `foo` from the report. Before the change, Sphinx warned `py:class reference target not found: True` and `False`. After it, the build is clean under `-n`. I did not add a regression test, since the rules bar adding test files, and I did not run the full test suite, only the two most relevant test modules.",
+ "timed_out": false,
+ "docker_rc": 0,
+ "limits": {
+  "max_turns": 50,
+  "max_budget_usd": 2.0,
+  "timeout_min": 25.0
+ },
+ "network": "cotml-egress",
+ "proxy": true,
+ "claude_version": "2.1.296",
+ "model_usage": {
+  "claude-haiku-5-5": {
+   "inputTokens": 22,
+   "outputTokens": 4729,
+   "cacheReadInputTokens": 53736,
+   "cacheCreationInputTokens": 9550,
+   "webSearchRequests": 0,
+   "costUSD": 0.00409781,
+   "contextWindow": 1000000,
+   "maxOutputTokens": 128000,
+   "thinkingTokens": 1994,
+   "canonicalModel": "claude-haiku-5-5",
+   "provider": "firstParty",
+   "costBasis": "list"
+  }
+ },
+ "started_at": "2026-10-14T09:39:54+00:00",
+ "framing": "issue",
+ "patch_files": [
+  "sphinx/domains/python.py"
+ ],
+ "touched_test_files": [],
+ "untracked_files": []
+}

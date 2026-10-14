@@ -1,0 +1,73 @@
+{
+ "problem": "pydata__xarray-6744",
+ "bench": "swe",
+ "condition": "bare",
+ "effort": "low",
+ "model": "claude-sonnet-5-5",
+ "batch": "swe_sonnet",
+ "dry_run": false,
+ "outcome": "solved",
+ "verify_pass": true,
+ "verify_stage": "ok",
+ "verify_detail": "resolved (run_id cotml-20261014012356-20c0286f)",
+ "num_turns": 4,
+ "input_tokens": 8,
+ "output_tokens": 708,
+ "thinking_tokens": 0,
+ "cache_read_tokens": 7147,
+ "cache_creation_tokens": 2080,
+ "usage_source": "result",
+ "total_cost_usd": 0.0130107,
+ "duration_s": 22.4,
+ "agent_duration_ms": 16708,
+ "lean_compile_count": 1,
+ "search_tactic_uses": 0,
+ "search_tactic_in_final": false,
+ "tool_calls": {
+  "Bash": 3
+ },
+ "proof_chars": 989,
+ "proof_lines": 20,
+ "statement_prefix_changed": false,
+ "stop_reason": "end_turn",
+ "result_subtype": "success",
+ "terminal_reason": "completed",
+ "is_error": false,
+ "api_error_status": null,
+ "permission_denials": 0,
+ "agent_said_give_up": false,
+ "final_text": "Manual iteration over a `DataArrayRolling` now respects `center=True`. I fixed it in `DataArrayRolling.__iter__` in `xarray/core/rolling.py`.\n\nThe old code always ended each window at the current position, so centred windows came out shifted by one. The new code moves each window's end forward by half the window size when `center=True`. It also clips the start and end to the array bounds, so the edge windows are shorter, as in the non-centred case.\n\nAll 32 `rolling_iter` tests pass, including the three that were failing. I didn't run the rest of `test_rolling.py` or the wider suite, and I didn't run the issue's example directly.",
+ "timed_out": false,
+ "docker_rc": 0,
+ "limits": {
+  "max_turns": 50,
+  "max_budget_usd": 4.0,
+  "timeout_min": 25.0
+ },
+ "network": "cotml-egress",
+ "proxy": true,
+ "claude_version": "2.1.296",
+ "model_usage": {
+  "claude-sonnet-5-5": {
+   "inputTokens": 8,
+   "outputTokens": 708,
+   "cacheReadInputTokens": 7147,
+   "cacheCreationInputTokens": 2080,
+   "webSearchRequests": 0,
+   "costUSD": 0.0130107,
+   "contextWindow": 1000000,
+   "maxOutputTokens": 128000,
+   "thinkingTokens": 0,
+   "canonicalModel": "claude-sonnet-5-5",
+   "provider": "firstParty",
+   "costBasis": "list"
+  }
+ },
+ "started_at": "2026-10-14T08:23:33+00:00",
+ "framing": "debug",
+ "patch_files": [
+  "xarray/core/rolling.py"
+ ],
+ "touched_test_files": [],
+ "untracked_files": []
+}

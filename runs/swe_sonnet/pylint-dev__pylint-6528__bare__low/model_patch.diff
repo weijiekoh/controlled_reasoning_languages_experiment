@@ -1,0 +1,40 @@
+diff --git a/pylint/lint/pylinter.py b/pylint/lint/pylinter.py
+index 53345a6b..04ad605c 100644
+--- a/pylint/lint/pylinter.py
++++ b/pylint/lint/pylinter.py
+@@ -564,8 +564,20 @@ class PyLinter(
+             if not msg.may_be_emitted():
+                 self._msgs_state[msg.msgid] = False
+ 
+-    @staticmethod
+-    def _discover_files(files_or_modules: Sequence[str]) -> Iterator[str]:
++    def _is_ignored(self, base: str, path: str) -> bool:
++        import re
++
++        if base in self.config.black_list:
++            return True
++        if any(p.match(base) for p in self.config.black_list_re):
++            return True
++        path = os.path.normpath(path)
++        norm = path.replace("\\", "/")
++        return any(
++            p.match(path) or p.match(norm) for p in self.config.ignore_paths
++        )
++
++    def _discover_files(self, files_or_modules: Sequence[str]) -> Iterator[str]:
+         """Discover python modules and packages in sub-directory.
+ 
+         Returns iterator of paths to discovered modules and packages.
+@@ -575,7 +587,11 @@ class PyLinter(
+                 os.path.join(something, "__init__.py")
+             ):
+                 skip_subtrees: list[str] = []
+-                for root, _, files in os.walk(something):
++                for root, dirs, files in os.walk(something):
++                    dirs[:] = [d for d in dirs if not self._is_ignored(d, os.path.join(root, d))]
++                    if self._is_ignored(os.path.basename(root), root) and root != something:
++                        continue
++                    files = [f for f in files if not self._is_ignored(f, os.path.join(root, f))]
+                     if any(root.startswith(s) for s in skip_subtrees):
+                         # Skip subtree of already discovered package.
+                         continue

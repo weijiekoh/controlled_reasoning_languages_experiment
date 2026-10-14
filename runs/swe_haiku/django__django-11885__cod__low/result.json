@@ -1,0 +1,73 @@
+{
+ "problem": "django__django-11885",
+ "bench": "swe",
+ "condition": "cod",
+ "effort": "low",
+ "model": "claude-haiku-5-5",
+ "batch": "swe_haiku",
+ "dry_run": false,
+ "outcome": "solved",
+ "verify_pass": true,
+ "verify_stage": "ok",
+ "verify_detail": "resolved (run_id cotml-20261014010453-dcec7d0f)",
+ "num_turns": 9,
+ "input_tokens": 20,
+ "output_tokens": 6057,
+ "thinking_tokens": 3025,
+ "cache_read_tokens": 50970,
+ "cache_creation_tokens": 11535,
+ "usage_source": "result",
+ "total_cost_usd": 0.004982075000000001,
+ "duration_s": 61.7,
+ "agent_duration_ms": 60981,
+ "lean_compile_count": 5,
+ "search_tactic_uses": 0,
+ "search_tactic_in_final": false,
+ "tool_calls": {
+  "Bash": 8
+ },
+ "proof_chars": 2485,
+ "proof_lines": 50,
+ "statement_prefix_changed": false,
+ "stop_reason": "end_turn",
+ "result_subtype": "success",
+ "terminal_reason": "completed",
+ "is_error": false,
+ "api_error_status": null,
+ "permission_denials": 0,
+ "agent_said_give_up": false,
+ "final_text": "The target test `test_fast_delete_combined_relationships` now passes, and the full `delete` suite is green (45 tests, 1 skipped). I also ran `delete_regress`, `model_forms`, `admin_views`, `many_to_many` and `generic_relations` (629 tests) with no failures.\n\nThe change is in `django/db/models/deletion.py`:\n\n- **Combining:** when the collector fast-deletes rows of the same model through different related fields (for example `SecondReferrer.referrer` and `SecondReferrer.other_referrer`), it ORs those querysets into one `DELETE`.\n- **Batches kept separate:** batches for the same field stay as separate queries. My first attempt combined everything per model, and that broke `test_large_delete` and `test_large_delete_related`, which depend on per-batch fast deletes. Combining batches would also rebuild the oversized `IN` lists that batching exists to avoid.\n\nOne thing to be aware of: `self.fast_deletes` now holds a mix of plain querysets and small `{'qs', 'fields'}` dicts. The `delete()` loop handles both. Normalising to a single type would be a tidy follow-up but isn't needed for correctness.\n\nI did not commit anything.",
+ "timed_out": false,
+ "docker_rc": 0,
+ "limits": {
+  "max_turns": 50,
+  "max_budget_usd": 2.0,
+  "timeout_min": 25.0
+ },
+ "network": "cotml-egress",
+ "proxy": true,
+ "claude_version": "2.1.296",
+ "model_usage": {
+  "claude-haiku-5-5": {
+   "inputTokens": 20,
+   "outputTokens": 6057,
+   "cacheReadInputTokens": 50970,
+   "cacheCreationInputTokens": 11535,
+   "webSearchRequests": 0,
+   "costUSD": 0.004982075000000001,
+   "contextWindow": 1000000,
+   "maxOutputTokens": 128000,
+   "thinkingTokens": 3025,
+   "canonicalModel": "claude-haiku-5-5",
+   "provider": "firstParty",
+   "costBasis": "list"
+  }
+ },
+ "started_at": "2026-10-14T08:03:49+00:00",
+ "framing": "debug",
+ "patch_files": [
+  "django/db/models/deletion.py"
+ ],
+ "touched_test_files": [],
+ "untracked_files": []
+}

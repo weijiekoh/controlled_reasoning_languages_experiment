@@ -1,0 +1,2 @@
+ M sympy/polys/polytools.py
+ M sympy/polys/sqfreetools.py

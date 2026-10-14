@@ -1,0 +1,267 @@
+    pub type O = Option<Box<Node>>;
+
+    pub open spec fn vw(o: O) -> Set<u64> { match o { Some(n) => n.view(), None => Set::empty() } }
+    pub open spec fn bsx(o: O) -> bool { match o { Some(n) => n.is_bst(), None => true } }
+    pub open spec fn bhh(o: O) -> int { match o { Some(n) => n.black_height(), None => 1 } }
+    pub open spec fn prp(o: O) -> bool { match o { Some(n) => n.satisfies_red_props(), None => true } }
+    pub open spec fn rd(o: O) -> bool { match o { Some(n) => n.is_red, None => false } }
+    pub open spec fn lf(o: O) -> O { match o { Some(n) => n.left, None => None } }
+    pub open spec fn rt(o: O) -> O { match o { Some(n) => n.right, None => None } }
+    pub open spec fn vl(o: O) -> u64 { match o { Some(n) => n.val, None => 0 } }
+    pub open spec fn mk(v: u64, c: bool, l: O, r: O) -> O {
+        Some(Box::new(Node { val: v, is_red: c, left: l, right: r }))
+    }
+    pub open spec fn tog(o: O) -> O {
+        match o { Some(n) => mk(n.val, !n.is_red, n.left, n.right), None => None }
+    }
+    pub open spec fn setc(o: O, c: bool) -> O {
+        match o { Some(n) => mk(n.val, c, n.left, n.right), None => None }
+    }
+    pub open spec fn withl(o: O, l: O) -> O {
+        match o { Some(n) => mk(n.val, n.is_red, l, n.right), None => None }
+    }
+    pub open spec fn withr(o: O, r: O) -> O {
+        match o { Some(n) => mk(n.val, n.is_red, n.left, r), None => None }
+    }
+    pub open spec fn withv(o: O, v: u64) -> O {
+        match o { Some(n) => mk(v, n.is_red, n.left, n.right), None => None }
+    }
+    pub open spec fn flip(o: O) -> O {
+        match o { Some(n) => mk(n.val, !n.is_red, tog(n.left), tog(n.right)), None => None }
+    }
+    pub open spec fn rotl(o: O) -> O {
+        match o {
+            Some(n) => match n.right {
+                Some(x) => mk(x.val, n.is_red, mk(n.val, true, n.left, x.left), x.right),
+                None => o },
+            None => None }
+    }
+    pub open spec fn rotr(o: O) -> O {
+        match o {
+            Some(n) => match n.left {
+                Some(x) => mk(x.val, n.is_red, x.left, mk(n.val, true, x.right, n.right)),
+                None => o },
+            None => None }
+    }
+    pub open spec fn mrl(o: O) -> O {
+        if rd(lf(rt(flip(o)))) {
+            flip(rotl(withr(flip(o), rotr(rt(flip(o))))))
+        } else { flip(o) }
+    }
+    pub open spec fn mrr(o: O) -> O {
+        if rd(lf(lf(flip(o)))) {
+            let h2 = flip(rotr(flip(o)));
+            withr(h2, rotl(rt(h2)))
+        } else { flip(o) }
+    }
+    pub open spec fn bal(o: O) -> O {
+        let h1 = if rd(rt(o)) && !rd(lf(o)) { rotl(o) } else { o };
+        let h2 = if rd(lf(h1)) && rd(lf(lf(h1))) { rotr(h1) } else { h1 };
+        if rd(lf(h2)) && rd(rt(h2)) { flip(h2) } else { h2 }
+    }
+    pub open spec fn sz(o: O) -> nat decreases o {
+        match o { Some(n) => 1 + sz(n.left) + sz(n.right), None => 0 }
+    }
+
+    pub fn x_mk(v: u64, c: bool, l: O, r: O) -> (res: O) ensures res == mk(v, c, l, r) {
+        Some(Box::new(Node { val: v, is_red: c, left: l, right: r }))
+    }
+    pub fn x_rd(o: &O) -> (b: bool) ensures b == rd(*o) {
+        match o { Some(n) => n.is_red, None => false }
+    }
+    pub fn x_lf(o: &O) -> (r: &O) ensures *r == lf(*o) {
+        match o { Some(n) => &n.left, None => o }
+    }
+    pub fn x_rt(o: &O) -> (r: &O) ensures *r == rt(*o) {
+        match o { Some(n) => &n.right, None => o }
+    }
+    pub fn x_tog(o: O) -> (res: O) ensures res == tog(o) {
+        match o {
+            Some(n) => { let Node { val, is_red, left, right } = *n; x_mk(val, !is_red, left, right) }
+            None => None }
+    }
+    pub fn x_setc(o: O, c: bool) -> (res: O) ensures res == setc(o, c) {
+        match o {
+            Some(n) => { let Node { val, is_red, left, right } = *n; x_mk(val, c, left, right) }
+            None => None }
+    }
+    pub fn x_withl(o: O, l: O) -> (res: O) ensures res == withl(o, l) {
+        match o {
+            Some(n) => { let Node { val, is_red, left, right } = *n; x_mk(val, is_red, l, right) }
+            None => None }
+    }
+    pub fn x_withr(o: O, r: O) -> (res: O) ensures res == withr(o, r) {
+        match o {
+            Some(n) => { let Node { val, is_red, left, right } = *n; x_mk(val, is_red, left, r) }
+            None => None }
+    }
+    pub fn x_withv(o: O, v: u64) -> (res: O) ensures res == withv(o, v) {
+        match o {
+            Some(n) => { let Node { val, is_red, left, right } = *n; x_mk(v, is_red, left, right) }
+            None => None }
+    }
+    pub fn x_flip(o: O) -> (res: O) ensures res == flip(o) {
+        match o {
+            Some(n) => { let Node { val, is_red, left, right } = *n;
+                let l = x_tog(left); let r = x_tog(right); x_mk(val, !is_red, l, r) }
+            None => None }
+    }
+    pub fn x_rotl(o: O) -> (res: O) ensures res == rotl(o) {
+        match o {
+            Some(n) => { let Node { val, is_red, left, right } = *n;
+                match right {
+                    Some(x) => { let Node { val: xv, is_red: xc, left: xl, right: xr } = *x;
+                        let inner = x_mk(val, true, left, xl); x_mk(xv, is_red, inner, xr) }
+                    None => x_mk(val, is_red, left, right) } }
+            None => None }
+    }
+    pub fn x_rotr(o: O) -> (res: O) ensures res == rotr(o) {
+        match o {
+            Some(n) => { let Node { val, is_red, left, right } = *n;
+                match left {
+                    Some(x) => { let Node { val: xv, is_red: xc, left: xl, right: xr } = *x;
+                        let inner = x_mk(val, true, xr, right); x_mk(xv, is_red, xl, inner) }
+                    None => x_mk(val, is_red, left, right) } }
+            None => None }
+    }
+
+    pub fn x_rotr_right(o: O) -> (res: O) ensures res == withr(o, rotr(rt(o))) {
+        match o {
+            Some(n) => { let Node { val, is_red, left, right } = *n;
+                let r2 = x_rotr(right); x_mk(val, is_red, left, r2) }
+            None => None }
+    }
+    pub fn x_rotl_right(o: O) -> (res: O) ensures res == withr(o, rotl(rt(o))) {
+        match o {
+            Some(n) => { let Node { val, is_red, left, right } = *n;
+                let r2 = x_rotl(right); x_mk(val, is_red, left, r2) }
+            None => None }
+    }
+    pub fn x_mrl(o: O) -> (res: O) ensures res == mrl(o) {
+        let h1 = x_flip(o);
+        if x_rd(x_lf(x_rt(&h1))) {
+            let h2 = x_rotr_right(h1);
+            let h3 = x_rotl(h2);
+            x_flip(h3)
+        } else { h1 }
+    }
+    pub fn x_mrr(o: O) -> (res: O) ensures res == mrr(o) {
+        let h1 = x_flip(o);
+        if x_rd(x_lf(x_lf(&h1))) {
+            let h2 = x_rotr(h1);
+            let h3 = x_flip(h2);
+            x_rotl_right(h3)
+        } else { h1 }
+    }
+    pub fn x_bal(o: O) -> (res: O) ensures res == bal(o) {
+        let h1 = if x_rd(x_rt(&o)) && !x_rd(x_lf(&o)) { x_rotl(o) } else { o };
+        let h2 = if x_rd(x_lf(&h1)) && x_rd(x_lf(x_lf(&h1))) { x_rotr(h1) } else { h1 };
+        if x_rd(x_lf(&h2)) && x_rd(x_rt(&h2)) { x_flip(h2) } else { h2 }
+    }
+
+    pub open spec fn minv(o: O) -> u64 decreases o {
+        match o { Some(n) => match n.left { None => n.val, Some(_) => minv(n.left) }, None => 0 }
+    }
+    pub fn x_min(o: &O) -> (m: u64) requires o is Some, ensures m == minv(*o), decreases *o {
+        match o {
+            Some(n) => match &n.left { None => n.val, Some(_) => x_min(&n.left) },
+            None => 0 }
+    }
+    pub fn x_isnone(o: &O) -> (b: bool) ensures b == (*o is None) { match o { None => true, Some(_) => false } }
+    pub fn x_vl(o: &O) -> (v: u64) ensures v == vl(*o) { match o { Some(n) => n.val, None => 0 } }
+    pub fn x_takel(o: O) -> (res: (O, O)) ensures res.0 == lf(o), res.1 == withl(o, None) {
+        match o {
+            Some(n) => { let Node { val, is_red, left, right } = *n; (left, x_mk(val, is_red, None, right)) }
+            None => (None, None) }
+    }
+    pub fn x_taker(o: O) -> (res: (O, O)) ensures res.0 == rt(o), res.1 == withr(o, None) {
+        match o {
+            Some(n) => { let Node { val, is_red, left, right } = *n; (right, x_mk(val, is_red, left, None)) }
+            None => (None, None) }
+    }
+
+    pub fn del(o: O, v: u64) -> (res: O)
+        requires bsx(o), okk(o), wf(o), nn(o),
+        ensures bsx(res), okk(res), wf(res), bhh(res) == bhh(o), rd(res) ==> rd(o),
+            vw(res) == vw(o).remove(v),
+        decreases sz(o),
+    {
+        proof { sz_child(o); bst_parts(o); ok_parts(o); }
+        let ghost o0 = o;
+        let val = x_vl(&o);
+        if v < val {
+            if x_isnone(x_lf(&o)) {
+                proof { assert(vw(o0).remove(v) =~= vw(o0)); }
+                return o;
+            }
+            let c1 = !x_rd(x_lf(&o)) && !x_rd(x_lf(x_lf(&o)));
+            let h1 = if c1 { x_mrl(o) } else { o };
+            proof {
+                lmove_facts(o0, h1);
+                if c1 { mrl_bst(o0); sz_mrl(o0); }
+                sz_child(h1);
+                bst_parts(h1);
+            }
+            let (a, rest) = x_takel(h1);
+            let a2 = del(a, v);
+            let h2 = x_withl(rest, a2);
+            proof {
+                assert(h2 == withl(h1, a2));
+                la_facts(h1, a2);
+                bst_replace_left(h1, a2, v);
+                bal_bst(h2);
+            }
+            x_bal(h2)
+        } else {
+            let h1 = if x_rd(x_lf(&o)) { x_rotr(o) } else { o };
+            proof {
+                if rd(lf(o0)) { rotr_bst(o0); sz_rot(o0); }
+            }
+            let v1 = x_vl(&h1);
+            if x_isnone(x_rt(&h1)) {
+                proof {
+                    assert(h1 == o0);
+                    bhh_pos(lf(o0));
+                    assert(lf(o0) is None);
+                    assert(vw(o0) =~= Set::empty().insert(val));
+                    assert(vw(o0).remove(v) =~= (if v == val { Set::empty() } else { vw(o0) }));
+                }
+                if v == v1 { return None; } else { return h1; }
+            }
+            let c2 = !x_rd(x_rt(&h1)) && !x_rd(x_lf(x_rt(&h1)));
+            let h2 = if c2 { x_mrr(h1) } else { h1 };
+            proof {
+                rmove_facts(o0, h1, h2);
+                if c2 { mrr_bst(h1); sz_mrr(h1); }
+                sz_child(h2);
+                bst_parts(h2);
+            }
+            let v2 = x_vl(&h2);
+            let (r, rest) = x_taker(h2);
+            if v == v2 {
+                proof { minv_prop(r); }
+                let m = x_min(&r);
+                let r2 = del(r, m);
+                let h3 = x_withr(x_withv(rest, m), r2);
+                proof {
+                    let hh = withv(h2, m);
+                    assert(h3 == withr(hh, r2));
+                    withv_facts(h2, m);
+                    if rd(h2) { rr2_facts(hh, r2); } else { rb_facts(hh, r2); }
+                    bst_eq(h2, m, r2);
+                    bal_bst(h3);
+                }
+                x_bal(h3)
+            } else {
+                let r2 = del(r, v);
+                let h3 = x_withr(rest, r2);
+                proof {
+                    assert(h3 == withr(h2, r2));
+                    if rd(h2) { rr2_facts(h2, r2); } else { rb_facts(h2, r2); }
+                    bst_replace_right(h2, r2, v);
+                    bal_bst(h3);
+                }
+                x_bal(h3)
+            }
+        }
+    }

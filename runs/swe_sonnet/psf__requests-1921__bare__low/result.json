@@ -1,0 +1,73 @@
+{
+ "problem": "psf__requests-1921",
+ "bench": "swe",
+ "condition": "bare",
+ "effort": "low",
+ "model": "claude-sonnet-5-5",
+ "batch": "swe_sonnet",
+ "dry_run": false,
+ "outcome": "solved",
+ "verify_pass": true,
+ "verify_stage": "ok",
+ "verify_detail": "resolved (run_id cotml-20261014025111-1de93ebe)",
+ "num_turns": 5,
+ "input_tokens": 10,
+ "output_tokens": 633,
+ "thinking_tokens": 0,
+ "cache_read_tokens": 9341,
+ "cache_creation_tokens": 1993,
+ "usage_source": "result",
+ "total_cost_usd": 0.012266599999999999,
+ "duration_s": 8.8,
+ "agent_duration_ms": 8117,
+ "lean_compile_count": 0,
+ "search_tactic_uses": 0,
+ "search_tactic_in_final": false,
+ "tool_calls": {
+  "Bash": 4
+ },
+ "proof_chars": 604,
+ "proof_lines": 14,
+ "statement_prefix_changed": false,
+ "stop_reason": "end_turn",
+ "result_subtype": "success",
+ "terminal_reason": "completed",
+ "is_error": false,
+ "api_error_status": null,
+ "permission_denials": 0,
+ "agent_said_give_up": false,
+ "final_text": "I changed `merge_setting` in `requests/sessions.py` so that a header set to `None` on the session is now dropped, not sent as the string \"None\". I didn't run the test suite or try the example from the issue, so this is untested.\n\nBefore, the function only removed keys that were `None` in the per-request settings. A `None` stored in `session.headers` survived the merge and went out as `Accept-Encoding: None`. It now removes every key whose merged value is `None`, whether the `None` came from the session or the request.\n\nThis applies to every setting merged this way, not just headers. `session.params` and the hooks merge also get the same behaviour.",
+ "timed_out": false,
+ "docker_rc": 0,
+ "limits": {
+  "max_turns": 50,
+  "max_budget_usd": 4.0,
+  "timeout_min": 25.0
+ },
+ "network": "cotml-egress",
+ "proxy": true,
+ "claude_version": "2.1.296",
+ "model_usage": {
+  "claude-sonnet-5-5": {
+   "inputTokens": 10,
+   "outputTokens": 633,
+   "cacheReadInputTokens": 9341,
+   "cacheCreationInputTokens": 1993,
+   "webSearchRequests": 0,
+   "costUSD": 0.012266599999999999,
+   "contextWindow": 1000000,
+   "maxOutputTokens": 128000,
+   "thinkingTokens": 0,
+   "canonicalModel": "claude-sonnet-5-5",
+   "provider": "firstParty",
+   "costBasis": "list"
+  }
+ },
+ "started_at": "2026-10-14T09:51:02+00:00",
+ "framing": "issue",
+ "patch_files": [
+  "requests/sessions.py"
+ ],
+ "touched_test_files": [],
+ "untracked_files": []
+}

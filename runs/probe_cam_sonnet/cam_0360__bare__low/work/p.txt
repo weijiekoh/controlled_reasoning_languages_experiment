@@ -1,0 +1,20 @@
+  classical
+  have hg : HasGradientAt (fun z : EuclideanSpace ℝ (Fin n) => ∑ i : Fin n, z i * Real.log (z i))
+      (WithLp.toLp 2 (fun i => Real.log (y i) + 1)) y := by
+    have h : HasFDerivAt (fun z : EuclideanSpace ℝ (Fin n) => ∑ i : Fin n, z i * Real.log (z i))
+        (∑ i : Fin n, (Real.log (y i) + 1) • (EuclideanSpace.proj i : EuclideanSpace ℝ (Fin n) →L[ℝ] ℝ)) y := by
+      apply HasFDerivAt.fun_sum
+      intro i _
+      exact (Real.hasDerivAt_mul_log (hy i).ne').comp_hasFDerivAt y (EuclideanSpace.proj i : EuclideanSpace ℝ (Fin n) →L[ℝ] ℝ).hasFDerivAt
+    convert h using 1
+    ext v
+    simp [EuclideanSpace.inner_eq_star_dotProduct, dotProduct, mul_comm]
+  unfold bregmanDivergence
+  rw [dif_pos ⟨hx, hy⟩, hg.gradient]
+  simp only [PiLp.inner_apply, PiLp.sub_apply]
+  rw [← Finset.sum_sub_distrib, ← Finset.sum_sub_distrib]
+  apply Finset.sum_congr rfl
+  intro i _
+  rw [Real.log_div (hx i).ne' (hy i).ne']
+  simp
+  ring

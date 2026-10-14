@@ -1,0 +1,73 @@
+{
+ "problem": "pytest-dev__pytest-7571",
+ "bench": "swe",
+ "condition": "cod",
+ "effort": "low",
+ "model": "claude-haiku-5-5",
+ "batch": "swe_haiku",
+ "dry_run": false,
+ "outcome": "solved",
+ "verify_pass": true,
+ "verify_stage": "ok",
+ "verify_detail": "resolved (run_id cotml-20261014011309-015ff6a1)",
+ "num_turns": 4,
+ "input_tokens": 10,
+ "output_tokens": 1189,
+ "thinking_tokens": 177,
+ "cache_read_tokens": 12631,
+ "cache_creation_tokens": 4909,
+ "usage_source": "result",
+ "total_cost_usd": 0.0013354349999999998,
+ "duration_s": 10.1,
+ "agent_duration_ms": 9394,
+ "lean_compile_count": 3,
+ "search_tactic_uses": 0,
+ "search_tactic_in_final": false,
+ "tool_calls": {
+  "Bash": 3
+ },
+ "proof_chars": 1261,
+ "proof_lines": 27,
+ "statement_prefix_changed": false,
+ "stop_reason": "end_turn",
+ "result_subtype": "success",
+ "terminal_reason": "completed",
+ "is_error": false,
+ "api_error_status": null,
+ "permission_denials": 0,
+ "agent_said_give_up": false,
+ "final_text": "`caplog.set_level()` now restores the handler's level at the end of each test, so the leaked level from `test_foo` no longer shows up in `test_bar`.\n\nThe cause was in `src/_pytest/logging.py`. `set_level` changed the handler's level, but `_finalize` only restored the logger levels. The fix saves the handler's original level the first time `set_level` is called and puts it back in `_finalize`.\n\n`test_change_level_undos_handler_level` now passes, and the full `testing/logging` suite passes (58 tests). I did not commit the change.",
+ "timed_out": false,
+ "docker_rc": 0,
+ "limits": {
+  "max_turns": 50,
+  "max_budget_usd": 2.0,
+  "timeout_min": 25.0
+ },
+ "network": "cotml-egress",
+ "proxy": true,
+ "claude_version": "2.1.296",
+ "model_usage": {
+  "claude-haiku-5-5": {
+   "inputTokens": 10,
+   "outputTokens": 1189,
+   "cacheReadInputTokens": 12631,
+   "cacheCreationInputTokens": 4909,
+   "webSearchRequests": 0,
+   "costUSD": 0.0013354349999999998,
+   "contextWindow": 1000000,
+   "maxOutputTokens": 128000,
+   "thinkingTokens": 177,
+   "canonicalModel": "claude-haiku-5-5",
+   "provider": "firstParty",
+   "costBasis": "list"
+  }
+ },
+ "started_at": "2026-10-14T08:12:58+00:00",
+ "framing": "debug",
+ "patch_files": [
+  "src/_pytest/logging.py"
+ ],
+ "touched_test_files": [],
+ "untracked_files": []
+}

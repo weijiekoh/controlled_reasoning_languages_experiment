@@ -1,0 +1,15 @@
+{
+ "id": "lca",
+ "entry": "lca.rs",
+ "description": "description.md",
+ "main_fn": "lowest_common_ancestor",
+ "editable_regions": {
+  "helpers": "between `// <helpers>` and `// </helpers>`: helper spec fns and exec helpers",
+  "proofs": "between `// <proofs>` and `// </proofs>`: lemmas (proof fns)",
+  "code": "between `// <code>` and `// </code>`: exactly one block `{ ... }`, the body of the function under spec"
+ },
+ "fixed": "Everything outside the three editable regions is fixed: the `use` lines, the <preamble> block (definitions, spec fns, and any exec fns given there), the <spec> block (signature, requires, ensures of the function under test), fn main, and all marker comments. Compared token-wise; comments and whitespace are ignored.",
+ "source": "data/algoveri/algoveri_data/lca/verus_spec.rs",
+ "source_sha256": "534d7f2e30688ba8021c0dd11b2cbcd46e7f16bc916dfcb46d076ea7feaa5f79",
+ "patches": []
+}

@@ -1,0 +1,10 @@
+  have hfix : ∀ a (ha : a ∈ f.rootSet K), ψ t (e ⟨a, ha⟩) = e ⟨a, ha⟩ := by
+    intro a ha
+    have h1 : ψ t (e ⟨a, ha⟩) = e ((Polynomial.Gal.galActionHom f K t) ⟨a, ha⟩) := by
+      simp [ψ, Equiv.permCongrHom]
+    rw [h1]
+    congr 1
+    apply Subtype.ext
+    rw [Polynomial.Gal.galActionHom_restrict]
+    exact ht2 a (IntermediateField.subset_adjoin _ _ (by simp [‹_›]))
+  sorry

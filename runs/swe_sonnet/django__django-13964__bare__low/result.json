@@ -1,0 +1,73 @@
+{
+ "problem": "django__django-13964",
+ "bench": "swe",
+ "condition": "bare",
+ "effort": "low",
+ "model": "claude-sonnet-5-5",
+ "batch": "swe_sonnet",
+ "dry_run": false,
+ "outcome": "solved",
+ "verify_pass": true,
+ "verify_stage": "ok",
+ "verify_detail": "resolved (run_id cotml-20261014011730-f9305463)",
+ "num_turns": 5,
+ "input_tokens": 10,
+ "output_tokens": 577,
+ "thinking_tokens": 0,
+ "cache_read_tokens": 11664,
+ "cache_creation_tokens": 2701,
+ "usage_source": "result",
+ "total_cost_usd": 0.0137089,
+ "duration_s": 8.8,
+ "agent_duration_ms": 8254,
+ "lean_compile_count": 1,
+ "search_tactic_uses": 0,
+ "search_tactic_in_final": false,
+ "tool_calls": {
+  "Bash": 4
+ },
+ "proof_chars": 706,
+ "proof_lines": 13,
+ "statement_prefix_changed": false,
+ "stop_reason": "end_turn",
+ "result_subtype": "success",
+ "terminal_reason": "completed",
+ "is_error": false,
+ "api_error_status": null,
+ "permission_denials": 0,
+ "agent_said_give_up": false,
+ "final_text": "I fixed this in `django/db/models/base.py`. Saving the parent now picks up a related object's primary key even when that key was set after the assignment.\n\n`_prepare_related_fields_for_save` only copied the related object's pk into `product_id` when `product_id` was `None`. With a `CharField` primary key, the unset value is `\"\"`, so it never copied the pk across. I changed that check to treat any of the field's empty values as unset, so `\"\"` now gets replaced by `\"foo\"`.\n\nI ran the `many_to_one` and `basic` test suites, and they pass (94 tests, 2 skipped). I did not run the exact scenario from the issue, and I added no new test.",
+ "timed_out": false,
+ "docker_rc": 0,
+ "limits": {
+  "max_turns": 50,
+  "max_budget_usd": 4.0,
+  "timeout_min": 25.0
+ },
+ "network": "cotml-egress",
+ "proxy": true,
+ "claude_version": "2.1.296",
+ "model_usage": {
+  "claude-sonnet-5-5": {
+   "inputTokens": 10,
+   "outputTokens": 577,
+   "cacheReadInputTokens": 11664,
+   "cacheCreationInputTokens": 2701,
+   "webSearchRequests": 0,
+   "costUSD": 0.0137089,
+   "contextWindow": 1000000,
+   "maxOutputTokens": 128000,
+   "thinkingTokens": 0,
+   "canonicalModel": "claude-sonnet-5-5",
+   "provider": "firstParty",
+   "costBasis": "list"
+  }
+ },
+ "started_at": "2026-10-14T08:17:20+00:00",
+ "framing": "issue",
+ "patch_files": [
+  "django/db/models/base.py"
+ ],
+ "touched_test_files": [],
+ "untracked_files": []
+}

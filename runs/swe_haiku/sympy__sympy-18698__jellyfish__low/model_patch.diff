@@ -1,0 +1,91 @@
+diff --git a/sympy/polys/polytools.py b/sympy/polys/polytools.py
+index c9e77a901f..89a9736c8d 100755
+--- a/sympy/polys/polytools.py
++++ b/sympy/polys/polytools.py
+@@ -5968,6 +5968,28 @@ def _symbolic_factor(expr, opt, method):
+         return expr
+ 
+ 
++def _merge_factors_by_multiplicity(factors):
++    """
++    Multiply together square-free factors having equal multiplicity.
++
++    Factors of multiplicity one are left as they are (issue 7067).
++    """
++    merged, order, result = {}, [], []
++
++    for f, k in factors:
++        if k == 1:
++            result.append((f, k))
++        elif k in merged:
++            merged[k] = merged[k]*f
++        else:
++            merged[k] = f
++            order.append(k)
++
++    result.extend((merged[k], k) for k in order)
++
++    return result
++
++
+ def _generic_factor_list(expr, gens, args, method):
+     """Helper function for :func:`sqf_list` and :func:`factor_list`. """
+     options.allowed_flags(args, ['frac', 'polys'])
+@@ -5995,6 +6017,10 @@ def _generic_factor_list(expr, gens, args, method):
+                     f, _ = _poly_from_expr(f, _opt)
+                     factors[i] = (f, k)
+ 
++        if method == 'sqf':
++            fp = _merge_factors_by_multiplicity(fp)
++            fq = _merge_factors_by_multiplicity(fq)
++
+         fp = _sorted_factors(fp, method)
+         fq = _sorted_factors(fq, method)
+ 
+diff --git a/sympy/polys/sqfreetools.py b/sympy/polys/sqfreetools.py
+index 1783a7744a..d7a2620d3e 100755
+--- a/sympy/polys/sqfreetools.py
++++ b/sympy/polys/sqfreetools.py
+@@ -278,6 +278,24 @@ def dmp_gf_sqf_list(f, u, K, all=False):
+     raise NotImplementedError('multivariate polynomials over finite fields')
+ 
+ 
++def _merge_sqf_factors(result, mul):
++    """
++    Merge square-free factors having the same multiplicity.
++
++    Factors with equal multiplicity are emitted consecutively, so only
++    adjacent entries need to be combined into a single product.
++    """
++    merged = []
++
++    for g, i in result:
++        if merged and merged[-1][1] == i:
++            merged[-1] = (mul(merged[-1][0], g), i)
++        else:
++            merged.append((g, i))
++
++    return merged
++
++
+ def dup_sqf_list(f, K, all=False):
+     """
+     Return square-free decomposition of a polynomial in ``K[x]``.
+@@ -332,7 +350,7 @@ def dup_sqf_list(f, K, all=False):
+ 
+         i += 1
+ 
+-    return coeff, result
++    return coeff, _merge_sqf_factors(result, lambda a, b: dup_mul(a, b, K))
+ 
+ 
+ def dup_sqf_list_include(f, K, all=False):
+@@ -420,7 +438,7 @@ def dmp_sqf_list(f, u, K, all=False):
+ 
+         i += 1
+ 
+-    return coeff, result
++    return coeff, _merge_sqf_factors(result, lambda a, b: dmp_mul(a, b, u, K))
+ 
+ 
+ def dmp_sqf_list_include(f, u, K, all=False):

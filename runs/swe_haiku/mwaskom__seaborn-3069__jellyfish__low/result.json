@@ -1,0 +1,73 @@
+{
+ "problem": "mwaskom__seaborn-3069",
+ "bench": "swe",
+ "condition": "jellyfish",
+ "effort": "low",
+ "model": "claude-haiku-5-5",
+ "batch": "swe_haiku",
+ "dry_run": false,
+ "outcome": "solved",
+ "verify_pass": true,
+ "verify_stage": "ok",
+ "verify_detail": "resolved (run_id cotml-20261014011019-e902ed84)",
+ "num_turns": 9,
+ "input_tokens": 18,
+ "output_tokens": 3699,
+ "thinking_tokens": 1172,
+ "cache_read_tokens": 60074,
+ "cache_creation_tokens": 9146,
+ "usage_source": "result",
+ "total_cost_usd": 0.00359529,
+ "duration_s": 85.6,
+ "agent_duration_ms": 83904,
+ "lean_compile_count": 3,
+ "search_tactic_uses": 0,
+ "search_tactic_in_final": false,
+ "tool_calls": {
+  "Bash": 8
+ },
+ "proof_chars": 1117,
+ "proof_lines": 23,
+ "statement_prefix_changed": false,
+ "stop_reason": "end_turn",
+ "result_subtype": "success",
+ "terminal_reason": "completed",
+ "is_error": false,
+ "api_error_status": null,
+ "permission_denials": 0,
+ "agent_said_give_up": false,
+ "final_text": "Both target tests now pass, and the change adds no regressions in `tests/_core/test_plot.py`.\n\n**Change:** in `Plotter._finalize_figure` (`seaborn/_core/plot.py`), any axis whose scale is a `Nominal` (including inferred ones) now:\n- turns off its grid, and\n- sets its limits to \u00b10.5 around the first and last tick. On the y axis the limits are inverted.\n\nAn explicit `p.limit(...)` still overrides these limits, since it is applied afterwards.\n\n**Test results:**\n- The two target tests pass.\n- `TestScaling` went from 24 failed to 22 failed. The remaining failures are pandas errors that were already there before my change.\n- The full `test_plot.py` went from 76 failed to 74 failed, with no new failures.\n\nI did not commit anything. The change is only in the working tree.",
+ "timed_out": false,
+ "docker_rc": 0,
+ "limits": {
+  "max_turns": 50,
+  "max_budget_usd": 2.0,
+  "timeout_min": 25.0
+ },
+ "network": "cotml-egress",
+ "proxy": true,
+ "claude_version": "2.1.296",
+ "model_usage": {
+  "claude-haiku-5-5": {
+   "inputTokens": 18,
+   "outputTokens": 3699,
+   "cacheReadInputTokens": 60074,
+   "cacheCreationInputTokens": 9146,
+   "webSearchRequests": 0,
+   "costUSD": 0.00359529,
+   "contextWindow": 1000000,
+   "maxOutputTokens": 128000,
+   "thinkingTokens": 1172,
+   "canonicalModel": "claude-haiku-5-5",
+   "provider": "firstParty",
+   "costBasis": "list"
+  }
+ },
+ "started_at": "2026-10-14T08:08:52+00:00",
+ "framing": "debug",
+ "patch_files": [
+  "seaborn/_core/plot.py"
+ ],
+ "touched_test_files": [],
+ "untracked_files": []
+}

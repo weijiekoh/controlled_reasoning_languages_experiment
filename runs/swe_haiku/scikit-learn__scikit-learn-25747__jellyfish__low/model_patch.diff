@@ -1,0 +1,15 @@
+diff --git a/sklearn/utils/_set_output.py b/sklearn/utils/_set_output.py
+index 335773c6a..efc69882a 100755
+--- a/sklearn/utils/_set_output.py
++++ b/sklearn/utils/_set_output.py
+@@ -55,7 +55,9 @@ def _wrap_in_pandas_container(
+     if isinstance(data_to_wrap, pd.DataFrame):
+         if columns is not None:
+             data_to_wrap.columns = columns
+-        if index is not None:
++        # The output may have a different number of samples than the input
++        # (e.g. an aggregation), in which case its own index must be kept.
++        if index is not None and len(index) == data_to_wrap.shape[0]:
+             data_to_wrap.index = index
+         return data_to_wrap
+ 

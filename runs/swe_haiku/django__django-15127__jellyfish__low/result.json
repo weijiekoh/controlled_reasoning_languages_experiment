@@ -1,0 +1,75 @@
+{
+ "problem": "django__django-15127",
+ "bench": "swe",
+ "condition": "jellyfish",
+ "effort": "low",
+ "model": "claude-haiku-5-5",
+ "batch": "swe_haiku",
+ "dry_run": false,
+ "outcome": "solved",
+ "verify_pass": true,
+ "verify_stage": "ok",
+ "verify_detail": "resolved (run_id cotml-20261014000431-cab0fde9)",
+ "num_turns": 7,
+ "input_tokens": 16,
+ "output_tokens": 2360,
+ "thinking_tokens": 495,
+ "cache_read_tokens": 35294,
+ "cache_creation_tokens": 3861,
+ "usage_source": "result",
+ "total_cost_usd": 0.0020171650000000005,
+ "duration_s": 29.4,
+ "agent_duration_ms": 28456,
+ "lean_compile_count": 4,
+ "search_tactic_uses": 0,
+ "search_tactic_in_final": false,
+ "tool_calls": {
+  "Bash": 6
+ },
+ "proof_chars": 585,
+ "proof_lines": 15,
+ "statement_prefix_changed": true,
+ "stop_reason": "end_turn",
+ "result_subtype": "success",
+ "terminal_reason": "completed",
+ "is_error": false,
+ "api_error_status": null,
+ "permission_denials": 0,
+ "agent_said_give_up": false,
+ "final_text": "I fixed the issue: `Message.level_tag` now picks up `MESSAGE_TAGS` changes made with `@override_settings`.\n\nThe cause was that `django/contrib/messages/storage/base.py` computes `LEVEL_TAGS` once at import time, so overriding the setting later had no effect. I added a `setting_changed` receiver in `django/test/signals.py` that recomputes `LEVEL_TAGS` whenever `MESSAGE_TAGS` changes. It's the same pattern Django uses for other settings.\n\nVerification:\n- A standalone script confirmed that inside `override_settings(MESSAGE_TAGS={INFO: 'custom'})` the tag is `'custom'`, and it returns to `'info'` after the override exits.\n- `python runtests.py messages_tests` from the `tests/` directory: 96 tests run, all OK.\n\nI didn't add a regression test, since the rules forbid touching test files. The change is uncommitted in the working tree.",
+ "timed_out": false,
+ "docker_rc": 0,
+ "limits": {
+  "max_turns": 50,
+  "max_budget_usd": 2.0,
+  "timeout_min": 25.0
+ },
+ "network": "cotml-egress",
+ "proxy": true,
+ "claude_version": "2.1.296",
+ "model_usage": {
+  "claude-haiku-5-5": {
+   "inputTokens": 16,
+   "outputTokens": 2360,
+   "cacheReadInputTokens": 35294,
+   "cacheCreationInputTokens": 3861,
+   "webSearchRequests": 0,
+   "costUSD": 0.0020171650000000005,
+   "contextWindow": 1000000,
+   "maxOutputTokens": 128000,
+   "thinkingTokens": 495,
+   "canonicalModel": "claude-haiku-5-5",
+   "provider": "firstParty",
+   "costBasis": "list"
+  }
+ },
+ "started_at": "2026-10-14T07:04:01+00:00",
+ "framing": "issue",
+ "patch_files": [
+  "django/test/signals.py"
+ ],
+ "touched_test_files": [
+  "django/test/signals.py"
+ ],
+ "untracked_files": []
+}

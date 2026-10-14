@@ -1,0 +1,15 @@
+{
+ "id": "maximum_subarray_sum",
+ "entry": "maximum_subarray_sum.rs",
+ "description": "description.md",
+ "main_fn": "max_subarray_sum",
+ "editable_regions": {
+  "helpers": "between `// <helpers>` and `// </helpers>`: helper spec fns and exec helpers",
+  "proofs": "between `// <proofs>` and `// </proofs>`: lemmas (proof fns)",
+  "code": "between `// <code>` and `// </code>`: exactly one block `{ ... }`, the body of the function under spec"
+ },
+ "fixed": "Everything outside the three editable regions is fixed: the `use` lines, the <preamble> block (definitions, spec fns, and any exec fns given there), the <spec> block (signature, requires, ensures of the function under test), fn main, and all marker comments. Compared token-wise; comments and whitespace are ignored.",
+ "source": "data/algoveri/algoveri_data/maximum_subarray_sum/verus_spec.rs",
+ "source_sha256": "c1df037c74b46f67f7424d8ed0a1bf7ac07275f8c7583e6e39f066033704f57b",
+ "patches": []
+}

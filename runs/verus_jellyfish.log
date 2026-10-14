@@ -1,0 +1,22 @@
+isolation check: ok (no .lean files outside /work)
+20 runs, 0 done, 20 to run, parallel 4
+[1/20] discrete_logarithm__jellyfish__low: solved (ok) turns=10 out_tok=6693 cost=0.00510614 32.5s
+[2/20] bracket_matching__jellyfish__low: gave_up (verify) turns=11 out_tok=9035 cost=0.006766615 50.2s
+[3/20] edmond_karp__jellyfish__low: gave_up (verify) turns=3 out_tok=4527 cost=0.003172275 25.9s
+[4/20] integer_exponential__jellyfish__low: solved (ok) turns=6 out_tok=5261 cost=0.00365819 23.2s
+[5/20] bst_zigzag__jellyfish__low: solved (ok) turns=19 out_tok=21981 cost=0.0183621 114.3s
+[6/20] llrbt_flipcolor__jellyfish__low: gave_up (verify) turns=8 out_tok=7815 cost=0.005758235 46.0s
+[7/20] llrbt_delete__jellyfish__low: gave_up (verify) turns=3 out_tok=12266 cost=0.008034295 66.4s
+[8/20] max_matching__jellyfish__low: gave_up (verify) turns=3 out_tok=7736 cost=0.005223455 43.3s
+[9/20] push_relabel__jellyfish__low: gave_up (verify) turns=5 out_tok=5423 cost=0.004036155 30.0s
+[10/20] llrbt_rotateleft__jellyfish__low: solved (ok) turns=20 out_tok=19976 cost=0.01501223 99.0s
+[11/20] ringbuffer_dequeue__jellyfish__low: solved (ok) turns=12 out_tok=5490 cost=0.004466725 28.9s
+[12/20] queue_dequeue__jellyfish__low: solved (ok) turns=17 out_tok=11097 cost=0.009433455 59.7s
+[13/20] ringbuffer_enqueue__jellyfish__low: solved (ok) turns=31 out_tok=29852 cost=0.02820061 146.9s
+[14/20] rod_cutting__jellyfish__low: solved (ok) turns=41 out_tok=34657 cost=0.030759904999999994 163.3s
+[15/20] longest_increasing_subsequence__jellyfish__low: solved (ok) turns=42 out_tok=67741 cost=0.06457061000000001 308.1s
+[16/20] trie_delete__jellyfish__low: gave_up (verify) turns=11 out_tok=12331 cost=0.009049165 63.4s
+[17/20] unionfind_linkroots__jellyfish__low: gave_up (verify) turns=4 out_tok=5400 cost=0.0037714 29.3s
+[18/20] dijkstra__jellyfish__low: solved (ok) turns=20 out_tok=117597 cost=0.26556608000000004 539.2s
+[19/20] unionfind_find__jellyfish__low: solved (ok) turns=22 out_tok=43942 cost=0.036397695 208.4s
+[20/20] topological_sort__jellyfish__low: solved (ok) turns=46 out_tok=94709 cost=0.15288641 450.8s

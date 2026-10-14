@@ -1,0 +1,1 @@
+{"pass": false, "stage": "tests", "detail": "FAIL_TO_PASS 0/1 failing: test_Permutation_subclassing; PASS_TO_PASS 4/8 failing: test_josephus, test_ranking, test_mul", "seconds": 20.5}

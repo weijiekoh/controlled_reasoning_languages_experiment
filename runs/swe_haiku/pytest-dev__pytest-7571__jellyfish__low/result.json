@@ -1,0 +1,73 @@
+{
+ "problem": "pytest-dev__pytest-7571",
+ "bench": "swe",
+ "condition": "jellyfish",
+ "effort": "low",
+ "model": "claude-haiku-5-5",
+ "batch": "swe_haiku",
+ "dry_run": false,
+ "outcome": "solved",
+ "verify_pass": true,
+ "verify_stage": "ok",
+ "verify_detail": "resolved (run_id cotml-20261014011318-8a2b2626)",
+ "num_turns": 4,
+ "input_tokens": 10,
+ "output_tokens": 1335,
+ "thinking_tokens": 107,
+ "cache_read_tokens": 16532,
+ "cache_creation_tokens": 3589,
+ "usage_source": "result",
+ "total_cost_usd": 0.0012824450000000001,
+ "duration_s": 9.0,
+ "agent_duration_ms": 8382,
+ "lean_compile_count": 3,
+ "search_tactic_uses": 0,
+ "search_tactic_in_final": false,
+ "tool_calls": {
+  "Bash": 3
+ },
+ "proof_chars": 1309,
+ "proof_lines": 28,
+ "statement_prefix_changed": false,
+ "stop_reason": "end_turn",
+ "result_subtype": "success",
+ "terminal_reason": "completed",
+ "is_error": false,
+ "api_error_status": null,
+ "permission_denials": 0,
+ "agent_said_give_up": false,
+ "final_text": "The `caplog` fixture now restores the handler's log level at the end of each test, so the issue's example prints `0` for `test_bar` as it did before 6.0.\n\nThe cause was that `set_level` changed the handler's level but never saved the original, so `_finalize` had nothing to restore. In `src/_pytest/logging.py` I made three changes:\n- `LogCaptureFixture.__init__` gains `_initial_handler_level`, initialised to `None`.\n- `set_level` records the handler's original level the first time it is called.\n- `_finalize` restores that handler level and clears it.\n\n`testing/logging/test_fixture.py` passes in full (15 tests), including `test_change_level_undos_handler_level`. I did not run the wider test suite, and I did not commit.",
+ "timed_out": false,
+ "docker_rc": 0,
+ "limits": {
+  "max_turns": 50,
+  "max_budget_usd": 2.0,
+  "timeout_min": 25.0
+ },
+ "network": "cotml-egress",
+ "proxy": true,
+ "claude_version": "2.1.296",
+ "model_usage": {
+  "claude-haiku-5-5": {
+   "inputTokens": 10,
+   "outputTokens": 1335,
+   "cacheReadInputTokens": 16532,
+   "cacheCreationInputTokens": 3589,
+   "webSearchRequests": 0,
+   "costUSD": 0.0012824450000000001,
+   "contextWindow": 1000000,
+   "maxOutputTokens": 128000,
+   "thinkingTokens": 107,
+   "canonicalModel": "claude-haiku-5-5",
+   "provider": "firstParty",
+   "costBasis": "list"
+  }
+ },
+ "started_at": "2026-10-14T08:13:09+00:00",
+ "framing": "debug",
+ "patch_files": [
+  "src/_pytest/logging.py"
+ ],
+ "touched_test_files": [],
+ "untracked_files": []
+}

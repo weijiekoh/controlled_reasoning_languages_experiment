@@ -1,0 +1,73 @@
+{
+ "problem": "sympy__sympy-15875",
+ "bench": "swe",
+ "condition": "bare",
+ "effort": "low",
+ "model": "claude-sonnet-5-5",
+ "batch": "swe_sonnet",
+ "dry_run": false,
+ "outcome": "solved",
+ "verify_pass": true,
+ "verify_stage": "ok",
+ "verify_detail": "resolved (run_id cotml-20261014025633-2f8ebc25)",
+ "num_turns": 6,
+ "input_tokens": 12,
+ "output_tokens": 1136,
+ "thinking_tokens": 294,
+ "cache_read_tokens": 13339,
+ "cache_creation_tokens": 2506,
+ "usage_source": "result",
+ "total_cost_usd": 0.0189829,
+ "duration_s": 18.7,
+ "agent_duration_ms": 18129,
+ "lean_compile_count": 1,
+ "search_tactic_uses": 0,
+ "search_tactic_in_final": false,
+ "tool_calls": {
+  "Bash": 5
+ },
+ "proof_chars": 402,
+ "proof_lines": 12,
+ "statement_prefix_changed": false,
+ "stop_reason": "end_turn",
+ "result_subtype": "success",
+ "terminal_reason": "completed",
+ "is_error": false,
+ "api_error_status": null,
+ "permission_denials": 0,
+ "agent_said_give_up": false,
+ "final_text": "I fixed the wrong `is_zero` answer in `Add._eval_is_zero` in `sympy/core/add.py`. For `-2*I + (1 + I)**2`, `is_zero` now returns `None` instead of `False`.\n\nBoth terms in that expression are purely imaginary: `(1 + I)**2` is `2*I`. The old code summed the real terms, found nothing left, and decided the imaginary parts couldn't cancel. They can, so it now says it doesn't know in that case.\n\nI didn't run the issue's example directly. I did run `test_arit.py` and `test_assumptions.py`, which gave 146 passed and 6 expected failures. I didn't add a test for this case, and I didn't check the matrix rank problem from #15872.",
+ "timed_out": false,
+ "docker_rc": 0,
+ "limits": {
+  "max_turns": 50,
+  "max_budget_usd": 4.0,
+  "timeout_min": 25.0
+ },
+ "network": "cotml-egress",
+ "proxy": true,
+ "claude_version": "2.1.296",
+ "model_usage": {
+  "claude-sonnet-5-5": {
+   "inputTokens": 12,
+   "outputTokens": 1136,
+   "cacheReadInputTokens": 13339,
+   "cacheCreationInputTokens": 2506,
+   "webSearchRequests": 0,
+   "costUSD": 0.0189829,
+   "contextWindow": 1000000,
+   "maxOutputTokens": 128000,
+   "thinkingTokens": 294,
+   "canonicalModel": "claude-sonnet-5-5",
+   "provider": "firstParty",
+   "costBasis": "list"
+  }
+ },
+ "started_at": "2026-10-14T09:56:13+00:00",
+ "framing": "issue",
+ "patch_files": [
+  "sympy/core/add.py"
+ ],
+ "touched_test_files": [],
+ "untracked_files": []
+}

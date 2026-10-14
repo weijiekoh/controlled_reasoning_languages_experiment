@@ -1,0 +1,80 @@
+{"problem": "putnam_2001_b4", "bench": "putnam", "condition": "bare", "effort": "low", "outcome": "solved", "text_lines": 6, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "putnam_2001_b4", "bench": "putnam", "condition": "caveman", "effort": "low", "outcome": "solved", "text_lines": 5, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "putnam_2001_b4", "bench": "putnam", "condition": "cod", "effort": "low", "outcome": "solved", "text_lines": 6, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "putnam_2001_b4", "bench": "putnam", "condition": "sponge", "effort": "low", "outcome": "solved", "text_lines": 15, "tagged_lines": 6, "compliance": 0.4, "tags": {"GOAL": 1, "PLAN": 2, "RESULT": 1, "FACT": 1, "INFER": 1}}
+{"problem": "putnam_2003_a6", "bench": "putnam", "condition": "bare", "effort": "low", "outcome": "solved", "text_lines": 8, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "putnam_2003_a6", "bench": "putnam", "condition": "caveman", "effort": "low", "outcome": "solved", "text_lines": 4, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "putnam_2003_a6", "bench": "putnam", "condition": "cod", "effort": "low", "outcome": "solved", "text_lines": 12, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "putnam_2003_a6", "bench": "putnam", "condition": "sponge", "effort": "low", "outcome": "solved", "text_lines": 11, "tagged_lines": 9, "compliance": 0.8181818181818182, "tags": {"GOAL": 1, "PLAN": 2, "RESULT": 1, "FACT": 1, "DEF": 1, "INFER": 3}}
+{"problem": "putnam_2004_b5", "bench": "putnam", "condition": "bare", "effort": "low", "outcome": "solved", "text_lines": 12, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "putnam_2004_b5", "bench": "putnam", "condition": "caveman", "effort": "low", "outcome": "solved", "text_lines": 6, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "putnam_2004_b5", "bench": "putnam", "condition": "cod", "effort": "low", "outcome": "solved", "text_lines": 9, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "putnam_2004_b5", "bench": "putnam", "condition": "sponge", "effort": "low", "outcome": "solved", "text_lines": 13, "tagged_lines": 6, "compliance": 0.46153846153846156, "tags": {"GOAL": 1, "PLAN": 2, "RESULT": 1, "FACT": 1, "DEF": 1}}
+{"problem": "putnam_2006_b6", "bench": "putnam", "condition": "bare", "effort": "low", "outcome": "solved", "text_lines": 6, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "putnam_2006_b6", "bench": "putnam", "condition": "caveman", "effort": "low", "outcome": "gave_up", "text_lines": 6, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "putnam_2006_b6", "bench": "putnam", "condition": "cod", "effort": "low", "outcome": "solved", "text_lines": 7, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "putnam_2006_b6", "bench": "putnam", "condition": "sponge", "effort": "low", "outcome": "solved", "text_lines": 16, "tagged_lines": 3, "compliance": 0.1875, "tags": {"GOAL": 1, "PLAN": 2}}
+{"problem": "putnam_2007_b5", "bench": "putnam", "condition": "bare", "effort": "low", "outcome": "solved", "text_lines": 4, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "putnam_2007_b5", "bench": "putnam", "condition": "caveman", "effort": "low", "outcome": "solved", "text_lines": 3, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "putnam_2007_b5", "bench": "putnam", "condition": "cod", "effort": "low", "outcome": "solved", "text_lines": 2, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "putnam_2007_b5", "bench": "putnam", "condition": "sponge", "effort": "low", "outcome": "solved", "text_lines": 7, "tagged_lines": 4, "compliance": 0.5714285714285714, "tags": {"GOAL": 1, "PLAN": 1, "RESULT": 1, "FACT": 1}}
+{"problem": "putnam_2008_a5", "bench": "putnam", "condition": "bare", "effort": "low", "outcome": "solved", "text_lines": 7, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "putnam_2008_a5", "bench": "putnam", "condition": "caveman", "effort": "low", "outcome": "solved", "text_lines": 3, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "putnam_2008_a5", "bench": "putnam", "condition": "cod", "effort": "low", "outcome": "solved", "text_lines": 5, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "putnam_2008_a5", "bench": "putnam", "condition": "sponge", "effort": "low", "outcome": "solved", "text_lines": 26, "tagged_lines": 8, "compliance": 0.3076923076923077, "tags": {"GOAL": 2, "DEF": 2, "INFER": 4}}
+{"problem": "putnam_2010_a5", "bench": "putnam", "condition": "bare", "effort": "low", "outcome": "gave_up", "text_lines": 4, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "putnam_2010_a5", "bench": "putnam", "condition": "caveman", "effort": "low", "outcome": "solved", "text_lines": 9, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "putnam_2010_a5", "bench": "putnam", "condition": "cod", "effort": "low", "outcome": "gave_up", "text_lines": 7, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "putnam_2010_a5", "bench": "putnam", "condition": "sponge", "effort": "low", "outcome": "gave_up", "text_lines": 10, "tagged_lines": 9, "compliance": 0.9, "tags": {"GOAL": 1, "PLAN": 1, "RESULT": 3, "FACT": 1, "INFER": 1, "HYP": 1, "CHECK": 1}}
+{"problem": "putnam_2011_a5", "bench": "putnam", "condition": "bare", "effort": "low", "outcome": "gave_up", "text_lines": 9, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "putnam_2011_a5", "bench": "putnam", "condition": "caveman", "effort": "low", "outcome": "gave_up", "text_lines": 6, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "putnam_2011_a5", "bench": "putnam", "condition": "cod", "effort": "low", "outcome": "gave_up", "text_lines": 8, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "putnam_2011_a5", "bench": "putnam", "condition": "sponge", "effort": "low", "outcome": "gave_up", "text_lines": 11, "tagged_lines": 9, "compliance": 0.8181818181818182, "tags": {"GOAL": 1, "PLAN": 1, "FACT": 4, "HYP": 1, "CHECK": 1, "RESULT": 1}}
+{"problem": "putnam_2012_b4", "bench": "putnam", "condition": "bare", "effort": "low", "outcome": "solved", "text_lines": 9, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "putnam_2012_b4", "bench": "putnam", "condition": "caveman", "effort": "low", "outcome": "solved", "text_lines": 5, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "putnam_2012_b4", "bench": "putnam", "condition": "cod", "effort": "low", "outcome": "solved", "text_lines": 7, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "putnam_2012_b4", "bench": "putnam", "condition": "sponge", "effort": "low", "outcome": "solved", "text_lines": 11, "tagged_lines": 4, "compliance": 0.36363636363636365, "tags": {"GOAL": 1, "PLAN": 2, "RESULT": 1}}
+{"problem": "putnam_2012_b5", "bench": "putnam", "condition": "bare", "effort": "low", "outcome": "solved", "text_lines": 4, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "putnam_2012_b5", "bench": "putnam", "condition": "caveman", "effort": "low", "outcome": "solved", "text_lines": 2, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "putnam_2012_b5", "bench": "putnam", "condition": "cod", "effort": "low", "outcome": "solved", "text_lines": 11, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "putnam_2012_b5", "bench": "putnam", "condition": "sponge", "effort": "low", "outcome": "solved", "text_lines": 5, "tagged_lines": 2, "compliance": 0.4, "tags": {"GOAL": 1, "PLAN": 1}}
+{"problem": "putnam_2013_b4", "bench": "putnam", "condition": "bare", "effort": "low", "outcome": "solved", "text_lines": 8, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "putnam_2013_b4", "bench": "putnam", "condition": "caveman", "effort": "low", "outcome": "solved", "text_lines": 6, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "putnam_2013_b4", "bench": "putnam", "condition": "cod", "effort": "low", "outcome": "solved", "text_lines": 5, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "putnam_2013_b4", "bench": "putnam", "condition": "sponge", "effort": "low", "outcome": "solved", "text_lines": 10, "tagged_lines": 2, "compliance": 0.2, "tags": {"GOAL": 1, "PLAN": 1}}
+{"problem": "putnam_2016_b4", "bench": "putnam", "condition": "bare", "effort": "low", "outcome": "gave_up", "text_lines": 8, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "putnam_2016_b4", "bench": "putnam", "condition": "caveman", "effort": "low", "outcome": "gave_up", "text_lines": 2, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "putnam_2016_b4", "bench": "putnam", "condition": "cod", "effort": "low", "outcome": "gave_up", "text_lines": 7, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "putnam_2016_b4", "bench": "putnam", "condition": "sponge", "effort": "low", "outcome": "gave_up", "text_lines": 9, "tagged_lines": 8, "compliance": 0.8888888888888888, "tags": {"GOAL": 1, "PLAN": 1, "RESULT": 2, "FACT": 3, "INFER": 1}}
+{"problem": "putnam_2019_a4", "bench": "putnam", "condition": "bare", "effort": "low", "outcome": "gave_up", "text_lines": 4, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "putnam_2019_a4", "bench": "putnam", "condition": "caveman", "effort": "low", "outcome": "gave_up", "text_lines": 2, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "putnam_2019_a4", "bench": "putnam", "condition": "cod", "effort": "low", "outcome": "gave_up", "text_lines": 6, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "putnam_2019_a4", "bench": "putnam", "condition": "sponge", "effort": "low", "outcome": "gave_up", "text_lines": 9, "tagged_lines": 8, "compliance": 0.8888888888888888, "tags": {"GOAL": 1, "PLAN": 1, "FACT": 2, "HYP": 1, "INFER": 1, "CHECK": 1, "RESULT": 1}}
+{"problem": "putnam_2019_a5", "bench": "putnam", "condition": "bare", "effort": "low", "outcome": "solved", "text_lines": 5, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "putnam_2019_a5", "bench": "putnam", "condition": "caveman", "effort": "low", "outcome": "solved", "text_lines": 2, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "putnam_2019_a5", "bench": "putnam", "condition": "cod", "effort": "low", "outcome": "solved", "text_lines": 15, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "putnam_2019_a5", "bench": "putnam", "condition": "sponge", "effort": "low", "outcome": "solved", "text_lines": 19, "tagged_lines": 3, "compliance": 0.15789473684210525, "tags": {"GOAL": 1, "PLAN": 1, "RESULT": 1}}
+{"problem": "putnam_2021_a6", "bench": "putnam", "condition": "bare", "effort": "low", "outcome": "gave_up", "text_lines": 2, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "putnam_2021_a6", "bench": "putnam", "condition": "caveman", "effort": "low", "outcome": "gave_up", "text_lines": 2, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "putnam_2021_a6", "bench": "putnam", "condition": "cod", "effort": "low", "outcome": "gave_up", "text_lines": 3, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "putnam_2021_a6", "bench": "putnam", "condition": "sponge", "effort": "low", "outcome": "gave_up", "text_lines": 9, "tagged_lines": 8, "compliance": 0.8888888888888888, "tags": {"GOAL": 1, "PLAN": 1, "RESULT": 2, "FACT": 1, "INFER": 1, "HYP": 1, "CHECK": 1}}
+{"problem": "putnam_2021_b5", "bench": "putnam", "condition": "bare", "effort": "low", "outcome": "gave_up", "text_lines": 2, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "putnam_2021_b5", "bench": "putnam", "condition": "caveman", "effort": "low", "outcome": "gave_up", "text_lines": 2, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "putnam_2021_b5", "bench": "putnam", "condition": "cod", "effort": "low", "outcome": "gave_up", "text_lines": 2, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "putnam_2021_b5", "bench": "putnam", "condition": "sponge", "effort": "low", "outcome": "gave_up", "text_lines": 15, "tagged_lines": 9, "compliance": 0.6, "tags": {"PLAN": 2, "FACT": 3, "RESULT": 2, "INFER": 2}}
+{"problem": "putnam_2022_a5", "bench": "putnam", "condition": "bare", "effort": "low", "outcome": "gave_up", "text_lines": 5, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "putnam_2022_a5", "bench": "putnam", "condition": "caveman", "effort": "low", "outcome": "gave_up", "text_lines": 5, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "putnam_2022_a5", "bench": "putnam", "condition": "cod", "effort": "low", "outcome": "gave_up", "text_lines": 5, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "putnam_2022_a5", "bench": "putnam", "condition": "sponge", "effort": "low", "outcome": "gave_up", "text_lines": 11, "tagged_lines": 10, "compliance": 0.9090909090909091, "tags": {"PLAN": 1, "GOAL": 1, "FACT": 2, "INFER": 2, "HYP": 1, "CHECK": 1, "RESULT": 2}}
+{"problem": "putnam_2024_a4", "bench": "putnam", "condition": "bare", "effort": "low", "outcome": "gave_up", "text_lines": 9, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "putnam_2024_a4", "bench": "putnam", "condition": "caveman", "effort": "low", "outcome": "gave_up", "text_lines": 6, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "putnam_2024_a4", "bench": "putnam", "condition": "cod", "effort": "low", "outcome": "solved", "text_lines": 15, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "putnam_2024_a4", "bench": "putnam", "condition": "sponge", "effort": "low", "outcome": "gave_up", "text_lines": 11, "tagged_lines": 10, "compliance": 0.9090909090909091, "tags": {"PLAN": 1, "FACT": 5, "INFER": 2, "HYP": 1, "RESULT": 1}}
+{"problem": "putnam_2025_a5", "bench": "putnam", "condition": "bare", "effort": "low", "outcome": "gave_up", "text_lines": 3, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "putnam_2025_a5", "bench": "putnam", "condition": "caveman", "effort": "low", "outcome": "gave_up", "text_lines": 2, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "putnam_2025_a5", "bench": "putnam", "condition": "cod", "effort": "low", "outcome": "gave_up", "text_lines": 6, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "putnam_2025_a5", "bench": "putnam", "condition": "sponge", "effort": "low", "outcome": "gave_up", "text_lines": 10, "tagged_lines": 9, "compliance": 0.9, "tags": {"GOAL": 1, "PLAN": 1, "RESULT": 2, "FACT": 2, "INFER": 1, "HYP": 1, "CHECK": 1}}
+{"problem": "putnam_2025_b4", "bench": "putnam", "condition": "bare", "effort": "low", "outcome": "gave_up", "text_lines": 7, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "putnam_2025_b4", "bench": "putnam", "condition": "caveman", "effort": "low", "outcome": "gave_up", "text_lines": 2, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "putnam_2025_b4", "bench": "putnam", "condition": "cod", "effort": "low", "outcome": "gave_up", "text_lines": 8, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "putnam_2025_b4", "bench": "putnam", "condition": "sponge", "effort": "low", "outcome": "gave_up", "text_lines": 8, "tagged_lines": 7, "compliance": 0.875, "tags": {"PLAN": 1, "FACT": 3, "HYP": 1, "CHECK": 1, "RESULT": 1}}

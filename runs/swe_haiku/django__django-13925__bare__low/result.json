@@ -1,0 +1,73 @@
+{
+ "problem": "django__django-13925",
+ "bench": "swe",
+ "condition": "bare",
+ "effort": "low",
+ "model": "claude-haiku-5-5",
+ "batch": "swe_haiku",
+ "dry_run": false,
+ "outcome": "solved",
+ "verify_pass": true,
+ "verify_stage": "ok",
+ "verify_detail": "resolved (run_id cotml-20261013235918-8799da37)",
+ "num_turns": 8,
+ "input_tokens": 18,
+ "output_tokens": 3111,
+ "thinking_tokens": 1216,
+ "cache_read_tokens": 44168,
+ "cache_creation_tokens": 8487,
+ "usage_source": "result",
+ "total_cost_usd": 0.003059855,
+ "duration_s": 34.3,
+ "agent_duration_ms": 28394,
+ "lean_compile_count": 5,
+ "search_tactic_uses": 0,
+ "search_tactic_in_final": false,
+ "tool_calls": {
+  "Bash": 7
+ },
+ "proof_chars": 550,
+ "proof_lines": 12,
+ "statement_prefix_changed": false,
+ "stop_reason": "end_turn",
+ "result_subtype": "success",
+ "terminal_reason": "completed",
+ "is_error": false,
+ "api_error_status": null,
+ "permission_denials": 0,
+ "agent_said_give_up": false,
+ "final_text": "I fixed the false `models.W042` warning for models that inherit their primary key from a parent model. The related test suites (`model_inheritance`, `model_inheritance_regress`, `check_framework`) pass: 242 tests, OK.\n\n**Cause:** When a child model inherits from a concrete parent and doesn't declare its own primary key, Django promotes the auto-generated parent link (a `OneToOneField`) to be the primary key. That field is marked `auto_created=True`, so `_check_default_pk` treated it as an auto-created primary key and warned.\n\n**Fix:** In `django/db/models/base.py`, `_check_default_pk` now skips the warning when the primary key is a parent link:\n\n```python\nnot (cls._meta.pk.remote_field and cls._meta.pk.remote_field.parent_link) and\n```\n\nModels that genuinely get an auto-created `id` still receive W042. The change is uncommitted in the working tree. I didn't add a regression test, since the rules bar adding test files. I also didn't run the issue's exact project; my check was a small standalone model pair, which showed the child's primary key is no longer flagged.",
+ "timed_out": false,
+ "docker_rc": 0,
+ "limits": {
+  "max_turns": 50,
+  "max_budget_usd": 2.0,
+  "timeout_min": 25.0
+ },
+ "network": "cotml-egress",
+ "proxy": true,
+ "claude_version": "2.1.296",
+ "model_usage": {
+  "claude-haiku-5-5": {
+   "inputTokens": 18,
+   "outputTokens": 3111,
+   "cacheReadInputTokens": 44168,
+   "cacheCreationInputTokens": 8487,
+   "webSearchRequests": 0,
+   "costUSD": 0.003059855,
+   "contextWindow": 1000000,
+   "maxOutputTokens": 128000,
+   "thinkingTokens": 1216,
+   "canonicalModel": "claude-haiku-5-5",
+   "provider": "firstParty",
+   "costBasis": "list"
+  }
+ },
+ "started_at": "2026-10-14T06:58:42+00:00",
+ "framing": "issue",
+ "patch_files": [
+  "django/db/models/base.py"
+ ],
+ "touched_test_files": [],
+ "untracked_files": []
+}

@@ -1,0 +1,73 @@
+{
+ "problem": "django__django-13033",
+ "bench": "swe",
+ "condition": "jellyfish",
+ "effort": "low",
+ "model": "claude-haiku-5-5",
+ "batch": "swe_haiku",
+ "dry_run": false,
+ "outcome": "solved",
+ "verify_pass": true,
+ "verify_stage": "ok",
+ "verify_detail": "resolved (run_id cotml-20261014000252-a1ff09bd)",
+ "num_turns": 6,
+ "input_tokens": 14,
+ "output_tokens": 2171,
+ "thinking_tokens": 530,
+ "cache_read_tokens": 38097,
+ "cache_creation_tokens": 5452,
+ "usage_source": "result",
+ "total_cost_usd": 0.00214937,
+ "duration_s": 22.1,
+ "agent_duration_ms": 21055,
+ "lean_compile_count": 3,
+ "search_tactic_uses": 0,
+ "search_tactic_in_final": false,
+ "tool_calls": {
+  "Bash": 5
+ },
+ "proof_chars": 885,
+ "proof_lines": 13,
+ "statement_prefix_changed": false,
+ "stop_reason": "end_turn",
+ "result_subtype": "success",
+ "terminal_reason": "completed",
+ "is_error": false,
+ "api_error_status": null,
+ "permission_denials": 0,
+ "agent_said_give_up": false,
+ "final_text": "The fix is in `django/db/models/sql/compiler.py`, in `find_ordering_name`. The ordering suites pass (590 tests, OK).\n\n**Cause:** when ordering by a relation's `_id` attname through a path (e.g. `record__root_id`), the check that decides whether to fall back to the related model's default `Meta.ordering` compared the attname against the full name `record__root_id`. That never matched, so the compiler appended `OneModel`'s `-id` ordering and an extra self-join. That explains both the spurious DESC and the second `LEFT OUTER JOIN`.\n\n**Fix:** compare against the last path piece, `pieces[-1]`, instead of the full `name`:\n\n```python\nif field.is_relation and opts.ordering and getattr(field, 'attname', None) != pieces[-1] and name != 'pk':\n```\n\n**Verified:** with a self-referencing `OneModel.root` and `TwoModel.record`, `order_by(\"record__root_id\")` now produces a single INNER JOIN with `ORDER BY \"x_onemodel\".\"root_id\" ASC`, and `order_by(\"-record__root_id\")` gives `DESC` on the same column. The `-id` default ordering is no longer applied.\n\nI did not add a regression test, since the rules bar changes to test files. Results are from a scratch script (`/tmp/t.py`) and the existing suites, not a dedicated test for this case.",
+ "timed_out": false,
+ "docker_rc": 0,
+ "limits": {
+  "max_turns": 50,
+  "max_budget_usd": 2.0,
+  "timeout_min": 25.0
+ },
+ "network": "cotml-egress",
+ "proxy": true,
+ "claude_version": "2.1.296",
+ "model_usage": {
+  "claude-haiku-5-5": {
+   "inputTokens": 14,
+   "outputTokens": 2171,
+   "cacheReadInputTokens": 38097,
+   "cacheCreationInputTokens": 5452,
+   "webSearchRequests": 0,
+   "costUSD": 0.00214937,
+   "contextWindow": 1000000,
+   "maxOutputTokens": 128000,
+   "thinkingTokens": 530,
+   "canonicalModel": "claude-haiku-5-5",
+   "provider": "firstParty",
+   "costBasis": "list"
+  }
+ },
+ "started_at": "2026-10-14T07:02:28+00:00",
+ "framing": "issue",
+ "patch_files": [
+  "django/db/models/sql/compiler.py"
+ ],
+ "touched_test_files": [],
+ "untracked_files": []
+}

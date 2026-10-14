@@ -1,0 +1,15 @@
+{
+ "id": "binary_search",
+ "entry": "binary_search.rs",
+ "description": "description.md",
+ "main_fn": "binary_search_lower_bound",
+ "editable_regions": {
+  "helpers": "between `// <helpers>` and `// </helpers>`: helper spec fns and exec helpers",
+  "proofs": "between `// <proofs>` and `// </proofs>`: lemmas (proof fns)",
+  "code": "between `// <code>` and `// </code>`: exactly one block `{ ... }`, the body of the function under spec"
+ },
+ "fixed": "Everything outside the three editable regions is fixed: the `use` lines, the <preamble> block (definitions, spec fns, and any exec fns given there), the <spec> block (signature, requires, ensures of the function under test), fn main, and all marker comments. Compared token-wise; comments and whitespace are ignored.",
+ "source": "data/algoveri/algoveri_data/binary_search/verus_spec.rs",
+ "source_sha256": "a147c7acf493678d3643db96fc9df8e7540e9b254e9a3e33c37c66f3f7658f51",
+ "patches": []
+}

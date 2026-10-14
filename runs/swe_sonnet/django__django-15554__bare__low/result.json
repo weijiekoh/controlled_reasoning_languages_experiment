@@ -1,0 +1,73 @@
+{
+ "problem": "django__django-15554",
+ "bench": "swe",
+ "condition": "bare",
+ "effort": "low",
+ "model": "claude-sonnet-5-5",
+ "batch": "swe_sonnet",
+ "dry_run": false,
+ "outcome": "solved",
+ "verify_pass": true,
+ "verify_stage": "ok",
+ "verify_detail": "resolved (run_id cotml-20261014012327-0e5c3b73)",
+ "num_turns": 13,
+ "input_tokens": 26,
+ "output_tokens": 3934,
+ "thinking_tokens": 2042,
+ "cache_read_tokens": 89110,
+ "cache_creation_tokens": 13426,
+ "usage_source": "result",
+ "total_cost_usd": 0.081868,
+ "duration_s": 45.7,
+ "agent_duration_ms": 45083,
+ "lean_compile_count": 5,
+ "search_tactic_uses": 0,
+ "search_tactic_in_final": false,
+ "tool_calls": {
+  "Bash": 12
+ },
+ "proof_chars": 665,
+ "proof_lines": 17,
+ "statement_prefix_changed": false,
+ "stop_reason": "end_turn",
+ "result_subtype": "success",
+ "terminal_reason": "completed",
+ "is_error": false,
+ "api_error_status": null,
+ "permission_denials": 0,
+ "agent_said_give_up": false,
+ "final_text": "Multiple `FilteredRelation`s on the same relation now each get their own JOIN. All 43 tests in `filtered_relation` pass (one skipped), including `test_multiple`. I ran only that app's tests, not the wider Django suite.\n\nThe cause was in `Query.join()` in `django/db/models/sql/query.py`. It reused any existing join whose table, parent and join field matched, and it ignored the filtered relation. So the second `FilteredRelation` on `myrelation__nested` silently reused the first one's join.\n\nI changed it so a join that carries a `FilteredRelation` is only reused when the filtered relation matches too. Joins without one still use the old lenient comparison. I did not change `Join.equals()` itself.\n\nI first tried making `Join.equals()` strict, but that broke 24 tests. The conditions inside a `FilteredRelation` (e.g. `reservation__borrower=...`) build their joins with no filtered relation attached. They rely on the lenient match to land on the filtered join.\n\nThe lenient path still picks the most recently created matching alias. With several filtered relations on the same relation, a condition's own joins could in principle bind to the wrong one. The existing tests don't hit this, and I didn't test that case.",
+ "timed_out": false,
+ "docker_rc": 0,
+ "limits": {
+  "max_turns": 50,
+  "max_budget_usd": 4.0,
+  "timeout_min": 25.0
+ },
+ "network": "cotml-egress",
+ "proxy": true,
+ "claude_version": "2.1.296",
+ "model_usage": {
+  "claude-sonnet-5-5": {
+   "inputTokens": 26,
+   "outputTokens": 3934,
+   "cacheReadInputTokens": 89110,
+   "cacheCreationInputTokens": 13426,
+   "webSearchRequests": 0,
+   "costUSD": 0.081868,
+   "contextWindow": 1000000,
+   "maxOutputTokens": 128000,
+   "thinkingTokens": 2042,
+   "canonicalModel": "claude-sonnet-5-5",
+   "provider": "firstParty",
+   "costBasis": "list"
+  }
+ },
+ "started_at": "2026-10-14T08:22:40+00:00",
+ "framing": "debug",
+ "patch_files": [
+  "django/db/models/sql/query.py"
+ ],
+ "touched_test_files": [],
+ "untracked_files": []
+}

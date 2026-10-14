@@ -1,0 +1,1 @@
+{"time": "2026-10-13T20:31:57", "argv": ["--effort", "low", "--max-turns", "60", "--max-budget-usd", "3", "--timeout-min", "30", "--parallel", "3", "--bench", "verus", "--problems", "problems/probe_verus.txt", "--condition", "bare", "--model", "claude-sonnet-5-5", "--out", "runs/probe_verus_sonnet/"], "model": "claude-sonnet-5-5"}

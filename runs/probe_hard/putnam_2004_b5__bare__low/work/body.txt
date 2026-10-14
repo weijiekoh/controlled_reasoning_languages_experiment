@@ -1,0 +1,42 @@
+  by
+  set f : ℝ → ℝ := fun t => Real.log (1 + t) with hf
+  set F : ℝ → ℝ := fun t => (1 + t) * Real.log (1 + t) - t with hF
+  have hd : ∀ t : ℝ, 0 ≤ t → HasDerivAt F (f t) t := by
+    intro t ht
+    have h1 : (1 + t) ≠ 0 := by positivity
+    have := (((hasDerivAt_id t).const_add 1).mul (((hasDerivAt_id t).const_add 1).log h1)).sub (hasDerivAt_id t)
+    convert this using 1
+    field_simp
+    ring
+  have fmono : ∀ a b : ℝ, 0 ≤ a → a ≤ b → f a ≤ f b := by
+    intro a b ha hab
+    exact Real.log_le_log (by linarith) (by linarith)
+  have hA : ∀ a b : ℝ, 0 ≤ a → a ≤ b → f a * (b - a) ≤ F b - F a ∧ F b - F a ≤ f b * (b - a) := by
+    intro a b ha hab
+    have hint : ∫ t in a..b, f t = F b - F a :=
+      intervalIntegral.integral_eq_sub_of_hasDerivAt
+        (fun t ht => hd t (by rw [Set.uIcc_of_le hab] at ht; linarith [ht.1]))
+        (ContinuousOn.intervalIntegrable (by
+          apply ContinuousOn.log (by fun_prop)
+          intro t ht
+          rw [Set.uIcc_of_le hab] at ht
+          linarith [ht.1]))
+    have hc : ContinuousOn f (Set.Icc a b) := by
+      apply ContinuousOn.log (by fun_prop)
+      intro t ht; linarith [ht.1]
+    have hi : IntervalIntegrable f MeasureTheory.volume a b :=
+      (hc.mono (by rw [Set.uIcc_of_le hab])).intervalIntegrable
+    constructor
+    · rw [← hint]
+      have := intervalIntegral.integral_mono_on hab (intervalIntegrable_const (c := f a)) hi
+        (fun t ht => fmono a t ha ht.1)
+      simpa [mul_comm] using this
+    · rw [← hint]
+      have := intervalIntegral.integral_mono_on hab hi (intervalIntegrable_const (c := f b))
+        (fun t ht => fmono t b (by linarith [ht.1]) ht.2)
+      simpa [mul_comm] using this
+  have F0 : F 0 = 0 := by simp [hF]
+  have f0 : f 0 = 0 := by simp [hf]
+  have F1 : F 1 = 2 * Real.log 2 - 1 := by
+    simp only [hF]; norm_num
+  have f1 : f 1 = Real.log 2 := by simp [hf]; norm_num

@@ -1,0 +1,16 @@
+import Mathlib
+open Polynomial
+#check @Equiv.Perm.card_support_eq_two
+#check @Equiv.Perm.two_le_card_support_of_ne_one
+#check @Equiv.Perm.surjective_of_isSwap_of_isPretransitive
+#check @Equiv.Perm.closure_of_isSwap_of_isPretransitive
+#check @MulAction.IsPretransitive.of_compHom
+#check @MulAction.IsPreprimitive.of_surjective
+#check @Finset.card_eq_three
+#check @Finset.card_compl
+#check @IsSplittingField.adjoin_rootSet
+#check @IsSplittingField.splits
+#check @Polynomial.Gal.restrict
+#check @Polynomial.Gal.galAction_isPretransitive
+#check @MulAction.IsPretransitive
+#check @Equiv.Perm.IsSwap.isCycle

@@ -1,0 +1,15 @@
+{
+ "id": "bst_zigzig",
+ "entry": "bst_zigzig.rs",
+ "description": "description.md",
+ "main_fn": "zig_zig",
+ "editable_regions": {
+  "helpers": "between `// <helpers>` and `// </helpers>`: helper spec fns and exec helpers",
+  "proofs": "between `// <proofs>` and `// </proofs>`: lemmas (proof fns)",
+  "code": "between `// <code>` and `// </code>`: exactly one block `{ ... }`, the body of the function under spec"
+ },
+ "fixed": "Everything outside the three editable regions is fixed: the `use` lines, the <preamble> block (definitions, spec fns, and any exec fns given there), the <spec> block (signature, requires, ensures of the function under test), fn main, and all marker comments. Compared token-wise; comments and whitespace are ignored.",
+ "source": "data/algoveri/algoveri_data/bst_zigzig/verus_spec.rs",
+ "source_sha256": "226c297552f7108d2cf756a2c8ac84c5c9a52a69b724b9818525c1f964774a94",
+ "patches": []
+}

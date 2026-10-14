@@ -1,0 +1,73 @@
+{
+ "problem": "pylint-dev__pylint-6528",
+ "bench": "swe",
+ "condition": "jellyfish",
+ "effort": "low",
+ "model": "claude-haiku-5-5",
+ "batch": "swe_haiku",
+ "dry_run": false,
+ "outcome": "solved",
+ "verify_pass": true,
+ "verify_stage": "ok",
+ "verify_detail": "resolved (run_id cotml-20261014001058-954f6e05)",
+ "num_turns": 8,
+ "input_tokens": 18,
+ "output_tokens": 4400,
+ "thinking_tokens": 1552,
+ "cache_read_tokens": 64997,
+ "cache_creation_tokens": 10617,
+ "usage_source": "result",
+ "total_cost_usd": 0.004178894999999999,
+ "duration_s": 97.3,
+ "agent_duration_ms": 91041,
+ "lean_compile_count": 3,
+ "search_tactic_uses": 0,
+ "search_tactic_in_final": false,
+ "tool_calls": {
+  "Bash": 7
+ },
+ "proof_chars": 2375,
+ "proof_lines": 51,
+ "statement_prefix_changed": false,
+ "stop_reason": "end_turn",
+ "result_subtype": "success",
+ "terminal_reason": "completed",
+ "is_error": false,
+ "api_error_status": null,
+ "permission_denials": 0,
+ "agent_said_give_up": false,
+ "final_text": "DONE, with one caveat below.\n\n**Fix:** `_discover_files` in `pylint/lint/pylinter.py` now applies `ignore`, `ignore_patterns` and `ignore_paths` while walking directories in recursive mode. Ignored sub-directories are pruned from the walk, and ignored files are skipped. `ignore_paths` is matched against the normalised path, so `./.a` matches `^\\.a`.\n\n**Verified** on the issue's reproduction (`.a/foo.py` and `bar.py`):\n- `--ignore=.a`, `--ignore-paths=.a` and `--ignore-patterns=^\\.a` each now skip `.a/foo.py`. Before the fix, all three still reported it.\n- `tests/lint`, `tests/test_self.py` and `tests/test_check_parallel.py`: 219 passed, 2 failed. Both failures are in `test_self.py::TestCallbackOptions` (`test_generate_toml_config` and `test_generate_toml_config_disable_symbolic_names`). I confirmed `test_generate_toml_config` also fails with my change stashed. I did not check the second one against the stashed tree.\n\n**Caveat:** the issue's first command, with no ignore flags, still checks `.a/foo.py`. That is because this version's default `ignore-patterns` is `^\\.#`, which matches emacs lock files, not all dot-directories. The issue expects the default to be `^\\.`. I left the default unchanged because it is a behaviour change beyond the ignore-handling bug. Say if you want it changed.\n\nI did not commit. The changes are in the working tree.",
+ "timed_out": false,
+ "docker_rc": 0,
+ "limits": {
+  "max_turns": 50,
+  "max_budget_usd": 2.0,
+  "timeout_min": 25.0
+ },
+ "network": "cotml-egress",
+ "proxy": true,
+ "claude_version": "2.1.296",
+ "model_usage": {
+  "claude-haiku-5-5": {
+   "inputTokens": 18,
+   "outputTokens": 4400,
+   "cacheReadInputTokens": 64997,
+   "cacheCreationInputTokens": 10617,
+   "webSearchRequests": 0,
+   "costUSD": 0.004178894999999999,
+   "contextWindow": 1000000,
+   "maxOutputTokens": 128000,
+   "thinkingTokens": 1552,
+   "canonicalModel": "claude-haiku-5-5",
+   "provider": "firstParty",
+   "costBasis": "list"
+  }
+ },
+ "started_at": "2026-10-14T07:09:20+00:00",
+ "framing": "issue",
+ "patch_files": [
+  "pylint/lint/pylinter.py"
+ ],
+ "touched_test_files": [],
+ "untracked_files": []
+}

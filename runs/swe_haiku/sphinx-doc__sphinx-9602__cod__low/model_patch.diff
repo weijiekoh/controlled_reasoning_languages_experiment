@@ -1,0 +1,20 @@
+diff --git a/sphinx/domains/python.py b/sphinx/domains/python.py
+index 9875a9f4b..24b1b961d 100644
+--- a/sphinx/domains/python.py
++++ b/sphinx/domains/python.py
+@@ -122,8 +122,14 @@ def _parse_annotation(annotation: str, env: BuildEnvironment = None) -> List[Nod
+         elif isinstance(node, ast.Constant):  # type: ignore
+             if node.value is Ellipsis:
+                 return [addnodes.desc_sig_punctuation('', "...")]
++            elif isinstance(node.value, str):
++                return [addnodes.desc_sig_literal_string('', repr(node.value))]
++            elif isinstance(node.value, bool):
++                return [addnodes.desc_sig_keyword('', repr(node.value))]
++            elif isinstance(node.value, (int, float, complex)):
++                return [addnodes.desc_sig_literal_number('', repr(node.value))]
+             else:
+-                return [nodes.Text(node.value)]
++                return [nodes.Text(repr(node.value))]
+         elif isinstance(node, ast.Expr):
+             return unparse(node.value)
+         elif isinstance(node, ast.Index):

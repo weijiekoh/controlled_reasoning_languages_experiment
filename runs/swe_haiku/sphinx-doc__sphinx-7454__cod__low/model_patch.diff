@@ -1,0 +1,22 @@
+diff --git a/sphinx/domains/python.py b/sphinx/domains/python.py
+index 893bb0a22..680726429 100644
+--- a/sphinx/domains/python.py
++++ b/sphinx/domains/python.py
+@@ -31,6 +31,7 @@ from sphinx.domains import Domain, ObjType, Index, IndexEntry
+ from sphinx.environment import BuildEnvironment
+ from sphinx.locale import _, __
+ from sphinx.pycode.ast import ast, parse as ast_parse
++from sphinx.pycode.ast import unparse as ast_unparse
+ from sphinx.roles import XRefRole
+ from sphinx.util import logging
+ from sphinx.util.docfields import Field, GroupedField, TypedField
+@@ -93,6 +94,9 @@ def _parse_annotation(annotation: str) -> List[Node]:
+             return sum((unparse(e) for e in node.body), [])
+         elif isinstance(node, ast.Name):
+             return [nodes.Text(node.id)]
++        elif (isinstance(node, (ast.NameConstant, ast.Constant)) and  # type: ignore
++              (node.value is None or node.value is Ellipsis)):  # type: ignore
++            return [nodes.Text(ast_unparse(node))]
+         elif isinstance(node, ast.Subscript):
+             result = unparse(node.value)
+             result.append(addnodes.desc_sig_punctuation('', '['))

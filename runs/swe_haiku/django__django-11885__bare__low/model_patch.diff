@@ -1,0 +1,75 @@
+diff --git a/django/db/models/deletion.py b/django/db/models/deletion.py
+index ae82d26340..521199a5f9 100644
+--- a/django/db/models/deletion.py
++++ b/django/db/models/deletion.py
+@@ -70,6 +70,9 @@ class Collector:
+         # fast_deletes is a list of queryset-likes that can be deleted without
+         # fetching the objects into memory.
+         self.fast_deletes = []
++        # The related field through which each fast-delete queryset was
++        # collected (or None), keyed by the position in self.fast_deletes.
++        self._fast_delete_fields = []
+ 
+         # Tracks deletion-order dependency for databases without transactions
+         # or ability to defer constraint checks. Only concrete model classes
+@@ -123,6 +126,33 @@ class Collector:
+             signals.post_delete.has_listeners(model)
+         )
+ 
++    def _add_fast_delete(self, qs, from_field=None):
++        self.fast_deletes.append(qs)
++        self._fast_delete_fields.append(from_field)
++
++    def _combined_fast_deletes(self):
++        """
++        Combine fast-delete querysets targeting the same model into as few
++        querysets as possible, using OR, so fewer DELETE queries are issued.
++        Querysets collected through the same related field (e.g. batches of
++        the same foreign key) are kept separate, as they are already batched.
++        """
++        groups = {}  # model -> list of [fields_seen, queryset]
++        for qs, field in zip(self.fast_deletes, self._fast_delete_fields):
++            buckets = groups.setdefault(qs.model, [])
++            bucket = None
++            if field is not None:
++                for candidate in buckets:
++                    if field not in candidate[0]:
++                        bucket = candidate
++                        break
++            if bucket is None:
++                buckets.append([{field}, qs])
++            else:
++                bucket[0].add(field)
++                bucket[1] = bucket[1] | qs
++        return [bucket[1] for buckets in groups.values() for bucket in buckets]
++
+     def can_fast_delete(self, objs, from_field=None):
+         """
+         Determine if the objects in the given queryset-like or single object
+@@ -191,7 +221,7 @@ class Collector:
+         If 'keep_parents' is True, data of parent model's will be not deleted.
+         """
+         if self.can_fast_delete(objs):
+-            self.fast_deletes.append(objs)
++            self._add_fast_delete(objs)
+             return
+         new_objs = self.add(objs, source, nullable,
+                             reverse_dependency=reverse_dependency)
+@@ -225,7 +255,7 @@ class Collector:
+                 for batch in batches:
+                     sub_objs = self.related_objects(related, batch)
+                     if self.can_fast_delete(sub_objs, from_field=field):
+-                        self.fast_deletes.append(sub_objs)
++                        self._add_fast_delete(sub_objs, from_field=field)
+                     else:
+                         related_model = related.related_model
+                         # Non-referenced fields can be deferred if no signal
+@@ -310,7 +340,7 @@ class Collector:
+                     )
+ 
+             # fast deletes
+-            for qs in self.fast_deletes:
++            for qs in self._combined_fast_deletes():
+                 count = qs._raw_delete(using=self.using)
+                 deleted_counter[qs.model._meta.label] += count
+ 

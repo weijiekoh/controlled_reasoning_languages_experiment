@@ -1,0 +1,238 @@
+import Mathlib
+
+-- Note: uses (ℕ → ℕ) instead of (Equiv.Perm (Fin n))
+noncomputable abbrev putnam_2006_a4_solution : ℕ → ℝ := (fun n : ℕ => (n + 1) / 3)
+/--
+Let $S=\{1,2,\dots,n\}$ for some integer $n>1$. Say a permutation $\pi$ of $S$ has a \emph{local maximum} at $k \in S$ if
+\begin{enumerate}
+\item[(i)] $\pi(k)>\pi(k+1)$ for $k=1$;
+\item[(ii)] $\pi(k-1)<\pi(k)$ and $\pi(k)>\pi(k+1)$ for $1< k< n$;
+\item[(iii)] $\pi(k-1)<\pi(k)$ for $k=n$.
+\end{enumerate}
+(For example, if $n=5$ and $\pi$ takes values at $1,2,3,4,5$ of $2,1,4,5,3$, then $\pi$ has a local maximum of 2 at $k=1$, and a local maximum of 5 at $k=4$.) What is the average number of local maxima of a permutation of $S$, averaging over all permutations of $S$?
+-/
+theorem putnam_2006_a4
+(n : ℕ)
+(pnat : Equiv.Perm (Fin n) → (ℕ → ℕ))
+(pcount : Equiv.Perm (Fin n) → ℕ)
+(ngt1 : n > 1)
+(hpnat : ∀ p : Equiv.Perm (Fin n), ∀ k : Fin n, (pnat p) k = p k)
+(hpcount : ∀ p : Equiv.Perm (Fin n), pcount p = {k : Fin n | (k.1 = 0 ∨ (pnat p) (k - 1) < (pnat p) k) ∧ (k = n - 1 ∨ (pnat p) k > (pnat p) (k + 1))}.encard)
+: (∑ p : Equiv.Perm (Fin n), pcount p) / {p : Equiv.Perm (Fin n) | true}.ncard = putnam_2006_a4_solution n := by
+  classical
+  set N := (Finset.univ : Finset (Equiv.Perm (Fin n))).card with hN
+  obtain ⟨Pr, hPr⟩ : ∃ Pr : Equiv.Perm (Fin n) → Fin n → Prop,
+      ∀ p k, Pr p k ↔ ((k.1 = 0 ∨ (pnat p) (k.1 - 1) < (pnat p) k.1) ∧
+        (k.1 = n - 1 ∨ (pnat p) k.1 > (pnat p) (k.1 + 1))) :=
+    ⟨fun p k => (k.1 = 0 ∨ (pnat p) (k.1 - 1) < (pnat p) k.1) ∧
+        (k.1 = n - 1 ∨ (pnat p) k.1 > (pnat p) (k.1 + 1)), fun _ _ => Iff.rfl⟩
+  have hf : ∀ (p : Equiv.Perm (Fin n)) (j : ℕ) (hj : j < n), pnat p j = (p ⟨j, hj⟩).val :=
+    fun p j hj => hpnat p ⟨j, hj⟩
+  have hcount : ∀ p, pcount p = (Finset.univ.filter (fun k : Fin n => Pr p k)).card := by
+    intro p
+    have h1 := hpcount p
+    have h2 : ∀ k : Fin n, ((k.1 = 0 ∨ (pnat p) (k.1 - 1) < (pnat p) k.1) ∧
+        (k.1 = n - 1 ∨ (pnat p) k.1 > (pnat p) (k.1 + 1))) ↔ Pr p k := fun k => (hPr p k).symm
+    simp only [h2] at h1
+    rw [show {k : Fin n | Pr p k} = ↑(Finset.univ.filter (fun k : Fin n => Pr p k)) from by
+      ext k; simp, Set.encard_coe_eq_coe_finsetCard] at h1
+    exact_mod_cast h1
+  have hS : ∑ p : Equiv.Perm (Fin n), pcount p =
+      ∑ k : Fin n, (Finset.univ.filter (fun p : Equiv.Perm (Fin n) => Pr p k)).card := by
+    simp only [hcount, Finset.card_filter]
+    exact Finset.sum_comm
+  have inv : ∀ (τ : Equiv.Perm (Fin n)) (Q : Equiv.Perm (Fin n) → Prop) [DecidablePred Q],
+      (Finset.univ.filter (fun p => Q (p * τ))).card = (Finset.univ.filter (fun p => Q p)).card := by
+    intro τ Q _
+    apply Finset.card_nbij' (fun p => p * τ) (fun p => p * τ⁻¹)
+    · intro p hp; simpa using hp
+    · intro p hp; simpa using hp
+    · intro p _; simp
+    · intro p _; simp
+  have tri : ∀ x y z : Fin n, x ≠ y → y ≠ z → x ≠ z →
+      ((if y < x ∧ z < x then 1 else 0) + (if x < y ∧ z < y then 1 else 0)
+        + (if x < z ∧ y < z then 1 else 0) : ℕ) = 1 := by
+    intro x y z h1 h2 h3
+    have h1' : x.val ≠ y.val := fun h => h1 (Fin.ext h)
+    have h2' : y.val ≠ z.val := fun h => h2 (Fin.ext h)
+    have h3' : x.val ≠ z.val := fun h => h3 (Fin.ext h)
+    simp only [Fin.lt_def]
+    split_ifs <;> omega
+  have key2 : ∀ x y : Fin n, x ≠ y →
+      2 * (Finset.univ.filter (fun p : Equiv.Perm (Fin n) => p x < p y)).card = N := by
+    intro x y hxy
+    have h := inv (Equiv.swap x y) (fun p => p x < p y)
+    beta_reduce at h
+    simp only [Equiv.Perm.mul_apply, Equiv.swap_apply_left, Equiv.swap_apply_right] at h
+    have hsum : ∑ p : Equiv.Perm (Fin n),
+        ((if p x < p y then 1 else 0) + (if p y < p x then 1 else 0) : ℕ) =
+        ∑ p : Equiv.Perm (Fin n), (1 : ℕ) := by
+      apply Finset.sum_congr rfl
+      intro p _
+      have hne : p x ≠ p y := fun h' => hxy (p.injective h')
+      rcases lt_or_gt_of_ne hne with h1 | h1
+      · have h2 : ¬ p y < p x := not_lt.mpr h1.le
+        simp [h1, h2]
+      · have h2 : ¬ p x < p y := not_lt.mpr h1.le
+        simp [h1, h2]
+    simp only [Finset.sum_add_distrib, Finset.sum_boole, Finset.sum_const, smul_eq_mul,
+      mul_one, Nat.cast_id] at hsum
+    rw [hN]
+    omega
+  have key3 : ∀ a b c : Fin n, a ≠ b → b ≠ c → a ≠ c →
+      3 * (Finset.univ.filter (fun p : Equiv.Perm (Fin n) => p a < p b ∧ p c < p b)).card = N := by
+    intro a b c hab hbc hac
+    obtain ⟨τ, hτ⟩ : ∃ τ : Equiv.Perm (Fin n), τ = Equiv.swap a b * Equiv.swap b c := ⟨_, rfl⟩
+    have hτa : τ a = b := by
+      rw [hτ]; simp [Equiv.Perm.mul_apply, Equiv.swap_apply_def, hab, hbc, hac, hab.symm, hbc.symm, hac.symm]
+    have hτb : τ b = c := by
+      rw [hτ]; simp [Equiv.Perm.mul_apply, Equiv.swap_apply_def, hab, hbc, hac, hab.symm, hbc.symm, hac.symm]
+    have hτc : τ c = a := by
+      rw [hτ]; simp [Equiv.Perm.mul_apply, Equiv.swap_apply_def, hab, hbc, hac, hab.symm, hbc.symm, hac.symm]
+    have h1 := inv τ (fun p => p a < p b ∧ p c < p b)
+    beta_reduce at h1
+    simp only [Equiv.Perm.mul_apply, hτa, hτb, hτc] at h1
+    have e1 : (Finset.univ.filter (fun p : Equiv.Perm (Fin n) => p a < p c ∧ p b < p c)).card =
+        (Finset.univ.filter (fun p : Equiv.Perm (Fin n) => p a < p b ∧ p c < p b)).card := by
+      rw [← h1]
+      congr 1
+      apply Finset.filter_congr
+      intro p _
+      tauto
+    have h2 := inv τ (fun p => p a < p c ∧ p b < p c)
+    beta_reduce at h2
+    simp only [Equiv.Perm.mul_apply, hτa, hτb, hτc] at h2
+    have e2 : (Finset.univ.filter (fun p : Equiv.Perm (Fin n) => p b < p a ∧ p c < p a)).card =
+        (Finset.univ.filter (fun p : Equiv.Perm (Fin n) => p a < p c ∧ p b < p c)).card := by
+      rw [← h2]
+    have hsum : ∑ p : Equiv.Perm (Fin n),
+        ((if p b < p a ∧ p c < p a then 1 else 0) + (if p a < p b ∧ p c < p b then 1 else 0)
+          + (if p a < p c ∧ p b < p c then 1 else 0) : ℕ) =
+        ∑ p : Equiv.Perm (Fin n), (1 : ℕ) :=
+      Finset.sum_congr rfl (fun p _ => tri _ _ _ (p.injective.ne hab) (p.injective.ne hbc)
+        (p.injective.ne hac))
+    simp only [Finset.sum_add_distrib, Finset.sum_boole, Finset.sum_const, smul_eq_mul,
+      mul_one, Nat.cast_id] at hsum
+    rw [hN]
+    omega
+  have hk : ∀ k : Fin n, 6 * (Finset.univ.filter (fun p : Equiv.Perm (Fin n) => Pr p k)).card =
+      2 * N + (if k.val = 0 ∨ k.val = n - 1 then N else 0) := by
+    intro k
+    have hkn := k.isLt
+    by_cases h0 : k.val = 0
+    · have hl : ¬ k.val = n - 1 := by omega
+      have key : ∀ p, Pr p k ↔ pnat p (k.val + 1) < pnat p k.val := by
+        intro p
+        rw [hPr]
+        constructor
+        · rintro ⟨_, h2⟩
+          exact h2.resolve_left hl
+        · intro h
+          exact ⟨Or.inl h0, Or.inr (by rw [h0] at h ⊢; exact h)⟩
+      have hne : (⟨k.val + 1, by omega⟩ : Fin n) ≠ k := by
+        intro h
+        have := congrArg Fin.val h
+        dsimp only at this
+        omega
+      have hfc : Finset.univ.filter (fun p : Equiv.Perm (Fin n) => Pr p k) =
+          Finset.univ.filter (fun p : Equiv.Perm (Fin n) => p ⟨k.val + 1, by omega⟩ < p k) := by
+        apply Finset.filter_congr
+        intro p _
+        have e1 := hf p (k.val + 1) (by omega)
+        have e3 : pnat p k.val = (p k).val := hf p k.val hkn
+        simp only [key p, e1, e3, Fin.lt_def]
+      rw [hfc, if_pos (Or.inl h0)]
+      have := key2 _ k hne
+      omega
+    · by_cases hl : k.val = n - 1
+      · have key : ∀ p, Pr p k ↔ pnat p (k.val - 1) < pnat p k.val := by
+          intro p
+          rw [hPr]
+          constructor
+          · rintro ⟨h1, _⟩
+            exact h1.resolve_left h0
+          · intro h
+            exact ⟨Or.inr h, Or.inl hl⟩
+        have hne : (⟨k.val - 1, by omega⟩ : Fin n) ≠ k := by
+          intro h
+          have := congrArg Fin.val h
+          dsimp only at this
+          omega
+        have hfc : Finset.univ.filter (fun p : Equiv.Perm (Fin n) => Pr p k) =
+            Finset.univ.filter (fun p : Equiv.Perm (Fin n) => p ⟨k.val - 1, by omega⟩ < p k) := by
+          apply Finset.filter_congr
+          intro p _
+          have e1 := hf p (k.val - 1) (by omega)
+          have e3 : pnat p k.val = (p k).val := hf p k.val hkn
+          simp only [key p, e1, e3, Fin.lt_def]
+        rw [hfc, if_pos (Or.inr hl)]
+        have := key2 _ k hne
+        omega
+      · have key : ∀ p, Pr p k ↔
+            pnat p (k.val - 1) < pnat p k.val ∧ pnat p (k.val + 1) < pnat p k.val := by
+          intro p
+          rw [hPr]
+          constructor
+          · rintro ⟨h1, h2⟩
+            exact ⟨h1.resolve_left h0, h2.resolve_left hl⟩
+          · rintro ⟨h1, h2⟩
+            exact ⟨Or.inr h1, Or.inr h2⟩
+        have hab : (⟨k.val - 1, by omega⟩ : Fin n) ≠ k := by
+          intro h
+          have := congrArg Fin.val h
+          dsimp only at this
+          omega
+        have hbc : k ≠ (⟨k.val + 1, by omega⟩ : Fin n) := by
+          intro h
+          have := congrArg Fin.val h
+          dsimp only at this
+          omega
+        have hac : (⟨k.val - 1, by omega⟩ : Fin n) ≠ ⟨k.val + 1, by omega⟩ := by
+          intro h
+          have := congrArg Fin.val h
+          dsimp only at this
+          omega
+        have hfc : Finset.univ.filter (fun p : Equiv.Perm (Fin n) => Pr p k) =
+            Finset.univ.filter (fun p : Equiv.Perm (Fin n) =>
+              p ⟨k.val - 1, by omega⟩ < p k ∧ p ⟨k.val + 1, by omega⟩ < p k) := by
+          apply Finset.filter_congr
+          intro p _
+          have e1 := hf p (k.val - 1) (by omega)
+          have e2 := hf p (k.val + 1) (by omega)
+          have e3 : pnat p k.val = (p k).val := hf p k.val hkn
+          simp only [key p, e1, e2, e3, Fin.lt_def]
+        rw [hfc, if_neg (show ¬ (k.val = 0 ∨ k.val = n - 1) by omega)]
+        have := key3 _ k _ hab hbc hac
+        omega
+  have hcard2 : (Finset.univ.filter (fun k : Fin n => k.val = 0 ∨ k.val = n - 1)).card = 2 := by
+    have hset2 : Finset.univ.filter (fun k : Fin n => k.val = 0 ∨ k.val = n - 1) =
+        {(⟨0, by omega⟩ : Fin n), ⟨n - 1, by omega⟩} := by
+      ext k
+      simp only [Finset.mem_filter, Finset.mem_univ, true_and, Finset.mem_insert,
+        Finset.mem_singleton, Fin.ext_iff]
+    rw [hset2]
+    apply Finset.card_pair
+    intro h
+    have := congrArg Fin.val h
+    dsimp only at this
+    omega
+  have hsumite : ∑ k : Fin n, (if k.val = 0 ∨ k.val = n - 1 then N else 0) = 2 * N := by
+    rw [Finset.sum_ite, Finset.sum_const_zero, add_zero, Finset.sum_const, hcard2, smul_eq_mul]
+  have h6 : 6 * ∑ k : Fin n, (Finset.univ.filter (fun p : Equiv.Perm (Fin n) => Pr p k)).card =
+      n * (2 * N) + 2 * N := by
+    rw [Finset.mul_sum, Finset.sum_congr rfl (fun k _ => hk k), Finset.sum_add_distrib,
+      hsumite, Finset.sum_const, Finset.card_univ, Fintype.card_fin, smul_eq_mul]
+  have h3 : 3 * ∑ p, pcount p = (n + 1) * N := by
+    rw [hS]
+    linarith [h6]
+  have hNpos : 0 < N := by
+    rw [hN]
+    exact Finset.card_pos.mpr Finset.univ_nonempty
+  have hset : {p : Equiv.Perm (Fin n) | true}.ncard = N := by
+    simp [Set.ncard_univ, Nat.card_eq_fintype_card, hN, Finset.card_univ]
+  rw [hset]
+  simp only [putnam_2006_a4_solution]
+  have h3r : (3 : ℝ) * ((∑ p, pcount p : ℕ) : ℝ) = ((n : ℝ) + 1) * (N : ℝ) := by
+    exact_mod_cast h3
+  rw [div_eq_div_iff (Nat.cast_pos.mpr hNpos).ne' (by norm_num)]
+  linarith [h3r]

@@ -1,0 +1,15 @@
+{
+ "id": "kmp",
+ "entry": "kmp.rs",
+ "description": "description.md",
+ "main_fn": "kmp_search",
+ "editable_regions": {
+  "helpers": "between `// <helpers>` and `// </helpers>`: helper spec fns and exec helpers",
+  "proofs": "between `// <proofs>` and `// </proofs>`: lemmas (proof fns)",
+  "code": "between `// <code>` and `// </code>`: exactly one block `{ ... }`, the body of the function under spec"
+ },
+ "fixed": "Everything outside the three editable regions is fixed: the `use` lines, the <preamble> block (definitions, spec fns, and any exec fns given there), the <spec> block (signature, requires, ensures of the function under test), fn main, and all marker comments. Compared token-wise; comments and whitespace are ignored.",
+ "source": "data/algoveri/algoveri_data/kmp/verus_spec.rs",
+ "source_sha256": "4157d0318858e2b7efcf179f8bac41e77730a14b27f3a7482184a2b3d3c1247e",
+ "patches": []
+}

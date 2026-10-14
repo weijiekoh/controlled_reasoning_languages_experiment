@@ -1,0 +1,1 @@
+{"pass": false, "stage": "spec", "detail": "fixed segment 2 changed near: expected `| sub : Seq < int > | is_valid_is ( seq @ , sub ) &` got `| sub : Seq < int > | # ! [ auto ] is_valid_is ( seq`", "seconds": 0.0}

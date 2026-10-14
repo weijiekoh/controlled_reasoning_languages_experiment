@@ -1,0 +1,1 @@
+{"pass": false, "stage": "tests", "detail": "FAIL_TO_PASS 0/1 failing: tests/test_self.py::TestRunTC::test_ignore_path_recursive_current_dir; PASS_TO_PASS 120/120", "seconds": 44.4}

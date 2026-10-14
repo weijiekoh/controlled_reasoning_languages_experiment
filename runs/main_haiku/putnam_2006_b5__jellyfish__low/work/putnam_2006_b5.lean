@@ -1,0 +1,50 @@
+import Mathlib
+
+open Set
+
+noncomputable abbrev putnam_2006_b5_solution : ℝ := 1 / 16
+/--
+For each continuous function $f: [0,1] \to \mathbb{R}$, let $I(f) = \int_0^1 x^2 f(x)\,dx$ and $J(x) = \int_0^1 x \left(f(x)\right)^2\,dx$. Find the maximum value of $I(f) - J(f)$ over all such functions $f$.
+-/
+theorem putnam_2006_b5
+  (I J : (ℝ → ℝ) → ℝ)
+  (hI : I = fun f ↦ ∫ x in (0)..1, x ^ 2 * (f x))
+  (hJ : J = fun f ↦ ∫ x in (0)..1, x * (f x) ^ 2) :
+  IsGreatest
+    {y | ∃ f : ℝ → ℝ, ContinuousOn f (Icc 0 1) ∧ I f - J f = y}
+    putnam_2006_b5_solution := by
+  have hcore : ∫ x in (0:ℝ)..1, x ^ 3 / 4 = 1 / 16 := by
+    simp [intervalIntegral.integral_div, integral_pow]
+    norm_num
+  subst hI hJ
+  unfold putnam_2006_b5_solution
+  constructor
+  · refine ⟨fun x => x / 2, ?_, ?_⟩
+    · exact (by fun_prop : Continuous fun x : ℝ => x / 2).continuousOn
+    · simp only
+      rw [← intervalIntegral.integral_sub]
+      · rw [← hcore]
+        congr 1
+        ext x
+        ring
+      · exact (by fun_prop : Continuous fun x : ℝ => x ^ 2 * (x / 2)).intervalIntegrable _ _
+      · exact (by fun_prop : Continuous fun x : ℝ => x * (x / 2) ^ 2).intervalIntegrable _ _
+  · rintro y ⟨f, hf, rfl⟩
+    have hU : uIcc (0:ℝ) 1 = Icc 0 1 := uIcc_of_le zero_le_one
+    have h1 : IntervalIntegrable (fun x : ℝ => x ^ 2 * f x) MeasureTheory.volume 0 1 := by
+      apply ContinuousOn.intervalIntegrable
+      rw [hU]
+      exact (by fun_prop : ContinuousOn (fun x : ℝ => x ^ 2) (Icc 0 1)).mul hf
+    have h2 : IntervalIntegrable (fun x : ℝ => x * f x ^ 2) MeasureTheory.volume 0 1 := by
+      apply ContinuousOn.intervalIntegrable
+      rw [hU]
+      exact (by fun_prop : ContinuousOn (fun x : ℝ => x) (Icc 0 1)).mul (hf.pow 2)
+    have h3 : IntervalIntegrable (fun x : ℝ => x ^ 3 / 4) MeasureTheory.volume 0 1 :=
+      (by fun_prop : Continuous fun x : ℝ => x ^ 3 / 4).intervalIntegrable _ _
+    show (∫ x in (0:ℝ)..1, x ^ 2 * f x) - (∫ x in (0:ℝ)..1, x * f x ^ 2) ≤ 1 / 16
+    rw [← intervalIntegral.integral_sub h1 h2, ← hcore]
+    apply intervalIntegral.integral_mono_on zero_le_one (h1.sub h2) h3
+    intro x hx
+    have hx0 : 0 ≤ x := hx.1
+    have : 0 ≤ x * (f x - x / 2) ^ 2 := mul_nonneg hx0 (sq_nonneg _)
+    nlinarith [this]

@@ -1,0 +1,15 @@
+{
+ "id": "max_matching",
+ "entry": "max_matching.rs",
+ "description": "description.md",
+ "main_fn": "max_bipartite_matching",
+ "editable_regions": {
+  "helpers": "between `// <helpers>` and `// </helpers>`: helper spec fns and exec helpers",
+  "proofs": "between `// <proofs>` and `// </proofs>`: lemmas (proof fns)",
+  "code": "between `// <code>` and `// </code>`: exactly one block `{ ... }`, the body of the function under spec"
+ },
+ "fixed": "Everything outside the three editable regions is fixed: the `use` lines, the <preamble> block (definitions, spec fns, and any exec fns given there), the <spec> block (signature, requires, ensures of the function under test), fn main, and all marker comments. Compared token-wise; comments and whitespace are ignored.",
+ "source": "data/algoveri/algoveri_data/max_matching/verus_spec.rs",
+ "source_sha256": "68dd34088f088eaebe5248b0a6236e927a68ce9e00983690f47b78e6024a19b7",
+ "patches": []
+}

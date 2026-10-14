@@ -1,0 +1,73 @@
+{
+ "problem": "sphinx-doc__sphinx-8621",
+ "bench": "swe",
+ "condition": "bare",
+ "effort": "low",
+ "model": "claude-haiku-5-5",
+ "batch": "swe_haiku",
+ "dry_run": false,
+ "outcome": "solved",
+ "verify_pass": true,
+ "verify_stage": "ok",
+ "verify_detail": "resolved (run_id cotml-20261014023852-797d424a)",
+ "num_turns": 7,
+ "input_tokens": 16,
+ "output_tokens": 3916,
+ "thinking_tokens": 1671,
+ "cache_read_tokens": 29094,
+ "cache_creation_tokens": 7337,
+ "usage_source": "result",
+ "total_cost_usd": 0.003167665,
+ "duration_s": 28.5,
+ "agent_duration_ms": 27784,
+ "lean_compile_count": 2,
+ "search_tactic_uses": 0,
+ "search_tactic_in_final": false,
+ "tool_calls": {
+  "Bash": 6
+ },
+ "proof_chars": 2778,
+ "proof_lines": 72,
+ "statement_prefix_changed": false,
+ "stop_reason": "end_turn",
+ "result_subtype": "success",
+ "terminal_reason": "completed",
+ "is_error": false,
+ "api_error_status": null,
+ "permission_denials": 0,
+ "agent_said_give_up": false,
+ "final_text": "I fixed the `:kbd:` splitting in `sphinx/builders/html/transforms.py`, so `-`, `+` and `^` are now treated as separators only when they follow a keystroke and precede another one.\n\n- `:kbd:\\`-\\``, `:kbd:\\`+\\`` and `:kbd:\\`^\\`` each produce a single `kbd` element.\n- `Shift-+` produces `Shift`, a `-` separator, then a `+` keystroke. `Ctrl--` and `Ctrl-^` also split correctly.\n- Ordinary compound keys such as `Control-x` and `Ctrl+Alt-Del` still split as before.\n\nI checked the splitting directly on those inputs; I did not rebuild a full HTML document to inspect the output. The HTML build tests selected with `-k kbd` matched no tests, so they don't cover this change. `tests/test_markup.py` has two failures (the `:pep:` cases), and they also fail without my change.",
+ "timed_out": false,
+ "docker_rc": 0,
+ "limits": {
+  "max_turns": 50,
+  "max_budget_usd": 2.0,
+  "timeout_min": 25.0
+ },
+ "network": "cotml-egress",
+ "proxy": true,
+ "claude_version": "2.1.296",
+ "model_usage": {
+  "claude-haiku-5-5": {
+   "inputTokens": 16,
+   "outputTokens": 3916,
+   "cacheReadInputTokens": 29094,
+   "cacheCreationInputTokens": 7337,
+   "webSearchRequests": 0,
+   "costUSD": 0.003167665,
+   "contextWindow": 1000000,
+   "maxOutputTokens": 128000,
+   "thinkingTokens": 1671,
+   "canonicalModel": "claude-haiku-5-5",
+   "provider": "firstParty",
+   "costBasis": "list"
+  }
+ },
+ "started_at": "2026-10-14T09:38:22+00:00",
+ "framing": "issue",
+ "patch_files": [
+  "sphinx/builders/html/transforms.py"
+ ],
+ "touched_test_files": [],
+ "untracked_files": []
+}

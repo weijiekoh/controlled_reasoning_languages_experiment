@@ -1,0 +1,1 @@
+{"time": "2026-10-13T20:05:54", "argv": ["--dry-run", "--model", "claude-haiku-5-5", "--bench", "putnam", "--problems", "putnam_2011_a5", "--condition", "jellyfish", "--effort", "low", "--max-turns", "30", "--max-budget-usd", "0.5", "--timeout-min", "15", "--parallel", "1", "--out", "runs/dryrun_enforce/"], "model": "claude-haiku-5-5"}

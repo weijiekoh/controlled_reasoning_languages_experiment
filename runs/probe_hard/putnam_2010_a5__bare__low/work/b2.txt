@@ -1,0 +1,95 @@
+  by
+  by_contra hne
+  have L : ∀ p q : Fin 3 → ℝ, p ⬝ᵥ q = 0 → p ⨯₃ q = 0 → p = 0 ∨ q = 0 := by
+    intro p q h1 h2
+    have := cross_dot_cross p q p q
+    rw [h2, h1, dotProduct_comm q p, h1] at this
+    simp at this
+    rcases this with h | h
+    · exact Or.inl (dotProduct_self_eq_zero.mp (by simpa using h))
+    · exact Or.inr (dotProduct_self_eq_zero.mp (by simpa using h))
+  have C : ∀ g k : G, g * k = k * g → i g ⨯₃ i k = 0 := by
+    intro g k hgk
+    rcases h g k with h1 | h1
+    · rcases h k g with h2 | h2
+      · have := cross_anticomm (i g) (i k)
+        rw [h1, h2, hgk] at this
+        have h3 : i (k * g) = 0 := by
+          ext j
+          have := congrFun this j
+          simp at this ⊢
+          linarith
+        rw [h1, hgk, h3]
+      · have := cross_anticomm (i g) (i k)
+        rw [h2, h1] at this
+        rw [h1]; simpa using this.symm
+    · exact h1
+  have P : ∀ p x y : Fin 3 → ℝ, p ⨯₃ x = 0 → p ⨯₃ y = 0 → x ⨯₃ y ≠ 0 → p = 0 := by
+    intro p x y h1 h2 h3
+    have e1 := cross_cross p x y
+    rw [h1, h2] at e1
+    simp at e1
+    have e2 : p ⬝ᵥ (x ⨯₃ y) = 0 := by
+      have a1 := congrFun h1 0
+      have a2 := congrFun h1 1
+      have a3 := congrFun h1 2
+      simp [cross_apply, dotProduct, Fin.sum_univ_three] at a1 a2 a3 ⊢
+      linear_combination (y 0) * a1 + (y 1) * a2 + (y 2) * a3
+    rcases L p _ e2 e1.symm with h4 | h4
+    · exact h4
+    · exact absurd h4 h3
+  set x := i a with hx
+  set y := i b with hy
+  have hc : x ⨯₃ y ≠ 0 := hne
+  have hab : x ⨯₃ y = i (a * b) := (h a b).resolve_right hc
+  have hx0 : x ≠ 0 := by intro h0; apply hc; rw [h0]; simp
+  have hyx : y ⨯₃ x = i (b * a) := by
+    rcases h b a with h1 | h1
+    · exact h1
+    · exfalso; apply hc
+      have := cross_anticomm y x
+      rw [h1] at this
+      simpa using this.symm
+  have hw1 : x ⨯₃ (x ⨯₃ y) = i (a * a * b) := by
+    rcases h a (a*b) with h1 | h1
+    · rw [← hab, ← mul_assoc] at h1; exact h1
+    · exfalso
+      rw [← hab] at h1
+      rcases L x _ (by simp [cross_apply, dotProduct, Fin.sum_univ_three]; try ring) h1 with h2 | h2
+      · exact hx0 h2
+      · exact hc h2
+  have hw2 : (y ⨯₃ x) ⨯₃ x = i (b * a * a) := by
+    rcases h (b*a) a with h1 | h1
+    · rw [← hyx] at h1; exact h1
+    · exfalso
+      rw [← hyx] at h1
+      have hn : y ⨯₃ x ≠ 0 := by
+        intro h0
+        have := cross_anticomm y x
+        rw [h0] at this
+        apply hc; simpa using this.symm
+      rcases L (y ⨯₃ x) x (by simp [cross_apply, dotProduct, Fin.sum_univ_three]; try ring) h1 with h2 | h2
+      · exact hn h2
+      · exact hx0 h2
+  have hww : (y ⨯₃ x) ⨯₃ x = x ⨯₃ (x ⨯₃ y) := by
+    ext j; fin_cases j <;> simp [cross_apply] <;> ring
+  have hcomm : b * a * a = a * a * b := by
+    apply i.injective
+    rw [← hw2, hww, hw1]
+  have t1 := C (a*a) a (by rw [mul_assoc])
+  have t2 := C (a*a) b (by rw [← mul_assoc, hcomm])
+  have v1 := C 1 a (by simp)
+  have v2 := C 1 b (by simp)
+  have ht := P _ x y t1 t2 hc
+  have hv := P _ x y v1 v2 hc
+  have haa : a * a = 1 := i.injective (by rw [ht, hv])
+  rw [haa, one_mul] at hw1
+  have e : x ⨯₃ (x ⨯₃ y) = y := hw1
+  have key : y ⬝ᵥ (x ⨯₃ (x ⨯₃ y)) = -((x ⨯₃ y) ⬝ᵥ (x ⨯₃ y)) := by
+    simp [cross_apply, dotProduct, Fin.sum_univ_three]; ring
+  rw [e] at key
+  have h0 : (x ⨯₃ y) ⬝ᵥ (x ⨯₃ y) = 0 := by
+    have : 0 ≤ (x ⨯₃ y) ⬝ᵥ (x ⨯₃ y) := by unfold dotProduct; exact Finset.sum_nonneg (fun j _ => mul_self_nonneg _)
+    have : 0 ≤ y ⬝ᵥ y := by unfold dotProduct; exact Finset.sum_nonneg (fun j _ => mul_self_nonneg _)
+    linarith
+  exact hc (dotProduct_self_eq_zero.mp h0)

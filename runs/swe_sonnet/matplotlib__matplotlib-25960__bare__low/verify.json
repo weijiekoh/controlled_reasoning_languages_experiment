@@ -1,0 +1,1 @@
+{"pass": false, "stage": "tests", "detail": "FAIL_TO_PASS 1/1; PASS_TO_PASS 135/137 failing: lib/matplotlib/tests/test_figure.py::test_subfigure[png], lib/matplotlib/tests/test_figure.py::test_subfigure_double[png]", "seconds": 98.8}

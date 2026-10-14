@@ -1,0 +1,1 @@
+{"time": "2026-10-13T19:35:57", "argv": ["--effort", "low", "--max-turns", "60", "--max-budget-usd", "3", "--timeout-min", "30", "--parallel", "4", "--bench", "combi", "--problems", "problems/probe_combi.txt", "--condition", "bare", "--model", "claude-sonnet-5-5", "--out", "runs/probe_combi_sonnet/"], "model": "claude-sonnet-5-5"}

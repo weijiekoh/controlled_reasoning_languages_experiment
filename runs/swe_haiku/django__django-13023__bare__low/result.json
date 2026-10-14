@@ -1,0 +1,73 @@
+{
+ "problem": "django__django-13023",
+ "bench": "swe",
+ "condition": "bare",
+ "effort": "low",
+ "model": "claude-haiku-5-5",
+ "batch": "swe_haiku",
+ "dry_run": false,
+ "outcome": "solved",
+ "verify_pass": true,
+ "verify_stage": "ok",
+ "verify_detail": "resolved (run_id cotml-20261014010249-c283afdb)",
+ "num_turns": 9,
+ "input_tokens": 20,
+ "output_tokens": 1823,
+ "thinking_tokens": 184,
+ "cache_read_tokens": 36011,
+ "cache_creation_tokens": 6889,
+ "usage_source": "result",
+ "total_cost_usd": 0.002134735,
+ "duration_s": 18.7,
+ "agent_duration_ms": 17956,
+ "lean_compile_count": 6,
+ "search_tactic_uses": 0,
+ "search_tactic_in_final": false,
+ "tool_calls": {
+  "Bash": 8
+ },
+ "proof_chars": 617,
+ "proof_lines": 13,
+ "statement_prefix_changed": false,
+ "stop_reason": "end_turn",
+ "result_subtype": "success",
+ "terminal_reason": "completed",
+ "is_error": false,
+ "api_error_status": null,
+ "permission_denials": 0,
+ "agent_said_give_up": false,
+ "final_text": "`DecimalField.to_python()` now raises `ValidationError` instead of `TypeError` for dict, set, object, complex, bytes and similar inputs. Both target tests pass, and the full `model_fields` suite passes (394 tests, 5 skipped).\n\nThe fix is one line in `django/db/models/fields/__init__.py`. The `except` clause around `decimal.Decimal(value)` now also catches `TypeError` and `ValueError`, alongside `InvalidOperation`:\n\n```python\nexcept (decimal.InvalidOperation, TypeError, ValueError):\n```\n\n`ValueError` is needed because tuples and lists raise it rather than `TypeError`. The changes are uncommitted in the working tree.\n\n`test_lookup_really_big_value` was already passing once `test_invalid_value` was fixed. I did not separately diagnose why it was failing beforehand.",
+ "timed_out": false,
+ "docker_rc": 0,
+ "limits": {
+  "max_turns": 50,
+  "max_budget_usd": 2.0,
+  "timeout_min": 25.0
+ },
+ "network": "cotml-egress",
+ "proxy": true,
+ "claude_version": "2.1.296",
+ "model_usage": {
+  "claude-haiku-5-5": {
+   "inputTokens": 20,
+   "outputTokens": 1823,
+   "cacheReadInputTokens": 36011,
+   "cacheCreationInputTokens": 6889,
+   "webSearchRequests": 0,
+   "costUSD": 0.002134735,
+   "contextWindow": 1000000,
+   "maxOutputTokens": 128000,
+   "thinkingTokens": 184,
+   "canonicalModel": "claude-haiku-5-5",
+   "provider": "firstParty",
+   "costBasis": "list"
+  }
+ },
+ "started_at": "2026-10-14T08:02:28+00:00",
+ "framing": "debug",
+ "patch_files": [
+  "django/db/models/fields/__init__.py"
+ ],
+ "touched_test_files": [],
+ "untracked_files": []
+}

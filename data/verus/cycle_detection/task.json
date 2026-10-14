@@ -1,0 +1,15 @@
+{
+ "id": "cycle_detection",
+ "entry": "cycle_detection.rs",
+ "description": "description.md",
+ "main_fn": "has_cycle",
+ "editable_regions": {
+  "helpers": "between `// <helpers>` and `// </helpers>`: helper spec fns and exec helpers",
+  "proofs": "between `// <proofs>` and `// </proofs>`: lemmas (proof fns)",
+  "code": "between `// <code>` and `// </code>`: exactly one block `{ ... }`, the body of the function under spec"
+ },
+ "fixed": "Everything outside the three editable regions is fixed: the `use` lines, the <preamble> block (definitions, spec fns, and any exec fns given there), the <spec> block (signature, requires, ensures of the function under test), fn main, and all marker comments. Compared token-wise; comments and whitespace are ignored.",
+ "source": "data/algoveri/algoveri_data/cycle_detection/verus_spec.rs",
+ "source_sha256": "43cff8c8a11b6d5afadfd106493d636d245a9e3f57fde5697d08756fc26e386f",
+ "patches": []
+}

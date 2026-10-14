@@ -1,0 +1,11 @@
+        let mut done: Vec<bool> = Vec::new();
+        let mut init: usize = 0;
+        while init < n
+            invariant
+                init <= n,
+                done@.len() == init,
+            decreases n - init,
+        {
+            done.push(false);
+            init += 1;
+        }

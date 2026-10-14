@@ -1,0 +1,54 @@
+diff --git a/sphinx/domains/python.py b/sphinx/domains/python.py
+index 9875a9f4b..8c2326bb7 100644
+--- a/sphinx/domains/python.py
++++ b/sphinx/domains/python.py
+@@ -109,8 +109,17 @@ def type_to_xref(text: str, env: BuildEnvironment = None) -> addnodes.pending_xr
+ 
+ def _parse_annotation(annotation: str, env: BuildEnvironment = None) -> List[Node]:
+     """Parse type annotation."""
++    in_literal = [0]  # depth of Literal[...] subscripts being unparsed
++
++    def _is_literal(node: ast.AST) -> bool:
++        if isinstance(node, ast.Attribute):
++            return node.attr == 'Literal'
++        return isinstance(node, ast.Name) and node.id == 'Literal'
++
+     def unparse(node: ast.AST) -> List[Node]:
+         if isinstance(node, ast.Attribute):
++            if in_literal[0]:
++                return [addnodes.desc_sig_name('', "%s.%s" % (unparse(node.value)[0].astext(), node.attr))]
+             return [nodes.Text("%s.%s" % (unparse(node.value)[0], node.attr))]
+         elif isinstance(node, ast.BinOp):
+             result: List[Node] = unparse(node.left)
+@@ -122,6 +131,8 @@ def _parse_annotation(annotation: str, env: BuildEnvironment = None) -> List[Nod
+         elif isinstance(node, ast.Constant):  # type: ignore
+             if node.value is Ellipsis:
+                 return [addnodes.desc_sig_punctuation('', "...")]
++            elif in_literal[0]:
++                return [addnodes.desc_sig_literal_string('', repr(node.value))]
+             else:
+                 return [nodes.Text(node.value)]
+         elif isinstance(node, ast.Expr):
+@@ -143,11 +154,21 @@ def _parse_annotation(annotation: str, env: BuildEnvironment = None) -> List[Nod
+         elif isinstance(node, ast.Module):
+             return sum((unparse(e) for e in node.body), [])
+         elif isinstance(node, ast.Name):
++            if in_literal[0]:
++                return [addnodes.desc_sig_name('', node.id)]
+             return [nodes.Text(node.id)]
+         elif isinstance(node, ast.Subscript):
+             result = unparse(node.value)
+             result.append(addnodes.desc_sig_punctuation('', '['))
+-            result.extend(unparse(node.slice))
++            if _is_literal(node.value):
++                # values inside Literal[...] are not classes: do not make them references
++                in_literal[0] += 1
++                try:
++                    result.extend(unparse(node.slice))
++                finally:
++                    in_literal[0] -= 1
++            else:
++                result.extend(unparse(node.slice))
+             result.append(addnodes.desc_sig_punctuation('', ']'))
+             return result
+         elif isinstance(node, ast.Tuple):

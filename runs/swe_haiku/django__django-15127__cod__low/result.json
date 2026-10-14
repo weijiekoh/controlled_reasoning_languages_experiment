@@ -1,0 +1,75 @@
+{
+ "problem": "django__django-15127",
+ "bench": "swe",
+ "condition": "cod",
+ "effort": "low",
+ "model": "claude-haiku-5-5",
+ "batch": "swe_haiku",
+ "dry_run": false,
+ "outcome": "solved",
+ "verify_pass": true,
+ "verify_stage": "ok",
+ "verify_detail": "resolved (run_id cotml-20261014000414-7600a84f)",
+ "num_turns": 7,
+ "input_tokens": 16,
+ "output_tokens": 1946,
+ "thinking_tokens": 58,
+ "cache_read_tokens": 26068,
+ "cache_creation_tokens": 5095,
+ "usage_source": "result",
+ "total_cost_usd": 0.001872155,
+ "duration_s": 17.1,
+ "agent_duration_ms": 16319,
+ "lean_compile_count": 2,
+ "search_tactic_uses": 0,
+ "search_tactic_in_final": false,
+ "tool_calls": {
+  "Bash": 6
+ },
+ "proof_chars": 587,
+ "proof_lines": 15,
+ "statement_prefix_changed": true,
+ "stop_reason": "end_turn",
+ "result_subtype": "success",
+ "terminal_reason": "completed",
+ "is_error": false,
+ "api_error_status": null,
+ "permission_denials": 0,
+ "agent_said_give_up": false,
+ "final_text": "`level_tag` now picks up `MESSAGE_TAGS` changes made with `@override_settings`, and the messages test suite passes.\n\nThe cause was that `django/contrib/messages/storage/base.py` computes `LEVEL_TAGS` once at import time, so later setting changes were ignored. I added a `setting_changed` receiver in `django/test/signals.py`. When `MESSAGE_TAGS` changes, it recomputes `LEVEL_TAGS` for the base storage module. The same receiver runs again on exit from the override, so the original tags are restored.\n\nI checked this with a quick script: inside `override_settings(MESSAGE_TAGS={30: 'custom'})`, a level-30 message reports `'custom'`, and outside it reports `'warning'` again. I did not add a regression test, since the rules bar changes to test files. The change is uncommitted in the working tree.",
+ "timed_out": false,
+ "docker_rc": 0,
+ "limits": {
+  "max_turns": 50,
+  "max_budget_usd": 2.0,
+  "timeout_min": 25.0
+ },
+ "network": "cotml-egress",
+ "proxy": true,
+ "claude_version": "2.1.296",
+ "model_usage": {
+  "claude-haiku-5-5": {
+   "inputTokens": 16,
+   "outputTokens": 1946,
+   "cacheReadInputTokens": 26068,
+   "cacheCreationInputTokens": 5095,
+   "webSearchRequests": 0,
+   "costUSD": 0.001872155,
+   "contextWindow": 1000000,
+   "maxOutputTokens": 128000,
+   "thinkingTokens": 58,
+   "canonicalModel": "claude-haiku-5-5",
+   "provider": "firstParty",
+   "costBasis": "list"
+  }
+ },
+ "started_at": "2026-10-14T07:03:56+00:00",
+ "framing": "issue",
+ "patch_files": [
+  "django/test/signals.py"
+ ],
+ "touched_test_files": [
+  "django/test/signals.py"
+ ],
+ "untracked_files": []
+}

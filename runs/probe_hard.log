@@ -1,0 +1,22 @@
+isolation check: ok (no .lean files outside /work)
+20 runs, 0 done, 20 to run, parallel 5
+[1/20] putnam_2007_b5__bare__low: solved (ok) turns=8 out_tok=4737 cost=0.0660505 55.6s
+[2/20] putnam_2006_b6__bare__low: solved (ok) turns=7 out_tok=4875 cost=0.07292280000000001 60.4s
+[3/20] putnam_2001_b4__bare__low: solved (ok) turns=12 out_tok=10301 cost=0.15113890000000002 127.6s
+[4/20] putnam_2004_b5__bare__low: solved (ok) turns=14 out_tok=13578 cost=0.21180220000000005 147.5s
+[5/20] putnam_2008_a5__bare__low: solved (ok) turns=13 out_tok=7713 cost=0.1235186 109.2s
+[6/20] putnam_2003_a6__bare__low: solved (ok) turns=19 out_tok=14515 cost=0.23220719999999997 206.6s
+[7/20] putnam_2012_b5__bare__low: solved (ok) turns=6 out_tok=4394 cost=0.06180079999999998 49.1s
+[8/20] putnam_2012_b4__bare__low: solved (ok) turns=8 out_tok=4748 cost=0.0759716 81.7s
+[9/20] putnam_2010_a5__bare__low: solved (ok) turns=12 out_tok=19104 cost=0.26795420000000003 189.8s
+[10/20] putnam_2019_a4__bare__low: gave_up (compile) turns=5 out_tok=4659 cost=0.05673210000000001 43.5s
+[11/20] putnam_2013_b4__bare__low: solved (ok) turns=15 out_tok=7674 cost=0.1410085 110.0s
+[12/20] putnam_2019_a5__bare__low: solved (ok) turns=9 out_tok=6817 cost=0.1073799 83.3s
+[13/20] putnam_2022_a5__bare__low: gave_up (compile) turns=2 out_tok=2526 cost=0.0285638 25.3s
+[14/20] putnam_2016_b4__bare__low: solved (ok) turns=22 out_tok=27180 cost=0.4105531 284.5s
+[15/20] putnam_2021_a6__bare__low: solved (ok) turns=12 out_tok=21603 cost=0.31657230000000003 215.8s
+[16/20] putnam_2011_a5__bare__low: solved (ok) turns=20 out_tok=41518 cost=0.623983 392.4s
+[17/20] putnam_2021_b5__bare__low: solved (ok) turns=13 out_tok=31526 cost=0.44671450000000007 282.2s
+[18/20] putnam_2024_a4__bare__low: solved (ok) turns=9 out_tok=28092 cost=0.39396370000000003 359.6s
+[19/20] putnam_2025_b4__bare__low: solved (ok) turns=6 out_tok=61032 cost=0.7810075 458.5s
+[20/20] putnam_2025_a5__bare__low: solved (ok) turns=29 out_tok=72116 cost=1.0786497000000002 673.5s

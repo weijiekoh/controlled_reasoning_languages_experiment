@@ -1,0 +1,24 @@
+diff --git a/seaborn/_core/plot.py b/seaborn/_core/plot.py
+index 4f0290a4..0182c477 100644
+--- a/seaborn/_core/plot.py
++++ b/seaborn/_core/plot.py
+@@ -1632,6 +1632,19 @@ class Plotter:
+             for axis in "xy":
+                 axis_key = sub[axis]
+ 
++                # Nominal scales are drawn like categorical axes: no grid, and
++                # limits at +/- 0.5 from the first and last tick (inverted on y)
++                from seaborn._core.scales import Nominal
++                if isinstance(self._scales.get(axis_key), Nominal):
++                    axis_obj = getattr(ax, f"{axis}axis")
++                    axis_obj.grid(False)
++                    ticks = [t for t in axis_obj.get_majorticklocs()]
++                    if ticks:
++                        lo, hi = min(ticks) - 0.5, max(ticks) + 0.5
++                        if axis == "y":
++                            lo, hi = hi, lo
++                        ax.set(**{f"{axis}lim": (lo, hi)})
++
+                 # Axis limits
+                 if axis_key in p._limits:
+                     convert_units = getattr(ax, f"{axis}axis").convert_units

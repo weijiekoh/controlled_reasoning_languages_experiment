@@ -1,0 +1,73 @@
+{
+ "problem": "sphinx-doc__sphinx-8638",
+ "bench": "swe",
+ "condition": "cod",
+ "effort": "low",
+ "model": "claude-haiku-5-5",
+ "batch": "swe_haiku",
+ "dry_run": false,
+ "outcome": "gave_up",
+ "verify_pass": false,
+ "verify_stage": "tests",
+ "verify_detail": "FAIL_TO_PASS 0/1 failing: tests/test_domain_py.py::test_info_field_list_var; PASS_TO_PASS 34/34",
+ "num_turns": 11,
+ "input_tokens": 24,
+ "output_tokens": 7323,
+ "thinking_tokens": 4207,
+ "cache_read_tokens": 82861,
+ "cache_creation_tokens": 13515,
+ "usage_source": "result",
+ "total_cost_usd": 0.006181885,
+ "duration_s": 54.9,
+ "agent_duration_ms": 54282,
+ "lean_compile_count": 7,
+ "search_tactic_uses": 0,
+ "search_tactic_in_final": false,
+ "tool_calls": {
+  "Bash": 10
+ },
+ "proof_chars": 1354,
+ "proof_lines": 30,
+ "statement_prefix_changed": false,
+ "stop_reason": "end_turn",
+ "result_subtype": "success",
+ "terminal_reason": "completed",
+ "is_error": false,
+ "api_error_status": null,
+ "permission_denials": 0,
+ "agent_said_give_up": false,
+ "final_text": "A reference inside a class now resolves to that class's own attribute instead of an unrelated global with the same name. The fix is in `find_obj` in `sphinx/domains/python.py`.\n\n**Cause:** in the non-refspecific search, the exact-name match (`name in self.objects`) was checked first. So inside `Foo`, `:attr:`limit`` resolved to a global `limit` documented without a module prefix, ignoring `Foo.limit`.\n\n**Fix:** the exact-name check now runs last, after the class-scoped and module-scoped lookups. Module-type lookups still only allow exact matches.\n\n**Verification:**\n- Minimal reproduction: before the fix, both references pointed at `#limit`. After the fix, both point at `#Foo.limit`.\n- `tests/test_domain_py.py` passes.\n- `tests/test_ext_autodoc.py` has two failures (`test_autodoc`, `test_cython`). They also fail without my change, so they predate it.\n\nI did not add a test, since the rules bar modifying test files. I also did not commit.\n\nI reproduced the scoped-reference case directly. I did not reproduce the exact autodoc setup from the issue (the ivar itself auto-linking), so this fix addresses the resolution-order mechanism rather than that exact screenshot.",
+ "timed_out": false,
+ "docker_rc": 0,
+ "limits": {
+  "max_turns": 50,
+  "max_budget_usd": 2.0,
+  "timeout_min": 25.0
+ },
+ "network": "cotml-egress",
+ "proxy": true,
+ "claude_version": "2.1.296",
+ "model_usage": {
+  "claude-haiku-5-5": {
+   "inputTokens": 24,
+   "outputTokens": 7323,
+   "cacheReadInputTokens": 82861,
+   "cacheCreationInputTokens": 13515,
+   "webSearchRequests": 0,
+   "costUSD": 0.006181885,
+   "contextWindow": 1000000,
+   "maxOutputTokens": 128000,
+   "thinkingTokens": 4207,
+   "canonicalModel": "claude-haiku-5-5",
+   "provider": "firstParty",
+   "costBasis": "list"
+  }
+ },
+ "started_at": "2026-10-14T09:39:00+00:00",
+ "framing": "issue",
+ "patch_files": [
+  "sphinx/domains/python.py"
+ ],
+ "touched_test_files": [],
+ "untracked_files": []
+}

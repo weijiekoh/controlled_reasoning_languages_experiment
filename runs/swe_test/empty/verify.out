@@ -1,0 +1,5 @@
+{"pass": false, "stage": "no_patch", "detail": "empty patch", "seconds": 0.0}
+
+real	0m0.030s
+user	0m0.027s
+sys	0m0.004s

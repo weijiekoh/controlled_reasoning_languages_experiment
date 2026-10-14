@@ -1,0 +1,73 @@
+{
+ "problem": "pytest-dev__pytest-7236",
+ "bench": "swe",
+ "condition": "cod",
+ "effort": "low",
+ "model": "claude-haiku-5-5",
+ "batch": "swe_haiku",
+ "dry_run": false,
+ "outcome": "solved",
+ "verify_pass": true,
+ "verify_stage": "ok",
+ "verify_detail": "resolved (run_id cotml-20261014023530-c6ce2b86)",
+ "num_turns": 6,
+ "input_tokens": 14,
+ "output_tokens": 1919,
+ "thinking_tokens": 500,
+ "cache_read_tokens": 22774,
+ "cache_creation_tokens": 4777,
+ "usage_source": "result",
+ "total_cost_usd": 0.0017857650000000001,
+ "duration_s": 16.3,
+ "agent_duration_ms": 14976,
+ "lean_compile_count": 5,
+ "search_tactic_uses": 0,
+ "search_tactic_in_final": false,
+ "tool_calls": {
+  "Bash": 5
+ },
+ "proof_chars": 611,
+ "proof_lines": 14,
+ "statement_prefix_changed": false,
+ "stop_reason": "end_turn",
+ "result_subtype": "success",
+ "terminal_reason": "completed",
+ "is_error": false,
+ "api_error_status": null,
+ "permission_denials": 0,
+ "agent_said_give_up": false,
+ "final_text": "With `--pdb`, a `unittest.skip`-ed test now reports as skipped and its `tearDown` no longer runs. The repro prints `1 skipped`, and `testing/test_unittest.py` passes (50 passed, 9 skipped).\n\nThe cause was in `src/_pytest/unittest.py`. With `--pdb`, `runtest()` postpones `tearDown` so it can run after a failure. For skipped tests, `TestCase.run` never calls `tearDown`, but the postponed call was still executed in `teardown()`. The fix is in `teardown()`: it now skips the postponed `tearDown` when the test was skipped (`skipped_by_mark_key` is set in `addSkip`).\n\nI did not add a test file, as the rules prohibit changes under the test directories. Changes are uncommitted in the working tree.",
+ "timed_out": false,
+ "docker_rc": 0,
+ "limits": {
+  "max_turns": 50,
+  "max_budget_usd": 2.0,
+  "timeout_min": 25.0
+ },
+ "network": "cotml-egress",
+ "proxy": true,
+ "claude_version": "2.1.296",
+ "model_usage": {
+  "claude-haiku-5-5": {
+   "inputTokens": 14,
+   "outputTokens": 1919,
+   "cacheReadInputTokens": 22774,
+   "cacheCreationInputTokens": 4777,
+   "webSearchRequests": 0,
+   "costUSD": 0.0017857650000000001,
+   "contextWindow": 1000000,
+   "maxOutputTokens": 128000,
+   "thinkingTokens": 500,
+   "canonicalModel": "claude-haiku-5-5",
+   "provider": "firstParty",
+   "costBasis": "list"
+  }
+ },
+ "started_at": "2026-10-14T09:35:13+00:00",
+ "framing": "issue",
+ "patch_files": [
+  "src/_pytest/unittest.py"
+ ],
+ "touched_test_files": [],
+ "untracked_files": []
+}

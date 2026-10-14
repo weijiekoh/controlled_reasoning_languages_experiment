@@ -1,0 +1,73 @@
+{
+ "problem": "pydata__xarray-7233",
+ "bench": "swe",
+ "condition": "bare",
+ "effort": "low",
+ "model": "claude-haiku-5-5",
+ "batch": "swe_haiku",
+ "dry_run": false,
+ "outcome": "solved",
+ "verify_pass": true,
+ "verify_stage": "ok",
+ "verify_detail": "resolved (run_id cotml-20261014023326-2525c03c)",
+ "num_turns": 5,
+ "input_tokens": 12,
+ "output_tokens": 965,
+ "thinking_tokens": 0,
+ "cache_read_tokens": 15408,
+ "cache_creation_tokens": 3714,
+ "usage_source": "result",
+ "total_cost_usd": 0.00110203,
+ "duration_s": 82.4,
+ "agent_duration_ms": 81651,
+ "lean_compile_count": 1,
+ "search_tactic_uses": 0,
+ "search_tactic_in_final": false,
+ "tool_calls": {
+  "Bash": 4
+ },
+ "proof_chars": 555,
+ "proof_lines": 12,
+ "statement_prefix_changed": false,
+ "stop_reason": "end_turn",
+ "result_subtype": "success",
+ "terminal_reason": "completed",
+ "is_error": false,
+ "api_error_status": null,
+ "permission_denials": 0,
+ "agent_said_give_up": false,
+ "final_text": "I fixed `Coarsen.construct` so non-dimensional coordinates like `day` stay coordinates after reshaping. The issue's example now keeps `day` as a coordinate, and the rolling test suite passes (1821 passed, 32 skipped, 4 xpassed).\n\nThe cause was in `xarray/core/rolling.py`. The code only kept as coordinates the variables whose names matched the coarsened dimensions, so every other coordinate was demoted to a plain data variable. The fix changes that line to keep all of the original object's coordinates:\n\n```python\nshould_be_coords = set(self.obj.coords)\n```\n\nThe change is in the working tree and not committed. I didn't add a regression test, since the rules bar adding test files.",
+ "timed_out": false,
+ "docker_rc": 0,
+ "limits": {
+  "max_turns": 50,
+  "max_budget_usd": 2.0,
+  "timeout_min": 25.0
+ },
+ "network": "cotml-egress",
+ "proxy": true,
+ "claude_version": "2.1.296",
+ "model_usage": {
+  "claude-haiku-5-5": {
+   "inputTokens": 12,
+   "outputTokens": 965,
+   "cacheReadInputTokens": 15408,
+   "cacheCreationInputTokens": 3714,
+   "webSearchRequests": 0,
+   "costUSD": 0.00110203,
+   "contextWindow": 1000000,
+   "maxOutputTokens": 128000,
+   "thinkingTokens": 0,
+   "canonicalModel": "claude-haiku-5-5",
+   "provider": "firstParty",
+   "costBasis": "list"
+  }
+ },
+ "started_at": "2026-10-14T09:32:03+00:00",
+ "framing": "issue",
+ "patch_files": [
+  "xarray/core/rolling.py"
+ ],
+ "touched_test_files": [],
+ "untracked_files": []
+}

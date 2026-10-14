@@ -1,0 +1,16 @@
+import Mathlib
+#check @FiniteField.card_rootsOfUnity
+#check @IsSplittingField.adjoin_rootSet
+#check @FiniteField.card
+#check @IsPrimitiveRoot.card_nthRoots_one
+#check @IsCyclic.exists_ofOrder_eq_natCard
+#check @FiniteField.isCyclic_units
+#check @IntermediateField.finrank_eq_iff
+#check @IntermediateField.eq_top_of_finrank_eq
+#check @FiniteField.pow_card
+#check @Polynomial.SplittingField.instFiniteDimensional
+#check @IsPrimitiveRoot.card_rootsOfUnity
+#check @FiniteField.orderOf_dvd_card_sub_one
+#check @IntermediateField.adjoin_le_iff
+#check @Module.finrank_eq_card_basis
+#check @FiniteField.card'

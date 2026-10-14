@@ -1,0 +1,73 @@
+{
+ "problem": "django__django-14351",
+ "bench": "swe",
+ "condition": "jellyfish",
+ "effort": "low",
+ "model": "claude-haiku-5-5",
+ "batch": "swe_haiku",
+ "dry_run": false,
+ "outcome": "solved",
+ "verify_pass": true,
+ "verify_stage": "ok",
+ "verify_detail": "resolved (run_id cotml-20261014010556-4c40bb6e)",
+ "num_turns": 11,
+ "input_tokens": 24,
+ "output_tokens": 7105,
+ "thinking_tokens": 4006,
+ "cache_read_tokens": 144954,
+ "cache_creation_tokens": 17509,
+ "usage_source": "result",
+ "total_cost_usd": 0.007193065,
+ "duration_s": 45.2,
+ "agent_duration_ms": 44555,
+ "lean_compile_count": 3,
+ "search_tactic_uses": 0,
+ "search_tactic_in_final": false,
+ "tool_calls": {
+  "Bash": 10
+ },
+ "proof_chars": 866,
+ "proof_lines": 18,
+ "statement_prefix_changed": false,
+ "stop_reason": "end_turn",
+ "result_subtype": "success",
+ "terminal_reason": "completed",
+ "is_error": false,
+ "api_error_status": null,
+ "permission_denials": 0,
+ "agent_said_give_up": false,
+ "final_text": "OBJECTION: the fix could change GROUP BY for correlated subqueries used in lookups.\nREPLY: Only external (outer) columns are grouped now. Those are the only columns the subquery depends on. The `lookup`, `queries`, `expressions`, `aggregation` and `aggregation_regress` suites all pass, including correlated-subquery cases.\n\nDONE <- the target test `test_having_subquery_select` now passes.\n\nThe bug was in `django/db/models/lookups.py`. When a lookup's right-hand side was a subquery, `Lookup.get_group_by_cols()` added the whole `Query` object to GROUP BY. `Query` inherits `BaseExpression.get_group_by_cols()`, which returns `[self]`. Its default columns (all of the model's fields) then ended up in GROUP BY, and the subquery returned several columns where the `IN` needed one.\n\nThe change: for a `Query` right-hand side, `get_group_by_cols()` now adds only `rhs.get_external_cols()`, the outer references the subquery depends on. Other right-hand sides keep the old behaviour.\n\nResults:\n- `test_having_subquery_select` (aggregation_regress) fails before the change with `sub-select returns 3 columns - expected 1`, and passes after it.\n- `runtests.py aggregation_regress lookup queries expressions aggregation`: 786 tests, OK (skipped=18, expected failures=2).\n\nThe change is uncommitted in the working tree, and no test files were modified.",
+ "timed_out": false,
+ "docker_rc": 0,
+ "limits": {
+  "max_turns": 50,
+  "max_budget_usd": 2.0,
+  "timeout_min": 25.0
+ },
+ "network": "cotml-egress",
+ "proxy": true,
+ "claude_version": "2.1.296",
+ "model_usage": {
+  "claude-haiku-5-5": {
+   "inputTokens": 24,
+   "outputTokens": 7105,
+   "cacheReadInputTokens": 144954,
+   "cacheCreationInputTokens": 17509,
+   "webSearchRequests": 0,
+   "costUSD": 0.007193065,
+   "contextWindow": 1000000,
+   "maxOutputTokens": 128000,
+   "thinkingTokens": 4006,
+   "canonicalModel": "claude-haiku-5-5",
+   "provider": "firstParty",
+   "costBasis": "list"
+  }
+ },
+ "started_at": "2026-10-14T08:05:09+00:00",
+ "framing": "debug",
+ "patch_files": [
+  "django/db/models/lookups.py"
+ ],
+ "touched_test_files": [],
+ "untracked_files": []
+}

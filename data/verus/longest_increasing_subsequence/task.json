@@ -1,0 +1,17 @@
+{
+ "id": "longest_increasing_subsequence",
+ "entry": "longest_increasing_subsequence.rs",
+ "description": "description.md",
+ "main_fn": "longest_increasing_subsequence",
+ "editable_regions": {
+  "helpers": "between `// <helpers>` and `// </helpers>`: helper spec fns and exec helpers",
+  "proofs": "between `// <proofs>` and `// </proofs>`: lemmas (proof fns)",
+  "code": "between `// <code>` and `// </code>`: exactly one block `{ ... }`, the body of the function under spec"
+ },
+ "fixed": "Everything outside the three editable regions is fixed: the `use` lines, the <preamble> block (definitions, spec fns, and any exec fns given there), the <spec> block (signature, requires, ensures of the function under test), fn main, and all marker comments. Compared token-wise; comments and whitespace are ignored.",
+ "source": "data/algoveri/algoveri_data/longest_increasing_subsequence/verus_spec.rs",
+ "source_sha256": "9de4e3a5a4221a5f47ef4a4df34fcb9055b5e2977a861d7903df3ec6d9dc24c6",
+ "patches": [
+  "closing marker written as `// <spec>`; upstream parse_llm_response cannot find <spec>...</spec>, so this task can never pass in the authors' pipeline"
+ ]
+}

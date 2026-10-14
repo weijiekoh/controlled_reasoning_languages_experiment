@@ -1,0 +1,73 @@
+{
+ "problem": "matplotlib__matplotlib-14623",
+ "bench": "swe",
+ "condition": "bare",
+ "effort": "low",
+ "model": "claude-sonnet-5-5",
+ "batch": "swe_sonnet",
+ "dry_run": false,
+ "outcome": "solved",
+ "verify_pass": true,
+ "verify_stage": "ok",
+ "verify_detail": "resolved (run_id cotml-20261014024943-a5faf9c8)",
+ "num_turns": 6,
+ "input_tokens": 12,
+ "output_tokens": 1339,
+ "thinking_tokens": 75,
+ "cache_read_tokens": 17189,
+ "cache_creation_tokens": 6582,
+ "usage_source": "result",
+ "total_cost_usd": 0.0315879,
+ "duration_s": 17.6,
+ "agent_duration_ms": 16601,
+ "lean_compile_count": 0,
+ "search_tactic_uses": 0,
+ "search_tactic_in_final": false,
+ "tool_calls": {
+  "Bash": 5
+ },
+ "proof_chars": 807,
+ "proof_lines": 20,
+ "statement_prefix_changed": false,
+ "stop_reason": "end_turn",
+ "result_subtype": "success",
+ "terminal_reason": "completed",
+ "is_error": false,
+ "api_error_status": null,
+ "permission_denials": 0,
+ "agent_said_give_up": false,
+ "final_text": "Inverting a log axis through its limits works again. In a quick check, `set_ylim(1e5, 1)` on a log-scaled axis now gives `(100000.0, 1.0)`. I did not run the project's test suite, so that check is the only verification so far.\n\nThe cause was `LogLocator.nonsingular` in `lib/matplotlib/ticker.py`. It always swapped the limits into ascending order, which undid the inversion. It now remembers whether it swapped them and returns the limits in the original order.\n\nI did not touch the symlog/logit locator's `nonsingular`, which also swaps `vmin` and `vmax`. I haven't checked whether inverting those scales has the same problem.",
+ "timed_out": false,
+ "docker_rc": 0,
+ "limits": {
+  "max_turns": 50,
+  "max_budget_usd": 4.0,
+  "timeout_min": 25.0
+ },
+ "network": "cotml-egress",
+ "proxy": true,
+ "claude_version": "2.1.296",
+ "model_usage": {
+  "claude-sonnet-5-5": {
+   "inputTokens": 12,
+   "outputTokens": 1339,
+   "cacheReadInputTokens": 17189,
+   "cacheCreationInputTokens": 6582,
+   "webSearchRequests": 0,
+   "costUSD": 0.0315879,
+   "contextWindow": 1000000,
+   "maxOutputTokens": 128000,
+   "thinkingTokens": 75,
+   "canonicalModel": "claude-sonnet-5-5",
+   "provider": "firstParty",
+   "costBasis": "list"
+  }
+ },
+ "started_at": "2026-10-14T09:49:24+00:00",
+ "framing": "issue",
+ "patch_files": [
+  "lib/matplotlib/ticker.py"
+ ],
+ "touched_test_files": [],
+ "untracked_files": []
+}

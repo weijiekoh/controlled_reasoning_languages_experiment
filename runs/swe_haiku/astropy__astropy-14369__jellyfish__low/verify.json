@@ -1,0 +1,1 @@
+{"pass": false, "stage": "tests", "detail": "FAIL_TO_PASS 2/3 failing: astropy/units/tests/test_format.py::test_cds_grammar_fail[km/s.Mpc-1]; PASS_TO_PASS 731/732 failing: astropy/units/tests/test_format.py::test_cds_grammar_fail[km", "seconds": 58.7}

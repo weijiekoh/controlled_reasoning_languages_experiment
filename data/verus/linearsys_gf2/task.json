@@ -1,0 +1,15 @@
+{
+ "id": "linearsys_gf2",
+ "entry": "linearsys_gf2.rs",
+ "description": "description.md",
+ "main_fn": "solve_linear_system_gf2",
+ "editable_regions": {
+  "helpers": "between `// <helpers>` and `// </helpers>`: helper spec fns and exec helpers",
+  "proofs": "between `// <proofs>` and `// </proofs>`: lemmas (proof fns)",
+  "code": "between `// <code>` and `// </code>`: exactly one block `{ ... }`, the body of the function under spec"
+ },
+ "fixed": "Everything outside the three editable regions is fixed: the `use` lines, the <preamble> block (definitions, spec fns, and any exec fns given there), the <spec> block (signature, requires, ensures of the function under test), fn main, and all marker comments. Compared token-wise; comments and whitespace are ignored.",
+ "source": "data/algoveri/algoveri_data/linearsys_gf2/verus_spec.rs",
+ "source_sha256": "21ed3cb010cc255df3e3fc31cd0da4484e21f46bc7cedd06dfb956519f5acac1",
+ "patches": []
+}

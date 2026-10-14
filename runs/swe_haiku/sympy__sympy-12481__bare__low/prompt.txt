@@ -1,0 +1,15 @@
+Resolve the issue below in the Git repository at `/testbed`. The repository is checked out at the commit where the issue was reported. Python and the project's dependencies are installed in the active conda environment `testbed`.
+
+Rules:
+- Change the source code in `/testbed` to resolve the issue. Do not modify or add test files under the repository's test directories. Do not commit; leave your changes in the working tree.
+- Network access is not available. Do not install packages.
+- Run the project's own tests to check your change.
+- Stop when the issue is resolved.
+- If you conclude that you cannot resolve the issue, say "I give up" and stop.
+
+<issue>
+`Permutation` constructor fails with non-disjoint cycles
+Calling `Permutation([[0,1],[0,1]])` raises a `ValueError` instead of constructing the identity permutation.  If the cycles passed in are non-disjoint, they should be applied in left-to-right order and the resulting permutation should be returned.
+
+This should be easy to compute.  I don't see a reason why non-disjoint cycles should be forbidden.
+</issue>

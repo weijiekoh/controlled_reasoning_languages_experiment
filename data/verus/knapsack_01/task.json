@@ -1,0 +1,15 @@
+{
+ "id": "knapsack_01",
+ "entry": "knapsack_01.rs",
+ "description": "description.md",
+ "main_fn": "solve_knapsack_01",
+ "editable_regions": {
+  "helpers": "between `// <helpers>` and `// </helpers>`: helper spec fns and exec helpers",
+  "proofs": "between `// <proofs>` and `// </proofs>`: lemmas (proof fns)",
+  "code": "between `// <code>` and `// </code>`: exactly one block `{ ... }`, the body of the function under spec"
+ },
+ "fixed": "Everything outside the three editable regions is fixed: the `use` lines, the <preamble> block (definitions, spec fns, and any exec fns given there), the <spec> block (signature, requires, ensures of the function under test), fn main, and all marker comments. Compared token-wise; comments and whitespace are ignored.",
+ "source": "data/algoveri/algoveri_data/knapsack_01/verus_spec.rs",
+ "source_sha256": "ab49677e080e7d4c7cdd035e6f2e1a512db327bed2bd76f8cb38e21626c3773e",
+ "patches": []
+}

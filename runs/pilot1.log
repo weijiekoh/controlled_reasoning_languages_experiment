@@ -1,0 +1,24 @@
+isolation check: ok (no .lean files outside /work)
+10 runs, 0 done, 10 to run, parallel 5
+[1/10] algebra_absxm1pabsxpabsxp1eqxp2_0leqxleq1__bare__medium: solved (ok) turns=3 out_tok=561 cost=0.0085909 31.2s
+[2/10] aime_1990_p15__bare__medium: solved (ok) turns=5 out_tok=1423 cost=0.019649099999999996 54.2s
+[3/10] amc12a_2020_p4__bare__medium: solved (ok) turns=5 out_tok=932 cost=0.0174812 51.3s
+[4/10] mathd_algebra_329__bare__medium: solved (ok) turns=3 out_tok=327 cost=0.0055745000000000005 49.3s
+[5/10] mathd_algebra_113__bare__medium: solved (ok) turns=3 out_tok=322 cost=0.0054558 83.4s
+[6/10] mathd_numbertheory_447__bare__medium: solved (ok) turns=3 out_tok=237 cost=0.004605 8.3s
+[7/10] mathd_numbertheory_314__bare__medium: solved (ok) turns=3 out_tok=713 cost=0.0100582 19.7s
+[8/10] mathd_algebra_487__bare__medium: solved (ok) turns=5 out_tok=1274 cost=0.0179071 65.2s
+[9/10] amc12b_2021_p1__bare__medium: solved (ok) turns=6 out_tok=1437 cost=0.0206786 166.8s
+[10/10] imo_1984_p6__bare__medium: solved (ok) turns=9 out_tok=11844 cost=0.1639745 249.8s
+isolation check: ok (no .lean files outside /work)
+10 runs, 0 done, 10 to run, parallel 5
+[1/10] putnam_1978_a4__bare__medium: solved (ok) turns=5 out_tok=2655 cost=0.036594499999999995 50.9s
+[2/10] putnam_1997_a6__bare__medium: gave_up (safeverify) turns=5 out_tok=10188 cost=0.134906 98.1s
+[3/10] putnam_1964_b5__bare__medium: solved (ok) turns=9 out_tok=6182 cost=0.087387 109.9s
+[4/10] putnam_1982_a2__bare__medium: solved (ok) turns=9 out_tok=7610 cost=0.1067762 112.7s
+[5/10] putnam_1996_a4__bare__medium: solved (ok) turns=9 out_tok=8928 cost=0.1338378 120.9s
+[6/10] putnam_2003_b4__bare__medium: solved (ok) turns=5 out_tok=3296 cost=0.048038899999999995 51.3s
+[7/10] putnam_2008_b3__bare__medium: solved (ok) turns=13 out_tok=9135 cost=0.14235560000000003 200.2s
+[8/10] putnam_2021_a5__bare__medium: solved (ok) turns=12 out_tok=12341 cost=0.17445460000000002 249.7s
+[9/10] putnam_2010_a6__bare__medium: solved (ok) turns=11 out_tok=20180 cost=0.2855291999999999 300.2s
+[10/10] putnam_2018_b3__bare__medium: solved (ok) turns=20 out_tok=12605 cost=0.2032115 306.3s

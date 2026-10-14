@@ -1,0 +1,628 @@
+cam_id	original_path	theorem	book	chapter	exercise
+cam_0001	CAMBench/1.lean	rank_eq_finrank_iff_transpose_mul_self_nonsingular	Numerical Optimization	Chapter 10	10.1-(a)
+cam_0002	CAMBench/2.lean	full_column_rank_iff_transpose_mul_self_posDef	Numerical Optimization	Chapter 10	10.1-(b)
+cam_0003	CAMBench/3.lean	squared_norm_residual_convex	Numerical Optimization	Chapter 10	10.2
+cam_0004	CAMBench/4.lean	orthogonal_matrix_preserves_euclidean_norm	Numerical Optimization	Chapter 10	10.3-(a)
+cam_0005	CAMBench/5.lean	choleskyFactor_eq_R_of_qrColumnPivoting_id	Numerical Optimization	Chapter 10	10.3-(b)
+cam_0006	CAMBench/6.lean	jacobian_and_gradient_lipschitz_bounds	Numerical Optimization	Chapter 10	10.5
+cam_0007	CAMBench/7.lean	norm_rankOne_projection_eq_one	Numerical Optimization	Chapter 11	11.1
+cam_0008	CAMBench/8.lean	exists_zero_path_connecting_half_zero_to_one_one	Numerical Optimization	Chapter 11	11.10
+cam_0009	CAMBench/9.lean	phi_monotone_decreasing_unless_transpose_mul_vec_eq_zero	Numerical Optimization	Chapter 11	11.5
+cam_0010	CAMBench/10.lean	exactLineSearch_step_tends_to_one_near_nonsingular_root	Numerical Optimization	Chapter 11	11.7
+cam_0011	CAMBench/11.lean	transpose_mul_eq_zero_of_mul_transpose_mul_eq_zero	Numerical Optimization	Chapter 11	11.8
+cam_0012	CAMBench/12.lean	tangentCone_and_feasibleDirectionSet_at_origin_for_parabolic_region	Numerical Optimization	Chapter 12	12.11-(a)
+cam_0013	CAMBench/13.lean	redundant_constraint_problem_at_origin	Numerical Optimization	Chapter 12	12.12
+cam_0014	CAMBench/14.lean	exercise_12_13_mfcq_holds_and_licq_fails_at_origin	Numerical Optimization	Chapter 12	12.13
+cam_0015	CAMBench/15.lean	quarticConstrainedMinimization_kkt_at_one_zero_iff	Numerical Optimization	Chapter 12	12.15-(a)
+cam_0016	CAMBench/16.lean	only_first_constraint_active_at_solution	Numerical Optimization	Chapter 12	12.15-(b)
+cam_0017	CAMBench/17.lean	kkt_multiplier_unique_under_LICQ	Numerical Optimization	Chapter 12	12.17
+cam_0019	CAMBench/19.lean	quadraticEqualityConstrainedProblem_solution_points	Numerical Optimization	Chapter 12	12.18-(b)
+cam_0021	CAMBench/21.lean	exercise1219a_LICQ_holds_at_xstar	Numerical Optimization	Chapter 12	12.19-(a)
+cam_0022	CAMBench/22.lean	twoConstraintNonlinearProgram_kkt_satisfied	Numerical Optimization	Chapter 12	12.19-(b)
+cam_0023	CAMBench/23.lean	scalarOscillatoryConstraint_c2_and_feasible_points_characterization	Numerical Optimization	Chapter 12	12.1-(a)
+cam_0024	CAMBench/24.lean	every_nonzero_feasible_point_is_isolated_local_solution	Numerical Optimization	Chapter 12	12.1-(b)
+cam_0025	CAMBench/25.lean	zero_is_global_and_strict_local_but_not_isolated_local_solution	Numerical Optimization	Chapter 12	12.1-(c)
+cam_0026	CAMBench/26.lean	isolatedLocalSolution_not_necessarily_strict	Numerical Optimization	Chapter 12	12.2
+cam_0027	CAMBench/27.lean	min_mul_on_unit_circle	Numerical Optimization	Chapter 12	12.20
+cam_0028	CAMBench/28.lean	sup_mul_on_closed_unit_disk_eq_one_half	Numerical Optimization	Chapter 12	12.21
+cam_0029	CAMBench/29.lean	omega_convex_of_linear_eq_and_convex_ineq	Numerical Optimization	Chapter 12	12.22
+cam_0031	CAMBench/31.lean	last_row_factorization_coefficients	Numerical Optimization	Chapter 13	13.10
+cam_0032	CAMBench/32.lean	standard_form_primal_dual_weak_duality	Numerical Optimization	Chapter 13	13.2
+cam_0034	CAMBench/34.lean	scalar_zero_row_primal_and_dual_infeasible	Numerical Optimization	Chapter 13	13.4
+cam_0035	CAMBench/35.lean	no_basic_feasible_points_of_rows_linearly_dependent	Numerical Optimization	Chapter 13	13.6
+cam_0036	CAMBench/36.lean	feasible_iff_tail_zero_of_complete_pivoting	Numerical Optimization	Chapter 13	13.7-(a)
+cam_0037	CAMBench/37.lean	reduced_system_same_solution_set	Numerical Optimization	Chapter 13	13.7-(c)
+cam_0038	CAMBench/38.lean	linearProgramExercise13_9a_equiv_standardForm	Numerical Optimization	Chapter 13	13.9-(a)
+cam_0039	CAMBench/39.lean	exercise13_9_b_optimal_solution_and_value	Numerical Optimization	Chapter 13	13.9-(b)
+cam_0040	CAMBench/40.lean	exampleLinearProgram_F_zero_solution	Numerical Optimization	Chapter 14	14.1
+cam_0044	CAMBench/44.lean	mem_N_infty_iff_gamma_le_inf	Numerical Optimization	Chapter 14	14.3
+cam_0045	CAMBench/45.lean	exists_pos_pair_violating_theta_neighborhood	Numerical Optimization	Chapter 14	14.4
+cam_0046	CAMBench/46.lean	centralPath_eq_neighborhoods	Numerical Optimization	Chapter 14	14.5
+cam_0047	CAMBench/47.lean	phiRho_tendsto_atTop_of_component_product_tendsto_zero	Numerical Optimization	Chapter 14	14.7
+cam_0048	CAMBench/48.lean	blockMatrix_nonsingular_iff_full_row_rank	Numerical Optimization	Chapter 14	14.8
+cam_0049	CAMBench/49.lean	delta_x_dot_delta_s_eq_zero	Numerical Optimization	Chapter 14	14.9
+cam_0050	CAMBench/50.lean	block_column_matrices_linearIndependent	Numerical Optimization	Chapter 15	15.5
+cam_0051	CAMBench/51.lean	particular_solution_eq_transpose_mul_inv_gram	Numerical Optimization	Chapter 15	15.7-(b)
+cam_0052	CAMBench/52.lean	jacobian_correction_satisfies_linearized_constraint	Numerical Optimization	Chapter 15	UNKNOWN
+cam_0053	CAMBench/53.lean	reducedHessianProjector_independent_of_basis	Numerical Optimization	Chapter 16	16.12
+cam_0054	CAMBench/54.lean	orthogonal_projector_onto_ker_eq_two_forms	Numerical Optimization	Chapter 16	16.13-(a)
+cam_0055	CAMBench/55.lean	r_mul_constrained_newton_direction_ne_zero	Numerical Optimization	Chapter 16	16.14-(b)
+cam_0056	CAMBench/56.lean	EqualityConstrainedQuadraticProgram.no_finite_solution_of_exists_negative_direction	Numerical Optimization	Chapter 16	16.15
+cam_0057	CAMBench/57.lean	saddlePointBlockMatrix_indefinite	Numerical Optimization	Chapter 16	16.16-(a)
+cam_0058	CAMBench/58.lean	rank_eq_of_block_kkt_invertible	Numerical Optimization	Chapter 16	16.16-(b)
+cam_0059	CAMBench/59.lean	maximum_of_quadratic_on_simplex_region	Numerical Optimization	Chapter 16	16.17
+cam_0060	CAMBench/60.lean	principal_submatrix_posDef_of_posDef	Numerical Optimization	Chapter 16	16.19
+cam_0061	CAMBench/61.lean	minimum_of_quadratic_on_feasible_set	Numerical Optimization	Chapter 16	16.1-(a)
+cam_0063	CAMBench/63.lean	card_activeSet_range_le_three_pow	Numerical Optimization	Chapter 16	16.22
+cam_0065	CAMBench/65.lean	box_constrained_projection_solution_eq_projection	Numerical Optimization	Chapter 16	16.25
+cam_0066	CAMBench/66.lean	unique_global_solution_of_kkt_activeSet_posDef	Numerical Optimization	Chapter 16	16.4
+cam_0067	CAMBench/67.lean	KKTMatrix_inv_eq_fromBlocks	Numerical Optimization	Chapter 16	16.5
+cam_0068	CAMBench/68.lean	stationary_but_not_local_minimizer_of_negative_reduced_hessian	Numerical Optimization	Chapter 16	16.7
+cam_0069	CAMBench/69.lean	exists_orthogonal_right_factor_with_zero_block_upperTriangular	Numerical Optimization	Chapter 16	16.8
+cam_0070	CAMBench/70.lean	equalityConstrainedQuadraticProgram_line_restriction_minimal	Numerical Optimization	Chapter 16	UNKNOWN
+cam_0074	CAMBench/74.lean	stationary_points_of_penaltyObjective_mu_one	Numerical Optimization	Chapter 17	17.2
+cam_0075	CAMBench/75.lean	minSquare_has_second_derivative_at_zero_and_second_derivative_not_continuous	Numerical Optimization	Chapter 17	17.4
+cam_0076	CAMBench/76.lean	phi1_directionalDerivative_formula	Numerical Optimization	Chapter 17	17.7
+cam_0077	CAMBench/77.lean	infeasible_of_eventually_stationary_penalty	Numerical Optimization	Chapter 17	17.8
+cam_0079	CAMBench/79.lean	norm_A_mul_le_and_tendsto_zero_of_hessian_identity	Numerical Optimization	Chapter 17	UNKNOWN
+cam_0081	CAMBench/81.lean	linearized_constraint_system_consistent	Numerical Optimization	Chapter 18	18.8
+cam_0082	CAMBench/82.lean	exists_solution_in_transposeRange	Numerical Optimization	Chapter 18	18.9
+cam_0084	CAMBench/84.lean	scalarLinearProgram_primalLogBarrier_eq	Numerical Optimization	Chapter 19	19.12-(a)
+cam_0086	CAMBench/86.lean	slack_variable_kkt_iff_original_kkt	Numerical Optimization	Chapter 19	19.1-(b)
+cam_0087	CAMBench/87.lean	licq_iff_licq_slack_reformulation	Numerical Optimization	Chapter 19	19.1-(c)
+cam_0088	CAMBench/88.lean	newton_step_invariant_under_equation_scaling	Numerical Optimization	Chapter 19	19.3
+cam_0090	CAMBench/90.lean	primalDualMatrix_nonsingular_of_LICQ_strictComplementarity_secondOrder	Numerical Optimization	Chapter 19	19.5-(a)
+cam_0091	CAMBench/91.lean	unconstrainedMinimizer_along_steepestDescentLine	Numerical Optimization	Chapter 19	19.8-(b)
+cam_0093	CAMBench/93.lean	affine_change_of_variables_gradient_hessian	Numerical Optimization	Chapter 2	2.10
+cam_0094	CAMBench/94.lean	sr1_and_bfgs_scale_invariant	Numerical Optimization	Chapter 2	2.11
+cam_0095	CAMBench/95.lean	one_div_nat_convergesTo_zero_not_QLinearlyConvergent	Numerical Optimization	Chapter 2	2.13
+cam_0096	CAMBench/96.lean	qQuadraticallyConvergent_one_plus_half_pow_two_pow	Numerical Optimization	Chapter 2	2.14
+cam_0099	CAMBench/99.lean	exists_unique_stationary_point_and_is_saddle_for_quadratic	Numerical Optimization	Chapter 2	2.2
+cam_0103	CAMBench/103.lean	isolatedLocalMinimizer_has_strictly_smaller_value_nearby	Numerical Optimization	Chapter 2	2.6
+cam_0104	CAMBench/104.lean	quadratic_form_convex_of_posSemidef	Numerical Optimization	Chapter 2	2.7
+cam_0105	CAMBench/105.lean	argminSet_convex	Numerical Optimization	Chapter 2	2.8
+cam_0107	CAMBench/107.lean	blockDiagonal_has_eigenvalue_from_block	Numerical Optimization	Chapter 3	3.12
+cam_0109	CAMBench/109.lean	exists_differentiable_function_with_large_value_and_small_interpolation_step	Numerical Optimization	Chapter 3	3.14
+cam_0111	CAMBench/111.lean	exists_no_step_length_satisfying_WolfeConditions_of_c₂_lt_c₁	Numerical Optimization	Chapter 3	3.2
+cam_0112	CAMBench/112.lean	quadratic_line_search_minimizer	Numerical Optimization	Chapter 3	3.3
+cam_0113	CAMBench/113.lean	quadratic_exact_line_search_satisfies_Goldstein	Numerical Optimization	Chapter 3	3.4
+cam_0115	CAMBench/115.lean	steepestDescent_exactLineSearch_one_step_of_initialError_parallel_eigenvector	Numerical Optimization	Chapter 3	3.6
+cam_0116	CAMBench/116.lean	steepestDescent_qnorm_update_formula	Numerical Optimization	Chapter 3	3.7
+cam_0117	CAMBench/117.lean	kantorovich_inequality	Numerical Optimization	Chapter 3	3.8
+cam_0118	CAMBench/118.lean	exists_nonneg_add_smul_identity_positiveDefinite	Numerical Optimization	Chapter 4	4.10
+cam_0119	CAMBench/119.lean	gamma_le_one_for_spd	Numerical Optimization	Chapter 4	4.6
+cam_0120	CAMBench/120.lean	norm_monotone_along_piecewise_path_to_newton_step	Numerical Optimization	Chapter 4	4.7
+cam_0121	CAMBench/121.lean	lambda_update_eq_newton_update	Numerical Optimization	Chapter 4	4.8
+cam_0122	CAMBench/122.lean	polakRibiere_and_hestenesStiefel_eq_fletcherReeves_for_quadratic_exact_line_search	Numerical Optimization	Chapter 5	5.11
+cam_0123	CAMBench/123.lean	conjugate_directions_linearIndependent	Numerical Optimization	Chapter 5	5.2
+cam_0124	CAMBench/124.lean	exact_line_search_step_size_quadratic	Numerical Optimization	Chapter 5	5.3
+cam_0125	CAMBench/125.lean	composition_with_independent_directions_is_strictly_convex_quadratic	Numerical Optimization	Chapter 5	5.4
+cam_0126	CAMBench/126.lean	polynomial_preconditioned_quadratic_form_has_eigenpairs	Numerical Optimization	Chapter 5	5.7
+cam_0127	CAMBench/127.lean	det_one_add_mulVec_transpose_eq_one_add_dotProduct	Numerical Optimization	Chapter 6	6.10-(a)
+cam_0128	CAMBench/128.lean	trace_bfgs_update	Numerical Optimization	Chapter 6	6.11
+cam_0129	CAMBench/129.lean	curvature_condition_implies_secant_positive	Numerical Optimization	Chapter 6	6.2
+cam_0130	CAMBench/130.lean	bfgs_inverse_update_is_inverse	Numerical Optimization	Chapter 6	6.3
+cam_0132	CAMBench/132.lean	exists_symm_posDef_square_root_of_symm_posDef	Numerical Optimization	Chapter 6	6.6
+cam_0133	CAMBench/133.lean	mu_k_ge_one_of_cauchy_schwarz	Numerical Optimization	Chapter 6	6.7
+cam_0134	CAMBench/134.lean	one_sub_add_log_le_zero_of_pos	Numerical Optimization	Chapter 6	6.8
+cam_0135	CAMBench/135.lean	Hhat_singular_of_rank_one_update	Numerical Optimization	Chapter 7	7.2
+cam_0136	CAMBench/136.lean	lower_triangular_entry_recovered_from_Qk	Numerical Optimization	Chapter 7	7.4
+cam_0137	CAMBench/137.lean	centralDifference_optimal_step_and_accuracy	Numerical Optimization	Chapter 8	8.1
+cam_0140	CAMBench/140.lean	directional_derivatives_of_composition	Numerical Optimization	Chapter 8	8.12
+cam_0141	CAMBench/141.lean	mixed_difference_quotient_eq_mixedFDeriv_add_bigO	Numerical Optimization	Chapter 8	8.3
+cam_0142	CAMBench/142.lean	hessian_adjacency_subgraph_intersection_graph	Numerical Optimization	Chapter 8	8.4
+cam_0144	CAMBench/144.lean	kappa_Dk_ge_one_div_sqrt_add_two	Numerical Optimization	Chapter 9	9.10
+cam_0146	CAMBench/146.lean	norm_forwardFiniteDifferenceApproxGradient_sub_gradient_le	Numerical Optimization	Chapter 9	9.13
+cam_0147	CAMBench/147.lean	quadratic_model_interpolation_conditions_count	Numerical Optimization	Chapter 9	9.2-(a)
+cam_0148	CAMBench/148.lean	six_collinear_points_do_not_determine_quadratic_uniquely	Numerical Optimization	Chapter 9	9.4-(a)
+cam_0149	CAMBench/149.lean	exist_distinct_quadratics_agree_on_six_points_of_circle	Numerical Optimization	Chapter 9	9.4-(b)
+cam_0151	CAMBench/151.lean	quadratic_coefficients_of_interpolation_data	Numerical Optimization	Chapter 9	9.7
+cam_0152	CAMBench/152.lean	kappa_standard_basis_directions_eq_inv_sqrt	Numerical Optimization	Chapter 9	9.9
+cam_0154	CAMBench/154.lean	polynomialCoefficientSet_convex	Convex Optimization Additional Exercises	Chapter 1	1.1
+cam_0155	CAMBench/155.lean	convex_iff_add_smul_eq_smul_add	Convex Optimization Additional Exercises	Chapter 1	1.2
+cam_0156	CAMBench/156.lean	comp_linearFractional_isLinearFractional	Convex Optimization Additional Exercises	Chapter 1	1.3
+cam_0157	CAMBench/157.lean	dualCone_exponentialCone_eq	Convex Optimization Additional Exercises	Chapter 1	1.4
+cam_0158	CAMBench/158.lean	inter_and_dualSum_are_convex_cones	Convex Optimization Additional Exercises	Chapter 1	1.5-(a)
+cam_0159	CAMBench/159.lean	dualCone_inter_superset_minkowskiSum_dualCone	Convex Optimization Additional Exercises	Chapter 1	1.5-(b)
+cam_0161	CAMBench/161.lean	dualCone_of_nonnegative_preimage_eq_range_transpose_nonnegative	Convex Optimization Additional Exercises	Chapter 1	1.5-(d)
+cam_0162	CAMBench/162.lean	polar_convex	Convex Optimization Additional Exercises	Chapter 1	1.6-(a)
+cam_0163	CAMBench/163.lean	polar_of_cone_eq_setOf_dotProduct_nonpos	Convex Optimization Additional Exercises	Chapter 1	1.6-(b)
+cam_0164	CAMBench/164.lean	polar_unitBall_eq_dualNorm_le_one	Convex Optimization Additional Exercises	Chapter 1	1.6-(c)
+cam_0165	CAMBench/165.lean	polar_simplex_eq_iInter	Convex Optimization Additional Exercises	Chapter 1	1.6-(d)
+cam_0166	CAMBench/166.lean	polar_polar_eq_self_of_closed_convex_zero_mem	Convex Optimization Additional Exercises	Chapter 1	1.6-(e)
+cam_0167	CAMBench/167.lean	dualCone_zero_eq_univ	Convex Optimization Additional Exercises	Chapter 1	1.7-(a)
+cam_0168	CAMBench/168.lean	dualCone_eq_singleton_zero_of_univ	Convex Optimization Additional Exercises	Chapter 1	1.7-(b)
+cam_0169	CAMBench/169.lean	dualCone_eq_abs_le_in_R2	Convex Optimization Additional Exercises	Chapter 1	1.7-(c)
+cam_0170	CAMBench/170.lean	dualCone_eq_diagonal_subspace	Convex Optimization Additional Exercises	Chapter 1	1.7-(d)
+cam_0171	CAMBench/171.lean	gini_coefficient_quasiconvex_on_nonnegative_nonzero	Convex Optimization Additional Exercises	Chapter 13	13.12-(a)
+cam_0172	CAMBench/172.lean	irr_quasilinear	Convex Optimization Additional Exercises	Chapter 13	13.13-(a)
+cam_0173	CAMBench/173.lean	IRR_weighted_average_le_max	Convex Optimization Additional Exercises	Chapter 13	13.13-(b)
+cam_0174	CAMBench/174.lean	dense_kkt_portfolio_flop_count_theta_n_cubed	Convex Optimization Additional Exercises	Chapter 13	13.14-(a)
+cam_0175	CAMBench/175.lean	worstCaseReturn_maximization_equivalent_to_equivalent_convex_optimization	Convex Optimization Additional Exercises	Chapter 13	13.17-(a)
+cam_0176	CAMBench/176.lean	worstCaseVariancePortfolioProblem_worstCaseRisk_sufficient	Convex Optimization Additional Exercises	Chapter 13	13.19-(b)
+cam_0177	CAMBench/177.lean	convexConjugate_eq_maximum_offsetting_profit	Convex Optimization Additional Exercises	Chapter 13	13.1-(c)
+cam_0178	CAMBench/178.lean	risk_budgeting_normalized_weights_exist_unique	Convex Optimization Additional Exercises	Chapter 13	13.20-(a)
+cam_0179	CAMBench/179.lean	rebalancing_self_optimal_of_componentwise_transaction_bound	Convex Optimization Additional Exercises	Chapter 13	13.21-(a)
+cam_0180	CAMBench/180.lean	robust_optimal_implies_weighted_optimal	Convex Optimization Additional Exercises	Chapter 13	13.22-(a)
+cam_0181	CAMBench/181.lean	convexity_of_potential_and_market_clearing	Convex Optimization Additional Exercises	Chapter 13	13.23-(a)
+cam_0182	CAMBench/182.lean	unique_market_clearing_price_vector	Convex Optimization Additional Exercises	Chapter 13	13.23-(b)
+cam_0183	CAMBench/183.lean	minimum_value_found_by_convex_optimization_problem	Convex Optimization Additional Exercises	Chapter 13	13.24-(a)
+cam_0184	CAMBench/184.lean	logUtilitySimplexMaximization_optimality_conditions	Convex Optimization Additional Exercises	Chapter 13	13.6-(a)
+cam_0185	CAMBench/185.lean	gordan_theorem	Convex Optimization Additional Exercises	Chapter 13	13.7-(a)
+cam_0186	CAMBench/186.lean	logUtilityMaximization_unbounded_of_exists_direction	Convex Optimization Additional Exercises	Chapter 13	13.8-(a)
+cam_0188	CAMBench/188.lean	worstCaseProfit_maximization_iff_linearProgram_optimal	Convex Optimization Additional Exercises	Chapter 13	13.9-(a)
+cam_0189	CAMBench/189.lean	exists_optimal_dual_variables_for_primal_linear_program	Convex Optimization Additional Exercises	Chapter 13	13.9-(b)
+cam_0190	CAMBench/190.lean	perspective_convex_on_nonneg_pos	Convex Optimization Additional Exercises	Chapter 14	14.10-(a)
+cam_0191	CAMBench/191.lean	hFromPositiveIncreasingConvex_convexOn_nonneg	Convex Optimization Additional Exercises	Chapter 14	14.10-(b)
+cam_0192	CAMBench/192.lean	minimum_time_rope_transfer_feasible_by_bisection	Convex Optimization Additional Exercises	Chapter 14	14.15-(a)
+cam_0194	CAMBench/194.lean	spring_energy_min_concave_on_feasible_set	Convex Optimization Additional Exercises	Chapter 14	14.1-(a)
+cam_0195	CAMBench/195.lean	complianceEnergy_convexOn	Convex Optimization Additional Exercises	Chapter 14	14.3-(a)
+cam_0198	CAMBench/198.lean	minimumFuelDescentFixedTouchdownTime_equiv_convex_optimization	Convex Optimization Additional Exercises	Chapter 14	14.8-(a)
+cam_0199	CAMBench/199.lean	feasibleSet_convex_and_minimum_time_by_smallest_horizon	Convex Optimization Additional Exercises	Chapter 14	14.8-(b)
+cam_0200	CAMBench/200.lean	feedback_variance_minimax_equivalent_to_convex_variance_control	Convex Optimization Additional Exercises	Chapter 14	14.9-(a)
+cam_0201	CAMBench/201.lean	subsetDispersionMinimization_convex_in_free_coordinates	Convex Optimization Additional Exercises	Chapter 15	15.1-(a)
+cam_0202	CAMBench/202.lean	fS_eq_inf_closedBall_radius	Convex Optimization Additional Exercises	Chapter 15	15.1-(i)
+cam_0203	CAMBench/203.lean	eigenvalue_minimization_sdp_reformulation	Convex Optimization Additional Exercises	Chapter 15	15.2-(c)
+cam_0204	CAMBench/204.lean	network_utility_feasible_set_convex	Convex Optimization Additional Exercises	Chapter 15	15.3-(a)
+cam_0205	CAMBench/205.lean	interdiction_minimization_equivalent_to_convex_problem	Convex Optimization Additional Exercises	Chapter 15	15.4-(a)
+cam_0206	CAMBench/206.lean	algebraicConnectivityMaximization_sdp_supremum_characterization	Convex Optimization Additional Exercises	Chapter 15	15.6-(a)
+cam_0207	CAMBench/207.lean	graph_isomorphism_iff_boolean_feasibility	Convex Optimization Additional Exercises	Chapter 15	15.7-(a)
+cam_0208	CAMBench/208.lean	exists_prices_as_lagrange_multipliers_for_single_generator_subproblems	Convex Optimization Additional Exercises	Chapter 16	16.2-(a)
+cam_0209	CAMBench/209.lean	precedenceConstrainedSchedulingProblem_isConvexOptimization	Convex Optimization Additional Exercises	Chapter 16	16.4-(a)
+cam_0210	CAMBench/210.lean	scheduling_problem_equivalent_to_convex_scheduling	Convex Optimization Additional Exercises	Chapter 16	16.5-(a)
+cam_0211	CAMBench/211.lean	optimal_flow_satisfies_dc_power_flow	Convex Optimization Additional Exercises	Chapter 16	16.6-(b)
+cam_0212	CAMBench/212.lean	resourceAllocation_equiv_convex_problem	Convex Optimization Additional Exercises	Chapter 17	17.10-(a)
+cam_0213	CAMBench/213.lean	resource_allocation_equiv_separable_concave_unique_solution	Convex Optimization Additional Exercises	Chapter 17	17.10-(b)
+cam_0214	CAMBench/214.lean	energyGapQuasiconvexProblem_feasible_certifies_gap	Convex Optimization Additional Exercises	Chapter 17	17.11-(a)
+cam_0215	CAMBench/215.lean	idealPreferencePointModel_iff_feasible_box_constrained_linear_system	Convex Optimization Additional Exercises	Chapter 17	17.16-(a)
+cam_0216	CAMBench/216.lean	coordinate_values_eq_Icc_of_consistent_ideal_point	Convex Optimization Additional Exercises	Chapter 17	17.16-(b)
+cam_0217	CAMBench/217.lean	transportDistance_basic_properties	Convex Optimization Additional Exercises	Chapter 17	17.1-(a)
+cam_0218	CAMBench/218.lean	dosePlanningConvexProgram_isConvex	Convex Optimization Additional Exercises	Chapter 17	17.2-(a)
+cam_0219	CAMBench/219.lean	net_profit_shortfall_covers_unmet_requirement	Convex Optimization Additional Exercises	Chapter 17	17.4-(a)
+cam_0220	CAMBench/220.lean	supportableConsumptionSet_isPolyhedron_and_characterization	Convex Optimization Additional Exercises	Chapter 17	17.7-(a)
+cam_0221	CAMBench/221.lean	sigmoid_sum_not_quasiconcave_counterexample	Convex Optimization Additional Exercises	Chapter 17	17.8-(a)
+cam_0222	CAMBench/222.lean	logisticSumMaximization_isConvexOptimizationProblem	Convex Optimization Additional Exercises	Chapter 17	17.8-(b)
+cam_0223	CAMBench/223.lean	job_allocation_convex_optimization_problem	Convex Optimization Additional Exercises	Chapter 17	17.9-(a)
+cam_0224	CAMBench/224.lean	sup_eq_max_of_convexOn_convexHull_finset	Convex Optimization Additional Exercises	Chapter 2	2.1
+cam_0225	CAMBench/225.lean	weightedGeometricMean_concaveOn_pos	Convex Optimization Additional Exercises	Chapter 2	2.10
+cam_0226	CAMBench/226.lean	perspective_quasiconvex	Convex Optimization Additional Exercises	Chapter 2	2.11
+cam_0227	CAMBench/227.lean	continuedFraction4_convexOn_and_decreasing	Convex Optimization Additional Exercises	Chapter 2	2.12
+cam_0228	CAMBench/228.lean	cshub_convex_and_convexConjugate_eq	Convex Optimization Additional Exercises	Chapter 2	2.13
+cam_0229	CAMBench/229.lean	convex_affineCombination_one_pos_rest_nonpos	Convex Optimization Additional Exercises	Chapter 2	2.14
+cam_0231	CAMBench/231.lean	exists_convex_radial_profile_of_orthogonal_invariance	Convex Optimization Additional Exercises	Chapter 2	2.16
+cam_0232	CAMBench/232.lean	infimalConvolution_convex	Convex Optimization Additional Exercises	Chapter 2	2.17-(a)
+cam_0233	CAMBench/233.lean	convexConjugate_infimalConvolution_eq_sum_convexConjugate	Convex Optimization Additional Exercises	Chapter 2	2.17-(b)
+cam_0234	CAMBench/234.lean	concaveOn_prod_one_sub_exp_neg_rpow	Convex Optimization Additional Exercises	Chapter 2	2.19
+cam_0235	CAMBench/235.lean	convex_of_convex_coordinatewise_monotone_comp	Convex Optimization Additional Exercises	Chapter 2	2.2
+cam_0236	CAMBench/236.lean	polynomial_oscillation_on_Icc_convex	Convex Optimization Additional Exercises	Chapter 2	2.20-(a)
+cam_0237	CAMBench/237.lean	sum_exp_neg_inv_convexOn	Convex Optimization Additional Exercises	Chapter 2	2.20-(b)
+cam_0238	CAMBench/238.lean	directionalInfQuotient_convex	Convex Optimization Additional Exercises	Chapter 2	2.20-(c)
+cam_0239	CAMBench/239.lean	convex_permutation_invariant_doubly_stochastic_le	Convex Optimization Additional Exercises	Chapter 2	2.21-(a)
+cam_0240	CAMBench/240.lean	orthogonal_sq_entries_doubly_stochastic_and_diag_eq	Convex Optimization Additional Exercises	Chapter 2	2.21-(b)
+cam_0242	CAMBench/242.lean	matrix_inverse_quadratic_form_not_convex_counterexample	Convex Optimization Additional Exercises	Chapter 2	2.22
+cam_0243	CAMBench/243.lean	convexOn_neg_exp_neg_of_hessian_gradient_block_pos	Convex Optimization Additional Exercises	Chapter 2	2.23-(a)
+cam_0244	CAMBench/244.lean	permutation_max_norm_function_convex	Convex Optimization Additional Exercises	Chapter 2	2.23-(b)
+cam_0245	CAMBench/245.lean	infimal_convolution_epigraph_eq_and_convex	Convex Optimization Additional Exercises	Chapter 2	2.24
+cam_0246	CAMBench/246.lean	convex_iff_three_point_determinant_nonneg	Convex Optimization Additional Exercises	Chapter 2	2.25
+cam_0247	CAMBench/247.lean	det_le_of_posDef_and_loewner	Convex Optimization Additional Exercises	Chapter 2	2.26-(a)
+cam_0248	CAMBench/248.lean	schur_complement_solves_logDetSemidefiniteProgram	Convex Optimization Additional Exercises	Chapter 2	2.26-(b)
+cam_0249	CAMBench/249.lean	schurComplement_inv_eq_compression_of_block	Convex Optimization Additional Exercises	Chapter 2	2.26-(d)
+cam_0250	CAMBench/250.lean	sublevel_distribution_logConcave	Convex Optimization Additional Exercises	Chapter 2	2.27-(b)
+cam_0251	CAMBench/251.lean	positivePartExpectation_convex_and_logConcave	Convex Optimization Additional Exercises	Chapter 2	2.27-(c)
+cam_0252	CAMBench/252.lean	permutationMaximizationProblem_S_C_eq_sum_sorted_mul_sorted	Convex Optimization Additional Exercises	Chapter 2	2.28-(a)
+cam_0253	CAMBench/253.lean	mem_permutahedron_iff_partial_sums_le	Convex Optimization Additional Exercises	Chapter 2	2.28-(b)
+cam_0254	CAMBench/254.lean	weighted_geometric_mean_concave_on_pos	Convex Optimization Additional Exercises	Chapter 2	2.29-(a)
+cam_0255	CAMBench/255.lean	weighted_geometric_mean_concave	Convex Optimization Additional Exercises	Chapter 2	2.29-(b)
+cam_0256	CAMBench/256.lean	weighted_geometric_mean_concaveOn	Convex Optimization Additional Exercises	Chapter 2	2.29-(c)
+cam_0257	CAMBench/257.lean	weightedGeomMonomial_convexOn_of_nonpos	Convex Optimization Additional Exercises	Chapter 2	2.29-(d)
+cam_0258	CAMBench/258.lean	weighted_geometric_monomial_convex_of_unique_positive_exponent	Convex Optimization Additional Exercises	Chapter 2	2.29-(e)
+cam_0259	CAMBench/259.lean	weighted_geom_monomial_convex_of_one_pos_exponent	Convex Optimization Additional Exercises	Chapter 2	2.29-(f)
+cam_0260	CAMBench/260.lean	infimalConvolution_l1_sqNorm_eq_huberPenalty	Convex Optimization Additional Exercises	Chapter 2	2.30
+cam_0261	CAMBench/261.lean	convexOn_norm_comp_of_convex_nondecreasing	Convex Optimization Additional Exercises	Chapter 2	2.31-(a)
+cam_0262	CAMBench/262.lean	convexConjugate_radial_eq_scalarConvexConjugate_norm	Convex Optimization Additional Exercises	Chapter 2	2.31-(b)
+cam_0263	CAMBench/263.lean	convexConjugate_lp_norm_power_eq	Convex Optimization Additional Exercises	Chapter 2	2.31-(c)
+cam_0264	CAMBench/264.lean	negLog_t_sub_inv_mul_sq_norm_convexOn	Convex Optimization Additional Exercises	Chapter 2	2.3-(b)
+cam_0265	CAMBench/265.lean	convexOn_sq_div_of_nonneg_of_pos_of_concave	Convex Optimization Additional Exercises	Chapter 2	2.4
+cam_0266	CAMBench/266.lean	perspective_nonincreasing_in_t	Convex Optimization Additional Exercises	Chapter 2	2.5-(a)
+cam_0267	CAMBench/267.lean	perspective_of_convex_is_convex	Convex Optimization Additional Exercises	Chapter 2	2.5-(b)
+cam_0269	CAMBench/269.lean	perspective_affine_convexOn	Convex Optimization Additional Exercises	Chapter 2	2.7
+cam_0271	CAMBench/271.lean	ratio_squared_norm_affine_over_one_sub_normSq_convexOn	Convex Optimization Additional Exercises	Chapter 2	2.9
+cam_0272	CAMBench/272.lean	minimizer_on_standardSimplex_iff_gradient_coordinates_ge_average	Convex Optimization Additional Exercises	Chapter 3	3.1
+cam_0274	CAMBench/274.lean	schurComplement_blockMatrix_posSemidef_iff_objective_le	Convex Optimization Additional Exercises	Chapter 3	3.11-(a)
+cam_0275	CAMBench/275.lean	maxQuadraticFormMinimization_equiv_semidefinite_program	Convex Optimization Additional Exercises	Chapter 3	3.11-(b)
+cam_0276	CAMBench/276.lean	schurComplement_equivalent_to_unit_ball_quadratic_form_minimization	Convex Optimization Additional Exercises	Chapter 3	3.11-(c)
+cam_0281	CAMBench/281.lean	convexConeLiftSet_is_convex_cone	Convex Optimization Additional Exercises	Chapter 3	3.15-(a)
+cam_0282	CAMBench/282.lean	cone_closure_has_nonempty_interior	Convex Optimization Additional Exercises	Chapter 3	3.15-(b)
+cam_0283	CAMBench/283.lean	K_pointed_of_bounded_feasible_set	Convex Optimization Additional Exercises	Chapter 3	3.15-(c)
+cam_0284	CAMBench/284.lean	speed_formulation_equivalent_to_fuel_optimal_travel_time_program	Convex Optimization Additional Exercises	Chapter 3	3.20-(a)
+cam_0287	CAMBench/287.lean	posynomial_geometric_convexity	Convex Optimization Additional Exercises	Chapter 3	3.23
+cam_0288	CAMBench/288.lean	affinePolicyRobustProgram_equivalent_to_explicitLinearProgram	Convex Optimization Additional Exercises	Chapter 3	3.27-(a)
+cam_0289	CAMBench/289.lean	ellipsoidalRobustQuadraticProgram_equivalent_to_socp	Convex Optimization Additional Exercises	Chapter 3	3.29-(c)
+cam_0290	CAMBench/290.lean	expected_empirical_optimum_le_optimum	Convex Optimization Additional Exercises	Chapter 3	3.31
+cam_0291	CAMBench/291.lean	sum_posPart_le_cardinality_implies_feasible	Convex Optimization Additional Exercises	Chapter 3	3.32-(a)
+cam_0292	CAMBench/292.lean	lambdaThresholdConvexProgram_changeOfVariables_equiv	Convex Optimization Additional Exercises	Chapter 3	3.32-(b)
+cam_0293	CAMBench/293.lean	sdp_feasible_perturbation_iff_compressed	Convex Optimization Additional Exercises	Chapter 3	3.33-(a)
+cam_0294	CAMBench/294.lean	not_extremePoint_of_rank_condition	Convex Optimization Additional Exercises	Chapter 3	3.33-(b)
+cam_0295	CAMBench/295.lean	euclideanNorm_pair_eq_zero_iff	Convex Optimization Additional Exercises	Chapter 3	3.3-(a)
+cam_0296	CAMBench/296.lean	fourth_power_constraint_iff_exists_square_bound	Convex Optimization Additional Exercises	Chapter 3	3.3-(b)
+cam_0297	CAMBench/297.lean	reciprocal_constraint_iff	Convex Optimization Additional Exercises	Chapter 3	3.3-(c)
+cam_0298	CAMBench/298.lean	matrix_two_by_two_psd_iff	Convex Optimization Additional Exercises	Chapter 3	3.3-(e)
+cam_0299	CAMBench/299.lean	exp_max_log_deviation_convexOn	Convex Optimization Additional Exercises	Chapter 3	3.7-(a)
+cam_0300	CAMBench/300.lean	power_constraint_set_convex	Convex Optimization Additional Exercises	Chapter 3	3.7-(b)
+cam_0301	CAMBench/301.lean	exists_not_convex_Sm	Convex Optimization Additional Exercises	Chapter 3	3.7-(c)
+cam_0302	CAMBench/302.lean	complex_least_l2_norm_equiv_realification	Convex Optimization Additional Exercises	Chapter 3	3.9-(a)
+cam_0303	CAMBench/303.lean	complex_infinity_norm_minimization_equivalent_to_socp_reformulation	Convex Optimization Additional Exercises	Chapter 3	3.9-(b)
+cam_0304	CAMBench/304.lean	exp_reweighted_lagrangian_minimizer	Convex Optimization Additional Exercises	Chapter 4	4.11-(a)
+cam_0306	CAMBench/306.lean	exists_common_cost_vector_iff_exists_dual_certificates	Convex Optimization Additional Exercises	Chapter 4	4.13
+cam_0309	CAMBench/309.lean	spectral_trace_maximization	Convex Optimization Additional Exercises	Chapter 4	4.17-(a)
+cam_0310	CAMBench/310.lean	kyFan_r_convex_on_symmetric_matrices	Convex Optimization Additional Exercises	Chapter 4	4.17-(b)
+cam_0311	CAMBench/311.lean	min_sum_top_eigenvalues_equiv_trace_heuristic_sdp	Convex Optimization Additional Exercises	Chapter 4	4.17-(c)
+cam_0312	CAMBench/312.lean	exactPenaltyProblem_objective_convex	Convex Optimization Additional Exercises	Chapter 4	4.18-(a)
+cam_0313	CAMBench/313.lean	convexConjugate_infimalConvolution_eq_sum_convexConjugate	Convex Optimization Additional Exercises	Chapter 4	4.19-(b)
+cam_0314	CAMBench/314.lean	convexConjugate_infimalConvolution_quadratic	Convex Optimization Additional Exercises	Chapter 4	4.19-(c)
+cam_0317	CAMBench/317.lean	robustLinearObjectiveProblem_objective_convex	Convex Optimization Additional Exercises	Chapter 4	4.21-(a)
+cam_0318	CAMBench/318.lean	inf_supportFunction_eq_inf_reformulatedLinearProgram	Convex Optimization Additional Exercises	Chapter 4	4.21-(c)
+cam_0319	CAMBench/319.lean	positive_diagonal_scaling_from_optimal_solution	Convex Optimization Additional Exercises	Chapter 4	4.25
+cam_0320	CAMBench/320.lean	l2l1_primalProblem_has_lagrangeDual	Convex Optimization Additional Exercises	Chapter 4	4.26-(a)
+cam_0321	CAMBench/321.lean	optimality_conditions_of_leastSquaresL1Regularization	Convex Optimization Additional Exercises	Chapter 4	4.26-(b)
+cam_0322	CAMBench/322.lean	l1_regularized_minimizer_coord_eq_zero_of_column_norm_lt	Convex Optimization Additional Exercises	Chapter 4	4.26-(c)
+cam_0323	CAMBench/323.lean	lagrangeDualFunction_eq_piecewise_for_nonsmooth_problem	Convex Optimization Additional Exercises	Chapter 4	4.27
+cam_0324	CAMBench/324.lean	kyFanNormSDP_optimal_value	Convex Optimization Additional Exercises	Chapter 4	4.29-(a)
+cam_0326	CAMBench/326.lean	primal_dual_linear_program_optimalValue_le_convexLogisticProgram_optimalValue_le	Convex Optimization Additional Exercises	Chapter 4	4.30-(b)
+cam_0327	CAMBench/327.lean	quadratic_ball_kkt_implies_strong_duality_and_global_optimal	Convex Optimization Additional Exercises	Chapter 4	4.6-(a)
+cam_0328	CAMBench/328.lean	trust_region_global_minimizer_exists_kkt_multiplier	Convex Optimization Additional Exercises	Chapter 4	4.6-(b)
+cam_0329	CAMBench/329.lean	perturbationValue_eq_convexConjugate_negDual_on_interiorDom	Convex Optimization Additional Exercises	Chapter 4	4.7
+cam_0330	CAMBench/330.lean	penalty_minimizer_yields_dual_lower_bound	Convex Optimization Additional Exercises	Chapter 4	4.9
+cam_0331	CAMBench/331.lean	sparse_plausible_system_identification_feasible_set_convex	Convex Optimization Additional Exercises	Chapter 5	5.10-(a)
+cam_0332	CAMBench/332.lean	censored_least_squares_equiv	Convex Optimization Additional Exercises	Chapter 5	5.13-(a)
+cam_0334	CAMBench/334.lean	piecewiseAffineRegression_equivalent_to_convexSplineRegression	Convex Optimization Additional Exercises	Chapter 5	5.17-(a)
+cam_0337	CAMBench/337.lean	equivalentBarrierOptimizationProblem_has_same_feasible_points_and_optimal_solutions	Convex Optimization Additional Exercises	Chapter 5	5.4-(f)
+cam_0339	CAMBench/339.lean	logConcaveLocationScaleMLE_equiv_and_convex	Convex Optimization Additional Exercises	Chapter 6	6.1
+cam_0341	CAMBench/341.lean	map_estimate_iff_mem_argmin_phi	Convex Optimization Additional Exercises	Chapter 6	6.14-(a)
+cam_0342	CAMBench/342.lean	maximumEntropyProblem_is_convexOptimizationProblem	Convex Optimization Additional Exercises	Chapter 6	6.16-(a)
+cam_0343	CAMBench/343.lean	mle_gaussian_conditional_independence_equiv_sparse_precision	Convex Optimization Additional Exercises	Chapter 6	6.2
+cam_0344	CAMBench/344.lean	exp_integral_on_nonnegative_orthant_finite_iff	Convex Optimization Additional Exercises	Chapter 6	6.3-(a)
+cam_0346	CAMBench/346.lean	logLikelihood_concave_exponentialFamily	Convex Optimization Additional Exercises	Chapter 6	6.3-(d)
+cam_0347	CAMBench/347.lean	exponential_family_logLikelihood_gradient_average	Convex Optimization Additional Exercises	Chapter 6	6.3-(e)
+cam_0348	CAMBench/348.lean	teamAbilityMaximumLikelihoodProblem_gives_mle	Convex Optimization Additional Exercises	Chapter 6	6.4-(a)
+cam_0349	CAMBench/349.lean	monotoneDeconvolutionLeastSquares_mle_iff_leastSquares_optimal	Convex Optimization Additional Exercises	Chapter 6	6.6-(a)
+cam_0351	CAMBench/351.lean	minkowskiFunctional_eq_norm_and_tradeoff_reformulation	Convex Optimization Additional Exercises	Chapter 7	7.13-(a)
+cam_0352	CAMBench/352.lean	primal_log_det_dual_problem_formulation	Convex Optimization Additional Exercises	Chapter 7	7.15
+cam_0353	CAMBench/353.lean	polar_isConvex	Convex Optimization Additional Exercises	Chapter 7	7.17-(a)
+cam_0354	CAMBench/354.lean	polar_distance_minimization_equivalent_to_quadratic_program_reformulation	Convex Optimization Additional Exercises	Chapter 7	7.17-(b)
+cam_0355	CAMBench/355.lean	matrix_nonnegCone_image_subset_iff_columns	Convex Optimization Additional Exercises	Chapter 7	7.18-(a)
+cam_0356	CAMBench/356.lean	range_nonneg_eq_univ_iff_feasible_pm_stdBasis	Convex Optimization Additional Exercises	Chapter 7	7.18-(b)
+cam_0357	CAMBench/357.lean	distanceToConvexHull_equivalent_to_convexHullSOCP	Convex Optimization Additional Exercises	Chapter 7	7.19
+cam_0358	CAMBench/358.lean	ellipsoid_subset_strip_polyhedron_iff	Convex Optimization Additional Exercises	Chapter 7	7.1-(a)
+cam_0359	CAMBench/359.lean	bregmanDivergence_nonneg	Convex Optimization Additional Exercises	Chapter 7	7.20-(a)
+cam_0360	CAMBench/360.lean	bregmanDivergence_eq_sum_xlog_ratio_sub_add	Convex Optimization Additional Exercises	Chapter 7	7.20-(c)
+cam_0362	CAMBench/362.lean	bregmanDivergence_conj_eq_of_grad_conj_inverse	Convex Optimization Additional Exercises	Chapter 7	7.20-(e)
+cam_0363	CAMBench/363.lean	isEuclideanDistanceMatrix_iff_exists_psd_representation	Convex Optimization Additional Exercises	Chapter 7	7.2-(a)
+cam_0364	CAMBench/364.lean	edMatrices_convex_cone	Convex Optimization Additional Exercises	Chapter 7	7.2-(b)
+cam_0365	CAMBench/365.lean	euclideanDistanceMatrix_iff_zero_diag_and_centered_projection_nsd	Convex Optimization Additional Exercises	Chapter 7	7.2-(d)
+cam_0366	CAMBench/366.lean	exp_neg_edm_posSemidef	Convex Optimization Additional Exercises	Chapter 7	7.2-(e)
+cam_0368	CAMBench/368.lean	robust_separation_constraints_iff	Convex Optimization Additional Exercises	Chapter 7	7.4-(a)
+cam_0369	CAMBench/369.lean	linearFractional_minimax_is_quasiconvex_optimization_problem	Convex Optimization Additional Exercises	Chapter 7	7.9-(a)
+cam_0370	CAMBench/370.lean	exp_neg_div_convex_is_concave	Convex Optimization Additional Exercises	Chapter 8	8.10
+cam_0371	CAMBench/371.lean	scalar_newton_monotone_converges_and_backtracking_unit_steps	Convex Optimization Additional Exercises	Chapter 8	8.11
+cam_0374	CAMBench/374.lean	quadratic_constrained_linear_program_unique_solution	Convex Optimization Additional Exercises	Chapter 8	8.2
+cam_0375	CAMBench/375.lean	gradient_and_hessian_of_atv_objective	Convex Optimization Additional Exercises	Chapter 8	8.6-(a)
+cam_0376	CAMBench/376.lean	hessian_of_atv_objective_is_symmetric_tridiagonal_and_newton_system_linear_time	Convex Optimization Additional Exercises	Chapter 8	8.6-(b)
+cam_0378	CAMBench/378.lean	logDetSemidefiniteProgram_optimality_iff	Convex Optimization Additional Exercises	Chapter 8	8.8-(a)
+cam_0379	CAMBench/379.lean	diag_mul_diag_eq_iff_hadamardSquare_mul_eq	Convex Optimization Additional Exercises	Chapter 8	8.8-(b)
+cam_0380	CAMBench/380.lean	maximumLikelihoodEstimation_is_convex_optimization	Convex Optimization Additional Exercises	Chapter 8	8.9-(a)
+cam_0381	CAMBench/381.lean	abs_dot_le_twoNorm_mul_twoNorm	Convex Optimization Additional Exercises	Chapter 10	10.1-(a)
+cam_0382	CAMBench/382.lean	l1_norm_le_sqrt_dim_mul_l2_norm	Convex Optimization Additional Exercises	Chapter 10	10.1-(b)
+cam_0383	CAMBench/383.lean	arithmetic_mean_ge_harmonic_mean	Convex Optimization Additional Exercises	Chapter 10	10.1-(c)
+cam_0384	CAMBench/384.lean	circuit_current_objective_convex	Convex Optimization Additional Exercises	Chapter 11	11.5-(a)
+cam_0385	CAMBench/385.lean	minimization_of_rejection_supnorm_is_convex_optimization	Convex Optimization Additional Exercises	Chapter 12	12.10-(a)
+cam_0387	CAMBench/387.lean	sign_normalized_least_squares_is_convex_quadratic_program	Convex Optimization Additional Exercises	Chapter 12	12.13-(a)
+cam_0389	CAMBench/389.lean	feasibility_sets_convex_and_filter_problem_quasiconvex	Convex Optimization Additional Exercises	Chapter 12	12.1-(b)
+cam_0390	CAMBench/390.lean	fir_filter_design_equivalent_to_filter_length_integer_optimization_and_convex_feasibility	Convex Optimization Additional Exercises	Chapter 12	12.1-(c)
+cam_0391	CAMBench/391.lean	logFractionProblem_equivalent_to_convexProblem	Convex Optimization Additional Exercises	Chapter 12	12.3
+cam_0392	CAMBench/392.lean	discretizedAntennaOptimization_equivalent_to_antennaDesignSOCP	Convex Optimization Additional Exercises	Chapter 12	12.6-(a)
+cam_0395	CAMBench/395.lean	scaled_newton_dual_variable_dualFeasible	Convex Optimization Additional Exercises	Chapter 9	9.6-(b)
+cam_0396	CAMBench/396.lean	logBarrier_suboptimality_bound	Convex Optimization Additional Exercises	Chapter 9	9.6-(c)
+cam_0397	CAMBench/397.lean	centeringObjective_bounded_below_on_strictFeasibleSet	Convex Optimization Additional Exercises	Chapter 9	9.7-(b)
+cam_0398	CAMBench/398.lean	saddle_residual_deriv_inverse_norm_le	Convex Optimization	Chapter 10	10.10
+cam_0399	CAMBench/399.lean	reducedProblem_newtonStep_linear_system_and_rank_one_cost	Convex Optimization	Chapter 10	10.11-(a)
+cam_0400	CAMBench/400.lean	newtonStep_computable_in_linear_time	Convex Optimization	Chapter 10	10.11-(c)
+cam_0402	CAMBench/402.lean	kkt_matrix_nonsingular_iff_conditions	Convex Optimization	Chapter 10	10.1-(a)
+cam_0403	CAMBench/403.lean	kktBlockMatrix_pos_neg_eigenvalue_counts	Convex Optimization	Chapter 10	10.1-(b)
+cam_0404	CAMBench/404.lean	equalityConstrainedNewtonSteps_same_for_quadraticPenalty	Convex Optimization	Chapter 10	10.5
+cam_0405	CAMBench/405.lean	infeasibleStartNewton_feasibility_preserved	Convex Optimization	Chapter 10	10.8-(a)
+cam_0406	CAMBench/406.lean	entropy_minimization_problem_has_unique_optimal_solution	Convex Optimization	Chapter 10	10.9-(a)
+cam_0407	CAMBench/407.lean	initial_point_feasible_and_S_not_closed	Convex Optimization	Chapter 10	10.9-(b)
+cam_0408	CAMBench/408.lean	shiftedBarrier_stationary_iff_centralPath_stationary	Convex Optimization	Chapter 11	11.10
+cam_0409	CAMBench/409.lean	phi_t_convexConcave_of_barrier_terms	Convex Optimization	Chapter 11	11.12-(a)
+cam_0410	CAMBench/410.lean	xlogx_not_selfConcordantOn_pos	Convex Optimization	Chapter 11	11.13-(a)
+cam_0411	CAMBench/411.lean	txLogx_sub_log_selfConcordantOnRpp	Convex Optimization	Chapter 11	11.13-(b)
+cam_0412	CAMBench/412.lean	gradient_mem_negative_dualCone_of_concave_log_homogeneous	Convex Optimization	Chapter 11	11.15-(a)
+cam_0413	CAMBench/413.lean	gradient_scales_of_logarithmic_homogeneity	Convex Optimization	Chapter 11	11.16-(a)
+cam_0414	CAMBench/414.lean	gradient_eq_neg_hessian_mul_self_of_log_homogeneous	Convex Optimization	Chapter 11	11.16-(b)
+cam_0415	CAMBench/415.lean	ray_log_homogeneous_hessian_quadratic_form_eq_neg_theta	Convex Optimization	Chapter 11	11.16-(c)
+cam_0416	CAMBench/416.lean	generalizedLogarithm_gradient_hessian_inverse_quadratic_form_eq_neg_degree	Convex Optimization	Chapter 11	11.16-(d)
+cam_0417	CAMBench/417.lean	centering_sublevel_bounded_of_base_sublevel_bounded	Convex Optimization	Chapter 11	11.3
+cam_0418	CAMBench/418.lean	socp_barrier_minimizer_is_two_m_over_t_suboptimal	Convex Optimization	Chapter 11	11.5-(b)
+cam_0419	CAMBench/419.lean	barrierObjective_convex_on_barrierDomain	Convex Optimization	Chapter 11	11.6-(a)
+cam_0421	CAMBench/421.lean	convex_mem_sum_of_nonneg_eq_one	Convex Optimization	Chapter 2	2.1
+cam_0422	CAMBench/422.lean	quadratic_sublevelSet_convex	Convex Optimization	Chapter 2	2.10-(a)
+cam_0427	CAMBench/427.lean	slab_convex	Convex Optimization	Chapter 2	2.12-(a)
+cam_0428	CAMBench/428.lean	box_set_convex	Convex Optimization	Chapter 2	2.12-(b)
+cam_0429	CAMBench/429.lean	nearestPointDominanceSet_convex	Convex Optimization	Chapter 2	2.12-(d)
+cam_0430	CAMBench/430.lean	convex_translate_subset_set	Convex Optimization	Chapter 2	2.12-(f)
+cam_0431	CAMBench/431.lean	euclidean_sublevel_ratio_set_convex	Convex Optimization	Chapter 2	2.12-(g)
+cam_0432	CAMBench/432.lean	cone_eq_posSemidef_rank_ge_k_union_zero	Convex Optimization	Chapter 2	2.13
+cam_0433	CAMBench/433.lean	eroded_set_convex	Convex Optimization	Chapter 2	2.14-(b)
+cam_0434	CAMBench/434.lean	exceedance_probability_set_convex	Convex Optimization	Chapter 2	2.15-(b)
+cam_0435	CAMBench/435.lean	S_is_convex	Convex Optimization	Chapter 2	2.15-(c)
+cam_0436	CAMBench/436.lean	second_moment_sublevel_set_convex	Convex Optimization	Chapter 2	2.15-(d)
+cam_0437	CAMBench/437.lean	convex_probability_weights_with_large_second_moment	Convex Optimization	Chapter 2	2.15-(e)
+cam_0438	CAMBench/438.lean	variance_sublevel_set_not_convex_counterexample	Convex Optimization	Chapter 2	2.15-(f)
+cam_0439	CAMBench/439.lean	variance_superlevel_set_convex	Convex Optimization	Chapter 2	2.15-(g)
+cam_0440	CAMBench/440.lean	quartile_superlevel_set_convex	Convex Optimization	Chapter 2	2.15-(h)
+cam_0441	CAMBench/441.lean	quartile_sublevel_set_convex	Convex Optimization	Chapter 2	2.15-(i)
+cam_0442	CAMBench/442.lean	convex_setOf_add_of_convex	Convex Optimization	Chapter 2	2.16
+cam_0443	CAMBench/443.lean	perspective_image_convexHull_eq_convexHull_div	Convex Optimization	Chapter 2	2.17-(a)
+cam_0444	CAMBench/444.lean	linearFractionalMap_bijective_with_inverse	Convex Optimization	Chapter 2	2.18
+cam_0445	CAMBench/445.lean	preimage_halfspace_linear_fractional	Convex Optimization	Chapter 2	2.19-(a)
+cam_0446	CAMBench/446.lean	preimage_polyhedron_linearFractional	Convex Optimization	Chapter 2	2.19-(b)
+cam_0447	CAMBench/447.lean	preimage_linear_matrix_inequality_eq	Convex Optimization	Chapter 2	2.19-(d)
+cam_0449	CAMBench/449.lean	exists_strictly_positive_solution_iff_no_dual_certificate	Convex Optimization	Chapter 2	2.20
+cam_0451	CAMBench/451.lean	exists_separating_hyperplane_of_disjoint_convex	Convex Optimization	Chapter 2	2.22
+cam_0452	CAMBench/452.lean	nonnegative_product_ge_one_eq_iInter_halfspaces	Convex Optimization	Chapter 2	2.24-(a)
+cam_0453	CAMBench/453.lean	supporting_hyperplane_closedUnitBall_iff	Convex Optimization	Chapter 2	2.24-(b)
+cam_0454	CAMBench/454.lean	polyhedralInner_outer_approximation	Convex Optimization	Chapter 2	2.25
+cam_0455	CAMBench/455.lean	closed_convex_eq_iff_supportFunction_eq	Convex Optimization	Chapter 2	2.26
+cam_0456	CAMBench/456.lean	convex_of_supportingHyperplane_at_boundary	Convex Optimization	Chapter 2	2.27
+cam_0458	CAMBench/458.lean	pointed_closed_convex_cone_iff_eq_zero_or_ray_or_sector	Convex Optimization	Chapter 2	2.29-(c)
+cam_0460	CAMBench/460.lean	closed_midpoint_convex	Convex Optimization	Chapter 2	2.3
+cam_0462	CAMBench/462.lean	dualCone_isConvexCone	Convex Optimization	Chapter 2	2.31-(a)
+cam_0463	CAMBench/463.lean	dualCone_anti_monotone	Convex Optimization	Chapter 2	2.31-(b)
+cam_0464	CAMBench/464.lean	dualCone_isPointed_of_interior_nonempty	Convex Optimization	Chapter 2	2.31-(e)
+cam_0465	CAMBench/465.lean	dualCone_eq_nonneg_transpose_mul	Convex Optimization	Chapter 2	2.32
+cam_0466	CAMBench/466.lean	Kmplus_isProperCone	Convex Optimization	Chapter 2	2.33-(a)
+cam_0467	CAMBench/467.lean	dualCone_Kmplus_eq_partialSums_nonneg	Convex Optimization	Chapter 2	2.33-(b)
+cam_0468	CAMBench/468.lean	lexCone_isCone_but_not_proper	Convex Optimization	Chapter 2	2.34-(a)
+cam_0469	CAMBench/469.lean	lex_preorder_isLinearOrdering	Convex Optimization	Chapter 2	2.34-(b)
+cam_0470	CAMBench/470.lean	copositive_dual_cone_eq_convex_hull_rankOne_nonneg	Convex Optimization	Chapter 2	2.35
+cam_0471	CAMBench/471.lean	dualCone_of_euclideanDistanceMatrices_eq_vwvT_add_diag	Convex Optimization	Chapter 2	2.36
+cam_0472	CAMBench/472.lean	Kpol_isProperCone	Convex Optimization	Chapter 2	2.37-(a)
+cam_0473	CAMBench/473.lean	dualCone_Kpol_eq_Khan	Convex Optimization	Chapter 2	2.37-(c)
+cam_0474	CAMBench/474.lean	exercise_2_38_cone_characterizations	Convex Optimization	Chapter 2	2.38
+cam_0475	CAMBench/475.lean	barrierCone_supportFunction_sublinear	Convex Optimization	Chapter 2	2.38-(a)
+cam_0478	CAMBench/478.lean	exists_nonzero_mem_dualCone_and_neg_mem_dualCone_of_disjoint_interiors	Convex Optimization	Chapter 2	2.39
+cam_0479	CAMBench/479.lean	convexHull_eq_sInter_convex_supersets	Convex Optimization	Chapter 2	2.4
+cam_0480	CAMBench/480.lean	norm_sub_le_norm_sub_is_halfspace_explicit	Convex Optimization	Chapter 2	2.7
+cam_0481	CAMBench/481.lean	S_eq_nonneg_and_le_one_and_isPolyhedron	Convex Optimization	Chapter 2	2.8-(d)
+cam_0482	CAMBench/482.lean	polyhedron_eq_intersection_of_halfspaces_from_reflected_points	Convex Optimization	Chapter 2	2.9-(b)
+cam_0483	CAMBench/483.lean	variance_larger_does_not_imply_larger_convex_expectation	Convex Optimization	Chapter 3	3.10-(a)
+cam_0484	CAMBench/484.lean	expectedValue_convex_perturbation_monotone	Convex Optimization	Chapter 3	3.10-(b)
+cam_0486	CAMBench/486.lean	exists_affine_between_convex_and_concave	Convex Optimization	Chapter 3	3.12
+cam_0487	CAMBench/487.lean	kullbackLeiblerDivergence_nonneg_and_eq_zero_iff	Convex Optimization	Chapter 3	3.13
+cam_0488	CAMBench/488.lean	isConvexConcave_iff_hessian_blocks_semidefinite	Convex Optimization	Chapter 3	3.14-(a)
+cam_0490	CAMBench/490.lean	gradient_eq_zero_of_saddle_point	Convex Optimization	Chapter 3	3.14-(c)
+cam_0491	CAMBench/491.lean	log_eq_tendsto_uAlpha_at_zero	Convex Optimization	Chapter 3	3.15-(a)
+cam_0492	CAMBench/492.lean	isoelasticUtility_concave_monotone_and_at_one	Convex Optimization	Chapter 3	3.15-(b)
+cam_0493	CAMBench/493.lean	exp_sub_one_properties	Convex Optimization	Chapter 3	3.16-(a)
+cam_0494	CAMBench/494.lean	mul_pos_neither_convex_nor_concave_not_quasiconvex_but_quasiconcave	Convex Optimization	Chapter 3	3.16-(b)
+cam_0495	CAMBench/495.lean	inv_mul_mul_convex_quasiconvex_not_concave_not_quasiconcave	Convex Optimization	Chapter 3	3.16-(c)
+cam_0496	CAMBench/496.lean	ratio_pos_quasiconvex_quasiconcave_not_convex_not_concave	Convex Optimization	Chapter 3	3.16-(d)
+cam_0497	CAMBench/497.lean	x1_sq_div_x2_convex_quasiconvex_not_concave_not_quasiconcave	Convex Optimization	Chapter 3	3.16-(e)
+cam_0498	CAMBench/498.lean	power_sum_root_concave_on_positive_orthant	Convex Optimization	Chapter 3	3.17
+cam_0499	CAMBench/499.lean	trace_inv_convexOn_posDef	Convex Optimization	Chapter 3	3.18-(a)
+cam_0500	CAMBench/500.lean	det_rpow_one_div_concave_on_posDef	Convex Optimization	Chapter 3	3.18-(b)
+cam_0501	CAMBench/501.lean	weighted_sorted_sum_convexOn	Convex Optimization	Chapter 3	3.19-(a)
+cam_0502	CAMBench/502.lean	f_convex_on_D_trigonometric_log_integral	Convex Optimization	Chapter 3	3.19-(b)
+cam_0503	CAMBench/503.lean	convex_le_secant_on_interval	Convex Optimization	Chapter 3	3.1-(a)
+cam_0504	CAMBench/504.lean	secant_slope_mono_of_convex	Convex Optimization	Chapter 3	3.1-(b)
+cam_0505	CAMBench/505.lean	norm_affine_map_convex	Convex Optimization	Chapter 3	3.20-(a)
+cam_0506	CAMBench/506.lean	neg_det_root_convexOn_posDef_domain	Convex Optimization	Chapter 3	3.20-(b)
+cam_0507	CAMBench/507.lean	trace_inv_matrix_affine_convexOn	Convex Optimization	Chapter 3	3.20-(c)
+cam_0508	CAMBench/508.lean	max_norm_affine_convexOn_univ	Convex Optimization	Chapter 3	3.21-(a)
+cam_0509	CAMBench/509.lean	top_r_abs_sum_convexOn	Convex Optimization	Chapter 3	3.21-(b)
+cam_0510	CAMBench/510.lean	log_neg_log_sum_exp_convex_on_domain	Convex Optimization	Chapter 3	3.22-(a)
+cam_0511	CAMBench/511.lean	log_barrier_rotated_soc_convex	Convex Optimization	Chapter 3	3.22-(c)
+cam_0512	CAMBench/512.lean	minkowski_gauge_neg_root_convexOn	Convex Optimization	Chapter 3	3.22-(d)
+cam_0513	CAMBench/513.lean	lp_log_barrier_convexOn	Convex Optimization	Chapter 3	3.22-(e)
+cam_0514	CAMBench/514.lean	lp_power_over_t_convexOn	Convex Optimization	Chapter 3	3.23-(a)
+cam_0515	CAMBench/515.lean	quadratic_over_affine_isConvexOn	Convex Optimization	Chapter 3	3.23-(b)
+cam_0517	CAMBench/517.lean	interval_indicator_sum_is_convex_concave_quasiconvex_quasiconcave	Convex Optimization	Chapter 3	3.24-(c)
+cam_0518	CAMBench/518.lean	variance_on_probabilitySimplex_concave_quasiconcave_not_convex_not_quasiconvex	Convex Optimization	Chapter 3	3.24-(e)
+cam_0519	CAMBench/519.lean	quartile_on_simplex_quasiconvex_quasiconcave_not_convex_not_concave	Convex Optimization	Chapter 3	3.24-(f)
+cam_0520	CAMBench/520.lean	support_size_cover_quasiconcave_but_not_convex_concave_quasiconvex	Convex Optimization	Chapter 3	3.24-(g)
+cam_0522	CAMBench/522.lean	sum_top_k_eigenvalues_convex_on_symmetric	Convex Optimization	Chapter 3	3.26-(a)
+cam_0523	CAMBench/523.lean	geometricMeanSmallestEigenvalues_concave	Convex Optimization	Chapter 3	3.26-(b)
+cam_0526	CAMBench/526.lean	convex_eq_sSup_affine_minorants_on_interior_dom	Convex Optimization	Chapter 3	3.28-(a)
+cam_0527	CAMBench/527.lean	closed_convex_eq_sup_affine_minorants	Convex Optimization	Chapter 3	3.28-(b)
+cam_0528	CAMBench/528.lean	convex_piecewiseLinear_eq_iSup_affine	Convex Optimization	Chapter 3	3.29
+cam_0529	CAMBench/529.lean	convex_underestimator_le_infConvEpigraph	Convex Optimization	Chapter 3	3.30
+cam_0530	CAMBench/530.lean	g_homogeneous	Convex Optimization	Chapter 3	3.31-(a)
+cam_0531	CAMBench/531.lean	homogeneous_underestimator_le_infScaled	Convex Optimization	Chapter 3	3.31-(b)
+cam_0532	CAMBench/532.lean	inf_rescaling_convex	Convex Optimization	Chapter 3	3.31-(c)
+cam_0533	CAMBench/533.lean	mul_convexOn_of_monotone	Convex Optimization	Chapter 3	3.32-(a)
+cam_0534	CAMBench/534.lean	concaveOn_mul_of_opposite_monotone	Convex Optimization	Chapter 3	3.32-(b)
+cam_0535	CAMBench/535.lean	convexOn_div_of_convex_nondecreasing_of_concave_nonincreasing	Convex Optimization	Chapter 3	3.32-(c)
+cam_0536	CAMBench/536.lean	perspectiveFunction_convexOn	Convex Optimization	Chapter 3	3.33
+cam_0537	CAMBench/537.lean	minkowskiFunctional_convex	Convex Optimization	Chapter 3	3.34-(d)
+cam_0538	CAMBench/538.lean	minkowskiFunctional_isNorm_with_unitBall	Convex Optimization	Chapter 3	3.34-(e)
+cam_0539	CAMBench/539.lean	supportFunction_eq_supportFunction_convexHull	Convex Optimization	Chapter 3	3.35-(a)
+cam_0540	CAMBench/540.lean	supportFunction_minkowskiSum	Convex Optimization	Chapter 3	3.35-(b)
+cam_0541	CAMBench/541.lean	supportFunction_union	Convex Optimization	Chapter 3	3.35-(c)
+cam_0542	CAMBench/542.lean	subset_iff_supportFunction_le	Convex Optimization	Chapter 3	3.35-(d)
+cam_0544	CAMBench/544.lean	convexConjugate_neg_geomMean_eq_indicator_nonpos_prod_ge_one	Convex Optimization	Chapter 3	3.36-(e)
+cam_0545	CAMBench/545.lean	convexConjugateProd_log_barrier_eq	Convex Optimization	Chapter 3	3.36-(f)
+cam_0546	CAMBench/546.lean	convexConjugate_trace_inv_eq_negTwo_trace_sqrt	Convex Optimization	Chapter 3	3.37
+cam_0548	CAMBench/548.lean	conjugate_add_affine_eq_shift_sub	Convex Optimization	Chapter 3	3.39-(a)
+cam_0549	CAMBench/549.lean	closed_convex_function_eq_biconjugate	Convex Optimization	Chapter 3	3.39-(d)
+cam_0550	CAMBench/550.lean	convex_iff_integral_midpoint_bound	Convex Optimization	Chapter 3	3.4
+cam_0551	CAMBench/551.lean	gradient_convexConjugate_at_gradient_eq_point	Convex Optimization	Chapter 3	3.40-(a)
+cam_0552	CAMBench/552.lean	hessian_convexConjugate_eq_inverse_hessian_at_gradient	Convex Optimization	Chapter 3	3.40-(b)
+cam_0553	CAMBench/553.lean	W_quasiconcave	Convex Optimization	Chapter 3	3.42
+cam_0554	CAMBench/554.lean	differentiable_quasiconvex_iff_gradient_mono	Convex Optimization	Chapter 3	3.43
+cam_0557	CAMBench/557.lean	continuous_convex_sublevel_superlevel_factor_through_linear	Convex Optimization	Chapter 3	3.46
+cam_0558	CAMBench/558.lean	logConcaveOn_iff_ratio_le_exp_inner_deriv	Convex Optimization	Chapter 3	3.47
+cam_0559	CAMBench/559.lean	logisticFunction_logConcaveOn	Convex Optimization	Chapter 3	3.49-(a)
+cam_0560	CAMBench/560.lean	harmonic_mean_denominator_reciprocal_logConcaveOn	Convex Optimization	Chapter 3	3.49-(b)
+cam_0561	CAMBench/561.lean	prod_div_sum_logConcave_on_posOrthant	Convex Optimization	Chapter 3	3.49-(c)
+cam_0562	CAMBench/562.lean	det_div_trace_logConcaveOn_posDef	Convex Optimization	Chapter 3	3.49-(d)
+cam_0563	CAMBench/563.lean	integral_average_convex_on_Ioi	Convex Optimization	Chapter 3	3.5
+cam_0564	CAMBench/564.lean	elementarySymmetric_logConcave_on_negative_orthant	Convex Optimization	Chapter 3	3.50
+cam_0565	CAMBench/565.lean	log_polynomial_concave_on_interval	Convex Optimization	Chapter 3	3.51
+cam_0567	CAMBench/567.lean	convolution_logConcave	Convex Optimization	Chapter 3	3.53
+cam_0568	CAMBench/568.lean	gaussian_cdf_second_derivative_mul_le_sq_derivative	Convex Optimization	Chapter 3	3.54-(a)
+cam_0569	CAMBench/569.lean	sq_half_ge_linearized_neg_sq_half	Convex Optimization	Chapter 3	3.54-(b)
+cam_0570	CAMBench/570.lean	gaussian_tail_integral_bound	Convex Optimization	Chapter 3	3.54-(c)
+cam_0572	CAMBench/572.lean	cdf_second_derivative_mul_le_sq_of_hderiv_neg	Convex Optimization	Chapter 3	3.55-(b)
+cam_0573	CAMBench/573.lean	gamma_density_log_concave_on_Ioi	Convex Optimization	Chapter 3	3.56-(a)
+cam_0574	CAMBench/574.lean	inverse_matrixConvex	Convex Optimization	Chapter 3	3.57
+cam_0575	CAMBench/575.lean	schurComplement_matrixConcave	Convex Optimization	Chapter 3	3.58
+cam_0576	CAMBench/576.lean	kConvex_sublevel_set_convex	Convex Optimization	Chapter 3	3.60-(a)
+cam_0577	CAMBench/577.lean	isKConvex_iff_convex_KEpigraph	Convex Optimization	Chapter 3	3.60-(b)
+cam_0578	CAMBench/578.lean	convex_bounded_above_on_univ_is_constant	Convex Optimization	Chapter 3	3.7
+cam_0579	CAMBench/579.lean	convexOn_iff_convex_and_hessian_posSemidef	Convex Optimization	Chapter 3	3.8
+cam_0580	CAMBench/580.lean	affine_precomp_convexOn_iff_hessian_pullback_psd	Convex Optimization	Chapter 3	3.9-(a)
+cam_0581	CAMBench/581.lean	convex_on_affine_set_iff_hessian_shifted_psd	Convex Optimization	Chapter 3	3.9-(b)
+cam_0583	CAMBench/583.lean	infinityNormApproximation_equiv_epigraph	Convex Optimization	Chapter 4	4.11-(a)
+cam_0585	CAMBench/585.lean	l1FitInfinityBoundLinearProgram_equivalence	Convex Optimization	Chapter 4	4.11-(c)
+cam_0587	CAMBench/587.lean	minimumCostFlowLP_feasible_set_convex_and_objective_affine	Convex Optimization	Chapter 4	4.12
+cam_0588	CAMBench/588.lean	robust_linear_program_equivalent_to_reformulation	Convex Optimization	Chapter 4	4.13
+cam_0591	CAMBench/591.lean	boolean_optimal_of_relaxation_optimal_integral	Convex Optimization	Chapter 4	4.15-(b)
+cam_0592	CAMBench/592.lean	sparse_control_problem_equivalent_to_equivalentLinearProgram	Convex Optimization	Chapter 4	4.16
+cam_0593	CAMBench/593.lean	piecewiseLinearRevenue_equivalent_to_epigraphLP	Convex Optimization	Chapter 4	4.17
+cam_0594	CAMBench/594.lean	linf_ball_fractional_l1_objective_quasiconvex	Convex Optimization	Chapter 4	4.19-(a)
+cam_0595	CAMBench/595.lean	infimum_and_minimizer_of_Exercise_4_1_a	Convex Optimization	Chapter 4	4.1-(a)
+cam_0596	CAMBench/596.lean	linearOptimizationOverEllipsoid_unique_optimum	Convex Optimization	Chapter 4	4.21-(b)
+cam_0598	CAMBench/598.lean	quarticResidualMinimizer_iff_qcqp_exists	Convex Optimization	Chapter 4	4.23
+cam_0602	CAMBench/602.lean	strict_separating_hyperplane_iff_soc_feasible	Convex Optimization	Chapter 4	4.25
+cam_0604	CAMBench/604.lean	matrix_fractional_minimization_equiv_second_order_cone_program	Convex Optimization	Chapter 4	4.27
+cam_0607	CAMBench/607.lean	dom_f0_unbounded_iff_exists_nonzero_nonpositive_rows	Convex Optimization	Chapter 4	4.2-(a)
+cam_0608	CAMBench/608.lean	f0_unboundedBelow_iff_exists_direction	Convex Optimization	Chapter 4	4.2-(b)
+cam_0609	CAMBench/609.lean	kernel_translate_of_logBarrier_optimal_is_optimal	Convex Optimization	Chapter 4	4.2-(d)
+cam_0610	CAMBench/610.lean	monomial_matches_value_and_partials_at_point	Convex Optimization	Chapter 4	4.32
+cam_0611	CAMBench/611.lean	max_posynomial_minimization_log_change_of_variables_convex	Convex Optimization	Chapter 4	4.33-(a)
+cam_0612	CAMBench/612.lean	exponential_posynomial_convex_reformulation_equivalent	Convex Optimization	Chapter 4	4.33-(b)
+cam_0615	CAMBench/615.lean	signomial_problem_equiv_geometric_program	Convex Optimization	Chapter 4	4.35
+cam_0616	CAMBench/616.lean	generalizedEigenvalue_iff_eq_diagonal_ratio	Convex Optimization	Chapter 4	4.38-(a)
+cam_0617	CAMBench/617.lean	congruenceTransform_preserves_feasibleSet_and_objective	Convex Optimization	Chapter 4	4.39-(a)
+cam_0618	CAMBench/618.lean	polynomial_isSOS_iff_exists_psd_gramMatrix	Convex Optimization	Chapter 4	4.45-(a)
+cam_0621	CAMBench/621.lean	maxDet_posDefCompletion_has_tridiagonal_inverse	Convex Optimization	Chapter 4	4.47-(d)
+cam_0622	CAMBench/622.lean	avg_mem_fixedPoints_of_finite_matrixGroup	Convex Optimization	Chapter 4	4.4-(a)
+cam_0623	CAMBench/623.lean	convex_GInvariant_avg_le	Convex Optimization	Chapter 4	4.4-(b)
+cam_0624	CAMBench/624.lean	exists_minimizer_const_on_ones_of_convex_permInvariant	Convex Optimization	Chapter 4	4.4-(d)
+cam_0626	CAMBench/626.lean	stochastic_convex_program_is_convex	Convex Optimization	Chapter 4	4.59-(a)
+cam_0627	CAMBench/627.lean	logUtilityPortfolioProblem_isConvexOptimization	Convex Optimization	Chapter 4	4.60
+cam_0628	CAMBench/628.lean	ParametricSupremumProblem.f_logConcave	Convex Optimization	Chapter 4	4.63-(a)
+cam_0630	CAMBench/630.lean	singleConstraintLinearProgram_dualAlternative	Convex Optimization	Chapter 4	4.8-(b)
+cam_0631	CAMBench/631.lean	boundedLinearProgram_greedy_optimal_solution	Convex Optimization	Chapter 4	4.8-(f)
+cam_0632	CAMBench/632.lean	LinearProgramIneqNonsing.pStar_eq_cMul_Ainv_b_iff_ATinv_c_nonpos	Convex Optimization	Chapter 4	4.9
+cam_0633	CAMBench/633.lean	phi_convex_of_convex_functions	Convex Optimization	Chapter 5	5.16-(a)
+cam_0634	CAMBench/634.lean	weak_max_min_inequality_holds	Convex Optimization	Chapter 5	5.24
+cam_0635	CAMBench/635.lean	p_isConvex	Convex Optimization	Chapter 5	5.25-(a)
+cam_0636	CAMBench/636.lean	fenchelConjugate_p_eq_inf_indicator_neg	Convex Optimization	Chapter 5	5.25-(b)
+cam_0637	CAMBench/637.lean	partial_infimum_isClosed_of_bounded_sublevelSets	Convex Optimization	Chapter 5	5.25-(e)
+cam_0640	CAMBench/640.lean	optimalValue_affineOnInterval_containing_zero	Convex Optimization	Chapter 5	5.33-(b)
+cam_0641	CAMBench/641.lean	leastSquares_residual_linf_le_sqrt_m_mul_chebyshev_optimal	Convex Optimization	Chapter 5	5.6-(a)
+cam_0642	CAMBench/642.lean	gpStar_sub_pPwlStar_bounds	Convex Optimization	Chapter 5	5.7-(c)
+cam_0643	CAMBench/643.lean	pz_plus_q_not_componentwise_nonnegative	Convex Optimization	Chapter 2	2.1
+cam_0644	CAMBench/644.lean	normSq_le_sum_phi_le_c_mul_normSq	Convex Optimization	Chapter 6	6.1
+cam_0646	CAMBench/646.lean	exists_monotone_nondecreasing_interpolant_iff	Convex Optimization	Chapter 6	6.12-(a)
+cam_0647	CAMBench/647.lean	convex_monotone_nondecreasing_interpolation_iff	Convex Optimization	Chapter 6	6.12-(b)
+cam_0648	CAMBench/648.lean	exists_quasiconvex_interpolant_iff_exists_separating_vectors	Convex Optimization	Chapter 6	6.13
+cam_0649	CAMBench/649.lean	dualCone_KPR_characterization	Convex Optimization	Chapter 6	6.14-(b)
+cam_0650	CAMBench/650.lean	pick_nevanlinna_representation_iff_psd	Convex Optimization	Chapter 6	6.14-(d)
+cam_0654	CAMBench/654.lean	chebyshevScalarApproximation_minimizers_eq_midrange	Convex Optimization	Chapter 6	6.2-(c)
+cam_0660	CAMBench/660.lean	least_absolute_deviations_opt_value_ge_smoothed_residual_bound	Convex Optimization	Chapter 6	6.4-(a)
+cam_0661	CAMBench/661.lean	l1_objective_of_separable_optimal_le	Convex Optimization	Chapter 6	6.4-(b)
+cam_0662	CAMBench/662.lean	lengthMinimizationProblem_isQuasiconvexOptimizationProblem	Convex Optimization	Chapter 6	6.5
+cam_0664	CAMBench/664.lean	tikhonov_svd_has_unique_minimizer	Convex Optimization	Chapter 6	6.7-(a)
+cam_0668	CAMBench/668.lean	rationalChebyshevFittingProblem_quasiconvex	Convex Optimization	Chapter 6	6.9
+cam_0669	CAMBench/669.lean	covariance_lower_bound_constraint_is_convex	Convex Optimization	Chapter 7	7.10
+cam_0670	CAMBench/670.lean	columnStochastic_is_convexCombination_of_deterministic	Convex Optimization	Chapter 7	7.11
+cam_0671	CAMBench/671.lean	mle_uniform_noise_iff_minimizes_infNorm_residual	Convex Optimization	Chapter 7	7.2
+cam_0673	CAMBench/673.lean	gaussian_logLikelihood_jointly_concave_on_covariance_region	Convex Optimization	Chapter 7	7.4-(b)
+cam_0674	CAMBench/674.lean	mle_transition_matrix_empirical_frequencies	Convex Optimization	Chapter 7	7.5-(a)
+cam_0675	CAMBench/675.lean	maximum_likelihood_estimation_for_sign_measurements_is_convex	Convex Optimization	Chapter 7	7.8
+cam_0676	CAMBench/676.lean	exists_unique_nearest_point_in_closed_convex_set	Convex Optimization	Chapter 8	8.1
+cam_0678	CAMBench/678.lean	john_ellipsoid_expansion_contains_polyhedron	Convex Optimization	Chapter 8	8.14-(a)
+cam_0679	CAMBench/679.lean	john_ellipsoid_scaling_contains_polytope	Convex Optimization	Chapter 8	8.14-(b)
+cam_0681	CAMBench/681.lean	redundant_cuts_preserve_polyhedron_and_make_x0_analytic_center	Convex Optimization	Chapter 8	8.18
+cam_0682	CAMBench/682.lean	redundant_of_slack_ge_m_times_sqrt_inv_quad_form	Convex Optimization	Chapter 8	8.19
+cam_0683	CAMBench/683.lean	analyticCenter_ellipsoid_bounds	Convex Optimization	Chapter 8	8.20
+cam_0684	CAMBench/684.lean	centerOfGravity_isMinimizer_of_squaredDistanceIntegral	Convex Optimization	Chapter 8	8.22
+cam_0685	CAMBench/685.lean	maximum_margin_separation_equivalent_to_minimum_norm_hyperplane	Convex Optimization	Chapter 8	8.23-(b)
+cam_0687	CAMBench/687.lean	graphEmbeddingLeastSquares_optimal_vectors_satisfy_symmetric_linear_systems	Convex Optimization	Chapter 8	8.26
+cam_0688	CAMBench/688.lean	restrictedConvexProblem_feasible_implies_min_distance	Convex Optimization	Chapter 8	8.27
+cam_0690	CAMBench/690.lean	nearestPointProperty_nonempty_and_isClosed	Convex Optimization	Chapter 8	8.2-(a)
+cam_0691	CAMBench/691.lean	projection_constant_on_segment_to_chebyshev_point	Convex Optimization	Chapter 8	8.2-(c)
+cam_0692	CAMBench/692.lean	projection_eq_along_ray_of_chebyshev	Convex Optimization	Chapter 8	8.2-(d)
+cam_0693	CAMBench/693.lean	chebyshev_set_convex_of_projection_ray_fixed	Convex Optimization	Chapter 8	8.2-(e)
+cam_0694	CAMBench/694.lean	secondOrderCone_projection_formula	Convex Optimization	Chapter 8	8.3-(c)
+cam_0695	CAMBench/695.lean	depth_concave_on_convex_set	Convex Optimization	Chapter 8	8.5-(a)
+cam_0696	CAMBench/696.lean	signedDistToConvexSet_convex	Convex Optimization	Chapter 8	8.5-(b)
+cam_0697	CAMBench/697.lean	dist_C_translate_add_convex	Convex Optimization	Chapter 8	8.6-(a)
+cam_0698	CAMBench/698.lean	dist_scaled_sets_translate_convex	Convex Optimization	Chapter 8	8.6-(b)
+cam_0699	CAMBench/699.lean	ellipsoids_disjoint_iff_exists_separating_vector	Convex Optimization	Chapter 8	8.7
+cam_0700	CAMBench/700.lean	euclidean_distance_matrix_iff_centered_gram_psd	Convex Optimization	Chapter 8	8.9
+cam_0701	CAMBench/701.lean	unconstrained_quadratic_unbounded_below_of_not_psd	Convex Optimization	Chapter 9	9.1-(a)
+cam_0702	CAMBench/702.lean	unconstrainedQuadraticProgram_unbounded_below_of_no_stationary_point	Convex Optimization	Chapter 9	9.1-(b)
+cam_0703	CAMBench/703.lean	ratio_squaredNorm_affine_denominator_isClosedFunction	Convex Optimization	Chapter 9	9.2-(a)
+cam_0704	CAMBench/704.lean	normalizedSteepestDescentDirection_eq_neg_dualNorm	Convex Optimization	Chapter 9	9.7-(a)
+cam_0705	CAMBench/705.lean	gradient_dot_scaled_normalized_steepest_descent_eq_neg_dualNorm_sq	Convex Optimization	Chapter 9	9.7-(b)
+cam_0706	CAMBench/706.lean	steepest_descent_direction_solves_quadratic_model	Convex Optimization	Chapter 9	9.7-(c)
+cam_0708	CAMBench/708.lean	newtonDecrement_eq_sup_normalized_and_rayleigh_quotient	Convex Optimization	Chapter 9	9.9
+cam_0709	CAMBench/709.lean	frobenius_norm_not_induced_by_vector_norm	最优化：建模理论与方法	Chapter 2	2.1
+cam_0710	CAMBench/710.lean	convex_iff_convex_epigraph	最优化：建模理论与方法	Chapter 2	2.10
+cam_0711	CAMBench/711.lean	traceMinimizationSDP_optimal_solution_eq	最优化：建模理论与方法	Chapter 2	2.11-(a)
+cam_0712	CAMBench/712.lean	trace_Bt_Ainv_B_jointlyConvex	最优化：建模理论与方法	Chapter 2	2.11-(b)
+cam_0713	CAMBench/713.lean	spectralNorm_eq_topSingularValue	最优化：建模理论与方法	Chapter 2	2.2
+cam_0714	CAMBench/714.lean	frobeniusNorm_mul_le_spectralNorm_mul_frobeniusNorm	最优化：建模理论与方法	Chapter 2	2.3-(a)
+cam_0715	CAMBench/715.lean	abs_matrix_inner_le_spectral_mul_nuclear	最优化：建模理论与方法	Chapter 2	2.3-(b)
+cam_0716	CAMBench/716.lean	inner_trace_nonneg_of_posSemidef	最优化：建模理论与方法	Chapter 2	2.5
+cam_0717	CAMBench/717.lean	sublevelSet_quadraticForm_convex	最优化：建模理论与方法	Chapter 2	2.7-(a)
+cam_0718	CAMBench/718.lean	constrained_quadratic_sublevel_affine_eq_convex	最优化：建模理论与方法	Chapter 2	2.7-(b)
+cam_0719	CAMBench/719.lean	convexConcave_iff_hessian_blocks_semidefinite	最优化：建模理论与方法	Chapter 2	2.8-(a)
+cam_0721	CAMBench/721.lean	gradient_eq_zero_of_saddle	最优化：建模理论与方法	Chapter 2	2.8-(c)
+cam_0724	CAMBench/724.lean	lp_quasinorm_concave_on_positive_orthant	最优化：建模理论与方法	Chapter 2	2.9-(c)
+cam_0725	CAMBench/725.lean	centroid_pairwise_sqdist_identity	最优化：建模理论与方法	Chapter 3	14-(a)
+cam_0726	CAMBench/726.lean	KMeansClusteringProblem.assignmentMatrixIsPSD	最优化：建模理论与方法	Chapter 3	14-(b)
+cam_0727	CAMBench/727.lean	blockMatrix_psd_iff_sub_rankOne_psd	最优化：建模理论与方法	Chapter 4	8-(a)
+cam_0728	CAMBench/728.lean	le_largestEigenvalue_iff_sub_posSemidef	最优化：建模理论与方法	Chapter 4	8-(b)
+cam_0729	CAMBench/729.lean	unconstrainedQuadraticProgram_has_optimal_solution_iff	最优化：建模理论与方法	Chapter 5	1
+cam_0732	CAMBench/732.lean	trace_inner_eq_zero_iff_mul_eq_zero	最优化：建模理论与方法	Chapter 5	13
+cam_0733	CAMBench/733.lean	lagrangian_and_dual_function_formula	最优化：建模理论与方法	Chapter 5	14-(a)
+cam_0734	CAMBench/734.lean	equality_constrained_least_squares_kkt_and_explicit_solution	最优化：建模理论与方法	Chapter 5	14-(b)
+cam_0735	CAMBench/735.lean	quadraticUnitBallProblem_dual_of_dual_eq_shor_lifting	最优化：建模理论与方法	Chapter 5	15
+cam_0738	CAMBench/738.lean	exponentialConstrainedOptimizationProblem_optimal_solution_satisfies_kkt	最优化：建模理论与方法	Chapter 5	17-(d)
+cam_0739	CAMBench/739.lean	lowRankMatrixFactorization_localMinimizer_necessary_conditions	最优化：建模理论与方法	Chapter 5	18
+cam_0741	CAMBench/741.lean	psdCone_isSelfDual	最优化：建模理论与方法	Chapter 5	3-(a)
+cam_0742	CAMBench/742.lean	secondOrderCone_isSelfDual	最优化：建模理论与方法	Chapter 5	3-(b)
+cam_0744	CAMBench/744.lean	critical_points_eq_for_quartic_bivariate	最优化：建模理论与方法	Chapter 5	5-(1)
+cam_0747	CAMBench/747.lean	minimumEuclideanNormProblem_solution_eq_pseudoinverse_mul	最优化：建模理论与方法	Chapter 5	6-(b)
+cam_0748	CAMBench/748.lean	simplex_linear_program_optimal_at_standardBasisVector_of_min_coeff	最优化：建模理论与方法	Chapter 5	6-(c)
+cam_0749	CAMBench/749.lean	nuclearNormProximalProblem_has_soft_thresholding_solution	最优化：建模理论与方法	Chapter 5	6-(d)
+cam_0750	CAMBench/750.lean	l1NormMinimization_weak_duality	最优化：建模理论与方法	Chapter 5	7-(a)
+cam_0751	CAMBench/751.lean	l1_residual_minimization_dual_is_linf_constrained	最优化：建模理论与方法	Chapter 5	7-(b)
+cam_0752	CAMBench/752.lean	linfNormApproximationProblem_dual_form	最优化：建模理论与方法	Chapter 5	7-(c)
+cam_0753	CAMBench/753.lean	tangentCone_eq_linearizedCone_of_linear_constraints	最优化：建模理论与方法	Chapter 5	9
+cam_0754	CAMBench/754.lean	hestenes_stiefel_has_quasi_newton_representation	最优化：建模理论与方法	Chapter 6	10
+cam_0756	CAMBench/756.lean	quadratic_has_unique_global_minimum_iff_posDef	最优化：建模理论与方法	Chapter 6	12-(b)
+cam_0757	CAMBench/757.lean	gaussNewton_minimumL2NormSolution_of_fullRowRank	最优化：建模理论与方法	Chapter 6	13
+cam_0758	CAMBench/758.lean	exists_stepSize_satisfying_wolfe_conditions	最优化：建模理论与方法	Chapter 6	1-(1)
+cam_0759	CAMBench/759.lean	no_step_size_satisfies_armijo_and_curvature_when_c₂_lt_c₁	最优化：建模理论与方法	Chapter 6	1-(2)
+cam_0760	CAMBench/760.lean	constant_stepsize_suboptimality_bound	最优化：建模理论与方法	Chapter 6	3-(1)
+cam_0761	CAMBench/761.lean	fractional_type_upper_bound_of_hatf_tendsto_fstar	最优化：建模理论与方法	Chapter 6	3-(3)
+cam_0762	CAMBench/762.lean	subgradient_method_worst_case_rate_not_improvable	最优化：建模理论与方法	Chapter 6	4-(c)
+cam_0763	CAMBench/763.lean	classicalNewtonIteration_multipleRoot_qLinear	最优化：建模理论与方法	Chapter 6	6-(a)
+cam_0765	CAMBench/765.lean	positiveSemidefinite_iff_quadraticForm_nonneg	最优化：建模理论与方法	Chapter 6	7
+cam_0766	CAMBench/766.lean	penalty_hessian_has_m_eigenvalues_of_order_sigma_pow_inv_sub_one	最优化：建模理论与方法	Chapter 7	3-(c)
+cam_0767	CAMBench/767.lean	logarithmicPenaltyMethod_terminates_or_converges	最优化：建模理论与方法	Chapter 7	4
+cam_0769	CAMBench/769.lean	MorrisonMethod_nextM_le_optimal_of_current_le_optimal	最优化：建模理论与方法	Chapter 7	6-(b)
+cam_0771	CAMBench/771.lean	sgd_stochastic_gradient_norm_sq_le_lipschitz_dist_sq_plus_variance	最优化：建模理论与方法	Chapter 8	20
+cam_0772	CAMBench/772.lean	proximalOperator_comp_affine	最优化：建模理论与方法	Chapter 8	2-(1)
+cam_0773	CAMBench/773.lean	proximalOperator_scaled_argument	最优化：建模理论与方法	Chapter 8	2-(2)
+cam_0774	CAMBench/774.lean	prox_add_linear_eq_prox_shift	最优化：建模理论与方法	Chapter 8	2-(3)
+cam_0775	CAMBench/775.lean	prox_h_eq_prox_theta_g	最优化：建模理论与方法	Chapter 8	2-(4)
+cam_0776	CAMBench/776.lean	proximalOperator_prod_eq	最优化：建模理论与方法	Chapter 8	2-(5)
+cam_0777	CAMBench/777.lean	moreau_decomposition_of_moreauDecomposition	最优化：建模理论与方法	Chapter 8	6
+cam_0778	CAMBench/778.lean	moreau_decomposition	最优化：建模理论与方法	Chapter 8	7

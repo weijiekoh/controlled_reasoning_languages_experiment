@@ -1,0 +1,261 @@
+import Mathlib
+
+def appears (W : ℤ → Fin 2) (U : Σ n, Fin n → Fin 2) : Prop :=
+  ∃ k, ∀ i : Fin U.1, U.2 i = W (k + i)
+
+def ubiquitous (W : ℤ → Fin 2) (U : Σ n, Fin n → Fin 2) : Prop :=
+  appears W ⟨U.1 + 1, Fin.snoc U.2 0⟩ ∧ -- U a
+  appears W ⟨U.1 + 1, Fin.snoc U.2 1⟩ ∧ -- U b
+  appears W ⟨U.1 + 1, Fin.cons 0 U.2⟩ ∧ -- a U
+  appears W ⟨U.1 + 1, Fin.cons 1 U.2⟩ -- b U
+
+/--
+Let $n$ be a positive integer and let $W=\ldots x_{-1} x_{0} x_{1} x_{2} \ldots$ be an infinite periodic word consisting of the letters $a$ and $b$. Suppose that the minimal period $N$ of $W$ is greater than $2^{n}$. A finite nonempty word $U$ is said to appear in $W$ if there exist indices $k \leq \ell$ such that $U=x_{k} x_{k+1} \ldots x_{\ell}$. A finite word $U$ is called ubiquitous if the four words $U a, U b, a U$, and $b U$ all appear in $W$. Prove that there are at least $n$ ubiquitous finite nonempty words.
+-/
+theorem imosl_2011_c6 (W : ℤ → Fin 2) (n : ℕ+) (N : ℕ) (hN : 2 ^ n.1 < N)
+    (hW : Function.Periodic W N) (hW' : ∀ N', 0 < N' ∧ N' < N → ¬ Function.Periodic W N') :
+    ∃ (x : Fin n ↪ (Σ k, Fin k → Fin 2)), (∀ i, (x i).1 ≠ 0) ∧ (∀ i, ubiquitous W (x i)) := by
+  classical
+  have hN0 : 0 < N := lt_of_le_of_lt (Nat.zero_le _) hN
+  have sep : ∀ c c' : ℤ, c < c' → c' - c < N → ∃ d, W (c + d) ≠ W (c' + d) := by
+    intro c c' hlt hN'
+    by_contra hcon
+    push_neg at hcon
+    have hp : Function.Periodic W (((c'-c).toNat : ℕ) : ℤ) := by
+      intro x
+      have h1 := hcon (x - c)
+      have h2 : (((c'-c).toNat : ℕ) : ℤ) = c' - c := Int.toNat_of_nonneg (by omega)
+      rw [h2]
+      have e1 : c + (x - c) = x := by ring
+      have e2 : c' + (x - c) = x + (c' - c) := by ring
+      rw [e1, e2] at h1
+      exact h1.symm
+    exact hW' (c'-c).toNat ⟨by omega, by omega⟩ hp
+  have allL : ∀ (c c' : ℤ) (b : ℤ), (∀ d, d < b → W (c+d) = W (c'+d)) → ∀ d, W (c+d) = W (c'+d) := by
+    intro c c' b h d
+    have hm : (d - b + 1) ≤ ((d - b + 1).toNat : ℤ) := Int.self_le_toNat _
+    have hN1 : (1:ℤ) ≤ N := by exact_mod_cast hN0
+    have hm0 : (0:ℤ) ≤ ((d - b + 1).toNat : ℤ) := by positivity
+    have hlt : d - ((d - b + 1).toNat : ℤ) * N < b := by nlinarith
+    have h1 := h _ hlt
+    have p1 : W (c + d - ((d - b + 1).toNat : ℕ) * (N:ℤ)) = W (c + d) := hW.sub_nat_mul_eq _
+    have p2 : W (c' + d - ((d - b + 1).toNat : ℕ) * (N:ℤ)) = W (c' + d) := hW.sub_nat_mul_eq _
+    rw [← p1, ← p2]
+    have e1 : c + d - ((d - b + 1).toNat : ℤ) * N = c + (d - ((d - b + 1).toNat : ℤ) * N) := by ring
+    have e2 : c' + d - ((d - b + 1).toNat : ℤ) * N = c' + (d - ((d - b + 1).toNat : ℤ) * N) := by ring
+    rw [e1, e2]; exact h1
+  have allR : ∀ (c c' : ℤ) (a : ℤ), (∀ d, a ≤ d → W (c+d) = W (c'+d)) → ∀ d, W (c+d) = W (c'+d) := by
+    intro c c' a h d
+    have hm : (a - d) ≤ ((a - d).toNat : ℤ) := Int.self_le_toNat _
+    have hN1 : (1:ℤ) ≤ N := by exact_mod_cast hN0
+    have hm0 : (0:ℤ) ≤ ((a - d).toNat : ℤ) := by positivity
+    have hlt : a ≤ d + ((a - d).toNat : ℤ) * N := by nlinarith
+    have h1 := h _ hlt
+    have p1 : W (c + d + ((a - d).toNat : ℕ) * (N:ℤ)) = W (c + d) := (hW.nat_mul _) _
+    have p2 : W (c' + d + ((a - d).toNat : ℕ) * (N:ℤ)) = W (c' + d) := (hW.nat_mul _) _
+    rw [← p1, ← p2]
+    have e1 : c + d + ((a - d).toNat : ℤ) * N = c + (d + ((a - d).toNat : ℤ) * N) := by ring
+    have e2 : c' + d + ((a - d).toNat : ℤ) * N = c' + (d + ((a - d).toNat : ℤ) * N) := by ring
+    rw [e1, e2]; exact h1
+  have two : ∀ x y : Fin 2, x ≠ y → ∀ v : Fin 2, x = v ∨ y = v := by decide
+  have neq0 : ∀ x y : Fin 2, x ≠ 0 → y ≠ 0 → x = y := by decide
+  have main : ∀ (T : Finset (Σ n, Fin n → Fin 2)), (∀ U, ubiquitous W U → U ∈ T) →
+      ∀ (μ : ℕ) (a b : ℕ) (S : Finset ℤ), (T.filter (fun U => a + b ≤ U.1)).card = μ →
+      (∀ c ∈ S, ∀ c' ∈ S, ∀ d : ℤ, -(a:ℤ) ≤ d → d < b → W (c+d) = W (c'+d)) →
+      (∀ c ∈ S, ∀ c' ∈ S, c ≠ c' → ∃ d, W (c+d) ≠ W (c'+d)) →
+      S.card ≤ 2 ^ μ := by
+    intro T hT μ
+    induction μ using Nat.strong_induction_on with
+    | _ μ ih =>
+    intro a b S hμ hag hsep
+    by_cases hS : S.card ≤ 1
+    · exact hS.trans Nat.one_le_two_pow
+    obtain ⟨c0, h0, c1, h1, hne⟩ := Finset.one_lt_card.1 (show 1 < S.card by omega)
+    have exL : ∃ j : ℕ, ∃ c ∈ S, ∃ c' ∈ S, W (c - ((a:ℤ)+(j:ℤ)) - 1) ≠ W (c' - ((a:ℤ)+(j:ℤ)) - 1) := by
+      by_contra hno
+      push_neg at hno
+      obtain ⟨d0, hd0⟩ := hsep c0 h0 c1 h1 hne
+      apply hd0
+      apply allL c0 c1 b _ d0
+      intro d hd
+      by_cases hda : -(a:ℤ) ≤ d
+      · exact hag c0 h0 c1 h1 d hda hd
+      · have := hno (-(a:ℤ) - d - 1).toNat c0 h0 c1 h1
+        have e : c0 - ((a:ℤ) + ((-(a:ℤ) - d - 1).toNat:ℤ)) - 1 = c0 + d := by omega
+        have e' : c1 - ((a:ℤ) + ((-(a:ℤ) - d - 1).toNat:ℤ)) - 1 = c1 + d := by omega
+        rw [e, e'] at this
+        exact this
+    have exR : ∃ j : ℕ, ∃ c ∈ S, ∃ c' ∈ S, W (c + ((b:ℤ)+(j:ℤ))) ≠ W (c' + ((b:ℤ)+(j:ℤ))) := by
+      by_contra hno
+      push_neg at hno
+      obtain ⟨d0, hd0⟩ := hsep c0 h0 c1 h1 hne
+      apply hd0
+      apply allR c0 c1 (-(a:ℤ)) _ d0
+      intro d hd
+      by_cases hda : d < b
+      · exact hag c0 h0 c1 h1 d hd hda
+      · have := hno (d - b).toNat c0 h0 c1 h1
+        have e : c0 + ((b:ℤ) + ((d - b).toNat:ℤ)) = c0 + d := by omega
+        have e' : c1 + ((b:ℤ) + ((d - b).toNat:ℤ)) = c1 + d := by omega
+        rw [e, e'] at this
+        exact this
+    obtain ⟨jL, hL1, hL2⟩ : ∃ jL : ℕ, (∃ c ∈ S, ∃ c' ∈ S, W (c - ((a:ℤ)+(jL:ℤ)) - 1) ≠ W (c' - ((a:ℤ)+(jL:ℤ)) - 1)) ∧
+        ∀ j < jL, ∀ c ∈ S, ∀ c' ∈ S, W (c - ((a:ℤ)+(j:ℤ)) - 1) = W (c' - ((a:ℤ)+(j:ℤ)) - 1) := by
+      refine ⟨Nat.find exL, Nat.find_spec exL, fun j hj => ?_⟩
+      have := Nat.find_min exL hj
+      push_neg at this
+      exact this
+    obtain ⟨jR, hR1, hR2⟩ : ∃ jR : ℕ, (∃ c ∈ S, ∃ c' ∈ S, W (c + ((b:ℤ)+(jR:ℤ))) ≠ W (c' + ((b:ℤ)+(jR:ℤ)))) ∧
+        ∀ j < jR, ∀ c ∈ S, ∀ c' ∈ S, W (c + ((b:ℤ)+(j:ℤ))) = W (c' + ((b:ℤ)+(j:ℤ))) := by
+      refine ⟨Nat.find exR, Nat.find_spec exR, fun j hj => ?_⟩
+      have := Nat.find_min exR hj
+      push_neg at this
+      exact this
+    have hag2 : ∀ c ∈ S, ∀ c' ∈ S, ∀ d : ℤ, -((a+jL:ℕ):ℤ) ≤ d → d < ((b+jR:ℕ):ℤ) → W (c+d) = W (c'+d) := by
+      intro c hc c' hc' d hd1 hd2
+      push_cast at hd1 hd2
+      by_cases h1 : -(a:ℤ) ≤ d
+      · by_cases h2 : d < b
+        · exact hag c hc c' hc' d h1 h2
+        · have := hR2 (d - b).toNat (by omega) c hc c' hc'
+          have e : c + ((b:ℤ) + ((d - b).toNat:ℤ)) = c + d := by omega
+          have e' : c' + ((b:ℤ) + ((d - b).toNat:ℤ)) = c' + d := by omega
+          rw [e, e'] at this
+          exact this
+      · have := hL2 (-(a:ℤ) - d - 1).toNat (by omega) c hc c' hc'
+        have e : c - ((a:ℤ) + ((-(a:ℤ) - d - 1).toNat:ℤ)) - 1 = c + d := by omega
+        have e' : c' - ((a:ℤ) + ((-(a:ℤ) - d - 1).toNat:ℤ)) - 1 = c' + d := by omega
+        rw [e, e'] at this
+        exact this
+    generalize hA : a + jL = A at hag2 hL1
+    generalize hB : b + jR = B at hag2 hR1
+    have hAa : a ≤ A := by omega
+    have hBb : b ≤ B := by omega
+    have hAc : ((a:ℤ)+(jL:ℤ)) = (A:ℤ) := by omega
+    have hBc : ((b:ℤ)+(jR:ℤ)) = (B:ℤ) := by omega
+    rw [hAc] at hL1
+    rw [hBc] at hR1
+    have rightv : ∀ v : Fin 2, ∃ c ∈ S, W (c + (B:ℤ)) = v := by
+      intro v
+      obtain ⟨c, hc, c', hc', hd⟩ := hR1
+      rcases two _ _ hd v with h | h
+      · exact ⟨c, hc, h⟩
+      · exact ⟨c', hc', h⟩
+    have leftv : ∀ v : Fin 2, ∃ c ∈ S, W (c - (A:ℤ) - 1) = v := by
+      intro v
+      obtain ⟨c, hc, c', hc', hd⟩ := hL1
+      rcases two _ _ hd v with h | h
+      · exact ⟨c, hc, h⟩
+      · exact ⟨c', hc', h⟩
+    have hubi : ubiquitous W (⟨A + B, fun i : Fin (A+B) => W (c0 - (A:ℤ) + ((i:ℕ):ℤ))⟩ : Σ n, Fin n → Fin 2) := by
+      have agr : ∀ c ∈ S, ∀ i : ℕ, i < A + B → W (c0 - (A:ℤ) + i) = W (c - (A:ℤ) + i) := by
+        intro c hc i hi
+        have := hag2 c0 h0 c hc (-(A:ℤ) + i) (by push_cast; omega) (by push_cast; omega)
+        have e : c0 + (-(A:ℤ) + i) = c0 - A + i := by ring
+        have e' : c + (-(A:ℤ) + i) = c - A + i := by ring
+        rw [e, e'] at this
+        exact this
+      have hr : ∀ v : Fin 2, appears W ⟨A + B + 1, Fin.snoc (α := fun _ => Fin 2) (fun i : Fin (A+B) => W (c0 - (A:ℤ) + ((i:ℕ):ℤ))) v⟩ := by
+        intro v
+        obtain ⟨c, hc, hcv⟩ := rightv v
+        refine ⟨c - A, fun i => ?_⟩
+        refine Fin.lastCases ?_ (fun j => ?_) i
+        · simp [Fin.snoc_last]
+          rw [← hcv]
+          congr 1
+          ring
+        · simp only [Fin.snoc_castSucc]
+          rw [agr c hc j j.2]
+          simp
+      have hl : ∀ v : Fin 2, appears W ⟨A + B + 1, Fin.cons (α := fun _ => Fin 2) v (fun i : Fin (A+B) => W (c0 - (A:ℤ) + ((i:ℕ):ℤ)))⟩ := by
+        intro v
+        obtain ⟨c, hc, hcv⟩ := leftv v
+        refine ⟨c - A - 1, fun i => ?_⟩
+        refine Fin.cases ?_ (fun j => ?_) i
+        · simp [hcv]
+        · simp only [Fin.cons_succ]
+          rw [agr c hc j j.2]
+          simp
+      exact ⟨hr 0, hr 1, hl 0, hl 1⟩
+    have hmem := hT _ hubi
+    have hsub : T.filter (fun U => A + 1 + B ≤ U.1) ⊂ T.filter (fun U => a + b ≤ U.1) := by
+      rw [Finset.ssubset_iff_of_subset]
+      · refine ⟨_, Finset.mem_filter.2 ⟨hmem, ?_⟩, ?_⟩
+        · show a + b ≤ A + B
+          omega
+        · intro hh
+          have := (Finset.mem_filter.1 hh).2
+          simp at this
+      · intro U hU
+        have := Finset.mem_filter.1 hU
+        exact Finset.mem_filter.2 ⟨this.1, by omega⟩
+    have hlt := Finset.card_lt_card hsub
+    rw [hμ] at hlt
+    have hsplit : ∀ P : ℤ → Prop, [DecidablePred P] → (∀ c ∈ S, ∀ c' ∈ S, P c → P c' → W (c - A - 1) = W (c' - A - 1)) →
+        (S.filter P).card ≤ 2 ^ (T.filter (fun U => A + 1 + B ≤ U.1)).card := by
+      intro P _ hP
+      refine ih _ hlt (A+1) B (S.filter P) rfl ?_ ?_
+      · intro c hc c' hc' d hd1 hd2
+        have hc1 := Finset.mem_filter.1 hc
+        have hc1' := Finset.mem_filter.1 hc'
+        push_cast at hd1
+        by_cases hdA : -(A:ℤ) ≤ d
+        · exact hag2 c hc1.1 c' hc1'.1 d (by exact_mod_cast hdA) (by exact_mod_cast hd2)
+        · have : d = -(A:ℤ) - 1 := by omega
+          have h := hP c hc1.1 c' hc1'.1 hc1.2 hc1'.2
+          have e : c - A - 1 = c + d := by omega
+          have e' : c' - A - 1 = c' + d := by omega
+          rw [e, e'] at h
+          exact h
+      · intro c hc c' hc' hcc
+        exact hsep c (Finset.mem_filter.1 hc).1 c' (Finset.mem_filter.1 hc').1 hcc
+    have s0 := hsplit (fun c => W (c - A - 1) = 0) (fun c _ c' _ h h' => by rw [h, h'])
+    have s1 := hsplit (fun c => ¬ W (c - A - 1) = 0) (fun c _ c' _ h h' => neq0 _ _ h h')
+    have htot := Finset.card_filter_add_card_filter_not (s := S) (fun c => W (c - A - 1) = 0)
+    have hp : 2 ^ (T.filter (fun U => A + 1 + B ≤ U.1)).card * 2 ≤ 2 ^ μ := by
+      rw [← pow_succ]
+      exact Nat.pow_le_pow_right (by norm_num) hlt
+    omega
+  have hbound : ∀ F : Finset (Σ k, Fin k → Fin 2), (∀ U, ubiquitous W U → U.1 ≠ 0 → U ∈ F) →
+      N ≤ 2 ^ (F.card + 1) := by
+    intro F hF
+    let e0 : Σ k, Fin k → Fin 2 := ⟨0, Fin.elim0⟩
+    have hT : ∀ U, ubiquitous W U → U ∈ insert e0 F := by
+      intro U hU
+      by_cases h0 : U.1 = 0
+      · obtain ⟨k, f⟩ := U
+        simp only at h0
+        subst h0
+        have : f = Fin.elim0 := funext fun i => i.elim0
+        subst this
+        exact Finset.mem_insert_self _ _
+      · exact Finset.mem_insert_of_mem (hF U hU h0)
+    have hc : (Finset.Ico (0:ℤ) N).card = N := by simp
+    have := main (insert e0 F) hT _ 0 0 (Finset.Ico (0:ℤ) N) rfl
+      (by intro c _ c' _ d h1 h2; push_cast at h1 h2; omega)
+      (by
+        intro c hc c' hc' hne
+        have h1 := Finset.mem_Ico.1 hc
+        have h2 := Finset.mem_Ico.1 hc'
+        rcases lt_or_gt_of_ne hne with h | h
+        · exact sep c c' h (by omega)
+        · obtain ⟨d, hd⟩ := sep c' c h (by omega)
+          exact ⟨d, fun e => hd e.symm⟩)
+    rw [hc] at this
+    refine this.trans (Nat.pow_le_pow_right (by norm_num) ?_)
+    exact (Finset.card_filter_le _ _).trans (Finset.card_insert_le _ _)
+  have hex : ∃ t : Finset (Σ k, Fin k → Fin 2), (∀ U ∈ t, U.1 ≠ 0 ∧ ubiquitous W U) ∧ t.card = n.1 := by
+    by_cases hfin : {U : Σ k, Fin k → Fin 2 | U.1 ≠ 0 ∧ ubiquitous W U}.Finite
+    · have hb := hbound hfin.toFinset (fun U hU h0 => by simp [h0, hU])
+      have : n.1 < hfin.toFinset.card + 1 :=
+        (Nat.pow_lt_pow_iff_right (by norm_num)).1 (lt_of_lt_of_le hN hb)
+      obtain ⟨t, hts, htc⟩ := Finset.exists_subset_card_eq (show n.1 ≤ hfin.toFinset.card by omega)
+      refine ⟨t, fun U hU => ?_, htc⟩
+      have := hts hU
+      simpa using this
+    · obtain ⟨t, hts, htc⟩ := Set.Infinite.exists_subset_card_eq hfin n.1
+      exact ⟨t, fun U hU => hts hU, htc⟩
+  obtain ⟨t, ht, htc⟩ := hex
+  let e : Fin n.1 ≃ t := (Finset.equivFinOfCardEq htc).symm
+  exact ⟨e.toEmbedding.trans (Function.Embedding.subtype _), fun i => (ht _ (e i).2).1,
+    fun i => (ht _ (e i).2).2⟩

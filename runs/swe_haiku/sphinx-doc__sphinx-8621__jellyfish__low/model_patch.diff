@@ -1,0 +1,78 @@
+diff --git a/sphinx/builders/html/transforms.py b/sphinx/builders/html/transforms.py
+index c91da57e9..f09d6660a 100644
+--- a/sphinx/builders/html/transforms.py
++++ b/sphinx/builders/html/transforms.py
+@@ -9,7 +9,7 @@
+ """
+ 
+ import re
+-from typing import Any, Dict
++from typing import Any, Dict, List
+ 
+ from docutils import nodes
+ 
+@@ -39,10 +39,63 @@ class KeyboardTransform(SphinxPostTransform):
+     builders = ('html',)
+     pattern = re.compile(r'(-|\+|\^|\s+)')
+ 
++    @staticmethod
++    def split_keys(text: str) -> List[str]:
++        """Split keystroke text into alternating keys and separators.
++
++        A separator character (``-``, ``+``, ``^`` or whitespace) is only a
++        separator when it follows a key; a separator character that starts a
++        key (e.g. the ``-`` in ``-`` or the ``+`` in ``Shift-+``) is a key.
++        The result alternates key, separator, key, ... like ``re.split``.
++        """
++        parts = []  # type: List[str]
++        i, n = 0, len(text)
++        while i < n:
++            # read a key
++            if text[i] in '-+^':
++                key_end = i + 1  # a separator char at key start is a key itself
++            elif text[i].isspace():
++                # leading whitespace: keep as separator-like empty key
++                parts.append('')
++                j = i
++                while j < n and text[j].isspace():
++                    j += 1
++                parts.append(text[i:j])
++                i = j
++                continue
++            else:
++                key_end = i
++                while key_end < n and text[key_end] not in '-+^' and not text[key_end].isspace():
++                    key_end += 1
++            parts.append(text[i:key_end])
++            i = key_end
++            if i >= n:
++                break
++            # read a separator (only if something follows it)
++            if i + 1 < n or text[i].isspace():
++                j = i
++                if text[i].isspace():
++                    while j < n and text[j].isspace():
++                        j += 1
++                else:
++                    j = i + 1
++                if j >= n:
++                    # separator at end: attach as trailing text
++                    parts.append(text[i:j])
++                    i = j
++                    break
++                parts.append(text[i:j])
++                i = j
++            else:
++                # a lone trailing separator character cannot occur here
++                parts.append(text[i:])
++                break
++        return parts
++
+     def run(self, **kwargs: Any) -> None:
+         matcher = NodeMatcher(nodes.literal, classes=["kbd"])
+         for node in self.document.traverse(matcher):  # type: nodes.literal
+-            parts = self.pattern.split(node[-1].astext())
++            parts = self.split_keys(node[-1].astext())
+             if len(parts) == 1:
+                 continue
+ 

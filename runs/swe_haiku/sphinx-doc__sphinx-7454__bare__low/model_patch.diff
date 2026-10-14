@@ -1,0 +1,15 @@
+diff --git a/sphinx/domains/python.py b/sphinx/domains/python.py
+index 893bb0a22..e4899d786 100644
+--- a/sphinx/domains/python.py
++++ b/sphinx/domains/python.py
+@@ -92,6 +92,10 @@ def _parse_annotation(annotation: str) -> List[Node]:
+         elif isinstance(node, ast.Module):
+             return sum((unparse(e) for e in node.body), [])
+         elif isinstance(node, ast.Name):
++            if node.id == 'None':
++                # None is a singleton documented as a data object, not a class
++                return [pending_xref('', nodes.Text(node.id),
++                                     refdomain='py', reftype='obj', reftarget=node.id)]
+             return [nodes.Text(node.id)]
+         elif isinstance(node, ast.Subscript):
+             result = unparse(node.value)

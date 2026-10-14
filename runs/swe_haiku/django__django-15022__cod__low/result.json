@@ -1,0 +1,73 @@
+{
+ "problem": "django__django-15022",
+ "bench": "swe",
+ "condition": "cod",
+ "effort": "low",
+ "model": "claude-haiku-5-5",
+ "batch": "swe_haiku",
+ "dry_run": false,
+ "outcome": "solved",
+ "verify_pass": true,
+ "verify_stage": "ok",
+ "verify_detail": "resolved (run_id cotml-20261014010624-05063f87)",
+ "num_turns": 7,
+ "input_tokens": 16,
+ "output_tokens": 2243,
+ "thinking_tokens": 508,
+ "cache_read_tokens": 28700,
+ "cache_creation_tokens": 4781,
+ "usage_source": "result",
+ "total_cost_usd": 0.002007725,
+ "duration_s": 51.7,
+ "agent_duration_ms": 51126,
+ "lean_compile_count": 3,
+ "search_tactic_uses": 0,
+ "search_tactic_in_final": false,
+ "tool_calls": {
+  "Bash": 6
+ },
+ "proof_chars": 1398,
+ "proof_lines": 31,
+ "statement_prefix_changed": false,
+ "stop_reason": "end_turn",
+ "result_subtype": "success",
+ "terminal_reason": "completed",
+ "is_error": false,
+ "api_error_status": null,
+ "permission_denials": 0,
+ "agent_said_give_up": false,
+ "final_text": "The admin search now builds a single combined filter instead of one `filter()` call per search word, so the query no longer gains a join for each word.\n\nThe change is in `get_search_results` in `django/contrib/admin/options.py`. Each word's OR-of-lookups is collected, and the words are then ANDed together with `reduce(operator.and_, ...)` and applied in one `queryset.filter(...)`. I also added the `operator` import and `reduce` to the `functools` import.\n\nTest results:\n- `admin_changelist`: 73 tests, OK (6 skipped). This suite includes `test_many_search_terms`, which was one of the failing tests.\n- `admin_views`: 426 tests, OK (26 skipped).\n\nI did not run the full test suite, so the other two named tests (the \"All rows containing each of the searched words\" and multi-valued relationship search tests) are covered only by the `admin_changelist` run, which includes them. I did not commit anything.",
+ "timed_out": false,
+ "docker_rc": 0,
+ "limits": {
+  "max_turns": 50,
+  "max_budget_usd": 2.0,
+  "timeout_min": 25.0
+ },
+ "network": "cotml-egress",
+ "proxy": true,
+ "claude_version": "2.1.296",
+ "model_usage": {
+  "claude-haiku-5-5": {
+   "inputTokens": 16,
+   "outputTokens": 2243,
+   "cacheReadInputTokens": 28700,
+   "cacheCreationInputTokens": 4781,
+   "webSearchRequests": 0,
+   "costUSD": 0.002007725,
+   "contextWindow": 1000000,
+   "maxOutputTokens": 128000,
+   "thinkingTokens": 508,
+   "canonicalModel": "claude-haiku-5-5",
+   "provider": "firstParty",
+   "costBasis": "list"
+  }
+ },
+ "started_at": "2026-10-14T08:05:31+00:00",
+ "framing": "debug",
+ "patch_files": [
+  "django/contrib/admin/options.py"
+ ],
+ "touched_test_files": [],
+ "untracked_files": []
+}

@@ -1,0 +1,15 @@
+{
+ "id": "topological_sort",
+ "entry": "topological_sort.rs",
+ "description": "description.md",
+ "main_fn": "topological_sort",
+ "editable_regions": {
+  "helpers": "between `// <helpers>` and `// </helpers>`: helper spec fns and exec helpers",
+  "proofs": "between `// <proofs>` and `// </proofs>`: lemmas (proof fns)",
+  "code": "between `// <code>` and `// </code>`: exactly one block `{ ... }`, the body of the function under spec"
+ },
+ "fixed": "Everything outside the three editable regions is fixed: the `use` lines, the <preamble> block (definitions, spec fns, and any exec fns given there), the <spec> block (signature, requires, ensures of the function under test), fn main, and all marker comments. Compared token-wise; comments and whitespace are ignored.",
+ "source": "data/algoveri/algoveri_data/topological_sort/verus_spec.rs",
+ "source_sha256": "612b7be3bd094b88551773cf0ed8615e83a99b84f2617127a28322983a307e7a",
+ "patches": []
+}

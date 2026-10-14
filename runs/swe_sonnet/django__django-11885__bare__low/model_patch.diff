@@ -1,0 +1,31 @@
+diff --git a/django/db/models/deletion.py b/django/db/models/deletion.py
+index ae82d26340..47b4d6f0e5 100644
+--- a/django/db/models/deletion.py
++++ b/django/db/models/deletion.py
+@@ -214,6 +214,7 @@ class Collector:
+         if collect_related:
+             if keep_parents:
+                 parents = set(model._meta.get_parent_list())
++            fast_by_batch = {}
+             for related in get_candidate_relations_to_delete(model._meta):
+                 # Preserve parent reverse relationships if keep_parents=True.
+                 if keep_parents and related.model in parents:
+@@ -222,10 +223,16 @@ class Collector:
+                 if field.remote_field.on_delete == DO_NOTHING:
+                     continue
+                 batches = self.get_del_batches(new_objs, field)
+-                for batch in batches:
++                for batch_num, batch in enumerate(batches):
+                     sub_objs = self.related_objects(related, batch)
+                     if self.can_fast_delete(sub_objs, from_field=field):
+-                        self.fast_deletes.append(sub_objs)
++                        key = (sub_objs.model, batch_num)
++                        if key in fast_by_batch:
++                            i = fast_by_batch[key]
++                            self.fast_deletes[i] = self.fast_deletes[i] | sub_objs
++                        else:
++                            fast_by_batch[key] = len(self.fast_deletes)
++                            self.fast_deletes.append(sub_objs)
+                     else:
+                         related_model = related.related_model
+                         # Non-referenced fields can be deferred if no signal

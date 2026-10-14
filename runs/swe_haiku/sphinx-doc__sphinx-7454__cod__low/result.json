@@ -1,0 +1,73 @@
+{
+ "problem": "sphinx-doc__sphinx-7454",
+ "bench": "swe",
+ "condition": "cod",
+ "effort": "low",
+ "model": "claude-haiku-5-5",
+ "batch": "swe_haiku",
+ "dry_run": false,
+ "outcome": "gave_up",
+ "verify_pass": false,
+ "verify_stage": "tests",
+ "verify_detail": "FAIL_TO_PASS 0/1 failing: tests/test_domain_py.py::test_parse_annotation; PASS_TO_PASS 27/27",
+ "num_turns": 14,
+ "input_tokens": 30,
+ "output_tokens": 4513,
+ "thinking_tokens": 1213,
+ "cache_read_tokens": 100190,
+ "cache_creation_tokens": 10409,
+ "usage_source": "result",
+ "total_cost_usd": 0.0045625250000000004,
+ "duration_s": 38.5,
+ "agent_duration_ms": 37646,
+ "lean_compile_count": 3,
+ "search_tactic_uses": 0,
+ "search_tactic_in_final": false,
+ "tool_calls": {
+  "Bash": 13
+ },
+ "proof_chars": 1158,
+ "proof_lines": 22,
+ "statement_prefix_changed": false,
+ "stop_reason": "end_turn",
+ "result_subtype": "success",
+ "terminal_reason": "completed",
+ "is_error": false,
+ "api_error_status": null,
+ "permission_denials": 0,
+ "agent_said_give_up": false,
+ "final_text": "The `None` return type in signature mode now becomes a cross-reference, the same node that description mode uses, so it should link to the `None` docs when intersphinx is configured. I did not confirm that link in HTML, because my local reproduction had no intersphinx inventory.\n\n**Cause:** On Python 3.8+, `None` parses as an `ast.Constant`/`NameConstant`. `_parse_annotation` in `sphinx/domains/python.py` had no branch for it, so it raised `SyntaxError` and fell back to plain text instead of a cross-reference.\n\n**Fix:** I added a branch in `_parse_annotation` that emits a text node for `None` and `Ellipsis` constants, which then gets wrapped as a cross-reference like other names. The change is in `sphinx/domains/python.py` only, and I did not touch any tests.\n\n**Tests:** `tests/test_domain_py.py` and `tests/test_ext_autodoc_configs.py` pass (42 tests). `tests/test_util_inspect.py::test_signature_annotations` and `tests/test_ext_autodoc.py::test_autodoc` fail both with and without my change, so they predate it.",
+ "timed_out": false,
+ "docker_rc": 0,
+ "limits": {
+  "max_turns": 50,
+  "max_budget_usd": 2.0,
+  "timeout_min": 25.0
+ },
+ "network": "cotml-egress",
+ "proxy": true,
+ "claude_version": "2.1.296",
+ "model_usage": {
+  "claude-haiku-5-5": {
+   "inputTokens": 30,
+   "outputTokens": 4513,
+   "cacheReadInputTokens": 100190,
+   "cacheCreationInputTokens": 10409,
+   "webSearchRequests": 0,
+   "costUSD": 0.0045625250000000004,
+   "contextWindow": 1000000,
+   "maxOutputTokens": 128000,
+   "thinkingTokens": 1213,
+   "canonicalModel": "claude-haiku-5-5",
+   "provider": "firstParty",
+   "costBasis": "list"
+  }
+ },
+ "started_at": "2026-10-14T07:11:46+00:00",
+ "framing": "issue",
+ "patch_files": [
+  "sphinx/domains/python.py"
+ ],
+ "touched_test_files": [],
+ "untracked_files": []
+}

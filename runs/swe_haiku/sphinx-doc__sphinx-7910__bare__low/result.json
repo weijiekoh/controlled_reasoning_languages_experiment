@@ -1,0 +1,73 @@
+{
+ "problem": "sphinx-doc__sphinx-7910",
+ "bench": "swe",
+ "condition": "bare",
+ "effort": "low",
+ "model": "claude-haiku-5-5",
+ "batch": "swe_haiku",
+ "dry_run": false,
+ "outcome": "solved",
+ "verify_pass": true,
+ "verify_stage": "ok",
+ "verify_detail": "resolved (run_id cotml-20261014023806-654d8a22)",
+ "num_turns": 5,
+ "input_tokens": 12,
+ "output_tokens": 1431,
+ "thinking_tokens": 266,
+ "cache_read_tokens": 12693,
+ "cache_creation_tokens": 2979,
+ "usage_source": "result",
+ "total_cost_usd": 0.001216005,
+ "duration_s": 11.7,
+ "agent_duration_ms": 10933,
+ "lean_compile_count": 1,
+ "search_tactic_uses": 0,
+ "search_tactic_in_final": false,
+ "tool_calls": {
+  "Bash": 4
+ },
+ "proof_chars": 1151,
+ "proof_lines": 26,
+ "statement_prefix_changed": false,
+ "stop_reason": "end_turn",
+ "result_subtype": "success",
+ "terminal_reason": "completed",
+ "is_error": false,
+ "api_error_status": null,
+ "permission_denials": 0,
+ "agent_said_give_up": false,
+ "final_text": "I changed how Napoleon finds the class that owns a member, so decorated `__init__` methods are documented again. The existing Napoleon tests pass (16 passed). I did not add a test for the decorated case or build a docs project to check the output.\n\nThe problem was in `sphinx/ext/napoleon/__init__.py`. For a top-level class, the owner lookup used `obj.__globals__[cls_path]`. A method wrapped with `functools.wraps` has the decorator's globals, not the class's module globals, so the lookup failed and Napoleon treated the method as not owned by the class.\n\nThe owner lookup now always resolves the class through `importlib.import_module(obj.__module__)` and walks the qualname from there. That works for top-level and nested classes alike, and it no longer depends on `__globals__`. The change is uncommitted in the working tree.",
+ "timed_out": false,
+ "docker_rc": 0,
+ "limits": {
+  "max_turns": 50,
+  "max_budget_usd": 2.0,
+  "timeout_min": 25.0
+ },
+ "network": "cotml-egress",
+ "proxy": true,
+ "claude_version": "2.1.296",
+ "model_usage": {
+  "claude-haiku-5-5": {
+   "inputTokens": 12,
+   "outputTokens": 1431,
+   "cacheReadInputTokens": 12693,
+   "cacheCreationInputTokens": 2979,
+   "webSearchRequests": 0,
+   "costUSD": 0.001216005,
+   "contextWindow": 1000000,
+   "maxOutputTokens": 128000,
+   "thinkingTokens": 266,
+   "canonicalModel": "claude-haiku-5-5",
+   "provider": "firstParty",
+   "costBasis": "list"
+  }
+ },
+ "started_at": "2026-10-14T09:37:53+00:00",
+ "framing": "issue",
+ "patch_files": [
+  "sphinx/ext/napoleon/__init__.py"
+ ],
+ "touched_test_files": [],
+ "untracked_files": []
+}

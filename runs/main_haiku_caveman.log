@@ -1,0 +1,32 @@
+isolation check: ok (no .lean files outside /work)
+20 runs, 0 done, 20 to run, parallel 4
+[1/20] putnam_2004_b5__caveman__low: gave_up (compile) turns=2 out_tok=3887 cost=0.002312325 17.0s
+[2/20] putnam_2006_b6__caveman__low: solved (ok) turns=8 out_tok=27138 cost=0.01890469 145.4s
+[3/20] putnam_2001_b4__caveman__low: solved (ok) turns=17 out_tok=29063 cost=0.022597279999999997 192.8s
+[4/20] putnam_2007_b5__caveman__low: solved (ok) turns=24 out_tok=17569 cost=0.014770985 172.5s
+[5/20] putnam_2003_a6__caveman__low: solved (ok) turns=15 out_tok=38853 cost=0.031096415 214.6s
+[6/20] putnam_2011_a5__caveman__low: gave_up (compile) turns=2 out_tok=3006 cost=0.001774165 23.7s
+[7/20] putnam_2010_a5__caveman__low: gave_up (compile) turns=2 out_tok=26760 cost=0.013579665 125.3s
+[8/20] putnam_2008_a5__caveman__low: solved (ok) turns=15 out_tok=23827 cost=0.01837442 166.1s
+[9/20] putnam_2012_b4__caveman__low: solved (ok) turns=7 out_tok=20162 cost=0.013884765 105.5s
+[10/20] putnam_2012_b5__caveman__low: solved (ok) turns=10 out_tok=20726 cost=0.01521376 116.5s
+[11/20] putnam_2016_b4__caveman__low: gave_up (compile) turns=2 out_tok=1971 cost=0.0011649149999999999 12.2s
+[12/20] putnam_2021_a6__caveman__low: gave_up (compile) turns=2 out_tok=4079 cost=0.0022179150000000004 21.4s
+[13/20] putnam_2021_b5__caveman__low: gave_up (compile) turns=2 out_tok=2942 cost=0.0016510399999999999 16.0s
+[14/20] putnam_2019_a4__caveman__low: gave_up (compile) turns=7 out_tok=11887 cost=0.007556140000000001 60.9s
+[15/20] putnam_2022_a5__caveman__low: gave_up (compile) turns=2 out_tok=5384 cost=0.00291629 29.1s
+[16/20] putnam_2024_a4__caveman__low: gave_up (compile) turns=2 out_tok=5581 cost=0.0029797900000000004 28.0s
+[17/20] putnam_2025_a5__caveman__low: gave_up (compile) turns=2 out_tok=2525 cost=0.001462165 14.7s
+[18/20] putnam_2025_b4__caveman__low: gave_up (compile) turns=2 out_tok=8459 cost=0.004457164999999999 41.2s
+[19/20] putnam_2019_a5__caveman__low: solved (ok) turns=20 out_tok=33081 cost=0.026887360000000003 202.1s
+[20/20] putnam_2013_b4__caveman__low: solved (ok) turns=14 out_tok=26401 cost=0.021006265 218.7s
+isolation check: ok (no .lean files outside /work)
+20 runs, 0 done, 20 to run, parallel 4
+[1/20] fateh_005__caveman__low: solved (ok) turns=5 out_tok=3609 cost=0.0026840199999999996 32.6s
+[2/20] fateh_017__caveman__low: solved (ok) turns=4 out_tok=3004 cost=0.002148235 24.3s
+[3/20] fateh_009__caveman__low: solved (ok) turns=10 out_tok=7455 cost=0.005483305000000001 74.3s
+[4/20] fateh_024__caveman__low: solved (ok) turns=5 out_tok=2166 cost=0.00165686 27.5s
+[5/20] fateh_011__caveman__low: solved (ok) turns=14 out_tok=14228 cost=0.011530735000000002 128.0s
+[6/20] fateh_036__caveman__low: gave_up (compile) turns=2 out_tok=1491 cost=0.00089871 9.5s
+[7/20] fateh_021__caveman__low: solved (ok) turns=10 out_tok=20740 cost=0.01491123 187.5s
+interrupted: killing containers

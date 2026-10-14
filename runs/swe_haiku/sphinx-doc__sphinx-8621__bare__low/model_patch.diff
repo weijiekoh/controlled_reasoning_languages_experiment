@@ -1,0 +1,78 @@
+diff --git a/sphinx/builders/html/transforms.py b/sphinx/builders/html/transforms.py
+index c91da57e9..80421750f 100644
+--- a/sphinx/builders/html/transforms.py
++++ b/sphinx/builders/html/transforms.py
+@@ -9,7 +9,7 @@
+ """
+ 
+ import re
+-from typing import Any, Dict
++from typing import Any, Dict, List, Tuple
+ 
+ from docutils import nodes
+ 
+@@ -42,21 +42,53 @@ class KeyboardTransform(SphinxPostTransform):
+     def run(self, **kwargs: Any) -> None:
+         matcher = NodeMatcher(nodes.literal, classes=["kbd"])
+         for node in self.document.traverse(matcher):  # type: nodes.literal
+-            parts = self.pattern.split(node[-1].astext())
++            parts = self.split_keys(node[-1].astext())
+             if len(parts) == 1:
+                 continue
+ 
+             node.pop()
+-            while parts:
+-                key = parts.pop(0)
+-                node += nodes.literal('', key, classes=["kbd"])
+-
+-                try:
+-                    # key separator (ex. -, +, ^)
+-                    sep = parts.pop(0)
+-                    node += nodes.Text(sep)
+-                except IndexError:
+-                    pass
++            for is_key, text in parts:
++                if is_key:
++                    node += nodes.literal('', text, classes=["kbd"])
++                else:
++                    node += nodes.Text(text)
++
++    def split_keys(self, text: str) -> List[Tuple[bool, str]]:
++        """Split text into (is_key, text) items.
++
++        A separator (``-``, ``+``, ``^`` or whitespace) is only recognized
++        when it follows a keystroke and is followed by another keystroke.
++        Any character at the start of a keystroke is part of that keystroke,
++        so e.g. ``-``, ``+`` and ``Shift-+`` are handled correctly.
++        """
++        result = []  # type: List[Tuple[bool, str]]
++        i = 0
++        n = len(text)
++        while i < n:
++            # keystroke: first char always belongs to the key
++            j = i + 1
++            while j < n and not self.is_separator_start(text, j):
++                j += 1
++            result.append((True, text[i:j]))
++            if j >= n:
++                break
++            # separator
++            if text[j].isspace():
++                k = j
++                while k < n and text[k].isspace():
++                    k += 1
++            else:
++                k = j + 1
++            if k >= n:
++                # trailing separator: keep it as plain text
++                result.append((False, text[j:]))
++                break
++            result.append((False, text[j:k]))
++            i = k
++        return result
++
++    def is_separator_start(self, text: str, j: int) -> bool:
++        return text[j].isspace() or text[j] in '-+^'
+ 
+ 
+ def setup(app: Sphinx) -> Dict[str, Any]:

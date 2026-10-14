@@ -1,0 +1,73 @@
+{
+ "problem": "matplotlib__matplotlib-25287",
+ "bench": "swe",
+ "condition": "bare",
+ "effort": "low",
+ "model": "claude-haiku-5-5",
+ "batch": "swe_haiku",
+ "dry_run": false,
+ "outcome": "solved",
+ "verify_pass": true,
+ "verify_stage": "ok",
+ "verify_detail": "resolved (run_id cotml-20261014022707-dcd9649d)",
+ "num_turns": 10,
+ "input_tokens": 22,
+ "output_tokens": 2847,
+ "thinking_tokens": 208,
+ "cache_read_tokens": 44193,
+ "cache_creation_tokens": 5530,
+ "usage_source": "result",
+ "total_cost_usd": 0.0025588799999999995,
+ "duration_s": 222.6,
+ "agent_duration_ms": 221831,
+ "lean_compile_count": 7,
+ "search_tactic_uses": 0,
+ "search_tactic_in_final": false,
+ "tool_calls": {
+  "Bash": 9
+ },
+ "proof_chars": 1181,
+ "proof_lines": 24,
+ "statement_prefix_changed": false,
+ "stop_reason": "end_turn",
+ "result_subtype": "success",
+ "terminal_reason": "completed",
+ "is_error": false,
+ "api_error_status": null,
+ "permission_denials": 0,
+ "agent_said_give_up": false,
+ "final_text": "The offset text (the exponent label such as `1e9`) now follows `ytick.labelcolor` / `xtick.labelcolor` instead of `ytick.color` / `xtick.color`. The reproduction from the issue now gives red.\n\nThe change is in `lib/matplotlib/axis.py`, in the `XAxis` and `YAxis` constructors where the offset text is created. When the label color is `'inherit'` (the default), it falls back to the tick color, the same way the tick labels already do.\n\nVerification:\n- `test_axes.py`: 786 passed, 66 skipped.\n- `test_ticker.py`: 474 passed, 1 failed. The same test fails on the untouched code, so the failure predates this change.\n\nI did not run the full test suite beyond those two files, and I did not add a regression test, since the rules didn't allow adding test files.",
+ "timed_out": false,
+ "docker_rc": 0,
+ "limits": {
+  "max_turns": 50,
+  "max_budget_usd": 2.0,
+  "timeout_min": 25.0
+ },
+ "network": "cotml-egress",
+ "proxy": true,
+ "claude_version": "2.1.296",
+ "model_usage": {
+  "claude-haiku-5-5": {
+   "inputTokens": 22,
+   "outputTokens": 2847,
+   "cacheReadInputTokens": 44193,
+   "cacheCreationInputTokens": 5530,
+   "webSearchRequests": 0,
+   "costUSD": 0.0025588799999999995,
+   "contextWindow": 1000000,
+   "maxOutputTokens": 128000,
+   "thinkingTokens": 208,
+   "canonicalModel": "claude-haiku-5-5",
+   "provider": "firstParty",
+   "costBasis": "list"
+  }
+ },
+ "started_at": "2026-10-14T09:23:23+00:00",
+ "framing": "issue",
+ "patch_files": [
+  "lib/matplotlib/axis.py"
+ ],
+ "touched_test_files": [],
+ "untracked_files": []
+}

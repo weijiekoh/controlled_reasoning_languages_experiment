@@ -1,0 +1,14 @@
+## version
+2.1.296 (Claude Code)
+## claude_rc 0
+## python
+Python 3.6.13 :: Anaconda, Inc.
+/opt/miniconda3/envs/testbed/bin/python
+## git
+## head 5875fd52e8cff72e81cecb0eaa8940b4080221ff 19fc6376ce67d01ca37a91ef2f55ef769f50513a modeonly
+## network
+direct blocked URLError <urlopen error [Errno -3] Temporary failure in name resolution>
+proxy blocked URLError <urlopen error Tunnel connection failed: 403 Forbidden>
+## user
+uid=0(root) gid=0(root) groups=0(root)
+## end

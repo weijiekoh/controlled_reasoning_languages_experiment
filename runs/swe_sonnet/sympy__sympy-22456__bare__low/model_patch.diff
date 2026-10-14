@@ -1,0 +1,60 @@
+diff --git a/sympy/codegen/ast.py b/sympy/codegen/ast.py
+index a02714b174..d5ccbf1c8f 100644
+--- a/sympy/codegen/ast.py
++++ b/sympy/codegen/ast.py
+@@ -132,6 +132,7 @@
+ 
+ from sympy.core.relational import (Ge, Gt, Le, Lt)
+ from sympy.core import Symbol, Tuple, Dummy
++from sympy.core.symbol import Str
+ from sympy.core.basic import Basic
+ from sympy.core.expr import Expr
+ from sympy.core.numbers import Float, Integer, oo
+@@ -895,15 +896,20 @@ class String(Token):
+ 
+     """
+     __slots__ = ('text',)
+-    not_in_args = ['text']
+     is_Atom = True
+ 
+     @classmethod
+     def _construct_text(cls, text):
++        if isinstance(text, Str):
++            return text.name
+         if not isinstance(text, str):
+             raise TypeError("Argument text is not a string type.")
+         return text
+ 
++    @property
++    def args(self):
++        return (Str(self.text),)
++
+     def _sympystr(self, printer, *args, **kwargs):
+         return self.text
+ 
+diff --git a/sympy/core/basic.py b/sympy/core/basic.py
+index 346169741a..2fca34067f 100644
+--- a/sympy/core/basic.py
++++ b/sympy/core/basic.py
+@@ -493,10 +493,17 @@ def atoms(self, *types):
+             types = tuple(
+                 [t if isinstance(t, type) else type(t) for t in types])
+         nodes = _preorder_traversal(self)
+-        if types:
+-            result = {node for node in nodes if isinstance(node, types)}
+-        else:
+-            result = {node for node in nodes if not node.args}
++        result = set()
++        for node in nodes:
++            if types:
++                if isinstance(node, types):
++                    result.add(node)
++            elif not node.args or (node.is_Atom and
++                    all(a.is_Atom and not a.args for a in node.args)
++                    and not node.is_Symbol and not node.is_Number
++                    and type(node).__module__ == 'sympy.codegen.ast'):
++                result.add(node)
++                nodes.skip()
+         return result
+ 
+     @property

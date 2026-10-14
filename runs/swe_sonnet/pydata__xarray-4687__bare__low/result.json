@@ -1,0 +1,73 @@
+{
+ "problem": "pydata__xarray-4687",
+ "bench": "swe",
+ "condition": "bare",
+ "effort": "low",
+ "model": "claude-sonnet-5-5",
+ "batch": "swe_sonnet",
+ "dry_run": false,
+ "outcome": "solved",
+ "verify_pass": true,
+ "verify_stage": "ok",
+ "verify_detail": "resolved (run_id cotml-20261014012404-324b5493)",
+ "num_turns": 7,
+ "input_tokens": 14,
+ "output_tokens": 1578,
+ "thinking_tokens": 208,
+ "cache_read_tokens": 26775,
+ "cache_creation_tokens": 5742,
+ "usage_source": "result",
+ "total_cost_usd": 0.0328405,
+ "duration_s": 30.2,
+ "agent_duration_ms": 24440,
+ "lean_compile_count": 1,
+ "search_tactic_uses": 0,
+ "search_tactic_in_final": false,
+ "tool_calls": {
+  "Bash": 6
+ },
+ "proof_chars": 1514,
+ "proof_lines": 39,
+ "statement_prefix_changed": false,
+ "stop_reason": "end_turn",
+ "result_subtype": "success",
+ "terminal_reason": "completed",
+ "is_error": false,
+ "api_error_status": null,
+ "permission_denials": 0,
+ "agent_said_give_up": false,
+ "final_text": "`xr.where` now takes a `keep_attrs` argument. With `keep_attrs=True`, the result gets the attributes of `x`. `test_where_attrs` now passes, along with the rest of `xarray/tests/test_computation.py` (248 passed, 1 skipped).\n\n- **Default:** `keep_attrs` falls back to the global `keep_attrs` option, which defaults to False. So plain `xr.where(data == 1, 5, 0)` still returns a result without attributes, as before. Attributes are only kept if you pass `keep_attrs=True` or set the global option.\n- **Which attributes:** they come from `x` (the second argument), not from `cond`, because that is what the test expects. I did this by calling `apply_ufunc` with `keep_attrs=\"drop\"` and copying `x.attrs` onto the result afterwards. If `x` is a plain scalar like `5` in your first example, it has no attributes, so none are kept.\n- **Not changed:** the dtype issue from the first report (int8 becoming int64) is untouched.\n\nThe change is in `xarray/core/computation.py`, and the docstring now documents the new argument.",
+ "timed_out": false,
+ "docker_rc": 0,
+ "limits": {
+  "max_turns": 50,
+  "max_budget_usd": 4.0,
+  "timeout_min": 25.0
+ },
+ "network": "cotml-egress",
+ "proxy": true,
+ "claude_version": "2.1.296",
+ "model_usage": {
+  "claude-sonnet-5-5": {
+   "inputTokens": 14,
+   "outputTokens": 1578,
+   "cacheReadInputTokens": 26775,
+   "cacheCreationInputTokens": 5742,
+   "webSearchRequests": 0,
+   "costUSD": 0.0328405,
+   "contextWindow": 1000000,
+   "maxOutputTokens": 128000,
+   "thinkingTokens": 208,
+   "canonicalModel": "claude-sonnet-5-5",
+   "provider": "firstParty",
+   "costBasis": "list"
+  }
+ },
+ "started_at": "2026-10-14T08:23:33+00:00",
+ "framing": "debug",
+ "patch_files": [
+  "xarray/core/computation.py"
+ ],
+ "touched_test_files": [],
+ "untracked_files": []
+}

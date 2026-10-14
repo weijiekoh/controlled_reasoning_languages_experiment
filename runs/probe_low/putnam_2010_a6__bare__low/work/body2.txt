@@ -1,0 +1,80 @@
+by
+  have A : ∀ b : ℕ → ℝ, (∀ k, 0 < b k) → (∀ k, b (k+1) ≤ b k) → Tendsto b atTop (𝓝 0) →
+      ∀ M : ℝ, ¬ ∀ n, ∑ k ∈ Finset.range n, (1 - b (k+1) / b k) ≤ M := by
+    intro b hpos hanti hlim M hM
+    have hd0 : ∀ k, 0 ≤ 1 - b (k+1) / b k := fun k => by
+      have := (div_le_one (hpos k)).2 (hanti k)
+      linarith
+    have hsum : Summable (fun k => 1 - b (k+1) / b k) := summable_of_sum_range_le hd0 hM
+    have hdt := hsum.tendsto_atTop_zero
+    obtain ⟨K, hK⟩ := Filter.eventually_atTop.1
+      (hdt.eventually (gt_mem_nhds (show (0:ℝ) < 1/2 by norm_num)))
+    have key : ∀ k ≥ K, Real.log (b k) - Real.log (b (k+1)) ≤ 2 * (1 - b (k+1) / b k) := by
+      intro k hk
+      have h1 := hK k hk
+      have hp := hpos k
+      have hq := hpos (k+1)
+      have hqp := hanti k
+      have h2 : b k ≤ 2 * b (k+1) := by
+        have : 1/2 < b (k+1) / b k := by linarith
+        rw [lt_div_iff₀ hp] at this
+        linarith
+      rw [← Real.log_div hp.ne' hq.ne']
+      have h3 := Real.log_le_sub_one_of_pos (div_pos hp hq)
+      have h4 : 0 ≤ (b k - b (k+1)) * (2 * b (k+1) - b k) :=
+        mul_nonneg (by linarith) (by linarith)
+      have h5 : b k / b (k+1) - 1 - 2 * (1 - b (k+1) / b k)
+          = -((b k - b (k+1)) * (2 * b (k+1) - b k)) / (b k * b (k+1)) := by
+        field_simp
+        ring
+      have h6 : 0 ≤ ((b k - b (k+1)) * (2 * b (k+1) - b k)) / (b k * b (k+1)) :=
+        div_nonneg h4 (by positivity)
+      have h7 : -((b k - b (k+1)) * (2 * b (k+1) - b k)) / (b k * b (k+1))
+          = -(((b k - b (k+1)) * (2 * b (k+1) - b k)) / (b k * b (k+1))) := by ring
+      linarith
+    have hlow : ∀ n, Real.log (b K) - 2 * M ≤ Real.log (b (K+n)) := by
+      intro n
+      have e := Finset.sum_range_sub' (fun i => Real.log (b (K+i))) n
+      have h1 : ∑ i ∈ Finset.range n, (Real.log (b (K+i)) - Real.log (b (K+(i+1))))
+          ≤ ∑ i ∈ Finset.range n, 2 * (1 - b (K+i+1) / b (K+i)) :=
+        Finset.sum_le_sum (fun i _ => key (K+i) (by omega))
+      rw [← Finset.mul_sum] at h1
+      have h2 := Finset.sum_range_add (fun k => 1 - b (k+1) / b k) K n
+      have h3 : 0 ≤ ∑ k ∈ Finset.range K, (1 - b (k+1) / b k) :=
+        Finset.sum_nonneg (fun k _ => hd0 k)
+      have h4 := hM (K+n)
+      rw [Nat.add_zero] at e
+      linarith
+    have hev := hlim.eventually (gt_mem_nhds (Real.exp_pos (Real.log (b K) - 2 * M)))
+    obtain ⟨N, hN⟩ := Filter.eventually_atTop.1 hev
+    have := hN (K+N) (by omega)
+    have h := Real.log_lt_log (hpos _) this
+    rw [Real.log_exp] at h
+    linarith [hlow N, hlow (N)]
+  rintro ⟨y, hy⟩
+  obtain ⟨hanti, hcont, hlim⟩ := hf
+  have hpos : ∀ x, 0 ≤ x → 0 < f x := by
+    intro x hx
+    by_contra hneg
+    push_neg at hneg
+    have h1 : f (x+1) < f x := hanti (by simpa using hx) (by simp; linarith) (by linarith)
+    have h2 : ∀ᶠ t in atTop, f t ≤ f (x+1) := by
+      filter_upwards [eventually_ge_atTop (x+1)] with t ht
+      exact hanti.antitoneOn (by simp; linarith) (by simp; linarith) ht
+    have := ge_of_tendsto hlim h2
+    linarith
+  set g : ℝ → ℝ := fun x => (f x - f (x+1)) / f x with hg
+  have hgc : ContinuousOn g (Ici 0) := by
+    apply ContinuousOn.div
+    · exact hcont.sub (hcont.comp (continuousOn_id.add continuousOn_const)
+        (fun x hx => by simp at hx ⊢; linarith))
+    · exact hcont
+    · intro x hx; exact (hpos x hx).ne'
+  have hint : ∀ a b : ℝ, 0 ≤ a → 0 ≤ b → IntervalIntegrable g MeasureTheory.volume a b := by
+    intro a b ha hb
+    apply ContinuousOn.intervalIntegrable
+    apply hgc.mono
+    intro x hx
+    rw [Set.uIcc_of_le (by sorry)] at hx
+    sorry
+  sorry

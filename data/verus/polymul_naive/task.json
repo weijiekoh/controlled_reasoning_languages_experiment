@@ -1,0 +1,15 @@
+{
+ "id": "polymul_naive",
+ "entry": "polymul_naive.rs",
+ "description": "description.md",
+ "main_fn": "poly_multiply",
+ "editable_regions": {
+  "helpers": "between `// <helpers>` and `// </helpers>`: helper spec fns and exec helpers",
+  "proofs": "between `// <proofs>` and `// </proofs>`: lemmas (proof fns)",
+  "code": "between `// <code>` and `// </code>`: exactly one block `{ ... }`, the body of the function under spec"
+ },
+ "fixed": "Everything outside the three editable regions is fixed: the `use` lines, the <preamble> block (definitions, spec fns, and any exec fns given there), the <spec> block (signature, requires, ensures of the function under test), fn main, and all marker comments. Compared token-wise; comments and whitespace are ignored.",
+ "source": "data/algoveri/algoveri_data/polymul_naive/verus_spec.rs",
+ "source_sha256": "157a367ae8669bbc1788924a5e2d2e78c23deff9b86840eb478173a1520ec7ce",
+ "patches": []
+}

@@ -1,0 +1,73 @@
+{
+ "problem": "matplotlib__matplotlib-24970",
+ "bench": "swe",
+ "condition": "cod",
+ "effort": "low",
+ "model": "claude-haiku-5-5",
+ "batch": "swe_haiku",
+ "dry_run": false,
+ "outcome": "solved",
+ "verify_pass": true,
+ "verify_stage": "ok",
+ "verify_detail": "resolved (run_id cotml-20261014000558-e6192988)",
+ "num_turns": 4,
+ "input_tokens": 10,
+ "output_tokens": 1530,
+ "thinking_tokens": 427,
+ "cache_read_tokens": 11936,
+ "cache_creation_tokens": 3126,
+ "usage_source": "result",
+ "total_cost_usd": 0.00127611,
+ "duration_s": 20.3,
+ "agent_duration_ms": 19185,
+ "lean_compile_count": 2,
+ "search_tactic_uses": 0,
+ "search_tactic_in_final": false,
+ "tool_calls": {
+  "Bash": 3
+ },
+ "proof_chars": 792,
+ "proof_lines": 15,
+ "statement_prefix_changed": false,
+ "stop_reason": "end_turn",
+ "result_subtype": "success",
+ "terminal_reason": "completed",
+ "is_error": false,
+ "api_error_status": null,
+ "permission_denials": 0,
+ "agent_said_give_up": false,
+ "final_text": "I fixed the NumPy 1.24 warnings in `Colormap.__call__` (`lib/matplotlib/colors.py`). Your reproduction now runs cleanly with warnings promoted to errors.\n\n**Cause:** for a `uint8` input, the code assigned the special indices `N`, `N+1` and `N+2` (256\u2013258) into a `uint8` array. NumPy 1.24 deprecates that out-of-bound conversion.\n\n**Fix:** integer inputs narrower than the platform `int` are now widened to `int` before the special indices are assigned.\n\n**Tests:** `lib/matplotlib/tests/test_colors.py` has 250 passing and 1 failing. The failure is `test_double_register_builtin_cmap`, which also fails without my change, so it is unrelated to this fix.\n\nThe changes are uncommitted in the working tree.",
+ "timed_out": false,
+ "docker_rc": 0,
+ "limits": {
+  "max_turns": 50,
+  "max_budget_usd": 2.0,
+  "timeout_min": 25.0
+ },
+ "network": "cotml-egress",
+ "proxy": true,
+ "claude_version": "2.1.296",
+ "model_usage": {
+  "claude-haiku-5-5": {
+   "inputTokens": 10,
+   "outputTokens": 1530,
+   "cacheReadInputTokens": 11936,
+   "cacheCreationInputTokens": 3126,
+   "webSearchRequests": 0,
+   "costUSD": 0.00127611,
+   "contextWindow": 1000000,
+   "maxOutputTokens": 128000,
+   "thinkingTokens": 427,
+   "canonicalModel": "claude-haiku-5-5",
+   "provider": "firstParty",
+   "costBasis": "list"
+  }
+ },
+ "started_at": "2026-10-14T07:05:36+00:00",
+ "framing": "issue",
+ "patch_files": [
+  "lib/matplotlib/colors.py"
+ ],
+ "touched_test_files": [],
+ "untracked_files": []
+}

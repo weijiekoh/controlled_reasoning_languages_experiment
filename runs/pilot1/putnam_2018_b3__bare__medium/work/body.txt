@@ -1,0 +1,22 @@
+    have h3' : 2^(2^b-1) - 1 ∣ 2^(2^(2^b)-1) - 1 := by
+      have hA1 : (2:ℤ)^(2^b) = 2 * 2^(2^b-1) := by
+        rw [← pow_succ']; congr 1; omega
+      have hN1 : (2:ℤ)^(2^(2^b)) = 2 * 2^(2^(2^b)-1) := by
+        rw [← pow_succ']; congr 1
+        have : 1 ≤ 2^(2^b) := Nat.one_le_two_pow
+        omega
+      push_cast at h3
+      rw [hN1] at h3
+      rw [hA1] at h3
+      have h5 : (2:ℤ) * (2^(2^b-1) - 1) ∣ 2 * (2^(2^(2^b)-1) - 1) := by
+        convert h3 using 1 <;> ring
+      have h6 := (mul_dvd_mul_iff_left (by norm_num : (2:ℤ) ≠ 0)).1 h5
+      have p1 : 1 ≤ 2^(2^b-1) := Nat.one_le_two_pow
+      have p2 : 1 ≤ 2^(2^(2^b)-1) := Nat.one_le_two_pow
+      zify [p1, p2]
+      exact_mod_cast h6
+    have h7 := (key (2^b-1) _ (by omega)).1 h3'
+    have h8 : 2^b - 1 ∣ 2^(2^b) - 1 := by
+      have : 2^(2^b) - 1 = 2^(2^(2^b)-1) - 1 := by sorry
+      sorry
+    sorry

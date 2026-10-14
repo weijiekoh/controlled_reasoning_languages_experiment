@@ -1,0 +1,73 @@
+{
+ "problem": "django__django-13297",
+ "bench": "swe",
+ "condition": "bare",
+ "effort": "low",
+ "model": "claude-haiku-5-5",
+ "batch": "swe_haiku",
+ "dry_run": false,
+ "outcome": "solved",
+ "verify_pass": true,
+ "verify_stage": "ok",
+ "verify_detail": "resolved (run_id cotml-20261014010253-fb3bd700)",
+ "num_turns": 5,
+ "input_tokens": 12,
+ "output_tokens": 2792,
+ "thinking_tokens": 1281,
+ "cache_read_tokens": 16487,
+ "cache_creation_tokens": 6663,
+ "usage_source": "result",
+ "total_cost_usd": 0.0023949449999999995,
+ "duration_s": 23.7,
+ "agent_duration_ms": 22851,
+ "lean_compile_count": 3,
+ "search_tactic_uses": 0,
+ "search_tactic_in_final": false,
+ "tool_calls": {
+  "Bash": 4
+ },
+ "proof_chars": 1622,
+ "proof_lines": 34,
+ "statement_prefix_changed": false,
+ "stop_reason": "end_turn",
+ "result_subtype": "success",
+ "terminal_reason": "completed",
+ "is_error": false,
+ "api_error_status": null,
+ "permission_denials": 0,
+ "agent_said_give_up": false,
+ "final_text": "I fixed the crash in `TemplateView.get` in `django/views/generic/base.py`. The target test `test_template_params_filtering` now passes, and the full `generic_views` suite passes (215 tests).\n\n**Cause:** `get()` wrapped every URL kwarg in a `SimpleLazyObject` to emit the deprecation warning. That included kwargs that `get_context_data` takes as named parameters, so the subclass received a lazy proxy instead of the string. Passing that proxy to a database query fails on SQLite.\n\n**Fix:**\n- `_wrap_url_kwargs_with_deprecation_warning` now takes the `get_context_data` callable. It inspects its signature and passes any URL kwarg that matches a named parameter through unchanged.\n- Other URL kwargs still get the deprecation-wrapped lazy value, so the `RemovedInDjango40Warning` behaviour is unchanged for them.\n- Added `import inspect`.\n\nThe changes are uncommitted in the working tree.",
+ "timed_out": false,
+ "docker_rc": 0,
+ "limits": {
+  "max_turns": 50,
+  "max_budget_usd": 2.0,
+  "timeout_min": 25.0
+ },
+ "network": "cotml-egress",
+ "proxy": true,
+ "claude_version": "2.1.296",
+ "model_usage": {
+  "claude-haiku-5-5": {
+   "inputTokens": 12,
+   "outputTokens": 2792,
+   "cacheReadInputTokens": 16487,
+   "cacheCreationInputTokens": 6663,
+   "webSearchRequests": 0,
+   "costUSD": 0.0023949449999999995,
+   "contextWindow": 1000000,
+   "maxOutputTokens": 128000,
+   "thinkingTokens": 1281,
+   "canonicalModel": "claude-haiku-5-5",
+   "provider": "firstParty",
+   "costBasis": "list"
+  }
+ },
+ "started_at": "2026-10-14T08:02:28+00:00",
+ "framing": "debug",
+ "patch_files": [
+  "django/views/generic/base.py"
+ ],
+ "touched_test_files": [],
+ "untracked_files": []
+}

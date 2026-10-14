@@ -1,0 +1,73 @@
+{
+ "problem": "matplotlib__matplotlib-25960",
+ "bench": "swe",
+ "condition": "jellyfish",
+ "effort": "low",
+ "model": "claude-haiku-5-5",
+ "batch": "swe_haiku",
+ "dry_run": false,
+ "outcome": "gave_up",
+ "verify_pass": false,
+ "verify_stage": "tests",
+ "verify_detail": "FAIL_TO_PASS 0/1 failing: lib/matplotlib/tests/test_figure.py::test_subfigures_wspace_hspace; PASS_TO_PASS 131/137 failing: lib/matplotlib/tests/test_figure.py::test_subfigure[png], lib/matplotlib/tests/test_figure.py::test_subfigure_tightbbox, lib/matplotlib/tests/test_figure.py::test_subfigure_ss[png]",
+ "num_turns": 12,
+ "input_tokens": 26,
+ "output_tokens": 5691,
+ "thinking_tokens": 2566,
+ "cache_read_tokens": 104891,
+ "cache_creation_tokens": 12460,
+ "usage_source": "result",
+ "total_cost_usd": 0.00545451,
+ "duration_s": 67.2,
+ "agent_duration_ms": 66287,
+ "lean_compile_count": 3,
+ "search_tactic_uses": 0,
+ "search_tactic_in_final": false,
+ "tool_calls": {
+  "Bash": 11
+ },
+ "proof_chars": 1258,
+ "proof_lines": 27,
+ "statement_prefix_changed": false,
+ "stop_reason": "end_turn",
+ "result_subtype": "success",
+ "terminal_reason": "completed",
+ "is_error": false,
+ "api_error_status": null,
+ "permission_denials": 0,
+ "agent_said_give_up": false,
+ "final_text": "The issue is fixed in `lib/matplotlib/figure.py`, but six existing subfigure tests now fail. Those tests encode the old layout, and fixing them means editing test files, which the rules forbid. I left them as they are.\n\n**Root cause:** `SubFigure._redo_transform_rel_fig` computed each subfigure's position from the width and height ratios alone. It never read the gridspec's `wspace`/`hspace`, so the values were ignored.\n\n**Fix:** The method now takes the cell edges from `gs.get_grid_positions(self._parent)`, which already applies the spacing. Subfigure bounds now change with `wspace`/`hspace`. For example, the top-left subfigure's width is 225 px with the default spacing, 248 px with 0 and 198 px with 0.5.\n\n**Test results:** `test_figure.py`, `test_gridspec.py` and `test_subplots.py` give 175 passed, 6 failed, 8 skipped. The six failures are all in `test_figure.py`, and all pass on the unmodified code:\n- `test_subfigure[png]`, `test_subfigure_ss[png]`, `test_subfigure_double[png]`, `test_subfigure_scatter_size[png]`: image comparisons fail because the layout changed.\n- `test_subfigure_tightbbox`, `test_subfigure_spanning`: numeric assertions fail, e.g. a value of 6.2 where 8.0 is expected.\n\nThese tests assume subfigures are laid out with no gap, which is the bug. Their expected images and asserted values need regenerating for the new layout. That is a test-file change, so it is for you to decide. Nothing is committed.",
+ "timed_out": false,
+ "docker_rc": 0,
+ "limits": {
+  "max_turns": 50,
+  "max_budget_usd": 2.0,
+  "timeout_min": 25.0
+ },
+ "network": "cotml-egress",
+ "proxy": true,
+ "claude_version": "2.1.296",
+ "model_usage": {
+  "claude-haiku-5-5": {
+   "inputTokens": 26,
+   "outputTokens": 5691,
+   "cacheReadInputTokens": 104891,
+   "cacheCreationInputTokens": 12460,
+   "webSearchRequests": 0,
+   "costUSD": 0.00545451,
+   "contextWindow": 1000000,
+   "maxOutputTokens": 128000,
+   "thinkingTokens": 2566,
+   "canonicalModel": "claude-haiku-5-5",
+   "provider": "firstParty",
+   "costBasis": "list"
+  }
+ },
+ "started_at": "2026-10-14T09:27:38+00:00",
+ "framing": "issue",
+ "patch_files": [
+  "lib/matplotlib/figure.py"
+ ],
+ "touched_test_files": [],
+ "untracked_files": []
+}

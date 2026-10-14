@@ -1,0 +1,82 @@
+import Mathlib
+
+open Filter Topology Set
+
+/--
+Let $n \geq 3$ be an integer. Let $f(x)$ and $g(x)$ be polynomials with real coefficients such that the points $(f(1), g(1)), (f(2), g(2)), \dots, (f(n), g(n))$ in $\mathbb{R}^2$ are the vertices of a regular $n$-gon in counterclockwise order. Prove that at least one of $f(x)$ and $g(x)$ has degree greater than or equal to $n-1$.
+-/
+theorem putnam_2008_a5
+(n : ℕ)
+(nge3 : n ≥ 3)
+(f g : Polynomial ℝ)
+(hfg : ∃ O z : ℂ, z ≠ 0 ∧ ∀ k : ℕ, k ∈ Icc 1 n → (f.eval (k : ℝ)) + Complex.I * (g.eval (k : ℝ)) = O + z * Complex.exp (Complex.I * 2 * Real.pi * k / n))
+: (f.natDegree ≥ n - 1 ∨ g.natDegree ≥ n - 1) :=
+by
+  by_contra hcon
+  push Not at hcon
+  obtain ⟨hf, hg⟩ := hcon
+  obtain ⟨O, z, hz, h⟩ := hfg
+  -- key: finite differences of a real polynomial of degree < n-1 vanish
+  have key : ∀ p : Polynomial ℝ, p.natDegree < n - 1 →
+      ∑ j ∈ Finset.range (n - 1 + 1), ((-1 : ℝ) ^ (n - 1 - j) * ((n - 1).choose j : ℝ)) * p.eval (1 + (j : ℝ)) = 0 := by
+    intro p hp
+    have h1 : (fwdDiff (1 : ℝ))^[n - 1] (fun x => p.eval x) 1 = 0 := by
+      have hfun : (fun x : ℝ => p.eval x) = ∑ i ∈ Finset.range (p.natDegree + 1), p.coeff i • (fun r : ℝ => r ^ i) := by
+        funext x
+        simp [Polynomial.eval_eq_sum_range, Finset.sum_apply]
+      rw [hfun, fwdDiff_iter_finsetSum, Finset.sum_apply]
+      apply Finset.sum_eq_zero
+      intro i hi
+      rw [fwdDiff_iter_const_smul, fwdDiff_iter_pow_eq_zero_of_lt (by simp at hi; omega), smul_zero, Pi.zero_apply]
+    rw [fwdDiff_iter_eq_sum_shift] at h1
+    simpa [zsmul_eq_mul, nsmul_eq_mul] using h1
+  have hf' := key f (by omega)
+  have hg' := key g (by omega)
+  have hprim := Complex.isPrimitiveRoot_exp n (by omega)
+  set ω := Complex.exp (2 * Real.pi * Complex.I / n) with hωdef
+  have hω : ∀ k : ℕ, Complex.exp (Complex.I * 2 * Real.pi * k / n) = ω ^ k := by
+    intro k
+    rw [hωdef, ← Complex.exp_nat_mul]
+    congr 1
+    ring
+  have hω1 : ω - 1 ≠ 0 := sub_ne_zero.mpr (hprim.ne_one (by omega))
+  have hω0 : ω ≠ 0 := Complex.exp_ne_zero _
+  -- complex coefficients
+  have A : ∑ j ∈ Finset.range (n - 1 + 1), ((-1 : ℂ) ^ (n - 1 - j) * ((n - 1).choose j : ℂ)) * ((f.eval (1 + (j : ℝ)) : ℝ) : ℂ) = 0 := by
+    exact_mod_cast hf'
+  have B : ∑ j ∈ Finset.range (n - 1 + 1), ((-1 : ℂ) ^ (n - 1 - j) * ((n - 1).choose j : ℂ)) * ((g.eval (1 + (j : ℝ)) : ℝ) : ℂ) = 0 := by
+    exact_mod_cast hg'
+  have hterm : ∀ j ∈ Finset.range (n - 1 + 1),
+      ((-1 : ℂ) ^ (n - 1 - j) * ((n - 1).choose j : ℂ)) * (((f.eval (1 + (j : ℝ)) : ℝ) : ℂ) + Complex.I * ((g.eval (1 + (j : ℝ)) : ℝ) : ℂ))
+        = ((-1 : ℂ) ^ (n - 1 - j) * ((n - 1).choose j : ℂ)) * O + ((-1 : ℂ) ^ (n - 1 - j) * ((n - 1).choose j : ℂ)) * z * ω ^ (1 + j) := by
+    intro j hj
+    rw [Finset.mem_range] at hj
+    have hk := h (1 + j) (by simp only [Set.mem_Icc]; omega)
+    rw [hω] at hk
+    push_cast at hk
+    rw [hk]
+    ring
+  have hsplit : ∑ j ∈ Finset.range (n - 1 + 1), ((-1 : ℂ) ^ (n - 1 - j) * ((n - 1).choose j : ℂ)) * (((f.eval (1 + (j : ℝ)) : ℝ) : ℂ) + Complex.I * ((g.eval (1 + (j : ℝ)) : ℝ) : ℂ))
+      = ∑ j ∈ Finset.range (n - 1 + 1), ((-1 : ℂ) ^ (n - 1 - j) * ((n - 1).choose j : ℂ)) * ((f.eval (1 + (j : ℝ)) : ℝ) : ℂ)
+        + Complex.I * ∑ j ∈ Finset.range (n - 1 + 1), ((-1 : ℂ) ^ (n - 1 - j) * ((n - 1).choose j : ℂ)) * ((g.eval (1 + (j : ℝ)) : ℝ) : ℂ) := by
+    rw [Finset.mul_sum, ← Finset.sum_add_distrib]
+    exact Finset.sum_congr rfl (fun j _ => by ring)
+  have hzero : ∑ j ∈ Finset.range (n - 1 + 1), ((-1 : ℂ) ^ (n - 1 - j) * ((n - 1).choose j : ℂ)) * (((f.eval (1 + (j : ℝ)) : ℝ) : ℂ) + Complex.I * ((g.eval (1 + (j : ℝ)) : ℝ) : ℂ)) = 0 := by
+    rw [hsplit, A, B]; ring
+  rw [Finset.sum_congr rfl hterm, Finset.sum_add_distrib, ← Finset.sum_mul] at hzero
+  -- binomial identities
+  have hC : ∑ j ∈ Finset.range (n - 1 + 1), ((-1 : ℂ) ^ (n - 1 - j) * ((n - 1).choose j : ℂ)) = 0 := by
+    have := add_pow (1 : ℂ) (-1) (n - 1)
+    have hn : n - 1 ≠ 0 := by omega
+    simp only [one_pow, one_mul, add_neg_cancel, zero_pow hn] at this
+    rw [this]
+  have hW : ∑ j ∈ Finset.range (n - 1 + 1), ((-1 : ℂ) ^ (n - 1 - j) * ((n - 1).choose j : ℂ)) * z * ω ^ (1 + j)
+      = z * (ω * (ω - 1) ^ (n - 1)) := by
+    have := add_pow ω (-1) (n - 1)
+    rw [sub_eq_add_neg, this, Finset.mul_sum, Finset.mul_sum]
+    exact Finset.sum_congr rfl (fun j _ => by ring)
+  rw [hC, hW] at hzero
+  have : z * (ω * (ω - 1) ^ (n - 1)) ≠ 0 := mul_ne_zero hz (mul_ne_zero hω0 (pow_ne_zero _ hω1))
+  apply this
+  rw [← hzero]
+  ring

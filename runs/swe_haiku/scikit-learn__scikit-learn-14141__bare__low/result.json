@@ -1,0 +1,73 @@
+{
+ "problem": "scikit-learn__scikit-learn-14141",
+ "bench": "swe",
+ "condition": "bare",
+ "effort": "low",
+ "model": "claude-haiku-5-5",
+ "batch": "swe_haiku",
+ "dry_run": false,
+ "outcome": "solved",
+ "verify_pass": true,
+ "verify_stage": "ok",
+ "verify_detail": "resolved (run_id cotml-20261014023634-cc6ed578)",
+ "num_turns": 3,
+ "input_tokens": 8,
+ "output_tokens": 519,
+ "thinking_tokens": 0,
+ "cache_read_tokens": 6075,
+ "cache_creation_tokens": 1530,
+ "usage_source": "result",
+ "total_cost_usd": 0.0005122999999999999,
+ "duration_s": 6.5,
+ "agent_duration_ms": 5856,
+ "lean_compile_count": 1,
+ "search_tactic_uses": 0,
+ "search_tactic_in_final": false,
+ "tool_calls": {
+  "Bash": 2
+ },
+ "proof_chars": 348,
+ "proof_lines": 11,
+ "statement_prefix_changed": false,
+ "stop_reason": "end_turn",
+ "result_subtype": "success",
+ "terminal_reason": "completed",
+ "is_error": false,
+ "api_error_status": null,
+ "permission_denials": 0,
+ "agent_said_give_up": false,
+ "final_text": "I added `joblib` to the dependency list in `sklearn/utils/_show_versions.py`, so `show_versions()` now reports its version. The show_versions tests pass (3 passed). I didn't touch the issue template, since adding it to `show_versions` was enough to resolve the issue.",
+ "timed_out": false,
+ "docker_rc": 0,
+ "limits": {
+  "max_turns": 50,
+  "max_budget_usd": 2.0,
+  "timeout_min": 25.0
+ },
+ "network": "cotml-egress",
+ "proxy": true,
+ "claude_version": "2.1.296",
+ "model_usage": {
+  "claude-haiku-5-5": {
+   "inputTokens": 8,
+   "outputTokens": 519,
+   "cacheReadInputTokens": 6075,
+   "cacheCreationInputTokens": 1530,
+   "webSearchRequests": 0,
+   "costUSD": 0.0005122999999999999,
+   "contextWindow": 1000000,
+   "maxOutputTokens": 128000,
+   "thinkingTokens": 0,
+   "canonicalModel": "claude-haiku-5-5",
+   "provider": "firstParty",
+   "costBasis": "list"
+  }
+ },
+ "started_at": "2026-10-14T09:36:27+00:00",
+ "framing": "issue",
+ "patch_files": [
+  "sklearn/utils/_show_versions.py"
+ ],
+ "touched_test_files": [],
+ "untracked_files": []
+}

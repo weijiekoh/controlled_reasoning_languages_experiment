@@ -1,0 +1,73 @@
+{
+ "problem": "sphinx-doc__sphinx-9281",
+ "bench": "swe",
+ "condition": "bare",
+ "effort": "low",
+ "model": "claude-haiku-5-5",
+ "batch": "swe_haiku",
+ "dry_run": false,
+ "outcome": "solved",
+ "verify_pass": true,
+ "verify_stage": "ok",
+ "verify_detail": "resolved (run_id cotml-20261014023921-37123753)",
+ "num_turns": 3,
+ "input_tokens": 8,
+ "output_tokens": 663,
+ "thinking_tokens": 55,
+ "cache_read_tokens": 6393,
+ "cache_creation_tokens": 1774,
+ "usage_source": "result",
+ "total_cost_usd": 0.00061798,
+ "duration_s": 6.6,
+ "agent_duration_ms": 6024,
+ "lean_compile_count": 1,
+ "search_tactic_uses": 0,
+ "search_tactic_in_final": false,
+ "tool_calls": {
+  "Bash": 2
+ },
+ "proof_chars": 559,
+ "proof_lines": 12,
+ "statement_prefix_changed": false,
+ "stop_reason": "end_turn",
+ "result_subtype": "success",
+ "terminal_reason": "completed",
+ "is_error": false,
+ "api_error_status": null,
+ "permission_denials": 0,
+ "agent_said_give_up": false,
+ "final_text": "I changed `object_description` in `sphinx/util/inspect.py` so that Enum members render as `ClassName.member` (for example `MyEnum.ValueA`) instead of the default `repr` (`<MyEnum.ValueA: 10>`). The `enum` module was already imported there, so no import was added.\n\n`tests/test_util_inspect.py` passes (38 tests). I did not run the full suite or build a docs example to check the rendered signature end to end.",
+ "timed_out": false,
+ "docker_rc": 0,
+ "limits": {
+  "max_turns": 50,
+  "max_budget_usd": 2.0,
+  "timeout_min": 25.0
+ },
+ "network": "cotml-egress",
+ "proxy": true,
+ "claude_version": "2.1.296",
+ "model_usage": {
+  "claude-haiku-5-5": {
+   "inputTokens": 8,
+   "outputTokens": 663,
+   "cacheReadInputTokens": 6393,
+   "cacheCreationInputTokens": 1774,
+   "webSearchRequests": 0,
+   "costUSD": 0.00061798,
+   "contextWindow": 1000000,
+   "maxOutputTokens": 128000,
+   "thinkingTokens": 55,
+   "canonicalModel": "claude-haiku-5-5",
+   "provider": "firstParty",
+   "costBasis": "list"
+  }
+ },
+ "started_at": "2026-10-14T09:39:14+00:00",
+ "framing": "issue",
+ "patch_files": [
+  "sphinx/util/inspect.py"
+ ],
+ "touched_test_files": [],
+ "untracked_files": []
+}

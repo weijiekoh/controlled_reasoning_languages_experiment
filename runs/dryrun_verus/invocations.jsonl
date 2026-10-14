@@ -1,0 +1,1 @@
+{"time": "2026-10-13T20:11:37", "argv": ["--dry-run", "--model", "claude-haiku-5-5", "--bench", "verus", "--problems", "problems/probe_verus.txt", "--condition", "bare", "--effort", "low", "--max-turns", "40", "--max-budget-usd", "1", "--timeout-min", "15", "--parallel", "2", "--out", "runs/dryrun_verus/"], "model": "claude-haiku-5-5"}

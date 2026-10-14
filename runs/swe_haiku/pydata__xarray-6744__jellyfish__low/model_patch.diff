@@ -1,0 +1,28 @@
+diff --git a/xarray/core/rolling.py b/xarray/core/rolling.py
+index aef290f6..67dc2a09 100644
+--- a/xarray/core/rolling.py
++++ b/xarray/core/rolling.py
+@@ -270,9 +270,20 @@ class DataArrayRolling(Rolling["DataArray"]):
+     def __iter__(self) -> Iterator[tuple[RollingKey, DataArray]]:
+         if self.ndim > 1:
+             raise ValueError("__iter__ is only supported for 1d-rolling")
+-        stops = np.arange(1, len(self.window_labels) + 1)
+-        starts = stops - int(self.window[0])
+-        starts[: int(self.window[0])] = 0
++        window_size = int(self.window[0])
++        n = len(self.window_labels)
++        if self.center[0]:
++            # Window for label i covers [i - offset, i - offset + window_size),
++            # matching the alignment used by the non-iterating reductions.
++            offset = window_size // 2
++            starts = np.arange(n) - offset
++            stops = starts + window_size
++        else:
++            stops = np.arange(1, n + 1)
++            starts = stops - window_size
++            starts[:window_size] = 0
++        starts = np.clip(starts, 0, n)
++        stops = np.clip(stops, 0, n)
+         for (label, start, stop) in zip(self.window_labels, starts, stops):
+             window = self.obj.isel({self.dim[0]: slice(start, stop)})
+ 

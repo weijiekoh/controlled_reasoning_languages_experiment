@@ -1,0 +1,27 @@
+  have hq : ((X^2 + X : (DualNumber k)[X])).Monic :=
+    monic_X_pow_add (n := 2) (p := X) (by rw [degree_X]; norm_num)
+  have hI : Ideal.span {((C (ε : DualNumber k)) * X^3 + (C (ε : DualNumber k)) * X^2 - X^2 - X : (DualNumber k)[X])} = Ideal.span {(X^2 + X : (DualNumber k)[X])} := by
+    have h0 : C (ε : DualNumber k) * C (ε : DualNumber k) = 0 := by
+      rw [← C_mul]; simp
+    have e : ((C (ε : DualNumber k)) * X^3 + (C (ε : DualNumber k)) * X^2 - X^2 - X : (DualNumber k)[X]) = (X^2+X) * (C (ε : DualNumber k) * X - 1) := by ring
+    apply le_antisymm
+    · refine (Ideal.span_singleton_le_span_singleton (α := (DualNumber k)[X])).2 ?_
+      rw [e]
+      exact dvd_mul_right _ _
+    · refine (Ideal.span_singleton_le_span_singleton (α := (DualNumber k)[X])).2 ?_
+      rw [e]
+      refine ⟨-(1 + C (ε : DualNumber k) * X), ?_⟩
+      linear_combination (X^2 + X) * (X * X : (DualNumber k)[X]) * h0
+  let pb := AdjoinRoot.powerBasis' hq
+  let e : S k ≃ₗ[DualNumber k] AdjoinRoot (X^2 + X : (DualNumber k)[X]) :=
+    AddEquiv.toLinearEquiv (Submodule.quotEquivOfEq _ _ hI).toAddEquiv (by
+        intro c s
+        induction s using Quotient.inductionOn' with
+        | h a => 
+          show _ = _
+          trace_state
+          sorry)
+  have := Module.Free.of_basis pb.basis
+  refine ⟨Module.Free.of_equiv e.symm, ?_⟩
+  rw [e.rank_eq, pb.basis.mk_eq_rank'' |>.symm]
+  sorry

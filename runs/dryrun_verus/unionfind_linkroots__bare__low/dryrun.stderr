@@ -1,0 +1,11 @@
+error: postcondition not satisfied
+  --> /work/unionfind_linkroots.rs:72:17
+   |
+60 |         pub fn link_roots(&mut self, root_i: usize, root_j: usize)
+   |         ---------------------------------------------------------- at the end of the function body
+...
+72 |                 self.spec_find(root_i) == self.spec_find(root_j),
+   |                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ failed this postcondition
+
+error: aborting due to 1 previous error
+

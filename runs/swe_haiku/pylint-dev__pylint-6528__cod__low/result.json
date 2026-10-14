@@ -1,0 +1,73 @@
+{
+ "problem": "pylint-dev__pylint-6528",
+ "bench": "swe",
+ "condition": "cod",
+ "effort": "low",
+ "model": "claude-haiku-5-5",
+ "batch": "swe_haiku",
+ "dry_run": false,
+ "outcome": "solved",
+ "verify_pass": true,
+ "verify_stage": "ok",
+ "verify_detail": "resolved (run_id cotml-20261014001146-cc27db24)",
+ "num_turns": 17,
+ "input_tokens": 36,
+ "output_tokens": 7527,
+ "thinking_tokens": 2399,
+ "cache_read_tokens": 167048,
+ "cache_creation_tokens": 14575,
+ "usage_source": "result",
+ "total_cost_usd": 0.007259455,
+ "duration_s": 155.4,
+ "agent_duration_ms": 154638,
+ "lean_compile_count": 7,
+ "search_tactic_uses": 0,
+ "search_tactic_in_final": false,
+ "tool_calls": {
+  "Bash": 16
+ },
+ "proof_chars": 3169,
+ "proof_lines": 65,
+ "statement_prefix_changed": false,
+ "stop_reason": "end_turn",
+ "result_subtype": "success",
+ "terminal_reason": "completed",
+ "is_error": false,
+ "api_error_status": null,
+ "permission_denials": 0,
+ "agent_said_give_up": false,
+ "final_text": "Recursive mode now respects `--ignore`, `--ignore-paths`, and `--ignore-patterns`. The fix is in `pylint/lint/pylinter.py`.\n\n**Cause:** `_discover_files` walked directories and yielded every `.py` file without consulting any of the ignore settings. The ignore checks only ran later, in `expand_modules`, and only on the top-level arguments.\n\n**Change:**\n- `_discover_files` is now an instance method. It skips ignored directories (pruning them from the walk), ignored files, and ignored top-level arguments.\n- It uses the same checks as `expand_modules`: basename in `ignore`, basename against `ignore_patterns`, and path against `ignore_paths`.\n- For `ignore_paths`, it also matches the normalized path, so `^\\.a` matches `./.a/foo.py`.\n\n**Verified** on the issue's example in a scratch directory:\n- `--ignore=.a` and `--ignore-patterns=\"^\\.a\"` skip `.a/foo.py`.\n- `--ignore-paths=\"^\\.a\"` skips it too, but only with the anchored regex. The issue's `--ignore-paths=.a` is unanchored, so it also matches `ba` in `bar.py`; that is the user's regex working as written.\n\n**Not changed:** the issue expects the default run to skip `.a/foo.py`, but this repo's default `ignore-patterns` is `^\\.#` (emacs lock files), not `^\\.`. I left the default alone, so the plain `pylint --recursive=y .` still lints `.a/foo.py`. Changing that default would be a separate decision.\n\n**Tests:** `tests/lint`, `tests/test_self.py`, `tests/test_check_parallel.py`, and `tests/test_regr.py` give 236 passed and 3 failed. The same 3 fail on the unmodified checkout (tomlkit \"dotted key\" error and a `test_package` case), so they are pre-existing. I did not add tests.",
+ "timed_out": false,
+ "docker_rc": 0,
+ "limits": {
+  "max_turns": 50,
+  "max_budget_usd": 2.0,
+  "timeout_min": 25.0
+ },
+ "network": "cotml-egress",
+ "proxy": true,
+ "claude_version": "2.1.296",
+ "model_usage": {
+  "claude-haiku-5-5": {
+   "inputTokens": 36,
+   "outputTokens": 7527,
+   "cacheReadInputTokens": 167048,
+   "cacheCreationInputTokens": 14575,
+   "webSearchRequests": 0,
+   "costUSD": 0.007259455,
+   "contextWindow": 1000000,
+   "maxOutputTokens": 128000,
+   "thinkingTokens": 2399,
+   "canonicalModel": "claude-haiku-5-5",
+   "provider": "firstParty",
+   "costBasis": "list"
+  }
+ },
+ "started_at": "2026-10-14T07:09:10+00:00",
+ "framing": "issue",
+ "patch_files": [
+  "pylint/lint/pylinter.py"
+ ],
+ "touched_test_files": [],
+ "untracked_files": []
+}

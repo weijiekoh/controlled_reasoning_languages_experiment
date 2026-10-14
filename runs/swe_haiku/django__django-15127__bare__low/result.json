@@ -1,0 +1,73 @@
+{
+ "problem": "django__django-15127",
+ "bench": "swe",
+ "condition": "bare",
+ "effort": "low",
+ "model": "claude-haiku-5-5",
+ "batch": "swe_haiku",
+ "dry_run": false,
+ "outcome": "solved",
+ "verify_pass": true,
+ "verify_stage": "ok",
+ "verify_detail": "resolved (run_id cotml-20261014000349-96862a02)",
+ "num_turns": 8,
+ "input_tokens": 18,
+ "output_tokens": 1923,
+ "thinking_tokens": 139,
+ "cache_read_tokens": 29328,
+ "cache_creation_tokens": 3813,
+ "usage_source": "result",
+ "total_cost_usd": 0.0017332050000000002,
+ "duration_s": 27.4,
+ "agent_duration_ms": 26551,
+ "lean_compile_count": 4,
+ "search_tactic_uses": 0,
+ "search_tactic_in_final": false,
+ "tool_calls": {
+  "Bash": 7
+ },
+ "proof_chars": 756,
+ "proof_lines": 20,
+ "statement_prefix_changed": false,
+ "stop_reason": "end_turn",
+ "result_subtype": "success",
+ "terminal_reason": "completed",
+ "is_error": false,
+ "api_error_status": null,
+ "permission_denials": 0,
+ "agent_said_give_up": false,
+ "final_text": "`Message.level_tag` now follows `@override_settings(MESSAGE_TAGS=...)`. The messages test suite passes (96 tests), and a direct check shows the tag changing inside the override and reverting afterward.\n\n**Cause:** `django/contrib/messages/storage/base.py` built `LEVEL_TAGS` once at import time, so later changes to `MESSAGE_TAGS` were never seen.\n\n**Fix:** In `django/contrib/messages/storage/base.py`, I added a `setting_changed` receiver that rebuilds `LEVEL_TAGS` whenever `MESSAGE_TAGS` or `MESSAGE_LEVEL` changes. The change is uncommitted in the working tree, and I did not add or modify any test files.",
+ "timed_out": false,
+ "docker_rc": 0,
+ "limits": {
+  "max_turns": 50,
+  "max_budget_usd": 2.0,
+  "timeout_min": 25.0
+ },
+ "network": "cotml-egress",
+ "proxy": true,
+ "claude_version": "2.1.296",
+ "model_usage": {
+  "claude-haiku-5-5": {
+   "inputTokens": 18,
+   "outputTokens": 1923,
+   "cacheReadInputTokens": 29328,
+   "cacheCreationInputTokens": 3813,
+   "webSearchRequests": 0,
+   "costUSD": 0.0017332050000000002,
+   "contextWindow": 1000000,
+   "maxOutputTokens": 128000,
+   "thinkingTokens": 139,
+   "canonicalModel": "claude-haiku-5-5",
+   "provider": "firstParty",
+   "costBasis": "list"
+  }
+ },
+ "started_at": "2026-10-14T07:03:19+00:00",
+ "framing": "issue",
+ "patch_files": [
+  "django/contrib/messages/storage/base.py"
+ ],
+ "touched_test_files": [],
+ "untracked_files": []
+}

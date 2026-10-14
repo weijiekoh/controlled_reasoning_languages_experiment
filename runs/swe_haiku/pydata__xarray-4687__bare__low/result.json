@@ -1,0 +1,73 @@
+{
+ "problem": "pydata__xarray-4687",
+ "bench": "swe",
+ "condition": "bare",
+ "effort": "low",
+ "model": "claude-haiku-5-5",
+ "batch": "swe_haiku",
+ "dry_run": false,
+ "outcome": "solved",
+ "verify_pass": true,
+ "verify_stage": "ok",
+ "verify_detail": "resolved (run_id cotml-20261014011146-27cb2aea)",
+ "num_turns": 13,
+ "input_tokens": 28,
+ "output_tokens": 4775,
+ "thinking_tokens": 1014,
+ "cache_read_tokens": 95338,
+ "cache_creation_tokens": 10754,
+ "usage_source": "result",
+ "total_cost_usd": 0.004687930000000001,
+ "duration_s": 75.1,
+ "agent_duration_ms": 74338,
+ "lean_compile_count": 6,
+ "search_tactic_uses": 0,
+ "search_tactic_in_final": false,
+ "tool_calls": {
+  "Bash": 12
+ },
+ "proof_chars": 1753,
+ "proof_lines": 43,
+ "statement_prefix_changed": false,
+ "stop_reason": "end_turn",
+ "result_subtype": "success",
+ "terminal_reason": "completed",
+ "is_error": false,
+ "api_error_status": null,
+ "permission_denials": 0,
+ "agent_said_give_up": false,
+ "final_text": "`xr.where` now accepts `keep_attrs`, and it keeps the attributes of `x` by default. `test_where_attrs` passes, along with the rest of `test_computation.py` (248 passed, 1 skipped).\n\nThe change is in `xarray/core/computation.py`:\n\n- `where(cond, x, y, keep_attrs=None)` gains the parameter and documents it.\n- `None` resolves to `_get_keep_attrs(default=True)`, so the issue's example now returns `{'foo': 'bar'}`.\n- When true, attrs come from `x` (the second argument). Using `keep_attrs=True` directly in `apply_ufunc` would have copied them from `cond`, which is what the test caught.\n- When false, the result has no attrs.\n\nTwo things to be aware of:\n\n- Keeping attrs by default is a behaviour change for existing callers who relied on `where` returning attribute-free results. Pass `keep_attrs=False` to restore the old behaviour.\n- I did not address the dtype change from the first issue (`int8` becoming `int64`). That comes from numpy's `where` promoting the Python scalars `5` and `0`, and the issue doesn't ask for it to change.\n\nI did not run the wider test suite beyond `test_computation.py`, and I did not commit.",
+ "timed_out": false,
+ "docker_rc": 0,
+ "limits": {
+  "max_turns": 50,
+  "max_budget_usd": 2.0,
+  "timeout_min": 25.0
+ },
+ "network": "cotml-egress",
+ "proxy": true,
+ "claude_version": "2.1.296",
+ "model_usage": {
+  "claude-haiku-5-5": {
+   "inputTokens": 28,
+   "outputTokens": 4775,
+   "cacheReadInputTokens": 95338,
+   "cacheCreationInputTokens": 10754,
+   "webSearchRequests": 0,
+   "costUSD": 0.004687930000000001,
+   "contextWindow": 1000000,
+   "maxOutputTokens": 128000,
+   "thinkingTokens": 1014,
+   "canonicalModel": "claude-haiku-5-5",
+   "provider": "firstParty",
+   "costBasis": "list"
+  }
+ },
+ "started_at": "2026-10-14T08:10:30+00:00",
+ "framing": "debug",
+ "patch_files": [
+  "xarray/core/computation.py"
+ ],
+ "touched_test_files": [],
+ "untracked_files": []
+}

@@ -1,0 +1,73 @@
+{
+ "problem": "sympy__sympy-20916",
+ "bench": "swe",
+ "condition": "bare",
+ "effort": "low",
+ "model": "claude-haiku-5-5",
+ "batch": "swe_haiku",
+ "dry_run": false,
+ "outcome": "gave_up",
+ "verify_pass": false,
+ "verify_stage": "tests",
+ "verify_detail": "FAIL_TO_PASS 0/1 failing: test_super_sub; PASS_TO_PASS 1/1",
+ "num_turns": 9,
+ "input_tokens": 20,
+ "output_tokens": 3945,
+ "thinking_tokens": 1638,
+ "cache_read_tokens": 43011,
+ "cache_creation_tokens": 7195,
+ "usage_source": "result",
+ "total_cost_usd": 0.003303985,
+ "duration_s": 27.1,
+ "agent_duration_ms": 26609,
+ "lean_compile_count": 1,
+ "search_tactic_uses": 0,
+ "search_tactic_in_final": false,
+ "tool_calls": {
+  "Bash": 8
+ },
+ "proof_chars": 421,
+ "proof_lines": 10,
+ "statement_prefix_changed": false,
+ "stop_reason": "end_turn",
+ "result_subtype": "success",
+ "terminal_reason": "completed",
+ "is_error": false,
+ "api_error_status": null,
+ "permission_denials": 0,
+ "agent_said_give_up": false,
+ "final_text": "Fixed. The problem was in `split_super_sub` in `sympy/printing/conventions.py`.\n\n**Cause:** A trailing digit run on a name (like `\u03c90`) is treated as a subscript only when the name matches `_name_with_digits_p`, which was `^([a-zA-Z]+)([0-9]+)$`. That pattern only accepts ASCII letters, so a Greek name such as `\u03c90` never matched. The digits stayed in the name, and the printer produced `\u03c90` with no subscript.\n\n**Change:** I widened the letter class to Unicode letters:\n```python\n_name_with_digits_p = re.compile(r'^([^\\W\\d_]+)([0-9]+)$')\n```\n\n**Verification:**\n- `pretty([-Symbol('t0')*Symbol('\u03c90'), -Symbol('t1')*Symbol('\u03c90')])` now prints `[-t\u2080\u22c5\u03c9\u2080, -t\u2081\u22c5\u03c9\u2080]`.\n- `split_super_sub('\u03c90')` returns `('\u03c9', [], ['0'])`, and ASCII names such as `omega0` and `x12` behave as before.\n- `sympy/printing/tests/test_conventions.py` and `sympy/printing/pretty/tests/test_pretty.py` pass (144 passed, 1 expected failure).\n\nI could not reproduce the issue's exact \"bad\" line from the report. It most likely comes from a Greek-letter symbol named with a trailing digit, which is the case this change covers. The changes are uncommitted in the working tree.",
+ "timed_out": false,
+ "docker_rc": 0,
+ "limits": {
+  "max_turns": 50,
+  "max_budget_usd": 2.0,
+  "timeout_min": 25.0
+ },
+ "network": "cotml-egress",
+ "proxy": true,
+ "claude_version": "2.1.296",
+ "model_usage": {
+  "claude-haiku-5-5": {
+   "inputTokens": 20,
+   "outputTokens": 3945,
+   "cacheReadInputTokens": 43011,
+   "cacheCreationInputTokens": 7195,
+   "webSearchRequests": 0,
+   "costUSD": 0.003303985,
+   "contextWindow": 1000000,
+   "maxOutputTokens": 128000,
+   "thinkingTokens": 1638,
+   "canonicalModel": "claude-haiku-5-5",
+   "provider": "firstParty",
+   "costBasis": "list"
+  }
+ },
+ "started_at": "2026-10-14T09:45:07+00:00",
+ "framing": "issue",
+ "patch_files": [
+  "sympy/printing/conventions.py"
+ ],
+ "touched_test_files": [],
+ "untracked_files": []
+}

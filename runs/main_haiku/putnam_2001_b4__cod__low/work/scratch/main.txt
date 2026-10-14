@@ -1,0 +1,31 @@
+
+theorem putnam_2001_b4
+(S : Set ℚ)
+(hS : S = univ \ {-1, 0, 1})
+(f : S → S)
+(hf : ∀ x : S, f x = x - 1 / (x : ℚ))
+: ⋂ n ∈ Ici 1, f^[n] '' univ = ∅ ↔ putnam_2001_b4_solution := by
+  simp only [putnam_2001_b4_solution, iff_true]
+  have hstep : ∀ w : S, (w:ℚ).num.natAbs + (w:ℚ).den + 2 ≤ ((f w : S):ℚ).num.natAbs + ((f w : S):ℚ).den := by
+    intro w
+    have h := w.2
+    rw [hS] at h
+    simp only [mem_diff, mem_insert_iff, mem_singleton_iff, mem_univ, true_and, not_or] at h
+    obtain ⟨h1, h0, h1'⟩ := h
+    rw [hf w]
+    exact key _ h1 h0 h1'
+  have hiter : ∀ k : ℕ, ∀ z : S, (z:ℚ).num.natAbs + (z:ℚ).den + 2 * k ≤ ((f^[k] z : S):ℚ).num.natAbs + ((f^[k] z : S):ℚ).den := by
+    intro k
+    induction k with
+    | zero => intro z; simp
+    | succ k ih =>
+      intro z
+      rw [Function.iterate_succ_apply']
+      have := hstep (f^[k] z)
+      have := ih z
+      omega
+  refine Set.eq_empty_iff_forall_notMem.mpr fun y hy => ?_
+  obtain ⟨z, -, hz⟩ := Set.mem_iInter₂.mp hy ((y:ℚ).num.natAbs + (y:ℚ).den + 1) (mem_Ici.mpr (by omega))
+  have := hiter ((y:ℚ).num.natAbs + (y:ℚ).den + 1) z
+  rw [hz] at this
+  omega

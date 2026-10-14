@@ -1,0 +1,15 @@
+{
+ "id": "trial_division_optimized",
+ "entry": "trial_division_optimized.rs",
+ "description": "description.md",
+ "main_fn": "check_prime",
+ "editable_regions": {
+  "helpers": "between `// <helpers>` and `// </helpers>`: helper spec fns and exec helpers",
+  "proofs": "between `// <proofs>` and `// </proofs>`: lemmas (proof fns)",
+  "code": "between `// <code>` and `// </code>`: exactly one block `{ ... }`, the body of the function under spec"
+ },
+ "fixed": "Everything outside the three editable regions is fixed: the `use` lines, the <preamble> block (definitions, spec fns, and any exec fns given there), the <spec> block (signature, requires, ensures of the function under test), fn main, and all marker comments. Compared token-wise; comments and whitespace are ignored.",
+ "source": "data/algoveri/algoveri_data/trial_division_optimized/verus_spec.rs",
+ "source_sha256": "a6660bf232fb18d1e1828e82b4d2b1d4f7e87ebb57b944e5c35d0a2ab00aa7b2",
+ "patches": []
+}

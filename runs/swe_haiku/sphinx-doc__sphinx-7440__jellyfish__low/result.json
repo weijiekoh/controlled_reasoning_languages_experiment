@@ -1,0 +1,73 @@
+{
+ "problem": "sphinx-doc__sphinx-7440",
+ "bench": "swe",
+ "condition": "jellyfish",
+ "effort": "low",
+ "model": "claude-haiku-5-5",
+ "batch": "swe_haiku",
+ "dry_run": false,
+ "outcome": "solved",
+ "verify_pass": true,
+ "verify_stage": "ok",
+ "verify_detail": "resolved (run_id cotml-20261014011432-b6287e6f)",
+ "num_turns": 8,
+ "input_tokens": 18,
+ "output_tokens": 3503,
+ "thinking_tokens": 1406,
+ "cache_read_tokens": 55932,
+ "cache_creation_tokens": 8479,
+ "usage_source": "result",
+ "total_cost_usd": 0.0033724949999999997,
+ "duration_s": 25.4,
+ "agent_duration_ms": 24870,
+ "lean_compile_count": 4,
+ "search_tactic_uses": 0,
+ "search_tactic_in_final": false,
+ "tool_calls": {
+  "Bash": 7
+ },
+ "proof_chars": 2373,
+ "proof_lines": 50,
+ "statement_prefix_changed": false,
+ "stop_reason": "end_turn",
+ "result_subtype": "success",
+ "terminal_reason": "completed",
+ "is_error": false,
+ "api_error_status": null,
+ "permission_denials": 0,
+ "agent_said_give_up": false,
+ "final_text": "`tests/test_domain_std.py::test_glossary` now passes. The `test_productionlist` failure was already there before my change, so I left it alone.\n\n**Cause:** `make_glossary_term` in `sphinx/domains/std.py` stored each term under its lowercased name. `MySQL` and `mysql` therefore collided, and Sphinx reported the duplicate.\n\n**Fix (in `sphinx/domains/std.py`):**\n- Glossary terms are now registered under their original case, so `MySQL` and `mysql` are distinct entries and no longer trigger the duplicate warning.\n- Cross-references still resolve case-insensitively. `:term:` lowercases its target, so `_resolve_obj_xref` and `resolve_any_xref` now fall back to a case-insensitive match over term names. An exact match is preferred when one exists.\n\n**Verification:**\n- `tests/test_domain_std.py`: 13 passed, 1 failed (`test_productionlist`, which also fails on the untouched repo).\n- I built a small project with `MySQL` and `mysql` glossary entries. It built without a duplicate warning. I did not check the rendered cross-reference targets.\n\nI did not commit anything, and I did not touch any test files.",
+ "timed_out": false,
+ "docker_rc": 0,
+ "limits": {
+  "max_turns": 50,
+  "max_budget_usd": 2.0,
+  "timeout_min": 25.0
+ },
+ "network": "cotml-egress",
+ "proxy": true,
+ "claude_version": "2.1.296",
+ "model_usage": {
+  "claude-haiku-5-5": {
+   "inputTokens": 18,
+   "outputTokens": 3503,
+   "cacheReadInputTokens": 55932,
+   "cacheCreationInputTokens": 8479,
+   "webSearchRequests": 0,
+   "costUSD": 0.0033724949999999997,
+   "contextWindow": 1000000,
+   "maxOutputTokens": 128000,
+   "thinkingTokens": 1406,
+   "canonicalModel": "claude-haiku-5-5",
+   "provider": "firstParty",
+   "costBasis": "list"
+  }
+ },
+ "started_at": "2026-10-14T08:14:06+00:00",
+ "framing": "debug",
+ "patch_files": [
+  "sphinx/domains/std.py"
+ ],
+ "touched_test_files": [],
+ "untracked_files": []
+}

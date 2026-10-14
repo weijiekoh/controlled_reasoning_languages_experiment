@@ -1,0 +1,27 @@
+diff --git a/lib/matplotlib/figure.py b/lib/matplotlib/figure.py
+index dab2bc4a5a..1321eef6f4 100644
+--- a/lib/matplotlib/figure.py
++++ b/lib/matplotlib/figure.py
+@@ -2274,12 +2274,16 @@ class SubFigure(FigureBase):
+             return
+         # need to figure out *where* this subplotspec is.
+         gs = self._subplotspec.get_gridspec()
+-        wr = np.asarray(gs.get_width_ratios())
+-        hr = np.asarray(gs.get_height_ratios())
+-        dx = wr[self._subplotspec.colspan].sum() / wr.sum()
+-        dy = hr[self._subplotspec.rowspan].sum() / hr.sum()
+-        x0 = wr[:self._subplotspec.colspan.start].sum() / wr.sum()
+-        y0 = 1 - hr[:self._subplotspec.rowspan.stop].sum() / hr.sum()
++        # Use the gridspec's own geometry so that wspace/hspace are honored.
++        bottoms, tops, lefts, rights = gs.get_grid_positions(self._parent)
++        rowspan = self._subplotspec.rowspan
++        colspan = self._subplotspec.colspan
++        x0 = lefts[colspan.start]
++        x1 = rights[colspan.stop - 1]
++        y0 = bottoms[rowspan.stop - 1]
++        y1 = tops[rowspan.start]
++        dx = x1 - x0
++        dy = y1 - y0
+         if self.bbox_relative is None:
+             self.bbox_relative = Bbox.from_bounds(x0, y0, dx, dy)
+         else:

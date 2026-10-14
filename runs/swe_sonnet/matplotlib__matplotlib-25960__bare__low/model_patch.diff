@@ -1,0 +1,53 @@
+diff --git a/lib/matplotlib/figure.py b/lib/matplotlib/figure.py
+index dab2bc4a5a..c1419ac913 100644
+--- a/lib/matplotlib/figure.py
++++ b/lib/matplotlib/figure.py
+@@ -1582,7 +1582,9 @@ default: %(va)s
+             If not given, all rows will have the same height.
+         """
+         gs = GridSpec(nrows=nrows, ncols=ncols, figure=self,
+-                      wspace=wspace, hspace=hspace,
++                      left=0, right=1, bottom=0, top=1,
++                      wspace=0 if wspace is None else wspace,
++                      hspace=0 if hspace is None else hspace,
+                       width_ratios=width_ratios,
+                       height_ratios=height_ratios)
+ 
+@@ -2274,12 +2276,31 @@ class SubFigure(FigureBase):
+             return
+         # need to figure out *where* this subplotspec is.
+         gs = self._subplotspec.get_gridspec()
+-        wr = np.asarray(gs.get_width_ratios())
+-        hr = np.asarray(gs.get_height_ratios())
+-        dx = wr[self._subplotspec.colspan].sum() / wr.sum()
+-        dy = hr[self._subplotspec.rowspan].sum() / hr.sum()
+-        x0 = wr[:self._subplotspec.colspan.start].sum() / wr.sum()
+-        y0 = 1 - hr[:self._subplotspec.rowspan.stop].sum() / hr.sum()
++        nrows, ncols = gs.get_geometry()
++        wspace = getattr(gs, 'wspace', None) or 0
++        hspace = getattr(gs, 'hspace', None) or 0
++        wr = np.asarray(gs.get_width_ratios(), dtype=float)
++        hr = np.asarray(gs.get_height_ratios(), dtype=float)
++        cell_w = 1 / (ncols + wspace * (ncols - 1))
++        cell_h = 1 / (nrows + hspace * (nrows - 1))
++        norm_w = cell_w * ncols / wr.sum()
++        norm_h = cell_h * nrows / hr.sum()
++        sep_w, sep_h = wspace * cell_w, hspace * cell_h
++        cw = np.column_stack([np.cumsum(np.r_[0, (wr + 0)[:-1]]) * norm_w
++                              + np.arange(ncols) * sep_w,
++                              np.cumsum(wr) * norm_w
++                              + np.arange(ncols) * sep_w])
++        rh = np.column_stack([np.cumsum(np.r_[0, (hr + 0)[:-1]]) * norm_h
++                              + np.arange(nrows) * sep_h,
++                              np.cumsum(hr) * norm_h
++                              + np.arange(nrows) * sep_h])
++        figlefts, figrights = cw[:, 0], cw[:, 1]
++        figtops, figbottoms = 1 - rh[:, 0], 1 - rh[:, 1]
++        rs, cs = self._subplotspec.rowspan, self._subplotspec.colspan
++        x0 = figlefts[cs.start]
++        dx = figrights[cs.stop - 1] - x0
++        y0 = figbottoms[rs.stop - 1]
++        dy = figtops[rs.start] - y0
+         if self.bbox_relative is None:
+             self.bbox_relative = Bbox.from_bounds(x0, y0, dx, dy)
+         else:

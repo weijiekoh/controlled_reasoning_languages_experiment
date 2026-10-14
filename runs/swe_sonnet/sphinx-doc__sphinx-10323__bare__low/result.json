@@ -1,0 +1,73 @@
+{
+ "problem": "sphinx-doc__sphinx-10323",
+ "bench": "swe",
+ "condition": "bare",
+ "effort": "low",
+ "model": "claude-sonnet-5-5",
+ "batch": "swe_sonnet",
+ "dry_run": false,
+ "outcome": "solved",
+ "verify_pass": true,
+ "verify_stage": "ok",
+ "verify_detail": "resolved (run_id cotml-20261014012406-5d26b222)",
+ "num_turns": 4,
+ "input_tokens": 8,
+ "output_tokens": 655,
+ "thinking_tokens": 0,
+ "cache_read_tokens": 8180,
+ "cache_creation_tokens": 2431,
+ "usage_source": "result",
+ "total_cost_usd": 0.013461499999999998,
+ "duration_s": 12.9,
+ "agent_duration_ms": 12092,
+ "lean_compile_count": 1,
+ "search_tactic_uses": 0,
+ "search_tactic_in_final": false,
+ "tool_calls": {
+  "Bash": 3
+ },
+ "proof_chars": 721,
+ "proof_lines": 16,
+ "statement_prefix_changed": false,
+ "stop_reason": "end_turn",
+ "result_subtype": "success",
+ "terminal_reason": "completed",
+ "is_error": false,
+ "api_error_status": null,
+ "permission_denials": 0,
+ "agent_said_give_up": false,
+ "final_text": "I fixed this in `sphinx/directives/code.py` by changing the order of the `literalinclude` filters. `dedent` now runs before `prepend` and `append`, so it only affects the included lines and not the prepended or appended text.\n\nWith this change, your `:prepend:` text keeps its leading whitespace. You can also use `:dedent:` without the \"non-whitespace stripped by dedent\" warning, which removes the need for the `_____` workaround.\n\nAll 41 tests in `tests/test_directive_code.py` pass, including `test_LiteralIncludeReader_dedent_and_append_and_prepend`. I didn't build your `pom.xml` example end to end. I also didn't run the rest of the test suite.\n\nThis changes behaviour for anyone who relied on `dedent` also shifting their `prepend` or `append` text. Their output will now differ.",
+ "timed_out": false,
+ "docker_rc": 0,
+ "limits": {
+  "max_turns": 50,
+  "max_budget_usd": 4.0,
+  "timeout_min": 25.0
+ },
+ "network": "cotml-egress",
+ "proxy": true,
+ "claude_version": "2.1.296",
+ "model_usage": {
+  "claude-sonnet-5-5": {
+   "inputTokens": 8,
+   "outputTokens": 655,
+   "cacheReadInputTokens": 8180,
+   "cacheCreationInputTokens": 2431,
+   "webSearchRequests": 0,
+   "costUSD": 0.013461499999999998,
+   "contextWindow": 1000000,
+   "maxOutputTokens": 128000,
+   "thinkingTokens": 0,
+   "canonicalModel": "claude-sonnet-5-5",
+   "provider": "firstParty",
+   "costBasis": "list"
+  }
+ },
+ "started_at": "2026-10-14T08:23:52+00:00",
+ "framing": "debug",
+ "patch_files": [
+  "sphinx/directives/code.py"
+ ],
+ "touched_test_files": [],
+ "untracked_files": []
+}

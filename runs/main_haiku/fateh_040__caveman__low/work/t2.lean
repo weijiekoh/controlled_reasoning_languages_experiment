@@ -1,0 +1,15 @@
+import Mathlib
+open Polynomial
+#check @Polynomial.Gal.galActionHom_restrict
+#check @Polynomial.Gal.galAction
+#check @AlgEquiv.autCongr
+#check @IsGalois.tfae
+#check @IntermediateField.fixedField_fixingSubgroup
+#check @IntermediateField.fixedField_bot
+#check @IntermediateField.mem_fixingSubgroup_iff
+#check @Polynomial.Gal.galActionHom_apply
+#check @Equiv.Perm.IsSwap
+#check @Equiv.Perm.subgroup_eq_top_of_isPreprimitive_of_isSwap_mem
+#check @Polynomial.Gal.galEquivGal
+#check @Polynomial.map_rootSet
+#check @IsSplittingField.algEquiv

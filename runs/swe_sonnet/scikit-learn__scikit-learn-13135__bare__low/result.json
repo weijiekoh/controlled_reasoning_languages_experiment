@@ -1,0 +1,73 @@
+{
+ "problem": "scikit-learn__scikit-learn-13135",
+ "bench": "swe",
+ "condition": "bare",
+ "effort": "low",
+ "model": "claude-sonnet-5-5",
+ "batch": "swe_sonnet",
+ "dry_run": false,
+ "outcome": "solved",
+ "verify_pass": true,
+ "verify_stage": "ok",
+ "verify_detail": "resolved (run_id cotml-20261014025355-d7f3647a)",
+ "num_turns": 3,
+ "input_tokens": 8,
+ "output_tokens": 413,
+ "thinking_tokens": 0,
+ "cache_read_tokens": 10175,
+ "cache_creation_tokens": 3329,
+ "usage_source": "result",
+ "total_cost_usd": 0.013486,
+ "duration_s": 7.8,
+ "agent_duration_ms": 6984,
+ "lean_compile_count": 0,
+ "search_tactic_uses": 0,
+ "search_tactic_in_final": false,
+ "tool_calls": {
+  "Bash": 2
+ },
+ "proof_chars": 663,
+ "proof_lines": 11,
+ "statement_prefix_changed": false,
+ "stop_reason": "end_turn",
+ "result_subtype": "success",
+ "terminal_reason": "completed",
+ "is_error": false,
+ "api_error_status": null,
+ "permission_denials": 0,
+ "agent_said_give_up": false,
+ "final_text": "I fixed the `strategy='kmeans'` failure in `sklearn/preprocessing/_discretization.py`. I haven't run the reproduction or any tests.\n\nThe k-means cluster centers weren't guaranteed to come back in order, so the bin edges built from them could be unsorted. `np.digitize` then raised the \"bins must be monotonically increasing\" error. I added `centers.sort()` right after the centers are computed in `fit`, so the edges are always increasing.\n\nI haven't added a test for the 5-bin case from the issue.",
+ "timed_out": false,
+ "docker_rc": 0,
+ "limits": {
+  "max_turns": 50,
+  "max_budget_usd": 4.0,
+  "timeout_min": 25.0
+ },
+ "network": "cotml-egress",
+ "proxy": true,
+ "claude_version": "2.1.296",
+ "model_usage": {
+  "claude-sonnet-5-5": {
+   "inputTokens": 8,
+   "outputTokens": 413,
+   "cacheReadInputTokens": 10175,
+   "cacheCreationInputTokens": 3329,
+   "webSearchRequests": 0,
+   "costUSD": 0.013486,
+   "contextWindow": 1000000,
+   "maxOutputTokens": 128000,
+   "thinkingTokens": 0,
+   "canonicalModel": "claude-sonnet-5-5",
+   "provider": "firstParty",
+   "costBasis": "list"
+  }
+ },
+ "started_at": "2026-10-14T09:53:46+00:00",
+ "framing": "issue",
+ "patch_files": [
+  "sklearn/preprocessing/_discretization.py"
+ ],
+ "touched_test_files": [],
+ "untracked_files": []
+}

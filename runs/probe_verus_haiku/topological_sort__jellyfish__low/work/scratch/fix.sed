@@ -1,0 +1,1 @@
+s|lemma_none_cycle(graph.view(), placed@.map_values(\|b: bool\| b), n as int, unp as int);|assert forall \|v: int\| 0 <= v < n \&\& !placed@[v] implies exists \|x: int\| 0 <= x < n \&\& !placed@[x] \&\& has_edge(graph.view(), x, v) by { assert(v == v); }\n                    lemma_none_cycle(graph.view(), placed@, n as int, unp as int);|

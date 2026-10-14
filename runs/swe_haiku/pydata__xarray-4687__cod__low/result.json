@@ -1,0 +1,73 @@
+{
+ "problem": "pydata__xarray-4687",
+ "bench": "swe",
+ "condition": "cod",
+ "effort": "low",
+ "model": "claude-haiku-5-5",
+ "batch": "swe_haiku",
+ "dry_run": false,
+ "outcome": "solved",
+ "verify_pass": true,
+ "verify_stage": "ok",
+ "verify_detail": "resolved (run_id cotml-20261014011129-ee5ae561)",
+ "num_turns": 8,
+ "input_tokens": 18,
+ "output_tokens": 2953,
+ "thinking_tokens": 374,
+ "cache_read_tokens": 44662,
+ "cache_creation_tokens": 7855,
+ "usage_source": "result",
+ "total_cost_usd": 0.0029067949999999998,
+ "duration_s": 49.5,
+ "agent_duration_ms": 48689,
+ "lean_compile_count": 4,
+ "search_tactic_uses": 0,
+ "search_tactic_in_final": false,
+ "tool_calls": {
+  "Bash": 7
+ },
+ "proof_chars": 1830,
+ "proof_lines": 47,
+ "statement_prefix_changed": false,
+ "stop_reason": "end_turn",
+ "result_subtype": "success",
+ "terminal_reason": "completed",
+ "is_error": false,
+ "api_error_status": null,
+ "permission_denials": 0,
+ "agent_said_give_up": false,
+ "final_text": "`test_where_attrs` now passes, and the full `xarray/tests/test_computation.py` suite passes (248 passed, 1 skipped).\n\nThe fix is in `xarray/core/computation.py`. `xr.where` now accepts a `keep_attrs` argument:\n\n- **Default** (`keep_attrs=None`): the result has no attributes, as before. The global `keep_attrs` option is respected.\n- **`keep_attrs=True`**: the result takes `x`'s attributes, falling back to `y`'s if `x` has none. `cond`'s attributes are never used.\n\nI didn't use `apply_ufunc`'s own `keep_attrs=True` because it takes attributes from the first argument, which is `cond` here. That would give `{'attr': 'cond'}` rather than the expected `{'attr': 'x'}`.\n\nYour example from the issue now gives `{'foo': 'bar'}` when `keep_attrs=True` is passed. Without the flag it still returns `{}`, so callers have to opt in.\n\nI did not address the dtype change from the first issue (`int8` becoming `int64`). That comes from NumPy's `where` promoting the scalar branches, and the failing test doesn't cover it.",
+ "timed_out": false,
+ "docker_rc": 0,
+ "limits": {
+  "max_turns": 50,
+  "max_budget_usd": 2.0,
+  "timeout_min": 25.0
+ },
+ "network": "cotml-egress",
+ "proxy": true,
+ "claude_version": "2.1.296",
+ "model_usage": {
+  "claude-haiku-5-5": {
+   "inputTokens": 18,
+   "outputTokens": 2953,
+   "cacheReadInputTokens": 44662,
+   "cacheCreationInputTokens": 7855,
+   "webSearchRequests": 0,
+   "costUSD": 0.0029067949999999998,
+   "contextWindow": 1000000,
+   "maxOutputTokens": 128000,
+   "thinkingTokens": 374,
+   "canonicalModel": "claude-haiku-5-5",
+   "provider": "firstParty",
+   "costBasis": "list"
+  }
+ },
+ "started_at": "2026-10-14T08:10:39+00:00",
+ "framing": "debug",
+ "patch_files": [
+  "xarray/core/computation.py"
+ ],
+ "touched_test_files": [],
+ "untracked_files": []
+}

@@ -1,0 +1,15 @@
+{
+ "id": "bfs",
+ "entry": "bfs.rs",
+ "description": "description.md",
+ "main_fn": "bfs_shortest_path",
+ "editable_regions": {
+  "helpers": "between `// <helpers>` and `// </helpers>`: helper spec fns and exec helpers",
+  "proofs": "between `// <proofs>` and `// </proofs>`: lemmas (proof fns)",
+  "code": "between `// <code>` and `// </code>`: exactly one block `{ ... }`, the body of the function under spec"
+ },
+ "fixed": "Everything outside the three editable regions is fixed: the `use` lines, the <preamble> block (definitions, spec fns, and any exec fns given there), the <spec> block (signature, requires, ensures of the function under test), fn main, and all marker comments. Compared token-wise; comments and whitespace are ignored.",
+ "source": "data/algoveri/algoveri_data/bfs/verus_spec.rs",
+ "source_sha256": "2895b77129629dd0dc10578fa981c12fc0808495c28df3833bb2b27f4f1f5874",
+ "patches": []
+}

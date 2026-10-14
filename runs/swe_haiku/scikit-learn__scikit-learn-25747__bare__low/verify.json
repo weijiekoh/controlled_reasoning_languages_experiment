@@ -1,0 +1,1 @@
+{"pass": false, "stage": "tests", "detail": "FAIL_TO_PASS 0/1 failing: sklearn/utils/tests/test_set_output.py::test_set_output_pandas_keep_index; PASS_TO_PASS 14/14", "seconds": 22.3}

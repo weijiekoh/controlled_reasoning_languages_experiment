@@ -1,0 +1,15 @@
+    spec fn idx_of(ord: Seq<int>, v: int) -> int {
+        choose |i: int| 0 <= i < ord.len() && ord[i] == v
+    }
+
+    spec fn is_walk(g: Seq<Seq<int>>, placed: Seq<bool>, n: int, u: int, k: int, w: Seq<int>) -> bool {
+        &&& w.len() == k + 1
+        &&& w[0] == u
+        &&& forall |t: int| 0 <= t <= k ==> (0 <= #[trigger] w[t] < n && !placed[w[t]])
+        &&& forall |t: int| 0 <= t < k ==> has_edge(g, #[trigger] w[t + 1], w[t])
+    }
+
+    spec fn pred_ok(g: Seq<Seq<int>>, ord: Seq<int>, n: int) -> bool {
+        forall |i: int, x: int| 0 <= i < ord.len() && 0 <= x < n && has_edge(g, x, #[trigger] ord[i])
+            ==> exists |kk: int| 0 <= kk < i && #[trigger] ord[kk] == x
+    }

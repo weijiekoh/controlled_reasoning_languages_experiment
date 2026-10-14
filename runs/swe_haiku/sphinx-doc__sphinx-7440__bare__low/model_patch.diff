@@ -1,0 +1,44 @@
+diff --git a/sphinx/domains/std.py b/sphinx/domains/std.py
+index d820cfe5c..efb8dac8a 100644
+--- a/sphinx/domains/std.py
++++ b/sphinx/domains/std.py
+@@ -305,7 +305,7 @@ def make_glossary_term(env: "BuildEnvironment", textnodes: Iterable[Node], index
+         term['ids'].append(node_id)
+ 
+     std = cast(StandardDomain, env.get_domain('std'))
+-    std.note_object('term', termtext.lower(), node_id, location=term)
++    std.note_object('term', termtext, node_id, location=term)
+ 
+     # add an index entry too
+     indexnode = addnodes.index()
+@@ -931,6 +931,16 @@ class StandardDomain(Domain):
+             if (objtype, target) in self.objects:
+                 docname, labelid = self.objects[objtype, target]
+                 break
++            if objtype == 'term':
++                # glossary terms are matched case-insensitively
++                ltarget = target.lower()
++                for (otype, name), value in self.objects.items():
++                    if otype == 'term' and name.lower() == ltarget:
++                        docname, labelid = value
++                        break
++                else:
++                    continue
++                break
+         else:
+             docname, labelid = '', ''
+         if not docname:
+@@ -953,7 +963,12 @@ class StandardDomain(Domain):
+         for objtype in self.object_types:
+             key = (objtype, target)
+             if objtype == 'term':
+-                key = (objtype, ltarget)
++                if key not in self.objects:
++                    matches = [k for k in self.objects
++                               if k[0] == objtype and k[1].lower() == ltarget]
++                    if not matches:
++                        continue
++                    key = matches[0]
+             if key in self.objects:
+                 docname, labelid = self.objects[key]
+                 results.append(('std:' + self.role_for_objtype(objtype),

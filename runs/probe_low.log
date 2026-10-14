@@ -1,0 +1,24 @@
+isolation check: ok (no .lean files outside /work)
+10 runs, 0 done, 10 to run, parallel 5
+[1/10] algebra_absxm1pabsxpabsxp1eqxp2_0leqxleq1__bare__low: solved (ok) turns=3 out_tok=492 cost=0.0114947 10.6s
+[2/10] aime_1990_p15__bare__low: solved (ok) turns=3 out_tok=1049 cost=0.017946900000000002 14.3s
+[3/10] amc12b_2021_p1__bare__low: solved (ok) turns=6 out_tok=1512 cost=0.025167699999999998 26.5s
+[4/10] mathd_algebra_113__bare__low: solved (ok) turns=3 out_tok=309 cost=0.0053233 9.9s
+[5/10] amc12a_2020_p4__bare__low: solved (ok) turns=5 out_tok=916 cost=0.0170552 18.0s
+[6/10] mathd_algebra_329__bare__low: solved (ok) turns=3 out_tok=332 cost=0.0056170000000000005 9.4s
+[7/10] mathd_numbertheory_447__bare__low: solved (ok) turns=3 out_tok=250 cost=0.004735 8.6s
+[8/10] mathd_numbertheory_314__bare__low: solved (ok) turns=3 out_tok=566 cost=0.008375700000000002 11.0s
+[9/10] mathd_algebra_487__bare__low: solved (ok) turns=5 out_tok=1072 cost=0.0155629 17.6s
+[10/10] imo_1984_p6__bare__low: solved (ok) turns=10 out_tok=11583 cost=0.16336279999999997 181.6s
+isolation check: ok (no .lean files outside /work)
+10 runs, 0 done, 10 to run, parallel 5
+[1/10] putnam_1978_a4__bare__low: solved (ok) turns=5 out_tok=2763 cost=0.0378628 58.2s
+[2/10] putnam_1982_a2__bare__low: solved (ok) turns=12 out_tok=6896 cost=0.0987138 108.7s
+[3/10] putnam_1997_a6__bare__low: solved (ok) turns=8 out_tok=9526 cost=0.13314710000000002 110.4s
+[4/10] putnam_1964_b5__bare__low: solved (ok) turns=17 out_tok=8372 cost=0.1409447 138.6s
+[5/10] putnam_1996_a4__bare__low: solved (ok) turns=13 out_tok=7779 cost=0.1230242 146.3s
+[6/10] putnam_2003_b4__bare__low: error (compile) turns=1 out_tok=0 cost=0 210.2s
+[7/10] putnam_2021_a5__bare__low: error (compile) turns=1 out_tok=0 cost=0 210.0s
+[8/10] putnam_2008_b3__bare__low: error (compile) turns=1 out_tok=0 cost=0 246.4s
+[9/10] putnam_2018_b3__bare__low: error (compile) turns=1 out_tok=0 cost=0 219.3s
+[10/10] putnam_2010_a6__bare__low: error (compile) turns=1 out_tok=0 cost=0 241.8s

@@ -1,0 +1,1 @@
+ M sympy/combinatorics/permutations.py

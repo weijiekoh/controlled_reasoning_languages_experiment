@@ -1,0 +1,33 @@
+diff --git a/sphinx/domains/python.py b/sphinx/domains/python.py
+index 9875a9f4b..abd34b07f 100644
+--- a/sphinx/domains/python.py
++++ b/sphinx/domains/python.py
+@@ -107,6 +107,15 @@ def type_to_xref(text: str, env: BuildEnvironment = None) -> addnodes.pending_xr
+                         refdomain='py', reftype=reftype, reftarget=text, **kwargs)
+ 
+ 
++def _is_literal_name(node: ast.AST) -> bool:
++    """Return True if *node* refers to ``Literal`` (e.g. ``Literal`` or ``typing.Literal``)."""
++    if isinstance(node, ast.Name):
++        return node.id == 'Literal'
++    elif isinstance(node, ast.Attribute):
++        return node.attr == 'Literal'
++    return False
++
++
+ def _parse_annotation(annotation: str, env: BuildEnvironment = None) -> List[Node]:
+     """Parse type annotation."""
+     def unparse(node: ast.AST) -> List[Node]:
+@@ -147,7 +156,11 @@ def _parse_annotation(annotation: str, env: BuildEnvironment = None) -> List[Nod
+         elif isinstance(node, ast.Subscript):
+             result = unparse(node.value)
+             result.append(addnodes.desc_sig_punctuation('', '['))
+-            result.extend(unparse(node.slice))
++            if _is_literal_name(node.value):
++                # Literal values are not types; keep them out of cross-reference resolution
++                result.append(nodes.inline('', '', *unparse(node.slice)))
++            else:
++                result.extend(unparse(node.slice))
+             result.append(addnodes.desc_sig_punctuation('', ']'))
+             return result
+         elif isinstance(node, ast.Tuple):

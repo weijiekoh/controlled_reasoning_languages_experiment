@@ -1,0 +1,36 @@
+by
+  rintro ⟨h1, h2⟩
+  have e0 := hf2 0
+  have e1 := hf2 1
+  have e2 := hf2 (-1)
+  have e3 := hf2 2
+  have e4 := hf2 (-2)
+  rw [hf1] at e0 e1 e2 e3 e4
+  have hb : (b:ℝ) = -a*(r1+r2+r3+r4) := by linarith
+  have hc : (c:ℝ) = a*(r1*r2+r3*r4+(r1+r2)*(r3+r4)) := by linarith
+  have hd : (d:ℝ) = -a*(r1*r2*(r3+r4)+r3*r4*(r1+r2)) := by linarith
+  have ha : (a:ℝ) ≠ 0 := by exact_mod_cast ane0
+  unfold Irrational at *
+  push_neg at h1 ⊢
+  obtain ⟨s, hs⟩ := h1
+  have ht : r3 + r4 = -(b:ℝ)/a - s := by rw [hs]; field_simp; linarith
+  have hne : (r3+r4) - s ≠ 0 := by rw [hs]; exact sub_ne_zero.mpr (Ne.symm h2)
+  have hne' : (-(b:ℚ)/a - s) - s ≠ 0 := by
+    intro h
+    apply hne
+    rw [ht]
+    have : ((-(b:ℚ)/a - s) - s : ℚ) = 0 := h
+    have h' : (((-(b:ℚ)/a - s) - s : ℚ) : ℝ) = 0 := by rw [this]; simp
+    push_cast at h'
+    linarith
+  refine ⟨((-(d:ℚ)/a) - (c/a - (-(b:ℚ)/a - s)*s) * s) / ((-(b:ℚ)/a - s) - s), ?_⟩
+  push_cast
+  have hne2 : (-(b:ℝ)/a - s) - s ≠ 0 := by
+    intro h; apply hne; rw [ht]; linarith
+  rw [div_eq_iff hne2]
+  rw [← ht]
+  have hq : (c:ℝ)/a = r1*r2+r3*r4+s*(r3+r4) := by rw [hc, hs]; field_simp
+  have hq2 : -(d:ℝ)/a = r1*r2*(r3+r4)+r3*r4*s := by rw [hd, hs]; field_simp
+  rw [hq, hq2, hs]
+  rw [hs] at hne2 ⊢
+  ring

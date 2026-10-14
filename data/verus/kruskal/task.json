@@ -1,0 +1,15 @@
+{
+ "id": "kruskal",
+ "entry": "kruskal.rs",
+ "description": "description.md",
+ "main_fn": "kruskal_mst",
+ "editable_regions": {
+  "helpers": "between `// <helpers>` and `// </helpers>`: helper spec fns and exec helpers",
+  "proofs": "between `// <proofs>` and `// </proofs>`: lemmas (proof fns)",
+  "code": "between `// <code>` and `// </code>`: exactly one block `{ ... }`, the body of the function under spec"
+ },
+ "fixed": "Everything outside the three editable regions is fixed: the `use` lines, the <preamble> block (definitions, spec fns, and any exec fns given there), the <spec> block (signature, requires, ensures of the function under test), fn main, and all marker comments. Compared token-wise; comments and whitespace are ignored.",
+ "source": "data/algoveri/algoveri_data/kruskal/verus_spec.rs",
+ "source_sha256": "cbb942d26ab47cfc3c4f34927652a32383ff99b4c263999bab7f508ec999ce31",
+ "patches": []
+}

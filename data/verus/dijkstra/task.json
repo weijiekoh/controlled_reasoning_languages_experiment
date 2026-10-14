@@ -1,0 +1,15 @@
+{
+ "id": "dijkstra",
+ "entry": "dijkstra.rs",
+ "description": "description.md",
+ "main_fn": "dijkstra_shortest_paths",
+ "editable_regions": {
+  "helpers": "between `// <helpers>` and `// </helpers>`: helper spec fns and exec helpers",
+  "proofs": "between `// <proofs>` and `// </proofs>`: lemmas (proof fns)",
+  "code": "between `// <code>` and `// </code>`: exactly one block `{ ... }`, the body of the function under spec"
+ },
+ "fixed": "Everything outside the three editable regions is fixed: the `use` lines, the <preamble> block (definitions, spec fns, and any exec fns given there), the <spec> block (signature, requires, ensures of the function under test), fn main, and all marker comments. Compared token-wise; comments and whitespace are ignored.",
+ "source": "data/algoveri/algoveri_data/dijkstra/verus_spec.rs",
+ "source_sha256": "59b354c78466ef6cf070174fe5e58e8d4b96e9ef84ed06975330466ffd51f9c9",
+ "patches": []
+}

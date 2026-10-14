@@ -1,0 +1,18 @@
+diff --git a/sympy/matrices/matrices.py b/sympy/matrices/matrices.py
+index 97cde62e2..17972915a 100644
+--- a/sympy/matrices/matrices.py
++++ b/sympy/matrices/matrices.py
+@@ -178,7 +178,12 @@ def _eval_det_bareiss(self):
+         def _find_pivot(l):
+             for pos,val in enumerate(l):
+                 if val:
+-                    return (pos, val, None, None)
++                    # entries may be symbolically zero without being
++                    # automatically simplified to zero; check after cancel
++                    if not val.is_Atom:
++                        val = cancel(val)
++                    if val:
++                        return (pos, val, None, None)
+             return (None, None, None, None)
+ 
+ 

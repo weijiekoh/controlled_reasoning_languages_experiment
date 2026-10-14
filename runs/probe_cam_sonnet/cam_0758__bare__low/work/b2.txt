@@ -1,0 +1,59 @@
+  set m := ⟪gradient f x, p⟫ with hm
+  have hm0 : m < 0 := hdesc
+  have hd : ∀ a : ℝ, HasDerivAt (fun α : ℝ => f (x + α • p)) (⟪gradient f (x + a • p), p⟫) a := by
+    intro a
+    have h1 := ((hf (x + a • p)).hasGradientAt).hasFDerivAt
+    have h2 : HasDerivAt (fun α : ℝ => x + α • p) p a := by
+      simpa using ((hasDerivAt_id a).smul_const p).const_add x
+    have h3 := h1.comp_hasDerivAt a h2
+    exact h3
+  set h : ℝ → ℝ := fun α => f (x + α • p) - f x - c₁ * α * m with hh
+  have hhd : ∀ a, HasDerivAt h (⟪gradient f (x + a • p), p⟫ - c₁ * m) a := by
+    intro a
+    have := ((hd a).sub_const (f x)).sub (((hasDerivAt_id a).const_mul c₁).mul_const m)
+    rw [show c₁ * 1 * m = c₁ * m by ring] at this; exact this
+  have hcont : Continuous h := continuous_iff_continuousAt.2 fun a => (hhd a).continuousAt
+  have h0 : h 0 = 0 := by simp [hh]
+  -- small ε
+  have hslope := (hasDerivAt_iff_tendsto_slope.1 (hhd 0))
+  have hneg : ((⟪gradient f (x + (0:ℝ) • p), p⟫ - c₁ * m)) < 0 := by
+    simp only [zero_smul, add_zero]; change m - c₁ * m < 0; nlinarith
+  have hev := hslope.eventually (gt_mem_nhds hneg)
+  have hev2 : ∀ᶠ α in 𝓝[>] (0:ℝ), slope h 0 α < 0 :=
+    (hev.filter_mono (nhdsWithin_mono _ (fun y hy => ne_of_gt hy)))
+  obtain ⟨ε, hε, hεpos⟩ := (hev2.and self_mem_nhdsWithin).exists
+  have hεpos' : (0:ℝ) < ε := hεpos
+  have hhε : h ε < 0 := by
+    rw [slope_def_field, h0] at hε
+    simp at hε
+    by_contra hc
+    rw [not_lt] at hc
+    have := div_nonneg hc hεpos'.le
+    linarith
+  obtain ⟨L, hL⟩ := hbounded
+  have hLb : ∀ α : ℝ, 0 ≤ α → L ≤ f (x + α • p) := fun α hα => hL ⟨⟨α, hα⟩, rfl⟩
+  have hcm : 0 < -(c₁ * m) := by nlinarith
+  set T := max (ε+1) ((f x - L + 1) / (-(c₁ * m))) with hT
+  have hTε : ε < T := lt_of_lt_of_le (by linarith) (le_max_left _ _)
+  have hT2 : (f x - L + 1) ≤ T * (-(c₁ * m)) := by
+    have := le_max_right (ε+1) ((f x - L + 1) / (-(c₁ * m)))
+    rw [div_le_iff₀ hcm] at this; exact this
+  have hhT : 0 < h T := by
+    have := hLb T (by linarith)
+    simp only [hh]; nlinarith
+  obtain ⟨a1, ha1, ha1h⟩ := intermediate_value_Icc hTε.le hcont.continuousOn (show (0:ℝ) ∈ Set.Icc (h ε) (h T) from ⟨hhε.le, hhT.le⟩)
+  have hεa : ε < a1 := by
+    rcases ha1.1.lt_or_eq with h' | h'
+    · exact h'
+    · subst h'; linarith
+  have hmin := isCompact_Icc.exists_isMinOn (Set.nonempty_Icc.2 (show (0:ℝ) ≤ a1 by linarith [ha1.1])) hcont.continuousOn
+  obtain ⟨ξ, hξ, hξmin⟩ := hmin
+  have hξneg : h ξ < 0 := lt_of_le_of_lt (hξmin (show ε ∈ Set.Icc 0 a1 from ⟨hεpos'.le, hεa.le⟩)) hhε
+  have hξ0 : ξ ≠ 0 := by rintro rfl; linarith
+  have hξa : ξ ≠ a1 := by rintro rfl; linarith
+  have hξo : ξ ∈ Set.Ioo 0 a1 := ⟨lt_of_le_of_ne hξ.1 (Ne.symm hξ0), lt_of_le_of_ne hξ.2 hξa⟩
+  have hloc : IsLocalMin h ξ := hξmin.isLocalMin (Icc_mem_nhds hξo.1 hξo.2)
+  have hder := hloc.hasDerivAt_eq_zero (hhd ξ)
+  refine ⟨ξ, hξo.1, hc₁, hc₁₂, hc₂, ?_, ?_⟩
+  · simp only [hh] at hξneg; linarith
+  · nlinarith

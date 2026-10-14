@@ -1,0 +1,15 @@
+{
+ "id": "longest_palindrome_substring",
+ "entry": "longest_palindrome_substring.rs",
+ "description": "description.md",
+ "main_fn": "longest_palindromic_substring",
+ "editable_regions": {
+  "helpers": "between `// <helpers>` and `// </helpers>`: helper spec fns and exec helpers",
+  "proofs": "between `// <proofs>` and `// </proofs>`: lemmas (proof fns)",
+  "code": "between `// <code>` and `// </code>`: exactly one block `{ ... }`, the body of the function under spec"
+ },
+ "fixed": "Everything outside the three editable regions is fixed: the `use` lines, the <preamble> block (definitions, spec fns, and any exec fns given there), the <spec> block (signature, requires, ensures of the function under test), fn main, and all marker comments. Compared token-wise; comments and whitespace are ignored.",
+ "source": "data/algoveri/algoveri_data/longest_palindrome_substring/verus_spec.rs",
+ "source_sha256": "33482e017ffc51275747f6e31c19e29330b3fd06998ddcec6f4ee68cceca4c0b",
+ "patches": []
+}

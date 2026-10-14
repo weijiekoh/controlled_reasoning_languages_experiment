@@ -1,0 +1,73 @@
+{
+ "problem": "sympy__sympy-21379",
+ "bench": "swe",
+ "condition": "bare",
+ "effort": "low",
+ "model": "claude-sonnet-5-5",
+ "batch": "swe_sonnet",
+ "dry_run": false,
+ "outcome": "solved",
+ "verify_pass": true,
+ "verify_stage": "ok",
+ "verify_detail": "resolved (run_id cotml-20261014011951-0ed732f9)",
+ "num_turns": 5,
+ "input_tokens": 10,
+ "output_tokens": 1063,
+ "thinking_tokens": 0,
+ "cache_read_tokens": 11521,
+ "cache_creation_tokens": 3415,
+ "usage_source": "result",
+ "total_cost_usd": 0.0203396,
+ "duration_s": 16.0,
+ "agent_duration_ms": 15309,
+ "lean_compile_count": 1,
+ "search_tactic_uses": 0,
+ "search_tactic_in_final": false,
+ "tool_calls": {
+  "Bash": 4
+ },
+ "proof_chars": 588,
+ "proof_lines": 16,
+ "statement_prefix_changed": false,
+ "stop_reason": "end_turn",
+ "result_subtype": "success",
+ "terminal_reason": "completed",
+ "is_error": false,
+ "api_error_status": null,
+ "permission_denials": 0,
+ "agent_said_give_up": false,
+ "final_text": "`subs({1: 1.0})` on the real-symbol expression from the issue no longer raises `PolynomialError`. It now returns `exp(sinh(z**(-1.0)*Piecewise((x, x < y), (y, True))))`.\n\nI haven't run the test suite, because `pytest` isn't installed in this environment. The only check was re-running the expression from the issue.\n\n**Cause:** the traceback shows that `subs` rebuilds `exp(...)`, which asks whether its argument is zero. That check reaches `sinh._eval_is_real`, which evaluates `(im % pi)`. `Mod.eval` in `sympy/core/mod.py` then calls `gcd(p, q)` on an expression containing a `Piecewise`, and the polynomial code raises \"Piecewise generators do not make sense\".\n\n**Fix:** in `Mod.eval`, I wrapped that `gcd` call in a `try/except PolynomialError` and fall back to a gcd of 1. `Mod` then skips the gcd-extraction step and carries on, which only costs it a simplification. I didn't test the second half of the issue, the same expression with plain (non-real) symbols.",
+ "timed_out": false,
+ "docker_rc": 0,
+ "limits": {
+  "max_turns": 50,
+  "max_budget_usd": 4.0,
+  "timeout_min": 25.0
+ },
+ "network": "cotml-egress",
+ "proxy": true,
+ "claude_version": "2.1.296",
+ "model_usage": {
+  "claude-sonnet-5-5": {
+   "inputTokens": 10,
+   "outputTokens": 1063,
+   "cacheReadInputTokens": 11521,
+   "cacheCreationInputTokens": 3415,
+   "webSearchRequests": 0,
+   "costUSD": 0.0203396,
+   "contextWindow": 1000000,
+   "maxOutputTokens": 128000,
+   "thinkingTokens": 0,
+   "canonicalModel": "claude-sonnet-5-5",
+   "provider": "firstParty",
+   "costBasis": "list"
+  }
+ },
+ "started_at": "2026-10-14T08:19:33+00:00",
+ "framing": "issue",
+ "patch_files": [
+  "sympy/core/mod.py"
+ ],
+ "touched_test_files": [],
+ "untracked_files": []
+}

@@ -1,0 +1,4 @@
+          show (Submodule.quotEquivOfEq _ _ hI) (C c • Submodule.Quotient.mk a) = c • (Submodule.quotEquivOfEq _ _ hI) (Submodule.Quotient.mk a)
+          rw [Submodule.quotEquivOfEq_mk, ← Submodule.Quotient.mk_smul, Submodule.quotEquivOfEq_mk]
+          trace_state
+          sorry)

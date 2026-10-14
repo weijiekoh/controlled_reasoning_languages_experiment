@@ -1,0 +1,73 @@
+{
+ "problem": "pydata__xarray-7229",
+ "bench": "swe",
+ "condition": "bare",
+ "effort": "low",
+ "model": "claude-haiku-5-5",
+ "batch": "swe_haiku",
+ "dry_run": false,
+ "outcome": "gave_up",
+ "verify_pass": false,
+ "verify_stage": "tests",
+ "verify_detail": "FAIL_TO_PASS 0/1 failing: xarray/tests/test_computation.py::test_where_attrs; PASS_TO_PASS 280/280",
+ "num_turns": 11,
+ "input_tokens": 24,
+ "output_tokens": 7149,
+ "thinking_tokens": 2939,
+ "cache_read_tokens": 77337,
+ "cache_creation_tokens": 11320,
+ "usage_source": "result",
+ "total_cost_usd": 0.00576527,
+ "duration_s": 76.6,
+ "agent_duration_ms": 76016,
+ "lean_compile_count": 4,
+ "search_tactic_uses": 0,
+ "search_tactic_in_final": false,
+ "tool_calls": {
+  "Bash": 10
+ },
+ "proof_chars": 1585,
+ "proof_lines": 39,
+ "statement_prefix_changed": false,
+ "stop_reason": "end_turn",
+ "result_subtype": "success",
+ "terminal_reason": "completed",
+ "is_error": false,
+ "api_error_status": null,
+ "permission_denials": 0,
+ "agent_said_give_up": false,
+ "final_text": "`xr.where(..., keep_attrs=True)` now keeps coordinate attributes. The issue's `time` attrs (`standard_name`) come through intact, and the data variable still takes `x`'s attributes. The computation, DataArray and Dataset test files pass (1112 passed, 3 skipped, 7 xfailed, 2 xpassed).\n\nThe fix is in `where()` in `xarray/core/computation.py`. The old code passed a callable to `apply_ufunc` that returned `x.attrs` for every merge, including coordinate merges, so coordinate attrs were overwritten. Now `apply_ufunc` runs with `keep_attrs=\"override\"` and `x`'s attrs are copied onto the result afterwards (and onto each data variable for a Dataset).\n\nI did not add a regression test, since the rules prohibit changing test files. I also did not run the issue's `air_temperature` tutorial example, because it needs a network download; I checked the same behaviour on a small synthetic dataset instead.",
+ "timed_out": false,
+ "docker_rc": 0,
+ "limits": {
+  "max_turns": 50,
+  "max_budget_usd": 2.0,
+  "timeout_min": 25.0
+ },
+ "network": "cotml-egress",
+ "proxy": true,
+ "claude_version": "2.1.296",
+ "model_usage": {
+  "claude-haiku-5-5": {
+   "inputTokens": 24,
+   "outputTokens": 7149,
+   "cacheReadInputTokens": 77337,
+   "cacheCreationInputTokens": 11320,
+   "webSearchRequests": 0,
+   "costUSD": 0.00576527,
+   "contextWindow": 1000000,
+   "maxOutputTokens": 128000,
+   "thinkingTokens": 2939,
+   "canonicalModel": "claude-haiku-5-5",
+   "provider": "firstParty",
+   "costBasis": "list"
+  }
+ },
+ "started_at": "2026-10-14T09:31:10+00:00",
+ "framing": "issue",
+ "patch_files": [
+  "xarray/core/computation.py"
+ ],
+ "touched_test_files": [],
+ "untracked_files": []
+}

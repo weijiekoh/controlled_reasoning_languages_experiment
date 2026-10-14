@@ -1,0 +1,16 @@
+diff --git a/sympy/core/symbol.py b/sympy/core/symbol.py
+index 44674d198..2ace159de 100644
+--- a/sympy/core/symbol.py
++++ b/sympy/core/symbol.py
+@@ -251,6 +251,11 @@ def _hashable_content(self):
+         # Note: user-specified assumptions not hashed, just derived ones
+         return (self.name,) + tuple(sorted(self.assumptions0.items()))
+ 
++    def _eval_is_finite(self):
++        # an even number is an integer, hence finite
++        if self.is_even:
++            return True
++
+     def _eval_subs(self, old, new):
+         from sympy.core.power import Pow
+         if old.is_Pow:

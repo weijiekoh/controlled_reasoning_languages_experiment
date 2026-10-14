@@ -1,0 +1,44 @@
+diff --git a/seaborn/_core/plot.py b/seaborn/_core/plot.py
+index 4f0290a4..8d74e5a5 100644
+--- a/seaborn/_core/plot.py
++++ b/seaborn/_core/plot.py
+@@ -25,7 +25,7 @@ from seaborn._marks.base import Mark
+ from seaborn._stats.base import Stat
+ from seaborn._core.data import PlotData
+ from seaborn._core.moves import Move
+-from seaborn._core.scales import Scale
++from seaborn._core.scales import Scale, Nominal
+ from seaborn._core.subplots import Subplots
+ from seaborn._core.groupby import GroupBy
+ from seaborn._core.properties import PROPERTIES, Property
+@@ -1644,6 +1644,18 @@ class Plotter:
+                         hi = cast(float, hi) + 0.5
+                     ax.set(**{f"{axis}lim": (lo, hi)})
+ 
++                # Nominal scales: draw to +/- 0.5 of the first/last category,
++                # hide the grid, and invert the y axis (like categorical plots)
++                scale = self._scales.get(axis_key)
++                if isinstance(scale, Nominal) and hasattr(scale, "_units_seed"):
++                    if axis_key not in p._limits:
++                        n = len(scale._units_seed)
++                        lo, hi = -.5, n - .5
++                        if axis == "y":
++                            lo, hi = hi, lo
++                        ax.set(**{f"{axis}lim": (lo, hi)})
++                    getattr(ax, f"{axis}axis").grid(False)
++
+         engine_default = None if p._target is not None else "tight"
+         layout_engine = p._layout_spec.get("engine", engine_default)
+         set_layout_engine(self._figure, layout_engine)
+diff --git a/seaborn/_core/scales.py b/seaborn/_core/scales.py
+index bbd71ec1..33ae513e 100644
+--- a/seaborn/_core/scales.py
++++ b/seaborn/_core/scales.py
+@@ -160,6 +160,7 @@ class Nominal(Scale):
+         stringify = np.vectorize(format)
+ 
+         units_seed = categorical_order(data, new.order)
++        new._units_seed = units_seed
+ 
+         # TODO move to Nominal._get_scale?
+         # TODO this needs some more complicated rethinking about how to pass

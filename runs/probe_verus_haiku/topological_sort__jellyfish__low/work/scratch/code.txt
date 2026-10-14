@@ -1,0 +1,127 @@
+    {
+        let n: usize = graph.adj.len();
+        let mut placed: Vec<bool> = Vec::new();
+        let mut k: usize = 0;
+        while k < n
+            invariant
+                k <= n,
+                placed@.len() == k,
+                forall |j: int| 0 <= j < k ==> placed@[j] == false,
+            decreases n - k
+        {
+            placed.push(false);
+            k = k + 1;
+        }
+        let mut order: Vec<usize> = Vec::new();
+        loop
+            invariant
+                graph.well_formed(),
+                graph.view().len() == n,
+                placed@.len() == n,
+                order@.len() <= n,
+                forall |i: int| 0 <= i < order@.len() ==> (order@[i] as int) < n,
+                forall |i: int, j: int| 0 <= i < j < order@.len() ==> order@[i] != order@[j],
+                forall |v: int| 0 <= v < n ==> (placed@[v] <==> exists |i: int| 0 <= i < order@.len() && order@[i] as int == v),
+                forall |i: int, x: int| 0 <= i < order@.len() && 0 <= x < n && has_edge(graph.view(), x, order@[i] as int)
+                    ==> exists |kk: int| 0 <= kk < i && order@[kk] as int == x,
+            decreases n - order.len()
+        {
+            let mut cand: usize = n;
+            let mut unp: usize = n;
+            let mut v: usize = 0;
+            while v < n && cand == n
+                invariant
+                    graph.well_formed(),
+                    graph.view().len() == n,
+                    placed@.len() == n,
+                    v <= n,
+                    cand <= n,
+                    unp <= n,
+                    unp == n ==> forall |u: int| 0 <= u < v ==> placed@[u],
+                    unp < n ==> (unp < v && !placed@[unp as int]),
+                    cand == n ==> forall |u: int| 0 <= u < v ==> (placed@[u] || exists |x: int| 0 <= x < n && !placed@[x] && has_edge(graph.view(), x, u)),
+                    cand < n ==> (!placed@[cand as int] && forall |x: int| 0 <= x < n && has_edge(graph.view(), x, cand as int) ==> placed@[x]),
+                decreases n - v
+            {
+                if !placed[v] {
+                    if unp == n {
+                        unp = v;
+                    }
+                    let mut blocked: bool = false;
+                    let mut x: usize = 0;
+                    while x < n
+                        invariant
+                            graph.well_formed(),
+                            graph.view().len() == n,
+                            placed@.len() == n,
+                            x <= n,
+                            v < n,
+                            blocked ==> exists |x2: int| 0 <= x2 < n && !placed@[x2] && has_edge(graph.view(), x2, v as int),
+                            !blocked ==> forall |x2: int| 0 <= x2 < x ==> (has_edge(graph.view(), x2, v as int) ==> placed@[x2]),
+                        decreases n - x
+                    {
+                        if !placed[x] {
+                            let mut i: usize = 0;
+                            while i < graph.adj[x].len()
+                                invariant
+                                    graph.well_formed(),
+                                    graph.view().len() == n,
+                                    x < n,
+                                    v < n,
+                                    i <= graph.adj@[x as int].len(),
+                                    !placed@[x as int],
+                                    blocked ==> exists |x2: int| 0 <= x2 < n && !placed@[x2] && has_edge(graph.view(), x2, v as int),
+                                    !blocked ==> forall |i2: int| 0 <= i2 < i ==> graph.adj@[x as int]@[i2] != v,
+                                decreases graph.adj[x].len() - i
+                            {
+                                if graph.adj[x][i] == v {
+                                    blocked = true;
+                                }
+                                i = i + 1;
+                            }
+                        }
+                        x = x + 1;
+                    }
+                    if !blocked {
+                        cand = v;
+                    }
+                }
+                v = v + 1;
+            }
+            if cand < n {
+                proof {
+                    let ghost s = order@.map_values(|e: usize| e as int).push(cand as int);
+                    assert(s.len() == order@.len() + 1);
+                    assert forall |i: int, j: int| 0 <= i < j < s.len() implies s[i] != s[j] by {
+                        assert(s[j] == cand as int);
+                        if j < s.len() - 1 { assert(s[i] == order@[i] as int); }
+                    }
+                    assert forall |i: int| 0 <= i < s.len() implies 0 <= #[trigger] s[i] < n as int by {
+                        if i < s.len() - 1 { assert(s[i] == order@[i] as int); }
+                    }
+                    lemma_bound(s, n as int);
+                }
+                order.push(cand);
+                placed.set(cand, true);
+            } else if unp == n {
+                // every node is placed: the ordering is complete
+                proof {
+                    let ghost oi = order@.map_values(|e: usize| e as int);
+                    assert(oi.len() == order@.len());
+                    assert forall |i: int| 0 <= i < oi.len() implies oi[i] == order@[i] as int by {}
+                    assert forall |v: int| 0 <= v < n as int implies oi.contains(v) by {
+                        assert(placed@[v]);
+                        let i = choose |i: int| 0 <= i < order@.len() && order@[i] as int == v;
+                        assert(oi[i] == v);
+                    }
+                    lemma_topo(graph.view(), oi, n as int);
+                }
+                return Some(order);
+            } else {
+                proof {
+                    lemma_none_cycle(graph.view(), placed@, n as int, unp as int);
+                }
+                return None;
+            }
+        }
+    }

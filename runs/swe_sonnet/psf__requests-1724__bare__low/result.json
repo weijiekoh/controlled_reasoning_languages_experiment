@@ -1,0 +1,73 @@
+{
+ "problem": "psf__requests-1724",
+ "bench": "swe",
+ "condition": "bare",
+ "effort": "low",
+ "model": "claude-sonnet-5-5",
+ "batch": "swe_sonnet",
+ "dry_run": false,
+ "outcome": "solved",
+ "verify_pass": true,
+ "verify_stage": "ok",
+ "verify_detail": "resolved (run_id cotml-20261014011812-1dfc3dfa)",
+ "num_turns": 5,
+ "input_tokens": 10,
+ "output_tokens": 574,
+ "thinking_tokens": 0,
+ "cache_read_tokens": 16680,
+ "cache_creation_tokens": 3876,
+ "usage_source": "result",
+ "total_cost_usd": 0.017118,
+ "duration_s": 8.8,
+ "agent_duration_ms": 8146,
+ "lean_compile_count": 0,
+ "search_tactic_uses": 0,
+ "search_tactic_in_final": false,
+ "tool_calls": {
+  "Bash": 4
+ },
+ "proof_chars": 876,
+ "proof_lines": 21,
+ "statement_prefix_changed": false,
+ "stop_reason": "end_turn",
+ "result_subtype": "success",
+ "terminal_reason": "completed",
+ "is_error": false,
+ "api_error_status": null,
+ "permission_denials": 0,
+ "agent_said_give_up": false,
+ "final_text": "I changed `requests/sessions.py` so the HTTP method is converted to a native `str` before `.upper()` is applied. A `u'POST'` method no longer turns the request into a unicode string, which is what caused the `UnicodeDecodeError` when a file body was appended. I also added `builtin_str` to the existing `.compat` import.\n\nI only checked that `import requests` still works. I didn't reproduce the original error, which needs Python 2.7 and a network call to httpbin. I also didn't run the project's test suite.\n\nOn Python 3, `builtin_str` is `str`, so behaviour there is unchanged. I did not touch the other `method.upper()` at line 257, which works on the request's existing method.",
+ "timed_out": false,
+ "docker_rc": 0,
+ "limits": {
+  "max_turns": 50,
+  "max_budget_usd": 4.0,
+  "timeout_min": 25.0
+ },
+ "network": "cotml-egress",
+ "proxy": true,
+ "claude_version": "2.1.296",
+ "model_usage": {
+  "claude-sonnet-5-5": {
+   "inputTokens": 10,
+   "outputTokens": 574,
+   "cacheReadInputTokens": 16680,
+   "cacheCreationInputTokens": 3876,
+   "webSearchRequests": 0,
+   "costUSD": 0.017118,
+   "contextWindow": 1000000,
+   "maxOutputTokens": 128000,
+   "thinkingTokens": 0,
+   "canonicalModel": "claude-sonnet-5-5",
+   "provider": "firstParty",
+   "costBasis": "list"
+  }
+ },
+ "started_at": "2026-10-14T08:18:02+00:00",
+ "framing": "issue",
+ "patch_files": [
+  "requests/sessions.py"
+ ],
+ "touched_test_files": [],
+ "untracked_files": []
+}

@@ -1,0 +1,75 @@
+{
+ "problem": "django__django-15127",
+ "bench": "swe",
+ "condition": "bare",
+ "effort": "low",
+ "model": "claude-sonnet-5-5",
+ "batch": "swe_sonnet",
+ "dry_run": false,
+ "outcome": "solved",
+ "verify_pass": true,
+ "verify_stage": "ok",
+ "verify_detail": "resolved (run_id cotml-20261014011732-e41feaf6)",
+ "num_turns": 4,
+ "input_tokens": 8,
+ "output_tokens": 564,
+ "thinking_tokens": 0,
+ "cache_read_tokens": 6100,
+ "cache_creation_tokens": 1524,
+ "usage_source": "result",
+ "total_cost_usd": 0.010076,
+ "duration_s": 8.8,
+ "agent_duration_ms": 8172,
+ "lean_compile_count": 0,
+ "search_tactic_uses": 0,
+ "search_tactic_in_final": false,
+ "tool_calls": {
+  "Bash": 3
+ },
+ "proof_chars": 574,
+ "proof_lines": 15,
+ "statement_prefix_changed": true,
+ "stop_reason": "end_turn",
+ "result_subtype": "success",
+ "terminal_reason": "completed",
+ "is_error": false,
+ "api_error_status": null,
+ "permission_denials": 0,
+ "agent_said_give_up": false,
+ "final_text": "I fixed this by adding a `setting_changed` receiver in `django/test/signals.py`. When `MESSAGE_TAGS` is overridden, it rebuilds `LEVEL_TAGS` in `django.contrib.messages.storage.base`. `Message.level_tag` should therefore pick up the overridden tags inside `@override_settings`.\n\nI haven't run any tests, and I didn't add a test for this case, so the fix is untested.\n\nI haven't confirmed that the tags go back to normal when the override ends. I expect they do, because Django sends `setting_changed` again on exit with the original value, which would trigger the same rebuild.",
+ "timed_out": false,
+ "docker_rc": 0,
+ "limits": {
+  "max_turns": 50,
+  "max_budget_usd": 4.0,
+  "timeout_min": 25.0
+ },
+ "network": "cotml-egress",
+ "proxy": true,
+ "claude_version": "2.1.296",
+ "model_usage": {
+  "claude-sonnet-5-5": {
+   "inputTokens": 8,
+   "outputTokens": 564,
+   "cacheReadInputTokens": 6100,
+   "cacheCreationInputTokens": 1524,
+   "webSearchRequests": 0,
+   "costUSD": 0.010076,
+   "contextWindow": 1000000,
+   "maxOutputTokens": 128000,
+   "thinkingTokens": 0,
+   "canonicalModel": "claude-sonnet-5-5",
+   "provider": "firstParty",
+   "costBasis": "list"
+  }
+ },
+ "started_at": "2026-10-14T08:17:22+00:00",
+ "framing": "issue",
+ "patch_files": [
+  "django/test/signals.py"
+ ],
+ "touched_test_files": [
+  "django/test/signals.py"
+ ],
+ "untracked_files": []
+}

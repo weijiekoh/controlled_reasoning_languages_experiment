@@ -1,0 +1,4 @@
+import Mathlib
+#check @IsPrincipalIdealRing.of_prime_ne_bot
+#check @IsPrincipalIdealRing.of_isDedekindDomain_of_uniqueFactorizationMonoid
+#check @Ideal.IsPrime.exists_mem_prime_of_ne_bot

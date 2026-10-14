@@ -1,0 +1,116 @@
+import Mathlib
+
+open Filter Topology
+
+noncomputable abbrev putnam_1997_a6_solution : ℤ → ℤ → ℝ := fun n k => Nat.choose (n.toNat-1) (k.toNat-1)
+/--
+For a positive integer $n$ and any real number $c$, define $x_k$ recursively by $x_0=0$, $x_1=1$, and for $k\geq 0$, \[x_{k+2}=\frac{cx_{k+1}-(n-k)x_k}{k+1}.\] Fix $n$ and then take $c$ to be the largest value for which $x_{n+1}=0$. Find $x_k$ in terms of $n$ and $k$, $1\leq k\leq n$.
+-/
+theorem putnam_1997_a6
+  (n : ℤ)
+  (hn : n > 0)
+  (x : ℝ → (ℤ → ℝ))
+  (hx0 : ∀ c, x c 0 = 0)
+  (hx1 : ∀ c, x c 1 = 1)
+  (hxk : ∀ c, ∀ k ≥ 0, x c (k + 2) = (c*(x c (k + 1)) - (n - k)*(x c k))/(k + 1))
+  (S : Set ℝ)
+  (S : Set ℝ)
+  (hS : S = {c : ℝ | x c (n + 1) = 0}) :
+  ∀ k : Set.Icc 1 n, x (sSup S) k = putnam_1997_a6_solution n k := by
+  obtain ⟨N, rfl⟩ : ∃ N : ℕ, n = (N:ℤ) + 1 := ⟨(n-1).toNat, by omega⟩
+  have hQ : ∀ j : ℕ, j ≤ N + 1 → x (N:ℝ) ((j:ℤ)+1) = (Nat.choose N j : ℝ) ∧
+      (j + 1 ≤ N + 1 → x (N:ℝ) ((j:ℤ)+2) = (Nat.choose N (j+1) : ℝ)) := by
+    intro j
+    induction j with
+    | zero =>
+      intro _
+      refine ⟨by simpa using hx1 _, fun _ => ?_⟩
+      have := hxk (N:ℝ) 0 (by norm_num)
+      simp [hx0, hx1] at this ⊢
+      linarith
+    | succ j ih =>
+      intro hj
+      obtain ⟨h1, h2⟩ := ih (by omega)
+      have h2' := h2 (by omega)
+      refine ⟨by push_cast; rw [← h2']; ring_nf, fun hj2 => ?_⟩
+      have := hxk (N:ℝ) ((j:ℤ)+1) (by positivity)
+      have e2 : ((j:ℤ)+1+1) = (j:ℤ)+2 := by ring
+      rw [e2, h2', h1] at this
+      have e3 : ((j:ℤ)+1+2) = ((j+1:ℕ):ℤ)+2 := by push_cast; ring
+      rw [e3] at this
+      rw [this]
+      have a1 := Nat.choose_succ_right_eq N (j+1)
+      have a2 := Nat.choose_succ_right_eq N j
+      have hjN : j + 1 ≤ N := by omega
+      have c1 : ((Nat.choose N (j+2) : ℕ):ℝ) * ((j:ℝ)+2) = (Nat.choose N (j+1):ℝ) * ((N:ℝ) - (j+1)) := by
+        have := congrArg (fun m : ℕ => (m:ℝ)) a1
+        simp only [Nat.cast_mul, Nat.cast_sub hjN] at this
+        push_cast at this; linarith
+      have c2 : ((Nat.choose N (j+1) : ℕ):ℝ) * ((j:ℝ)+1) = (Nat.choose N j:ℝ) * ((N:ℝ) - j) := by
+        have := congrArg (fun m : ℕ => (m:ℝ)) a2
+        simp only [Nat.cast_mul, Nat.cast_sub (by omega : j ≤ N)] at this
+        push_cast at this; linarith
+      push_cast
+      rw [div_eq_iff (by positivity)]
+      push_cast
+      nlinarith [c1, c2]
+  have hmem : (N:ℝ) ∈ S := by
+    rw [hS]
+    have := (hQ (N+1) le_rfl).1
+    have e : ((N+1:ℕ):ℤ)+1 = (N:ℤ)+1+1 := by push_cast; ring
+    rw [e] at this
+    simp only [Set.mem_setOf_eq]
+    rw [this]; simp
+  have hR : ∀ c : ℝ, c > N → ∀ k : ℕ, 1 ≤ k → k ≤ N + 1 →
+      0 < x c ((k:ℤ)+1) ∧ ((N:ℝ)+1-k) * x c k < k * x c ((k:ℤ)+1) := by
+    intro c hc k hk
+    induction k, hk using Nat.le_induction with
+    | base =>
+      intro _
+      have := hxk c 0 (by norm_num)
+      simp [hx0, hx1] at this ⊢
+      constructor <;> linarith
+    | succ k hk ih =>
+      intro hkN
+      obtain ⟨i1, i2⟩ := ih (by omega)
+      have := hxk c (k:ℤ) (by positivity)
+      have e : ((k:ℤ)+2) = ((k+1:ℕ):ℤ)+1 := by push_cast; ring
+      rw [e] at this
+      have hk0 : (0:ℝ) < (k:ℝ)+1 := by positivity
+      have hk1 : (1:ℝ) ≤ k := by exact_mod_cast hk
+      have hkN' : (k:ℝ) + 1 ≤ N + 1 := by exact_mod_cast hkN
+      have key : x c (((k+1:ℕ):ℤ)+1) * ((k:ℝ)+1) = c * x c ((k:ℤ)+1) - ((N:ℝ)+1-k) * x c k := by
+        push_cast at this ⊢
+        rw [this]; field_simp
+      have hlt : ((N:ℝ)-k) * x c ((k:ℤ)+1) < x c (((k+1:ℕ):ℤ)+1) * ((k:ℝ)+1) := by
+        rw [key]; nlinarith
+      have hnn : (0:ℝ) ≤ (N:ℝ) - k := by linarith
+      have hpos : 0 < x c (((k+1:ℕ):ℤ)+1) := by
+        have : 0 ≤ ((N:ℝ)-k) * x c ((k:ℤ)+1) := by positivity
+        nlinarith
+      refine ⟨hpos, ?_⟩
+      have e2 : ((k+1:ℕ):ℤ) = (k:ℤ)+1 := by push_cast; ring
+      rw [e2] at hpos hlt ⊢
+      push_cast
+      nlinarith
+  have hub : (N:ℝ) ∈ upperBounds S := by
+    intro c hc
+    rw [hS] at hc
+    by_contra hlt
+    push_neg at hlt
+    have := (hR c hlt (N+1) (by omega) le_rfl).1
+    have e : ((N+1:ℕ):ℤ)+1 = (N:ℤ)+1+1 := by push_cast; ring
+    rw [e] at this
+    simp only [Set.mem_setOf_eq] at hc
+    linarith
+  have hsup : sSup S = N := (IsGreatest.csSup_eq ⟨hmem, hub⟩)
+  rintro ⟨k, hk1, hk2⟩
+  rw [hsup]
+  obtain ⟨j, rfl⟩ : ∃ j : ℕ, k = (j:ℤ)+1 := ⟨(k-1).toNat, by omega⟩
+  have := (hQ j (by omega)).1
+  simp only [putnam_1997_a6_solution]
+  rw [this]
+  have : ((N:ℤ)+1).toNat - 1 = N := by omega
+  rw [this]
+  have : ((j:ℤ)+1).toNat - 1 = j := by omega
+  rw [this]

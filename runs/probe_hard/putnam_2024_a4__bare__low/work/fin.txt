@@ -1,0 +1,24 @@
+    have alg : ∀ U V W : ZMod (q + 7), Z = U * R → Y = V * R → X = W * R →
+        W * U - V ^ 2 = 0 := by
+      intro U V W hU hV hW
+      have h1 : V = U * U * R := mul_right_cancel₀ hR (by
+        linear_combination (-1) * hV - hZY + (Z + U * R) * hU)
+      have h2 : W = U * V * R := mul_right_cancel₀ hR (by
+        linear_combination (-1) * hW - hZYX + Y * hU + U * R * hV)
+      linear_combination U * h2 - V * h1
+    have key := alg _ _ _ hu hv hw
+    have key2 : ((((a3 : ℤ) - a0) * ((a1 : ℤ) - a0) - ((a2 : ℤ) - a0) ^ 2 : ℤ) : ZMod (q + 7)) = 0 := by
+      push_cast; push_cast at key; exact key
+    obtain ⟨m, hm⟩ := (ZMod.intCast_zmod_eq_zero_iff_dvd _ _).mp key2
+    push_cast at hm
+    have hq : (4 : ℤ) ≤ q := by omega
+    interval_cases a0 <;> interval_cases a1 <;> interval_cases a2 <;> interval_cases a3 <;>
+      first
+      | omega
+      | (have : m = 0 ∨ m = 1 ∨ m = -1 ∨ 2 ≤ m ∨ m ≤ -2 := by omega
+         rcases this with h | h | h | h | h
+         · subst h; omega
+         · subst h; omega
+         · subst h; omega
+         · nlinarith
+         · nlinarith)

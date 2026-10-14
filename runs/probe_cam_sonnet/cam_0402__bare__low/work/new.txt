@@ -1,0 +1,4 @@
+      have h6 := (h F hF).dotProduct_mulVec_pos hv0
+      simp only [star_trivial] at h6
+      rw [hFe F v, hv'] at h6
+      exact h6

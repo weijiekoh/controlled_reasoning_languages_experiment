@@ -1,0 +1,7 @@
+## version
+2.1.296 (Claude Code)
+## lean
+/work/aime_1983_p1.lean:7:8: warning: declaration uses `sorry`
+## lean_rc 0 1791937367.300797609 1791937370.486343622
+## isolation
+## end

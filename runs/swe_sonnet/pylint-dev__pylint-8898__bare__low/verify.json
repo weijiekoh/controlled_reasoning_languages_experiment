@@ -1,0 +1,1 @@
+{"pass": false, "stage": "tests", "detail": "FAIL_TO_PASS 0/1 failing: tests/config/test_config.py::test_csv_regex_error; PASS_TO_PASS 18/18", "seconds": 28.7}

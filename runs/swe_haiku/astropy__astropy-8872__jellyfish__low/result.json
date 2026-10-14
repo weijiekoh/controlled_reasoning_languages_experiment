@@ -1,0 +1,73 @@
+{
+ "problem": "astropy__astropy-8872",
+ "bench": "swe",
+ "condition": "jellyfish",
+ "effort": "low",
+ "model": "claude-haiku-5-5",
+ "batch": "swe_haiku",
+ "dry_run": false,
+ "outcome": "solved",
+ "verify_pass": true,
+ "verify_stage": "ok",
+ "verify_detail": "resolved (run_id cotml-20261014010410-5b84aef0)",
+ "num_turns": 5,
+ "input_tokens": 12,
+ "output_tokens": 1576,
+ "thinking_tokens": 330,
+ "cache_read_tokens": 19413,
+ "cache_creation_tokens": 6493,
+ "usage_source": "result",
+ "total_cost_usd": 0.001794955,
+ "duration_s": 19.5,
+ "agent_duration_ms": 18579,
+ "lean_compile_count": 2,
+ "search_tactic_uses": 0,
+ "search_tactic_in_final": false,
+ "tool_calls": {
+  "Bash": 4
+ },
+ "proof_chars": 1023,
+ "proof_lines": 19,
+ "statement_prefix_changed": false,
+ "stop_reason": "end_turn",
+ "result_subtype": "success",
+ "terminal_reason": "completed",
+ "is_error": false,
+ "api_error_status": null,
+ "permission_denials": 0,
+ "agent_said_give_up": false,
+ "final_text": "The float16 upcast is fixed. `test_preserve_dtype` now passes, and the other three failures in `test_quantity.py` were already failing before my change.\n\n**Cause:** In `Quantity.__new__` (`astropy/units/quantity.py`), the code decided whether to upcast with `np.can_cast(np.float32, value.dtype)`. Under safe casting, float32 cannot be cast to float16, so float16 input was treated as \"not a float\" and converted to `float64`.\n\n**Fix:** I changed both occurrences of that check to `np.can_cast(np.float16, value.dtype)`. Now float16 is kept, while integers, bools and object arrays are still converted to float.\n\n**Verification:**\n- `np.float16(1) * u.km` \u2192 dtype `float16`; `float32` is still `float32`; `int8` and `uint8` still become `float64`.\n- `test_quantity.py`: 85 passed, 1 xfailed. The remaining failures (`test_quantity_from_table`, `test_assign_slice_with_quantity_like`, `TestQuantityMatplotlib::test_scatter`) also fail on the unmodified repo, so they are unrelated to this change.\n\nChanges are left uncommitted in the working tree.",
+ "timed_out": false,
+ "docker_rc": 0,
+ "limits": {
+  "max_turns": 50,
+  "max_budget_usd": 2.0,
+  "timeout_min": 25.0
+ },
+ "network": "cotml-egress",
+ "proxy": true,
+ "claude_version": "2.1.296",
+ "model_usage": {
+  "claude-haiku-5-5": {
+   "inputTokens": 12,
+   "outputTokens": 1576,
+   "cacheReadInputTokens": 19413,
+   "cacheCreationInputTokens": 6493,
+   "webSearchRequests": 0,
+   "costUSD": 0.001794955,
+   "contextWindow": 1000000,
+   "maxOutputTokens": 128000,
+   "thinkingTokens": 330,
+   "canonicalModel": "claude-haiku-5-5",
+   "provider": "firstParty",
+   "costBasis": "list"
+  }
+ },
+ "started_at": "2026-10-14T08:03:49+00:00",
+ "framing": "debug",
+ "patch_files": [
+  "astropy/units/quantity.py"
+ ],
+ "touched_test_files": [],
+ "untracked_files": []
+}

@@ -1,0 +1,15 @@
+{
+ "id": "bubble_sort",
+ "entry": "bubble_sort.rs",
+ "description": "description.md",
+ "main_fn": "bubble_sort",
+ "editable_regions": {
+  "helpers": "between `// <helpers>` and `// </helpers>`: helper spec fns and exec helpers",
+  "proofs": "between `// <proofs>` and `// </proofs>`: lemmas (proof fns)",
+  "code": "between `// <code>` and `// </code>`: exactly one block `{ ... }`, the body of the function under spec"
+ },
+ "fixed": "Everything outside the three editable regions is fixed: the `use` lines, the <preamble> block (definitions, spec fns, and any exec fns given there), the <spec> block (signature, requires, ensures of the function under test), fn main, and all marker comments. Compared token-wise; comments and whitespace are ignored.",
+ "source": "data/algoveri/algoveri_data/bubble_sort/verus_spec.rs",
+ "source_sha256": "534f105486758edb08b2a6491a79d0375809b4dcaef1accf5e59fe5780eaea6b",
+ "patches": []
+}

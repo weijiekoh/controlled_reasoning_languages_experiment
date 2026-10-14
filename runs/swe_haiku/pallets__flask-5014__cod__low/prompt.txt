@@ -1,0 +1,17 @@
+Resolve the issue below in the Git repository at `/testbed`. The repository is checked out at the commit where the issue was reported. Python and the project's dependencies are installed in the active conda environment `testbed`.
+
+Rules:
+- Change the source code in `/testbed` to resolve the issue. Do not modify or add test files under the repository's test directories. Do not commit; leave your changes in the working tree.
+- Network access is not available. Do not install packages.
+- Run the project's own tests to check your change.
+- These tests currently fail and must pass:
+  - `tests/test_blueprints.py::test_empty_name_not_allowed`
+  The tests exist in the repo; run them.
+- Stop when the issue is resolved.
+- If you conclude that you cannot resolve the issue, say "I give up" and stop.
+
+<issue>
+Require a non-empty name for Blueprints
+Things do not work correctly if a Blueprint is given an empty name (e.g. #4944).
+It would be helpful if a `ValueError` was raised when trying to do that.
+</issue>

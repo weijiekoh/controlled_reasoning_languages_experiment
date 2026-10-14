@@ -1,0 +1,9 @@
+import Mathlib
+open Matrix
+#check @Matrix.PosSemidef.of_dotProduct_mulVec_nonneg
+#check @Matrix.PosDef.dotProduct_mulVec_pos
+#check @Matrix.posSemidef_iff_dotProduct_mulVec
+#check @Matrix.IsHermitian
+#check @Matrix.det_fromBlocks_zero₂₂
+#check @Matrix.mulVec_injective_iff_isUnit
+#check @Matrix.exists_mulVec_eq_zero_iff

@@ -1,0 +1,73 @@
+{
+ "problem": "pytest-dev__pytest-7236",
+ "bench": "swe",
+ "condition": "bare",
+ "effort": "low",
+ "model": "claude-sonnet-5-5",
+ "batch": "swe_sonnet",
+ "dry_run": false,
+ "outcome": "solved",
+ "verify_pass": true,
+ "verify_stage": "ok",
+ "verify_detail": "resolved (run_id cotml-20261014025346-59282765)",
+ "num_turns": 4,
+ "input_tokens": 8,
+ "output_tokens": 778,
+ "thinking_tokens": 0,
+ "cache_read_tokens": 8108,
+ "cache_creation_tokens": 2648,
+ "usage_source": "result",
+ "total_cost_usd": 0.015226799999999999,
+ "duration_s": 9.7,
+ "agent_duration_ms": 9030,
+ "lean_compile_count": 3,
+ "search_tactic_uses": 0,
+ "search_tactic_in_final": false,
+ "tool_calls": {
+  "Bash": 3
+ },
+ "proof_chars": 1232,
+ "proof_lines": 23,
+ "statement_prefix_changed": false,
+ "stop_reason": "end_turn",
+ "result_subtype": "success",
+ "terminal_reason": "completed",
+ "is_error": false,
+ "api_error_status": null,
+ "permission_denials": 0,
+ "agent_said_give_up": false,
+ "final_text": "Fixed: with `--pdb`, `tearDown` no longer runs on skipped unittest tests. The change is in `src/_pytest/unittest.py`.\n\nWith `--pdb`, pytest replaces `tearDown` with a no-op and calls the real one itself later. Because it called the real `tearDown` even for skipped tests, a skipped test ended up with the error you saw. I added an `_is_skipped()` check on the test case's class and method (via `__unittest_skip__`). The postponed-teardown handling is now applied only when the test isn't skipped.\n\nI ran your reproducer with `--pdb`: it now reports `1 skipped` with no error. `testing/test_unittest.py` gives 50 passed, 9 skipped. I didn't add a regression test, since the rules say not to touch the test directories.",
+ "timed_out": false,
+ "docker_rc": 0,
+ "limits": {
+  "max_turns": 50,
+  "max_budget_usd": 4.0,
+  "timeout_min": 25.0
+ },
+ "network": "cotml-egress",
+ "proxy": true,
+ "claude_version": "2.1.296",
+ "model_usage": {
+  "claude-sonnet-5-5": {
+   "inputTokens": 8,
+   "outputTokens": 778,
+   "cacheReadInputTokens": 8108,
+   "cacheCreationInputTokens": 2648,
+   "webSearchRequests": 0,
+   "costUSD": 0.015226799999999999,
+   "contextWindow": 1000000,
+   "maxOutputTokens": 128000,
+   "thinkingTokens": 0,
+   "canonicalModel": "claude-sonnet-5-5",
+   "provider": "firstParty",
+   "costBasis": "list"
+  }
+ },
+ "started_at": "2026-10-14T09:53:36+00:00",
+ "framing": "issue",
+ "patch_files": [
+  "src/_pytest/unittest.py"
+ ],
+ "touched_test_files": [],
+ "untracked_files": []
+}

@@ -1,0 +1,19 @@
+by
+  subst hbypass
+  refine ⟨?_, ?_⟩
+  · intro S _ h a b c hab
+    have hcc : c * c = c := by
+      have := h a b a b
+      rw [hab] at this
+      rw [this, hab]
+    refine ⟨hcc, fun d => ?_⟩
+    have h1 := h a b c d
+    have h2 := h c c c d
+    rw [hab] at h1
+    rw [hcc] at h2
+    rw [← h1, h2]
+  · refine ⟨Bool × Bool, ⟨fun x y => (x.1, y.2)⟩, inferInstance, ?_, ?_, ?_, ?_⟩
+    · intro a b c d; rfl
+    · intro a; rfl
+    · exact ⟨(true, true), (false, true), rfl, by decide⟩
+    · exact ⟨(true, true), (true, false), by decide⟩

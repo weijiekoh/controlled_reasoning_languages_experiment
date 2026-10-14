@@ -1,0 +1,26 @@
+{
+ "min_checks": 3,
+ "max_rounds": 2,
+ "rounds": 1,
+ "checks_at_rounds": [
+  2,
+  3
+ ],
+ "decisions": [
+  {
+   "checks": 2,
+   "num_turns": 4,
+   "total_cost_usd": 0.00219881,
+   "session_id": "3cab50cb-2c09-4bd4-984b-f0d94cffdb69",
+   "stop": null
+  },
+  {
+   "checks": 3,
+   "num_turns": 6,
+   "total_cost_usd": 0.005170114999999999,
+   "session_id": "3cab50cb-2c09-4bd4-984b-f0d94cffdb69",
+   "stop": "checks 3 >= 3"
+  }
+ ],
+ "reason": "checks 3 >= 3"
+}

@@ -1,0 +1,15 @@
+{
+ "id": "segmenttree_query",
+ "entry": "segmenttree_query.rs",
+ "description": "description.md",
+ "main_fn": "query",
+ "editable_regions": {
+  "helpers": "between `// <helpers>` and `// </helpers>`: helper spec fns and exec helpers",
+  "proofs": "between `// <proofs>` and `// </proofs>`: lemmas (proof fns)",
+  "code": "between `// <code>` and `// </code>`: exactly one block `{ ... }`, the body of the function under spec"
+ },
+ "fixed": "Everything outside the three editable regions is fixed: the `use` lines, the <preamble> block (definitions, spec fns, and any exec fns given there), the <spec> block (signature, requires, ensures of the function under test), fn main, and all marker comments. Compared token-wise; comments and whitespace are ignored.",
+ "source": "data/algoveri/algoveri_data/segmenttree_query/verus_spec.rs",
+ "source_sha256": "0ba7cc05befee34f649e6f81e35a376e4518ff749ab4c2e2641dafad3eb7b6bd",
+ "patches": []
+}

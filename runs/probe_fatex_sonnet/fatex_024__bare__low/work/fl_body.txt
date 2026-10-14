@@ -1,0 +1,67 @@
+    let S : Set ℝ := Set.range (fun i ↦ Real.sqrt (p i))
+    let K' : IntermediateField ℚ ℝ := IntermediateField.adjoin ℚ S
+    have hK : K'.toSubalgebra = Algebra.adjoin ℚ S := by
+      apply IntermediateField.adjoin_toSubalgebra_of_isAlgebraic
+      rintro _ ⟨i, rfl⟩
+      apply IsIntegral.isAlgebraic
+      refine ⟨X^2 - C (p i : ℚ), ?_, ?_⟩
+      · exact monic_X_pow_sub_C _ (by norm_num)
+      · simp [Real.sq_sqrt]
+    let e : RS p ≃ₐ[ℚ] K' := (Subalgebra.equivOfEq _ _ hK.symm).trans (AlgEquiv.refl)
+    let f : ℚ[X] := ∏ i, (X^2 - C (p i : ℚ))
+    have hmem : ∀ i, Real.sqrt (p i) ∈ K' := fun i => IntermediateField.subset_adjoin ℚ S ⟨i, rfl⟩
+    have hroot : ∀ i, Real.sqrt (p i) ∈ f.rootSet ℝ := by
+      intro i
+      rw [Polynomial.mem_rootSet]
+      refine ⟨?_, ?_⟩
+      · simp only [f]
+        rw [Finset.prod_ne_zero_iff]
+        intro j _
+        exact (monic_X_pow_sub_C _ (by norm_num)).ne_zero
+      · simp only [f, map_prod]
+        apply Finset.prod_eq_zero (Finset.mem_univ i)
+        simp [Real.sq_sqrt]
+    have h1 : (f.map (algebraMap ℚ K')).Splits := by
+      simp only [f, Polynomial.map_prod]
+      apply Polynomial.Splits.prod
+      intro i _
+      have ha : (⟨Real.sqrt (p i), hmem i⟩ : K') * ⟨Real.sqrt (p i), hmem i⟩ = algebraMap ℚ K' (p i : ℚ) := by
+        apply Subtype.ext
+        simp
+      have : (X^2 - C (p i : ℚ)).map (algebraMap ℚ K') = (X - C (⟨Real.sqrt (p i), hmem i⟩ : K')) * (X - C (-(⟨Real.sqrt (p i), hmem i⟩ : K'))) := by
+        simp only [Polynomial.map_sub, Polynomial.map_pow, Polynomial.map_X, Polynomial.map_C, ← ha, C_mul, C_neg]
+        ring
+      rw [this]
+      exact (Polynomial.Splits.X_sub_C _).mul (Polynomial.Splits.X_sub_C _)
+    have h2 : K' = IntermediateField.adjoin ℚ (f.rootSet ℝ) := by
+      apply le_antisymm
+      · rw [IntermediateField.adjoin_le_iff]
+        rintro _ ⟨i, rfl⟩
+        exact IntermediateField.subset_adjoin _ _ (hroot i)
+      · rw [IntermediateField.adjoin_le_iff]
+        intro y hy
+        rw [Polynomial.mem_rootSet] at hy
+        obtain ⟨h0, hy⟩ := hy
+        simp only [f, map_prod, Finset.prod_eq_zero_iff] at hy
+        obtain ⟨i, -, hi⟩ := hy
+        simp at hi
+        have : y ^ 2 = (Real.sqrt (p i))^2 := by rw [Real.sq_sqrt (by positivity)]; linarith
+        rcases sq_eq_sq_iff_eq_or_eq_neg.1 this with h | h
+        · rw [h]; exact hmem i
+        · rw [h]; exact K'.neg_mem (hmem i)
+    have hsp : Polynomial.IsSplittingField ℚ K' f := by
+      refine IntermediateField.isSplittingField_iff.2 ⟨h1, h2⟩
+    have := hsp
+    have : FiniteDimensional ℚ K' := Polynomial.IsSplittingField.finiteDimensional K' f
+    have hN : Normal ℚ K' := Normal.of_isSplittingField f
+    have : IsGalois ℚ K' := ⟨⟩
+    have : e x ∈ (⊥ : IntermediateField ℚ K') := by
+      rw [IsGalois.mem_bot_iff_fixed]
+      intro τ
+      have := hx (e.trans (τ.trans e.symm))
+      simpa using congrArg e this
+    obtain ⟨q, hq⟩ := IntermediateField.mem_bot.1 this
+    refine ⟨q, ?_⟩
+    have := congrArg (fun y : K' => (y : ℝ)) hq
+    have h2 : ((e x : K') : ℝ) = (x:ℝ) := rfl
+    rw [← h2]; simpa using this.symm

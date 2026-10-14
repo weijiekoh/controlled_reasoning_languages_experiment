@@ -1,0 +1,73 @@
+{
+ "problem": "sympy__sympy-18698",
+ "bench": "swe",
+ "condition": "bare",
+ "effort": "low",
+ "model": "claude-sonnet-5-5",
+ "batch": "swe_sonnet",
+ "dry_run": false,
+ "outcome": "solved",
+ "verify_pass": true,
+ "verify_stage": "ok",
+ "verify_detail": "resolved (run_id cotml-20261014025651-be085e99)",
+ "num_turns": 6,
+ "input_tokens": 12,
+ "output_tokens": 1773,
+ "thinking_tokens": 391,
+ "cache_read_tokens": 15318,
+ "cache_creation_tokens": 3634,
+ "usage_source": "result",
+ "total_cost_usd": 0.028370799999999998,
+ "duration_s": 24.4,
+ "agent_duration_ms": 23721,
+ "lean_compile_count": 1,
+ "search_tactic_uses": 0,
+ "search_tactic_in_final": false,
+ "tool_calls": {
+  "Bash": 5
+ },
+ "proof_chars": 732,
+ "proof_lines": 19,
+ "statement_prefix_changed": false,
+ "stop_reason": "end_turn",
+ "result_subtype": "success",
+ "terminal_reason": "completed",
+ "is_error": false,
+ "api_error_status": null,
+ "permission_denials": 0,
+ "agent_said_give_up": false,
+ "final_text": "`sqf_list` now groups factors that share a multiplicity and multiplies them together. The issue's example returns `(1, [(x**2 + 1, 1), (x - 1, 2), (x**2 - 5*x + 6, 3)])`.\n\nThe change is in `_symbolic_factor_list` in `sympy/polys/polytools.py`. It only applies to the `sqf` method, so `factor_list` is unchanged.\n\nI ran `sympy/polys/tests/test_polytools.py`: 147 passed, 1 failed, 1 expected failure. The failure is `test_factor_terms`, which asserts `sqf_list(x*(x + y)) == (1, [(x, 1), (x + y, 1)])`. With this change that call now returns one merged factor, `x**2 + x*y`, with multiplicity 1. That is the same rule that fixes the issue, so I left the test file alone as instructed. The assertion will need updating if you want this behaviour. I did not run the rest of the test suite.",
+ "timed_out": false,
+ "docker_rc": 0,
+ "limits": {
+  "max_turns": 50,
+  "max_budget_usd": 4.0,
+  "timeout_min": 25.0
+ },
+ "network": "cotml-egress",
+ "proxy": true,
+ "claude_version": "2.1.296",
+ "model_usage": {
+  "claude-sonnet-5-5": {
+   "inputTokens": 12,
+   "outputTokens": 1773,
+   "cacheReadInputTokens": 15318,
+   "cacheCreationInputTokens": 3634,
+   "webSearchRequests": 0,
+   "costUSD": 0.028370799999999998,
+   "contextWindow": 1000000,
+   "maxOutputTokens": 128000,
+   "thinkingTokens": 391,
+   "canonicalModel": "claude-sonnet-5-5",
+   "provider": "firstParty",
+   "costBasis": "list"
+  }
+ },
+ "started_at": "2026-10-14T09:56:26+00:00",
+ "framing": "issue",
+ "patch_files": [
+  "sympy/polys/polytools.py"
+ ],
+ "touched_test_files": [],
+ "untracked_files": []
+}

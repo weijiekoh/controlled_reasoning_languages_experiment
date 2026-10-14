@@ -1,0 +1,37 @@
+        {
+            let n = self.data.len();
+            let ghost s = self.data@;
+            let mut tmp: Vec<T> = Vec::new();
+            // Phase 1: move every element into tmp, reversing the order.
+            while self.data.len() > 0
+                invariant
+                    s.len() == n,
+                    tmp@.len() + self.data@.len() == n,
+                    self.data@ == s.subrange(0, self.data@.len() as int),
+                    forall|j: int| 0 <= j < tmp@.len() ==> tmp@[j] == s[n as int - 1 - j],
+                decreases self.data@.len(),
+            {
+                let x = self.data.pop().unwrap();
+                tmp.push(x);
+            }
+            // Phase 2: the front element s[0] is now last in tmp.
+            let val = tmp.pop().unwrap();
+            // Phase 3: move the remaining elements back in their original order.
+            while tmp.len() > 0
+                invariant
+                    s.len() == n,
+                    n >= 1,
+                    tmp@.len() + self.data@.len() == n - 1,
+                    forall|j: int| 0 <= j < self.data@.len() ==> self.data@[j] == s[j + 1],
+                    forall|j: int| 0 <= j < tmp@.len() ==> tmp@[j] == s[n as int - 1 - j],
+                decreases tmp@.len(),
+            {
+                let x = tmp.pop().unwrap();
+                self.data.push(x);
+            }
+            assert(val == s[0]);
+            vstd::assert_seqs_equal!(self.data@, s.subrange(1, n as int), j => {
+                assert(self.data@[j] == s[j + 1]);
+            });
+            val
+        }

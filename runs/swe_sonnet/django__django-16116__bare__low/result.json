@@ -1,0 +1,73 @@
+{
+ "problem": "django__django-16116",
+ "bench": "swe",
+ "condition": "bare",
+ "effort": "low",
+ "model": "claude-sonnet-5-5",
+ "batch": "swe_sonnet",
+ "dry_run": false,
+ "outcome": "solved",
+ "verify_pass": true,
+ "verify_stage": "ok",
+ "verify_detail": "resolved (run_id cotml-20261014011747-ab10819f)",
+ "num_turns": 8,
+ "input_tokens": 16,
+ "output_tokens": 1341,
+ "thinking_tokens": 71,
+ "cache_read_tokens": 21101,
+ "cache_creation_tokens": 3993,
+ "usage_source": "result",
+ "total_cost_usd": 0.0255346,
+ "duration_s": 22.2,
+ "agent_duration_ms": 21531,
+ "lean_compile_count": 1,
+ "search_tactic_uses": 0,
+ "search_tactic_in_final": false,
+ "tool_calls": {
+  "Bash": 7
+ },
+ "proof_chars": 1023,
+ "proof_lines": 23,
+ "statement_prefix_changed": false,
+ "stop_reason": "end_turn",
+ "result_subtype": "success",
+ "terminal_reason": "completed",
+ "is_error": false,
+ "api_error_status": null,
+ "permission_denials": 0,
+ "agent_said_give_up": false,
+ "final_text": "`makemigrations --check` now exits with status 1 when it finds model changes, and it no longer writes any migration files. You no longer need to add `--dry-run`.\n\nIt still prints the pending changes, as `--dry-run` does. I did this by setting `self.dry_run = True` in `django/core/management/commands/makemigrations.py` just before the existing write calls on the `--check` path.\n\nThe `makemigrations` tests in `migrations.test_commands` pass (59 tests). I did not add a test for the new behaviour or change the docs, which the issue says are currently silent on this. I also didn't run `--check` together with `--update` to confirm it leaves the last migration untouched. That combination goes through the same dry-run path and should be safe, but it is untested.",
+ "timed_out": false,
+ "docker_rc": 0,
+ "limits": {
+  "max_turns": 50,
+  "max_budget_usd": 4.0,
+  "timeout_min": 25.0
+ },
+ "network": "cotml-egress",
+ "proxy": true,
+ "claude_version": "2.1.296",
+ "model_usage": {
+  "claude-sonnet-5-5": {
+   "inputTokens": 16,
+   "outputTokens": 1341,
+   "cacheReadInputTokens": 21101,
+   "cacheCreationInputTokens": 3993,
+   "webSearchRequests": 0,
+   "costUSD": 0.0255346,
+   "contextWindow": 1000000,
+   "maxOutputTokens": 128000,
+   "thinkingTokens": 71,
+   "canonicalModel": "claude-sonnet-5-5",
+   "provider": "firstParty",
+   "costBasis": "list"
+  }
+ },
+ "started_at": "2026-10-14T08:17:23+00:00",
+ "framing": "issue",
+ "patch_files": [
+  "django/core/management/commands/makemigrations.py"
+ ],
+ "touched_test_files": [],
+ "untracked_files": []
+}

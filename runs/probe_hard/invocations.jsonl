@@ -1,0 +1,1 @@
+{"time": "2026-10-13T18:09:42", "argv": ["--bench", "putnam", "--problems", "problems/probe_hard_putnam.txt", "--condition", "bare", "--effort", "low", "--max-turns", "60", "--max-budget-usd", "3", "--timeout-min", "30", "--parallel", "5", "--out", "runs/probe_hard/"], "model": "claude-sonnet-5-5"}

@@ -1,0 +1,73 @@
+{
+ "problem": "django__django-17084",
+ "bench": "swe",
+ "condition": "bare",
+ "effort": "low",
+ "model": "claude-haiku-5-5",
+ "batch": "swe_haiku",
+ "dry_run": false,
+ "outcome": "solved",
+ "verify_pass": true,
+ "verify_stage": "ok",
+ "verify_detail": "resolved (run_id cotml-20261014000523-4af99815)",
+ "num_turns": 6,
+ "input_tokens": 14,
+ "output_tokens": 2262,
+ "thinking_tokens": 1003,
+ "cache_read_tokens": 22001,
+ "cache_creation_tokens": 4535,
+ "usage_source": "result",
+ "total_cost_usd": 0.0019192849999999997,
+ "duration_s": 22.1,
+ "agent_duration_ms": 21083,
+ "lean_compile_count": 3,
+ "search_tactic_uses": 0,
+ "search_tactic_in_final": false,
+ "tool_calls": {
+  "Bash": 5
+ },
+ "proof_chars": 599,
+ "proof_lines": 12,
+ "statement_prefix_changed": false,
+ "stop_reason": "end_turn",
+ "result_subtype": "success",
+ "terminal_reason": "completed",
+ "is_error": false,
+ "api_error_status": null,
+ "permission_denials": 0,
+ "agent_said_give_up": false,
+ "final_text": "I changed `get_aggregation` in `django/db/models/sql/query.py` so that an aggregate referencing a window-function annotation is computed through a subquery. I did not reproduce the issue's exact PostgreSQL error, since only the SQLite-backed test suites ran here.\n\nThe cause: `Coalesce(Window(Sum(...)))` is not treated as an aggregate, so `Sum(\"cumul_DJR\")` was compiled into the same query. That produced the \"aggregate function calls cannot contain window function calls\" error. The fix adds `contains_over_clause` to the existing `subquery` check on referenced annotations, which routes these queries through the subquery path.\n\nThe aggregation, aggregation_regress, expressions_window and expressions test suites pass (444 tests, OK with 9 skipped and 1 expected failure). I did not add a regression test, since the rules forbid touching test files.",
+ "timed_out": false,
+ "docker_rc": 0,
+ "limits": {
+  "max_turns": 50,
+  "max_budget_usd": 2.0,
+  "timeout_min": 25.0
+ },
+ "network": "cotml-egress",
+ "proxy": true,
+ "claude_version": "2.1.296",
+ "model_usage": {
+  "claude-haiku-5-5": {
+   "inputTokens": 14,
+   "outputTokens": 2262,
+   "cacheReadInputTokens": 22001,
+   "cacheCreationInputTokens": 4535,
+   "webSearchRequests": 0,
+   "costUSD": 0.0019192849999999997,
+   "contextWindow": 1000000,
+   "maxOutputTokens": 128000,
+   "thinkingTokens": 1003,
+   "canonicalModel": "claude-haiku-5-5",
+   "provider": "firstParty",
+   "costBasis": "list"
+  }
+ },
+ "started_at": "2026-10-14T07:04:59+00:00",
+ "framing": "issue",
+ "patch_files": [
+  "django/db/models/sql/query.py"
+ ],
+ "touched_test_files": [],
+ "untracked_files": []
+}

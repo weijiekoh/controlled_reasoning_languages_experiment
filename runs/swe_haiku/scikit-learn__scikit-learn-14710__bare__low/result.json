@@ -1,0 +1,73 @@
+{
+ "problem": "scikit-learn__scikit-learn-14710",
+ "bench": "swe",
+ "condition": "bare",
+ "effort": "low",
+ "model": "claude-haiku-5-5",
+ "batch": "swe_haiku",
+ "dry_run": false,
+ "outcome": "gave_up",
+ "verify_pass": false,
+ "verify_stage": "tests",
+ "verify_detail": "tests timed out after 1800s",
+ "num_turns": 7,
+ "input_tokens": 16,
+ "output_tokens": 2367,
+ "thinking_tokens": 298,
+ "cache_read_tokens": 34301,
+ "cache_creation_tokens": 13520,
+ "usage_source": "result",
+ "total_cost_usd": 0.0032181099999999997,
+ "duration_s": 901.7,
+ "agent_duration_ms": 900629,
+ "lean_compile_count": 3,
+ "search_tactic_uses": 0,
+ "search_tactic_in_final": false,
+ "tool_calls": {
+  "Bash": 6
+ },
+ "proof_chars": 1174,
+ "proof_lines": 21,
+ "statement_prefix_changed": false,
+ "stop_reason": "end_turn",
+ "result_subtype": "success",
+ "terminal_reason": "completed",
+ "is_error": false,
+ "api_error_status": null,
+ "permission_denials": 0,
+ "agent_said_give_up": false,
+ "final_text": "I fixed the string-target error in `HistGradientBoostingClassifier` when early stopping is on. The issue's reproduction script now fits and scores without error.\n\n**Cause:** `fit()` encodes the targets as integers `0..n_classes-1` before splitting off the validation set. The early-stopping scorer then calls `predict()`, which returns the original labels. It compared string labels against integer labels, which is where the `TypeError` came from.\n\n**Fix:** In `_check_early_stopping_scorer` in `sklearn/ensemble/_hist_gradient_boosting/gradient_boosting.py`, I decode `y_small_train` and `y_val` back to the original classes via `self.classes_` before scoring. This only applies when `classes_` exists, so regressors are unaffected. I did it in the scorer rather than in `fit()`, so the loss computation keeps receiving the encoded targets.\n\n**Testing:**\n- The reproduction from the issue runs and returns a score.\n- 22 early-stopping and classification-related tests in `test_gradient_boosting.py` pass.\n- I did not get a full run of that test file to completion, because it exceeded the time limit.",
+ "timed_out": false,
+ "docker_rc": 0,
+ "limits": {
+  "max_turns": 50,
+  "max_budget_usd": 2.0,
+  "timeout_min": 25.0
+ },
+ "network": "cotml-egress",
+ "proxy": true,
+ "claude_version": "2.1.296",
+ "model_usage": {
+  "claude-haiku-5-5": {
+   "inputTokens": 16,
+   "outputTokens": 2367,
+   "cacheReadInputTokens": 34301,
+   "cacheCreationInputTokens": 13520,
+   "webSearchRequests": 0,
+   "costUSD": 0.0032181099999999997,
+   "contextWindow": 1000000,
+   "maxOutputTokens": 128000,
+   "thinkingTokens": 298,
+   "canonicalModel": "claude-haiku-5-5",
+   "provider": "firstParty",
+   "costBasis": "list"
+  }
+ },
+ "started_at": "2026-10-14T07:10:45+00:00",
+ "framing": "issue",
+ "patch_files": [
+  "sklearn/ensemble/_hist_gradient_boosting/gradient_boosting.py"
+ ],
+ "touched_test_files": [],
+ "untracked_files": []
+}

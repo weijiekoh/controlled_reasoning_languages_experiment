@@ -1,0 +1,2 @@
+  have e1 : Qc.eval 1 = ((Q.eval 1 : ℤ) : ℂ) := by
+    rw [hQc, show (1:ℂ) = ((1:ℤ):ℂ) by simp, Polynomial.eval_intCast_map]; simp

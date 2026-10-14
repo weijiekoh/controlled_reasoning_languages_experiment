@@ -1,0 +1,11 @@
+import Mathlib
+open Finset
+#check @Finset.card_nbij
+#check @Finset.sum_Ico_reflect
+#check @Finset.sum_Ico_eq_sum_range
+#check @Fin.exists_succAbove_eq
+#check @Fin.forall_fin_succ
+#check @Finset.card_eq_sum_card_fiberwise
+#check @Int.units_eq_one_or
+#check @List.ofFn_succ
+#check @Fin.sum_univ_eq_sum_range

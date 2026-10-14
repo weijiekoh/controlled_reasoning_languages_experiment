@@ -1,0 +1,19 @@
+diff --git a/sympy/tensor/array/ndim_array.py b/sympy/tensor/array/ndim_array.py
+index 099b29116..2574f147b 100644
+--- a/sympy/tensor/array/ndim_array.py
++++ b/sympy/tensor/array/ndim_array.py
+@@ -174,7 +174,14 @@ def __len__(self):
+         >>> len(a)
+         9
+ 
++        Rank-0 arrays (scalars) contain a single element:
++
++        >>> len(Array(3))
++        1
++
+         """
++        if self.rank() == 0:
++            return 1
+         return self._loop_size
+ 
+     @property

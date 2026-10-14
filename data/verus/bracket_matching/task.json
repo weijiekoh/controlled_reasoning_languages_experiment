@@ -1,0 +1,15 @@
+{
+ "id": "bracket_matching",
+ "entry": "bracket_matching.rs",
+ "description": "description.md",
+ "main_fn": "bracket_match",
+ "editable_regions": {
+  "helpers": "between `// <helpers>` and `// </helpers>`: helper spec fns and exec helpers",
+  "proofs": "between `// <proofs>` and `// </proofs>`: lemmas (proof fns)",
+  "code": "between `// <code>` and `// </code>`: exactly one block `{ ... }`, the body of the function under spec"
+ },
+ "fixed": "Everything outside the three editable regions is fixed: the `use` lines, the <preamble> block (definitions, spec fns, and any exec fns given there), the <spec> block (signature, requires, ensures of the function under test), fn main, and all marker comments. Compared token-wise; comments and whitespace are ignored.",
+ "source": "data/algoveri/algoveri_data/bracket_matching/verus_spec.rs",
+ "source_sha256": "c3722f0330bbfa427bb1334448140738779563eef61fbc548191fcf4d1d886f0",
+ "patches": []
+}

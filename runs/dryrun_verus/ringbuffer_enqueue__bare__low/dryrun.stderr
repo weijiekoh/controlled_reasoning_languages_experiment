@@ -1,0 +1,28 @@
+note: function body check: not all errors may have been reported; rerun with a higher value for --multiple-errors to find other potential errors in this function
+  --> /work/ringbuffer_enqueue.rs:62:9
+   |
+62 |         pub fn enqueue(&mut self, value: T)
+   |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+error: postcondition not satisfied
+  --> /work/ringbuffer_enqueue.rs:69:17
+   |
+62 |           pub fn enqueue(&mut self, value: T)
+   |           ----------------------------------- at the end of the function body
+...
+69 | /                 old(self).len < old(self).capacity ==> 
+70 | |                     self.view() == old(self).view().push(value),
+   | |_______________________________________________________________^ failed this postcondition
+
+error: postcondition not satisfied
+  --> /work/ringbuffer_enqueue.rs:72:17
+   |
+62 |           pub fn enqueue(&mut self, value: T)
+   |           ----------------------------------- at the end of the function body
+...
+72 | /                 old(self).len == old(self).capacity ==> 
+73 | |                     self.view() == old(self).view().drop_first().push(value),
+   | |____________________________________________________________________________^ failed this postcondition
+
+error: aborting due to 2 previous errors
+

@@ -1,0 +1,19 @@
+by
+  have key : ∀ (G : SimpleGraph V), G.Connected → ∀ a b : V, a ≠ b → ∀ v, v ∈ G.support := by
+    intro G hG a b hab v
+    have : ∃ w, w ≠ v := by
+      by_cases h : a = v
+      · exact ⟨b, fun h' => hab (h.trans h'.symm)⟩
+      · exact ⟨a, h⟩
+    obtain ⟨w, hw⟩ := this
+    obtain ⟨p⟩ := hG.preconnected v w
+    cases p with
+    | nil => exact absurd rfl hw
+    | cons h _ => exact (SimpleGraph.mem_support _).2 ⟨_, h⟩
+  obtain ⟨a, b⟩ := e
+  have hab : a ≠ b := T.ne_of_adj he
+  exfalso
+  obtain ⟨T1, T2, h1, h2, -, hd⟩ := (show ∃ (T1 T2 : SimpleGraph V), IsTree T1 ∧ IsTree T2 ∧
+    T1.edgeSet ∪ T2.edgeSet = T.edgeSet \ {s(a,b)} ∧ Disjoint (T1.support) (T2.support) from ?_)
+  · exact (Set.disjoint_left.1 hd) (key T1 h1.1 a b hab a) (key T2 h2.1 a b hab a)
+  all_goals sorry

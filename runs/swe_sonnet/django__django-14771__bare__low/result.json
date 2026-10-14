@@ -1,0 +1,73 @@
+{
+ "problem": "django__django-14771",
+ "bench": "swe",
+ "condition": "bare",
+ "effort": "low",
+ "model": "claude-sonnet-5-5",
+ "batch": "swe_sonnet",
+ "dry_run": false,
+ "outcome": "solved",
+ "verify_pass": true,
+ "verify_stage": "ok",
+ "verify_detail": "resolved (run_id cotml-20261014012236-4e6c1c29)",
+ "num_turns": 4,
+ "input_tokens": 8,
+ "output_tokens": 758,
+ "thinking_tokens": 52,
+ "cache_read_tokens": 7407,
+ "cache_creation_tokens": 2619,
+ "usage_source": "result",
+ "total_cost_usd": 0.014884199999999998,
+ "duration_s": 9.2,
+ "agent_duration_ms": 8606,
+ "lean_compile_count": 1,
+ "search_tactic_uses": 0,
+ "search_tactic_in_final": false,
+ "tool_calls": {
+  "Bash": 3
+ },
+ "proof_chars": 719,
+ "proof_lines": 15,
+ "statement_prefix_changed": false,
+ "stop_reason": "end_turn",
+ "result_subtype": "success",
+ "terminal_reason": "completed",
+ "is_error": false,
+ "api_error_status": null,
+ "permission_denials": 0,
+ "agent_said_give_up": false,
+ "final_text": "The auto-reloader now passes `-X` options through to the child process it restarts, so `python -X utf8 manage.py runserver` keeps UTF-8 after a reload. The change is in `get_child_arguments()` in `django/utils/autoreload.py`.\n\nIt copies each entry from `sys._xoptions` into the child's arguments, only when the interpreter is CPython. A bare option like `utf8` becomes `-Xutf8`, and a valued one like `a=b` becomes `-Xa=b`.\n\nI ran `utils_tests.test_autoreload`. All 81 tests pass (20 skipped), including `test_xoptions`. I did not reproduce the Windows `runserver` scenario from the issue.",
+ "timed_out": false,
+ "docker_rc": 0,
+ "limits": {
+  "max_turns": 50,
+  "max_budget_usd": 4.0,
+  "timeout_min": 25.0
+ },
+ "network": "cotml-egress",
+ "proxy": true,
+ "claude_version": "2.1.296",
+ "model_usage": {
+  "claude-sonnet-5-5": {
+   "inputTokens": 8,
+   "outputTokens": 758,
+   "cacheReadInputTokens": 7407,
+   "cacheCreationInputTokens": 2619,
+   "webSearchRequests": 0,
+   "costUSD": 0.014884199999999998,
+   "contextWindow": 1000000,
+   "maxOutputTokens": 128000,
+   "thinkingTokens": 52,
+   "canonicalModel": "claude-sonnet-5-5",
+   "provider": "firstParty",
+   "costBasis": "list"
+  }
+ },
+ "started_at": "2026-10-14T08:22:25+00:00",
+ "framing": "debug",
+ "patch_files": [
+  "django/utils/autoreload.py"
+ ],
+ "touched_test_files": [],
+ "untracked_files": []
+}

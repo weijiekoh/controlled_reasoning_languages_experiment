@@ -1,0 +1,5 @@
+  have hFe : ∀ (F : Matrix (Fin n) (Fin (n - p)) ℝ) (v : Fin (n - p) → ℝ),
+      dotProduct v ((Fᵀ * P * F).mulVec v) = dotProduct (F.mulVec v) (P.mulVec (F.mulVec v)) := by
+    intro F v
+    rw [← Matrix.mulVec_mulVec, ← Matrix.mulVec_mulVec]
+    simp [Matrix.dotProduct_mulVec, Matrix.vecMul_transpose]

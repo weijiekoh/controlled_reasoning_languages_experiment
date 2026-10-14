@@ -1,0 +1,15 @@
+{
+ "id": "stack_pop",
+ "entry": "stack_pop.rs",
+ "description": "description.md",
+ "main_fn": "pop",
+ "editable_regions": {
+  "helpers": "between `// <helpers>` and `// </helpers>`: helper spec fns and exec helpers",
+  "proofs": "between `// <proofs>` and `// </proofs>`: lemmas (proof fns)",
+  "code": "between `// <code>` and `// </code>`: exactly one block `{ ... }`, the body of the function under spec"
+ },
+ "fixed": "Everything outside the three editable regions is fixed: the `use` lines, the <preamble> block (definitions, spec fns, and any exec fns given there), the <spec> block (signature, requires, ensures of the function under test), fn main, and all marker comments. Compared token-wise; comments and whitespace are ignored.",
+ "source": "data/algoveri/algoveri_data/stack_pop/verus_spec.rs",
+ "source_sha256": "adcbdad03158ace335b79ca278364c69296af405d5b556b84a35b9076ae2d421",
+ "patches": []
+}

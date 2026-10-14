@@ -1,0 +1,73 @@
+{
+ "problem": "matplotlib__matplotlib-25960",
+ "bench": "swe",
+ "condition": "bare",
+ "effort": "low",
+ "model": "claude-sonnet-5-5",
+ "batch": "swe_sonnet",
+ "dry_run": false,
+ "outcome": "gave_up",
+ "verify_pass": false,
+ "verify_stage": "tests",
+ "verify_detail": "FAIL_TO_PASS 1/1; PASS_TO_PASS 135/137 failing: lib/matplotlib/tests/test_figure.py::test_subfigure[png], lib/matplotlib/tests/test_figure.py::test_subfigure_double[png]",
+ "num_turns": 11,
+ "input_tokens": 22,
+ "output_tokens": 3774,
+ "thinking_tokens": 923,
+ "cache_read_tokens": 61624,
+ "cache_creation_tokens": 9035,
+ "usage_source": "result",
+ "total_cost_usd": 0.06653389999999999,
+ "duration_s": 131.3,
+ "agent_duration_ms": 130635,
+ "lean_compile_count": 5,
+ "search_tactic_uses": 0,
+ "search_tactic_in_final": false,
+ "tool_calls": {
+  "Bash": 10
+ },
+ "proof_chars": 2681,
+ "proof_lines": 52,
+ "statement_prefix_changed": false,
+ "stop_reason": "end_turn",
+ "result_subtype": "success",
+ "terminal_reason": "completed",
+ "is_error": false,
+ "api_error_status": null,
+ "permission_denials": 0,
+ "agent_said_give_up": false,
+ "final_text": "`wspace` and `hspace` now affect subfigure layout, but two existing tests fail. They are `test_subfigure[png]` and `test_subfigure_double[png]` in `lib/matplotlib/tests/test_figure.py`.\n\nBoth tests pass `wspace` explicitly, for example `fig.subfigures(1, 2, wspace=0.07)`. Their stored baseline images were drawn when that value was ignored, so they no longer match. I can't update those images under the rules. The other 135 tests in that file pass, and I didn't run the rest of the suite.\n\nI checked the bounding boxes directly:\n- **`wspace=0, hspace=0` on a 2\u00d72 grid:** the four subfigures tile the figure exactly, with no gaps.\n- **`wspace=0.5, width_ratios=[1, 2]` on a 1\u00d72 grid:** a gap appears between the two subfigures and the 1:2 ratio is kept.\n\nThe fix is in `lib/matplotlib/figure.py`. `SubFigure._redo_transform_rel_fig` now computes each subfigure's position from the gridspec's `wspace` and `hspace` as well as the width and height ratios, ignoring the margin settings (`left`, `right` and so on).\n\nOne choice you may want to revisit: if `wspace` or `hspace` isn't given, it defaults to 0 rather than the rc default. I did that so subfigures made without those arguments lay out exactly as before. I also set the gridspec margins to 0 and 1 in `Figure.subfigures`.",
+ "timed_out": false,
+ "docker_rc": 0,
+ "limits": {
+  "max_turns": 50,
+  "max_budget_usd": 4.0,
+  "timeout_min": 25.0
+ },
+ "network": "cotml-egress",
+ "proxy": true,
+ "claude_version": "2.1.296",
+ "model_usage": {
+  "claude-sonnet-5-5": {
+   "inputTokens": 22,
+   "outputTokens": 3774,
+   "cacheReadInputTokens": 61624,
+   "cacheCreationInputTokens": 9035,
+   "webSearchRequests": 0,
+   "costUSD": 0.06653389999999999,
+   "contextWindow": 1000000,
+   "maxOutputTokens": 128000,
+   "thinkingTokens": 923,
+   "canonicalModel": "claude-sonnet-5-5",
+   "provider": "firstParty",
+   "costBasis": "list"
+  }
+ },
+ "started_at": "2026-10-14T09:51:00+00:00",
+ "framing": "issue",
+ "patch_files": [
+  "lib/matplotlib/figure.py"
+ ],
+ "touched_test_files": [],
+ "untracked_files": []
+}

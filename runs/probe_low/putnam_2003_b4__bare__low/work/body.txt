@@ -1,0 +1,36 @@
+by
+  rintro ⟨hs, hne⟩
+  rw [Irrational, not_not] at hs ⊢
+  obtain ⟨p, hp⟩ := hs
+  have ha : (a:ℝ) ≠ 0 := by exact_mod_cast ane0
+  have h : ∀ z:ℝ, (a:ℝ) * z ^ 4 + b * z ^ 3 + c * z ^ 2 + d * z + e = a * (z - r1) * (z - r2) * (z - r3) * (z - r4) := fun z => by rw [← hf1, hf2]
+  have h0 := h 0
+  have h1 := h 1
+  have h2 := h (-1)
+  have h3 := h 2
+  have h4 := h (-2)
+  have hb : (b:ℝ) = -a*(r1+r2+r3+r4) := by
+    have : (b:ℝ) + a*(r1+r2+r3+r4) = 0 := by
+      linear_combination (1/12:ℝ) * ((h3 - h4) - 2*(h1 - h2))
+    linarith
+  have hd : (d:ℝ) = -a*(r1*r2*(r3+r4)+r3*r4*(r1+r2)) := by
+    have : (d:ℝ) + a*(r1*r2*(r3+r4)+r3*r4*(r1+r2)) = 0 := by
+      linear_combination (1/12:ℝ) * (-(h3 - h4) + 8*(h1 - h2))
+    linarith
+  have hc : (c:ℝ) = a*(r1*r2+r3*r4+(r1+r2)*(r3+r4)) := by
+    have : (c:ℝ) - a*(r1*r2+r3*r4+(r1+r2)*(r3+r4)) = 0 := by
+      linear_combination (1/2:ℝ) * (h1 + h2) - h0
+    linarith
+  set t : ℝ := r3 + r4 with ht
+  have htq : t = -(b:ℝ)/a - p := by
+    rw [hp.symm]; field_simp; linarith
+  have hts : t - p ≠ 0 := by
+    intro hh; apply hne; rw [← hp]; linarith
+  refine ⟨(( -(d:ℚ)/a) - p*((c:ℚ)/a - p*(-(b:ℚ)/a - p))) / ((-(b:ℚ)/a - p) - p), ?_⟩
+  have hq : r1 * r2 * (t - p) = (-(d:ℝ)/a) - p*((c:ℝ)/a - p*t) := by
+    rw [← hp] at *
+    field_simp
+    rw [hd, hc]
+    ring_nf
+    sorry
+  sorry

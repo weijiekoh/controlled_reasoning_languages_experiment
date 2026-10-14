@@ -1,0 +1,15 @@
+{
+ "id": "push_relabel",
+ "entry": "push_relabel.rs",
+ "description": "description.md",
+ "main_fn": "max_flow_value",
+ "editable_regions": {
+  "helpers": "between `// <helpers>` and `// </helpers>`: helper spec fns and exec helpers",
+  "proofs": "between `// <proofs>` and `// </proofs>`: lemmas (proof fns)",
+  "code": "between `// <code>` and `// </code>`: exactly one block `{ ... }`, the body of the function under spec"
+ },
+ "fixed": "Everything outside the three editable regions is fixed: the `use` lines, the <preamble> block (definitions, spec fns, and any exec fns given there), the <spec> block (signature, requires, ensures of the function under test), fn main, and all marker comments. Compared token-wise; comments and whitespace are ignored.",
+ "source": "data/algoveri/algoveri_data/push_relabel/verus_spec.rs",
+ "source_sha256": "1900ebc6d3b55b3f140e834e4bfe04b4db9e6d2c636a68742acee62b462ebf4c",
+ "patches": []
+}

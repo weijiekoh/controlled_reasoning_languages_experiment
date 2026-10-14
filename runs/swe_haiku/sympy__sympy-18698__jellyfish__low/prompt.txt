@@ -1,0 +1,27 @@
+Resolve the issue below in the Git repository at `/testbed`. The repository is checked out at the commit where the issue was reported. Python and the project's dependencies are installed in the active conda environment `testbed`.
+
+Rules:
+- Change the source code in `/testbed` to resolve the issue. Do not modify or add test files under the repository's test directories. Do not commit; leave your changes in the working tree.
+- Network access is not available. Do not install packages.
+- Run the project's own tests to check your change.
+- Stop when the issue is resolved.
+- If you conclude that you cannot resolve the issue, say "I give up" and stop.
+
+<issue>
+sqf and sqf_list output is not consistant
+The example below is wrong in the sense that we should have (x*_2 - 5_x + 6, 3) and not 2 factors of multiplicity 3.
+
+```
+>  sqf_list(  (x**2 + 1)  * (x - 1)**2 * (x - 2)**3 * (x - 3)**3  )
+
+>  (1, [(x**2 + 1, 1), (x - 1, 2), (x - 3, 3), (x - 2, 3)])
+```
+
+whereas below is correct --- one factor of multiplicity 2
+
+```
+>  sqf_list( x**5 - 2*x**4 - 2*x**3 + 4*x**2 + x - 2 )
+
+>  (1, [(x - 2, 1), (x**2 - 1, 2)])
+```
+</issue>

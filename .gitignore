@@ -1,0 +1,35 @@
+# Secrets
+.env
+*.env
+
+# Lean / Lake build outputs (rebuild: lake exe cache get)
+lean_env/.lake/
+harness/safeverify/.lake/
+
+# Claude Code binary copied into the sandbox image (copy from `which claude`)
+harness/docker/claude
+
+# Python
+__pycache__/
+*.pyc
+data/.venv-swe/
+.venv/
+
+# Third-party benchmark clones (see README "Data" for origins; derived task dirs are committed)
+data/PutnamBench/
+data/miniF2F-lean4/
+data/FATE-H/
+data/FATE-X/
+data/CombiBench/
+data/CAM-Bench/
+data/algoveri/
+data/comparator/
+data/SafeVerify/
+data/swebench_verified.jsonl
+
+# Run artifacts that are large or regenerable; result.json, verify.json, transcripts, and patches stay
+runs/targets/
+runs/**/swe_eval/
+runs/**/agent.stderr
+runs/tmp*/
+runs/test_results/

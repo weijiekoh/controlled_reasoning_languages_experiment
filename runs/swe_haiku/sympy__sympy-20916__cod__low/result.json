@@ -1,0 +1,73 @@
+{
+ "problem": "sympy__sympy-20916",
+ "bench": "swe",
+ "condition": "cod",
+ "effort": "low",
+ "model": "claude-haiku-5-5",
+ "batch": "swe_haiku",
+ "dry_run": false,
+ "outcome": "gave_up",
+ "verify_pass": false,
+ "verify_stage": "tests",
+ "verify_detail": "FAIL_TO_PASS 0/1 failing: test_super_sub; PASS_TO_PASS 1/1",
+ "num_turns": 13,
+ "input_tokens": 28,
+ "output_tokens": 4556,
+ "thinking_tokens": 1555,
+ "cache_read_tokens": 97796,
+ "cache_creation_tokens": 10717,
+ "usage_source": "result",
+ "total_cost_usd": 0.004598385000000002,
+ "duration_s": 35.3,
+ "agent_duration_ms": 34744,
+ "lean_compile_count": 2,
+ "search_tactic_uses": 0,
+ "search_tactic_in_final": false,
+ "tool_calls": {
+  "Bash": 12
+ },
+ "proof_chars": 421,
+ "proof_lines": 10,
+ "statement_prefix_changed": false,
+ "stop_reason": "end_turn",
+ "result_subtype": "success",
+ "terminal_reason": "completed",
+ "is_error": false,
+ "api_error_status": null,
+ "permission_denials": 0,
+ "agent_said_give_up": false,
+ "final_text": "Fixed. `pprint` now renders `\u03c90` as `\u03c9\u2080`, so the issue's example prints `-t\u2080\u22c5\u03c9\u2080` instead of `-t\u2080\u22c5\u03c90`.\n\n**Cause:** `split_super_sub` in `sympy/printing/conventions.py` split a trailing digit run into a subscript only when the name was pure ASCII letters (`[a-zA-Z]+`). A name like `\u03c90` therefore stayed whole, and the pretty printer never saw the `0` as a subscript.\n\n**Change:** the regex is now `^([^\\W\\d_]+)([0-9]+)$`, which accepts any Unicode letter. ASCII names like `w0`, `x12` and `a_1` split exactly as before.\n\n**Tests:** `sympy/printing/tests/test_conventions.py`, `sympy/printing/pretty/tests/test_pretty.py` and `sympy/printing/tests/test_latex.py` pass (297 passed, 3 expected failures). I did not run the full suite.\n\nThe change is uncommitted in the working tree.",
+ "timed_out": false,
+ "docker_rc": 0,
+ "limits": {
+  "max_turns": 50,
+  "max_budget_usd": 2.0,
+  "timeout_min": 25.0
+ },
+ "network": "cotml-egress",
+ "proxy": true,
+ "claude_version": "2.1.296",
+ "model_usage": {
+  "claude-haiku-5-5": {
+   "inputTokens": 28,
+   "outputTokens": 4556,
+   "cacheReadInputTokens": 97796,
+   "cacheCreationInputTokens": 10717,
+   "webSearchRequests": 0,
+   "costUSD": 0.004598385000000002,
+   "contextWindow": 1000000,
+   "maxOutputTokens": 128000,
+   "thinkingTokens": 1555,
+   "canonicalModel": "claude-haiku-5-5",
+   "provider": "firstParty",
+   "costBasis": "list"
+  }
+ },
+ "started_at": "2026-10-14T09:45:31+00:00",
+ "framing": "issue",
+ "patch_files": [
+  "sympy/printing/conventions.py"
+ ],
+ "touched_test_files": [],
+ "untracked_files": []
+}

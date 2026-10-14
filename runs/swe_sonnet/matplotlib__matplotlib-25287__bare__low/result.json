@@ -1,0 +1,73 @@
+{
+ "problem": "matplotlib__matplotlib-25287",
+ "bench": "swe",
+ "condition": "bare",
+ "effort": "low",
+ "model": "claude-sonnet-5-5",
+ "batch": "swe_sonnet",
+ "dry_run": false,
+ "outcome": "solved",
+ "verify_pass": true,
+ "verify_stage": "ok",
+ "verify_detail": "resolved (run_id cotml-20261014025058-38070716)",
+ "num_turns": 2,
+ "input_tokens": 6,
+ "output_tokens": 469,
+ "thinking_tokens": 0,
+ "cache_read_tokens": 4227,
+ "cache_creation_tokens": 1515,
+ "usage_source": "result",
+ "total_cost_usd": 0.0089122,
+ "duration_s": 5.4,
+ "agent_duration_ms": 4876,
+ "lean_compile_count": 0,
+ "search_tactic_uses": 0,
+ "search_tactic_in_final": false,
+ "tool_calls": {
+  "Bash": 1
+ },
+ "proof_chars": 1097,
+ "proof_lines": 20,
+ "statement_prefix_changed": false,
+ "stop_reason": "end_turn",
+ "result_subtype": "success",
+ "terminal_reason": "completed",
+ "is_error": false,
+ "api_error_status": null,
+ "permission_denials": 0,
+ "agent_said_give_up": false,
+ "final_text": "I changed `lib/matplotlib/axis.py` so the offset text (the exponent label) follows `xtick.labelcolor` and `ytick.labelcolor`. I haven't run the tests or the reproduction script, so the change is untested.\n\nIt is the same fix the issue proposed. When `labelcolor` is `'inherit'`, the offset text still uses `xtick.color` or `ytick.color`. Otherwise it uses the `labelcolor` value. The edit touches the two places where the x-axis and y-axis offset text are created.\n\nThe lines I edited are longer than the project's line-length limit, so a style check may flag them.",
+ "timed_out": false,
+ "docker_rc": 0,
+ "limits": {
+  "max_turns": 50,
+  "max_budget_usd": 4.0,
+  "timeout_min": 25.0
+ },
+ "network": "cotml-egress",
+ "proxy": true,
+ "claude_version": "2.1.296",
+ "model_usage": {
+  "claude-sonnet-5-5": {
+   "inputTokens": 6,
+   "outputTokens": 469,
+   "cacheReadInputTokens": 4227,
+   "cacheCreationInputTokens": 1515,
+   "webSearchRequests": 0,
+   "costUSD": 0.0089122,
+   "contextWindow": 1000000,
+   "maxOutputTokens": 128000,
+   "thinkingTokens": 0,
+   "canonicalModel": "claude-sonnet-5-5",
+   "provider": "firstParty",
+   "costBasis": "list"
+  }
+ },
+ "started_at": "2026-10-14T09:50:51+00:00",
+ "framing": "issue",
+ "patch_files": [
+  "lib/matplotlib/axis.py"
+ ],
+ "touched_test_files": [],
+ "untracked_files": []
+}

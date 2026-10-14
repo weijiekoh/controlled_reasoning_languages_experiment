@@ -1,0 +1,73 @@
+{
+ "problem": "scikit-learn__scikit-learn-14710",
+ "bench": "swe",
+ "condition": "bare",
+ "effort": "low",
+ "model": "claude-sonnet-5-5",
+ "batch": "swe_sonnet",
+ "dry_run": false,
+ "outcome": "gave_up",
+ "verify_pass": false,
+ "verify_stage": "tests",
+ "verify_detail": "FAIL_TO_PASS 1/1; PASS_TO_PASS 62/63 failing: sklearn/ensemble/_hist_gradient_boosting/tests/test_gradient_boosting.py::test_string_target_early_stopping[loss]",
+ "num_turns": 3,
+ "input_tokens": 8,
+ "output_tokens": 844,
+ "thinking_tokens": 0,
+ "cache_read_tokens": 11130,
+ "cache_creation_tokens": 4115,
+ "usage_source": "result",
+ "total_cost_usd": 0.0198565,
+ "duration_s": 39.8,
+ "agent_duration_ms": 39103,
+ "lean_compile_count": 0,
+ "search_tactic_uses": 0,
+ "search_tactic_in_final": false,
+ "tool_calls": {
+  "Bash": 2
+ },
+ "proof_chars": 1290,
+ "proof_lines": 26,
+ "statement_prefix_changed": false,
+ "stop_reason": "end_turn",
+ "result_subtype": "success",
+ "terminal_reason": "completed",
+ "is_error": false,
+ "api_error_status": null,
+ "permission_denials": 0,
+ "agent_said_give_up": false,
+ "final_text": "`HistGradientBoostingClassifier` now fits with string targets when early stopping is on. I ran the issue's reproduction (object-dtype `'x'`/`'y'` labels, `n_iter_no_change=10`) and it completes without the `TypeError`. I did not run the project's test suite.\n\nThe change is in `_check_early_stopping_scorer` in `sklearn/ensemble/_hist_gradient_boosting/gradient_boosting.py`. It applies the issue's suggested fix. For classifiers (anything with `classes_`), the integer-encoded `y_small_train` and `y_val` are mapped back to the original labels before being passed to the scorer. The scorer then compares labels of the same type as the predictions.\n\nI didn't add a regression test, since the rules say not to touch the test directories.",
+ "timed_out": false,
+ "docker_rc": 0,
+ "limits": {
+  "max_turns": 50,
+  "max_budget_usd": 4.0,
+  "timeout_min": 25.0
+ },
+ "network": "cotml-egress",
+ "proxy": true,
+ "claude_version": "2.1.296",
+ "model_usage": {
+  "claude-sonnet-5-5": {
+   "inputTokens": 8,
+   "outputTokens": 844,
+   "cacheReadInputTokens": 11130,
+   "cacheCreationInputTokens": 4115,
+   "webSearchRequests": 0,
+   "costUSD": 0.0198565,
+   "contextWindow": 1000000,
+   "maxOutputTokens": 128000,
+   "thinkingTokens": 0,
+   "canonicalModel": "claude-sonnet-5-5",
+   "provider": "firstParty",
+   "costBasis": "list"
+  }
+ },
+ "started_at": "2026-10-14T08:18:48+00:00",
+ "framing": "issue",
+ "patch_files": [
+  "sklearn/ensemble/_hist_gradient_boosting/gradient_boosting.py"
+ ],
+ "touched_test_files": [],
+ "untracked_files": []
+}

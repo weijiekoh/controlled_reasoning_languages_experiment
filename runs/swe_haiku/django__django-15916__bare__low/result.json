@@ -1,0 +1,73 @@
+{
+ "problem": "django__django-15916",
+ "bench": "swe",
+ "condition": "bare",
+ "effort": "low",
+ "model": "claude-haiku-5-5",
+ "batch": "swe_haiku",
+ "dry_run": false,
+ "outcome": "solved",
+ "verify_pass": true,
+ "verify_stage": "ok",
+ "verify_detail": "resolved (run_id cotml-20261014010638-aaa2ed01)",
+ "num_turns": 7,
+ "input_tokens": 16,
+ "output_tokens": 2339,
+ "thinking_tokens": 642,
+ "cache_read_tokens": 28598,
+ "cache_creation_tokens": 4949,
+ "usage_source": "result",
+ "total_cost_usd": 0.0020757049999999997,
+ "duration_s": 17.2,
+ "agent_duration_ms": 16576,
+ "lean_compile_count": 3,
+ "search_tactic_uses": 0,
+ "search_tactic_in_final": false,
+ "tool_calls": {
+  "Bash": 6
+ },
+ "proof_chars": 1321,
+ "proof_lines": 25,
+ "statement_prefix_changed": false,
+ "stop_reason": "end_turn",
+ "result_subtype": "success",
+ "terminal_reason": "completed",
+ "is_error": false,
+ "api_error_status": null,
+ "permission_denials": 0,
+ "agent_said_give_up": false,
+ "final_text": "Both target tests now pass, and the wider model form suites pass too (275 tests, OK).\n\nThe fix is in `django/forms/models.py`, in two parts:\n\n- **Metaclass lookup:** `ModelFormMetaclass.__new__` now takes `formfield_callback` in this order: the class's own attribute, then the class's own `Meta.formfield_callback`, then the base classes' `Meta`. Previously the class's own `Meta` was ignored.\n- **`modelform_factory`:** it no longer puts `\"formfield_callback\": None` into the new class attributes. That `None` was overriding the base form's callback. The key is only set when a callback is actually passed.\n\nI didn't separately run the issue's exact example, but the scenario it describes is what the `test_custom_callback_from_base_form_meta` test covers. The change is uncommitted in the working tree.",
+ "timed_out": false,
+ "docker_rc": 0,
+ "limits": {
+  "max_turns": 50,
+  "max_budget_usd": 2.0,
+  "timeout_min": 25.0
+ },
+ "network": "cotml-egress",
+ "proxy": true,
+ "claude_version": "2.1.296",
+ "model_usage": {
+  "claude-haiku-5-5": {
+   "inputTokens": 16,
+   "outputTokens": 2339,
+   "cacheReadInputTokens": 28598,
+   "cacheCreationInputTokens": 4949,
+   "webSearchRequests": 0,
+   "costUSD": 0.0020757049999999997,
+   "contextWindow": 1000000,
+   "maxOutputTokens": 128000,
+   "thinkingTokens": 642,
+   "canonicalModel": "claude-haiku-5-5",
+   "provider": "firstParty",
+   "costBasis": "list"
+  }
+ },
+ "started_at": "2026-10-14T08:06:19+00:00",
+ "framing": "debug",
+ "patch_files": [
+  "django/forms/models.py"
+ ],
+ "touched_test_files": [],
+ "untracked_files": []
+}

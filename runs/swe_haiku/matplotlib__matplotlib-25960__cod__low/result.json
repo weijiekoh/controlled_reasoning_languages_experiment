@@ -1,0 +1,73 @@
+{
+ "problem": "matplotlib__matplotlib-25960",
+ "bench": "swe",
+ "condition": "cod",
+ "effort": "low",
+ "model": "claude-haiku-5-5",
+ "batch": "swe_haiku",
+ "dry_run": false,
+ "outcome": "solved",
+ "verify_pass": true,
+ "verify_stage": "ok",
+ "verify_detail": "resolved (run_id cotml-20261014022948-f754acca)",
+ "num_turns": 16,
+ "input_tokens": 34,
+ "output_tokens": 9792,
+ "thinking_tokens": 4133,
+ "cache_read_tokens": 149012,
+ "cache_creation_tokens": 19720,
+ "usage_source": "result",
+ "total_cost_usd": 0.00885452,
+ "duration_s": 145.8,
+ "agent_duration_ms": 139937,
+ "lean_compile_count": 4,
+ "search_tactic_uses": 0,
+ "search_tactic_in_final": false,
+ "tool_calls": {
+  "Bash": 15
+ },
+ "proof_chars": 1994,
+ "proof_lines": 36,
+ "statement_prefix_changed": false,
+ "stop_reason": "end_turn",
+ "result_subtype": "success",
+ "terminal_reason": "completed",
+ "is_error": false,
+ "api_error_status": null,
+ "permission_denials": 0,
+ "agent_said_give_up": false,
+ "final_text": "Explicit `wspace`/`hspace` now take effect for subfigures. The figure, gridspec, subplots and constrained-layout tests all pass (227 passed, 8 skipped).\n\n**Cause:** `SubFigure._redo_transform_rel_fig` in `lib/matplotlib/figure.py` placed subfigures using only the width/height ratios. The `wspace`/`hspace` passed to `GridSpec` were stored but never used there.\n\n**Fix:** the placement now includes the separators between cells. Spacing is applied only when the value was given explicitly to `subfigures()`. Unset values keep the old zero-gap layout.\n\n**Trade-off:** the `subfigures()` docstring says unset values are inferred from the figure or rcParams, so the unset case doesn't fully match it. I did that on purpose: applying the figure's default spacing (0.2) would change every default subfigure layout, and `test_subfigure` compares against a baseline image in the test directory, which I wasn't allowed to regenerate. If you want the documented inference, that baseline image needs regenerating.\n\nVerified: for a 2\u00d72 grid, `wspace=0.5` gives 256px-wide cells with 128px gaps, and `wspace=0` gives the same tight layout as before. I didn't run the full test suite.",
+ "timed_out": false,
+ "docker_rc": 0,
+ "limits": {
+  "max_turns": 50,
+  "max_budget_usd": 2.0,
+  "timeout_min": 25.0
+ },
+ "network": "cotml-egress",
+ "proxy": true,
+ "claude_version": "2.1.296",
+ "model_usage": {
+  "claude-haiku-5-5": {
+   "inputTokens": 34,
+   "outputTokens": 9792,
+   "cacheReadInputTokens": 149012,
+   "cacheCreationInputTokens": 19720,
+   "webSearchRequests": 0,
+   "costUSD": 0.00885452,
+   "contextWindow": 1000000,
+   "maxOutputTokens": 128000,
+   "thinkingTokens": 4133,
+   "canonicalModel": "claude-haiku-5-5",
+   "provider": "firstParty",
+   "costBasis": "list"
+  }
+ },
+ "started_at": "2026-10-14T09:27:21+00:00",
+ "framing": "issue",
+ "patch_files": [
+  "lib/matplotlib/figure.py"
+ ],
+ "touched_test_files": [],
+ "untracked_files": []
+}

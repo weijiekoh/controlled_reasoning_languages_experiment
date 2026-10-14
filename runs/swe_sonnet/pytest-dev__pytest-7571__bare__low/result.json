@@ -1,0 +1,73 @@
+{
+ "problem": "pytest-dev__pytest-7571",
+ "bench": "swe",
+ "condition": "bare",
+ "effort": "low",
+ "model": "claude-sonnet-5-5",
+ "batch": "swe_sonnet",
+ "dry_run": false,
+ "outcome": "solved",
+ "verify_pass": true,
+ "verify_stage": "ok",
+ "verify_detail": "resolved (run_id cotml-20261014012400-322839c8)",
+ "num_turns": 4,
+ "input_tokens": 8,
+ "output_tokens": 855,
+ "thinking_tokens": 0,
+ "cache_read_tokens": 6277,
+ "cache_creation_tokens": 1795,
+ "usage_source": "result",
+ "total_cost_usd": 0.0136812,
+ "duration_s": 8.6,
+ "agent_duration_ms": 7895,
+ "lean_compile_count": 2,
+ "search_tactic_uses": 0,
+ "search_tactic_in_final": false,
+ "tool_calls": {
+  "Bash": 3
+ },
+ "proof_chars": 1309,
+ "proof_lines": 28,
+ "statement_prefix_changed": false,
+ "stop_reason": "end_turn",
+ "result_subtype": "success",
+ "terminal_reason": "completed",
+ "is_error": false,
+ "api_error_status": null,
+ "permission_denials": 0,
+ "agent_said_give_up": false,
+ "final_text": "`caplog.set_level()` now restores the handler level at the end of the test, as the docs say. The fix is in `src/_pytest/logging.py`.\n\n`set_level()` only saved and restored the logger's level, so `caplog.handler.level` kept its changed value into the next test. It now saves the handler's original level the first time `set_level()` is called. `_finalize()` puts that level back.\n\nAll 15 tests in `testing/logging/test_fixture.py` pass, including `test_change_level_undos_handler_level`. I did not run the rest of the test suite.\n\nI didn't check whether the `at_level()` context manager restores the handler level when its `with` block exits. It sits right after `set_level()` in the same file.",
+ "timed_out": false,
+ "docker_rc": 0,
+ "limits": {
+  "max_turns": 50,
+  "max_budget_usd": 4.0,
+  "timeout_min": 25.0
+ },
+ "network": "cotml-egress",
+ "proxy": true,
+ "claude_version": "2.1.296",
+ "model_usage": {
+  "claude-sonnet-5-5": {
+   "inputTokens": 8,
+   "outputTokens": 855,
+   "cacheReadInputTokens": 6277,
+   "cacheCreationInputTokens": 1795,
+   "webSearchRequests": 0,
+   "costUSD": 0.0136812,
+   "contextWindow": 1000000,
+   "maxOutputTokens": 128000,
+   "thinkingTokens": 0,
+   "canonicalModel": "claude-sonnet-5-5",
+   "provider": "firstParty",
+   "costBasis": "list"
+  }
+ },
+ "started_at": "2026-10-14T08:23:51+00:00",
+ "framing": "debug",
+ "patch_files": [
+  "src/_pytest/logging.py"
+ ],
+ "touched_test_files": [],
+ "untracked_files": []
+}

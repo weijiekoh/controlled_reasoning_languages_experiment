@@ -1,0 +1,40 @@
+diff --git a/sympy/combinatorics/permutations.py b/sympy/combinatorics/permutations.py
+index 136ed5a47..114385507 100755
+--- a/sympy/combinatorics/permutations.py
++++ b/sympy/combinatorics/permutations.py
+@@ -894,21 +894,8 @@ def __new__(cls, *args, **kwargs):
+         # for convenience in case one wants to enter permutations where
+         # counting starts from 1.
+ 
+-        temp = flatten(args)
+-        if has_dups(temp):
+-            if is_cycle:
+-                raise ValueError('there were repeated elements; to resolve '
+-                'cycles use Cycle%s.' % ''.join([str(tuple(c)) for c in args]))
+-            else:
+-                raise ValueError('there were repeated elements.')
+-        temp = set(temp)
+-
+-        if not is_cycle and \
+-                any(i not in temp for i in range(len(temp))):
+-            raise ValueError("Integers 0 through %s must be present." %
+-                             max(temp))
+-
+         if is_cycle:
++            # cycles may be non-disjoint; they are applied left-to-right
+             # it's not necessarily canonical so we won't store
+             # it -- use the array form instead
+             c = Cycle()
+@@ -916,6 +903,12 @@ def __new__(cls, *args, **kwargs):
+                 c = c(*ci)
+             aform = c.list()
+         else:
++            temp = set(args)
++            if has_dups(args):
++                raise ValueError('there were repeated elements.')
++            if any(i not in temp for i in range(len(temp))):
++                raise ValueError("Integers 0 through %s must be present." %
++                                 max(temp))
+             aform = list(args)
+         if size and size > len(aform):
+             # don't allow for truncation of permutation which

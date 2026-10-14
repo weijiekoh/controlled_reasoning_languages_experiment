@@ -1,0 +1,73 @@
+{
+ "problem": "matplotlib__matplotlib-14623",
+ "bench": "swe",
+ "condition": "jellyfish",
+ "effort": "low",
+ "model": "claude-haiku-5-5",
+ "batch": "swe_haiku",
+ "dry_run": false,
+ "outcome": "solved",
+ "verify_pass": true,
+ "verify_stage": "ok",
+ "verify_detail": "resolved (run_id cotml-20261014022159-c87dc24f)",
+ "num_turns": 7,
+ "input_tokens": 16,
+ "output_tokens": 3288,
+ "thinking_tokens": 971,
+ "cache_read_tokens": 44036,
+ "cache_creation_tokens": 6628,
+ "usage_source": "result",
+ "total_cost_usd": 0.00291446,
+ "duration_s": 153.3,
+ "agent_duration_ms": 152698,
+ "lean_compile_count": 2,
+ "search_tactic_uses": 0,
+ "search_tactic_in_final": false,
+ "tool_calls": {
+  "Bash": 6
+ },
+ "proof_chars": 1297,
+ "proof_lines": 24,
+ "statement_prefix_changed": false,
+ "stop_reason": "end_turn",
+ "result_subtype": "success",
+ "terminal_reason": "completed",
+ "is_error": false,
+ "api_error_status": null,
+ "permission_denials": 0,
+ "agent_said_give_up": false,
+ "final_text": "FACT: the same 180 tests fail without my change, so those failures predate it and are environmental (e.g. image-comparison and `hist` errors).\n\nSTATE\n- FACT: `LogLocator.nonsingular` (ticker.py) swaps `vmin`/`vmax` when `vmin > vmax` and does not swap them back.\n- FACT: `set_ylim` and `set_xlim` in `lib/matplotlib/axes/_base.py` passed the caller's order through that call, so inverted log limits were lost.\n- FACT: after the fix, `ax.set_ylim(y.max(), y.min())` on a log axis gives `(100000.0, 1.0)`, matching the linear case.\n- FACT: test failures are identical before and after (180 failed, 727 passed).\n\nOBJECTION: the fix lives in the axes layer, not in `LogLocator`, so other callers of `nonsingular` still get sorted output.\nREPLY: that is the existing contract for locators, and the issue concerns axis limits only. Changing `nonsingular` would affect tick computation, so I kept the change minimal in `set_xlim`/`set_ylim`.\n\nChange made in `lib/matplotlib/axes/_base.py`: `set_xlim` and `set_ylim` record whether the input was inverted, call `nonsingular`, and restore the inverted order if the locator sorted it. Log y-axes now invert like linear ones. I did not modify any test files and did not commit.",
+ "timed_out": false,
+ "docker_rc": 0,
+ "limits": {
+  "max_turns": 50,
+  "max_budget_usd": 2.0,
+  "timeout_min": 25.0
+ },
+ "network": "cotml-egress",
+ "proxy": true,
+ "claude_version": "2.1.296",
+ "model_usage": {
+  "claude-haiku-5-5": {
+   "inputTokens": 16,
+   "outputTokens": 3288,
+   "cacheReadInputTokens": 44036,
+   "cacheCreationInputTokens": 6628,
+   "webSearchRequests": 0,
+   "costUSD": 0.00291446,
+   "contextWindow": 1000000,
+   "maxOutputTokens": 128000,
+   "thinkingTokens": 971,
+   "canonicalModel": "claude-haiku-5-5",
+   "provider": "firstParty",
+   "costBasis": "list"
+  }
+ },
+ "started_at": "2026-10-14T09:19:24+00:00",
+ "framing": "issue",
+ "patch_files": [
+  "lib/matplotlib/axes/_base.py"
+ ],
+ "touched_test_files": [],
+ "untracked_files": []
+}

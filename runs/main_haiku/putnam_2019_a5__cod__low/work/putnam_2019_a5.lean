@@ -1,0 +1,162 @@
+import Mathlib
+
+open Topology Filter
+
+noncomputable abbrev putnam_2019_a5_solution : ℕ → ℕ := (fun p : ℕ => (p - 1) / 2)
+/--
+Let $p$ be an odd prime number, and let $\mathbb{F}_p$ denote the field of integers modulo $p$. Let $\mathbb{F}_p[x]$ be the ring of polynomials over $\mathbb{F}_p$, and let $q(x) \in \mathbb{F}_p[x]$ be given by $q(x)=\sum_{k=1}^{p-1} a_kx^k$, where $a_k=k^{(p-1)/2}\mod{p}$. Find the greatest nonnegative integer $n$ such that $(x-1)^n$ divides $q(x)$ in $\mathbb{F}_p[x]$.
+-/
+theorem putnam_2019_a5
+  (p : ℕ)
+  (q : Polynomial (ZMod p))
+  (a : ℕ → ZMod p)
+  (npoly : ℕ → Polynomial (ZMod p))
+  (podd : Odd p)
+  (pprime : p.Prime)
+  (hq : ∀ k : ℕ, q.coeff k = a k)
+  (ha0 : a 0 = 0 ∧ ∀ k > p - 1, a k = 0)
+  (haother : ∀ k : Set.Icc 1 (p - 1), a k = ((k : ℕ) ^ ((p - 1) / 2)) % p)
+  (hnpoly : ∀ n : ℕ, npoly n = (Polynomial.X - 1) ^ n) :
+  IsGreatest {n | npoly n ∣ q} (putnam_2019_a5_solution p) :=
+by
+  have := Fact.mk pprime
+  obtain ⟨k, hk⟩ := podd
+  have hp3 : 3 ≤ p := by have := pprime.two_le; omega
+  have hd : p - 1 = 2 * ((p - 1) / 2) := by omega
+  set d := (p - 1) / 2 with hd_def
+  have hd1 : 1 ≤ d := by omega
+  have hdp : d < p := by omega
+  have hcoef : ∀ k < p, q.coeff k = (k : ZMod p) ^ d := by
+    intro k hk
+    rcases Nat.eq_zero_or_pos k with h0 | hpos
+    · subst h0
+      rw [hq, ha0.1]
+      simp [zero_pow (by omega : d ≠ 0)]
+    · have h := haother ⟨k, ⟨hpos, by omega⟩⟩
+      rw [hq, h]
+      simp
+  have hdeg : q.natDegree < p := by
+    have : q.natDegree ≤ p - 1 :=
+      Polynomial.natDegree_le_iff_coeff_eq_zero.2 (fun N hN => by
+        rw [hq]; exact ha0.2 N (by omega))
+    omega
+  have hcomp : q.comp (Polynomial.X + 1)
+      = ∑ i ∈ Finset.range p, Polynomial.C (q.coeff i) * (Polynomial.X + 1) ^ i := by
+    conv_lhs => rw [Polynomial.as_sum_range' q p hdeg]
+    rw [Polynomial.sum_comp]
+    refine Finset.sum_congr rfl (fun i _ => ?_)
+    rw [← Polynomial.C_mul_X_pow_eq_monomial, Polynomial.mul_comp, Polynomial.C_comp,
+      Polynomial.X_pow_comp]
+  have hT : ∀ j, (q.comp (Polynomial.X + 1)).coeff j
+      = ∑ i ∈ Finset.range p, (i : ZMod p) ^ d * ((i.choose j : ℕ) : ZMod p) := by
+    intro j
+    rw [hcomp, Polynomial.finsetSum_coeff]
+    refine Finset.sum_congr rfl (fun i hi => ?_)
+    rw [Polynomial.coeff_C_mul, Polynomial.coeff_X_add_one_pow, hcoef i (Finset.mem_range.1 hi),
+      mul_comm]
+  have hconv : ∀ f : ZMod p → ZMod p, ∑ i ∈ Finset.range p, f (i : ZMod p) = ∑ x, f x := by
+    intro f
+    symm
+    refine Finset.sum_nbij (fun x : ZMod p => x.val) (fun x _ => Finset.mem_range.2 (ZMod.val_lt x))
+      (fun x _ y _ hxy => ZMod.val_injective p hxy) ?_ (fun x _ => by
+        simp [ZMod.natCast_zmod_val])
+    intro i hi
+    refine ⟨(i : ZMod p), Finset.mem_coe.2 (Finset.mem_univ _), ?_⟩
+    have hi' := Finset.mem_range.1 (Finset.mem_coe.1 hi)
+    simp [ZMod.val_natCast, Nat.mod_eq_of_lt hi']
+  have hP1 : ∀ e, 0 < e → e < 2 * d → ∑ x : ZMod p, x ^ e = 0 := by
+    intro e _ h1
+    apply FiniteField.sum_pow_lt_card_sub_one
+    rw [ZMod.card]; omega
+  have hPtop : ∑ x : ZMod p, x ^ (2 * d) = -1 := by
+    have h : ∀ x : ZMod p, x ^ (2 * d) = 1 - (if x = 0 then 1 else 0) := by
+      intro x
+      by_cases hx : x = 0
+      · subst hx
+        simp [zero_pow (by omega : 2 * d ≠ 0)]
+      · have := FiniteField.pow_card_sub_one_eq_one x hx
+        rw [ZMod.card] at this
+        rw [← hd, this, if_neg hx, sub_zero]
+    rw [Finset.sum_congr rfl (fun x _ => h x), Finset.sum_sub_distrib]
+    simp
+  have hmon : ∀ n, (descPochhammer (ZMod p) n).Monic := by
+    intro n
+    induction n with
+    | zero => simp [descPochhammer_zero]
+    | succ n ih =>
+      rw [descPochhammer_succ_right]
+      exact ih.mul (by simpa using Polynomial.monic_X_sub_C (n : ZMod p))
+  have hcd : (descPochhammer (ZMod p) d).coeff d = 1 := by
+    have := (hmon d).coeff_natDegree
+    rwa [descPochhammer_natDegree] at this
+  have hS : ∀ j < p, ((j.factorial : ℕ) : ZMod p) *
+      (∑ i ∈ Finset.range p, (i : ZMod p) ^ d * ((i.choose j : ℕ) : ZMod p))
+      = ∑ t ∈ Finset.range (j + 1), (descPochhammer (ZMod p) j).coeff t * ∑ x : ZMod p, x ^ (d + t) := by
+    intro j _
+    rw [Finset.mul_sum]
+    have e1 : ∀ i ∈ Finset.range p, ((j.factorial : ℕ) : ZMod p) *
+        ((i : ZMod p) ^ d * ((i.choose j : ℕ) : ZMod p))
+        = (fun x : ZMod p => x ^ d * Polynomial.eval x (descPochhammer (ZMod p) j)) (i : ZMod p) := by
+      intro i _
+      simp only
+      rw [descPochhammer_eval_eq_descFactorial, Nat.descFactorial_eq_factorial_mul_choose, Nat.cast_mul]
+      ring
+    rw [Finset.sum_congr rfl e1]
+    refine (hconv (fun x : ZMod p => x ^ d * Polynomial.eval x (descPochhammer (ZMod p) j))).trans ?_
+    simp only [Polynomial.eval_eq_sum_range, descPochhammer_natDegree, Finset.mul_sum]
+    rw [Finset.sum_comm]
+    refine Finset.sum_congr rfl (fun t _ => Finset.sum_congr rfl (fun x _ => by ring))
+  have hfacne : ∀ j < p, ((j.factorial : ℕ) : ZMod p) ≠ 0 := by
+    intro j hj h
+    rw [ZMod.natCast_eq_zero_iff] at h
+    have := (Nat.Prime.dvd_factorial pprime).1 h
+    omega
+  have hlow : ∀ j < d, (q.comp (Polynomial.X + 1)).coeff j = 0 := by
+    intro j hj
+    rw [hT j]
+    have hfac := hS j (by omega)
+    have hz : ∑ t ∈ Finset.range (j + 1), (descPochhammer (ZMod p) j).coeff t * ∑ x : ZMod p, x ^ (d + t) = 0 :=
+      Finset.sum_eq_zero (fun t ht => by
+        rw [hP1 (d + t) (by omega) (by have := Finset.mem_range.1 ht; omega), mul_zero])
+    rw [hz] at hfac
+    exact (mul_eq_zero.1 hfac).resolve_left (hfacne j (by omega))
+  have hhigh : (q.comp (Polynomial.X + 1)).coeff d ≠ 0 := by
+    rw [hT d]
+    intro h
+    have hfac := hS d hdp
+    rw [h, mul_zero, Finset.sum_range_succ] at hfac
+    have hz : ∑ t ∈ Finset.range d, (descPochhammer (ZMod p) d).coeff t * ∑ x : ZMod p, x ^ (d + t) = 0 :=
+      Finset.sum_eq_zero (fun t ht => by
+        rw [hP1 (d + t) (by omega) (by have := Finset.mem_range.1 ht; omega), mul_zero])
+    rw [hz, zero_add, hcd, one_mul, show d + d = 2 * d by ring, hPtop] at hfac
+    norm_num at hfac
+  have hdiv : ∀ n, (Polynomial.X - 1) ^ n ∣ q ↔ Polynomial.X ^ n ∣ q.comp (Polynomial.X + 1) := by
+    intro n
+    constructor
+    · rintro ⟨r, hr⟩
+      exact ⟨r.comp (Polynomial.X + 1), by rw [hr]; simp [Polynomial.mul_comp, Polynomial.pow_comp]⟩
+    · rintro ⟨s, hs⟩
+      refine ⟨s.comp (Polynomial.X - 1), ?_⟩
+      have := congrArg (fun f => f.comp (Polynomial.X - 1)) hs
+      simp only [Polynomial.mul_comp, Polynomial.pow_comp, Polynomial.comp_assoc,
+        Polynomial.add_comp, Polynomial.X_comp, Polynomial.one_comp] at this
+      simpa [Polynomial.comp_assoc] using this
+  have hdiv' : ∀ n, (Polynomial.X - 1) ^ n ∣ q ↔ ∀ j < n, (q.comp (Polynomial.X + 1)).coeff j = 0 := by
+    intro n
+    rw [hdiv, Polynomial.X_pow_dvd_iff]
+  refine ⟨?_, ?_⟩
+  · show npoly (putnam_2019_a5_solution p) ∣ q
+    rw [hnpoly]
+    show (Polynomial.X - 1) ^ d ∣ q
+    rw [hdiv']
+    intro j hj
+    exact hlow j hj
+  · intro n hn
+    have hn' : (Polynomial.X - 1) ^ n ∣ q := by
+      have := hn
+      simp only [Set.mem_setOf_eq, hnpoly] at this
+      exact this
+    rw [hdiv'] at hn'
+    by_contra h
+    push_neg at h
+    exact hhigh (hn' d h)

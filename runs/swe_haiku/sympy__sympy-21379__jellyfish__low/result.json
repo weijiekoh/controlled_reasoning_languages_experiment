@@ -1,0 +1,73 @@
+{
+ "problem": "sympy__sympy-21379",
+ "bench": "swe",
+ "condition": "jellyfish",
+ "effort": "low",
+ "model": "claude-haiku-5-5",
+ "batch": "swe_haiku",
+ "dry_run": false,
+ "outcome": "gave_up",
+ "verify_pass": false,
+ "verify_stage": "tests",
+ "verify_detail": "FAIL_TO_PASS 0/1 failing: test_Mod; PASS_TO_PASS 91/91",
+ "num_turns": 7,
+ "input_tokens": 16,
+ "output_tokens": 3033,
+ "thinking_tokens": 563,
+ "cache_read_tokens": 38673,
+ "cache_creation_tokens": 5377,
+ "usage_source": "result",
+ "total_cost_usd": 0.002576955,
+ "duration_s": 36.7,
+ "agent_duration_ms": 35875,
+ "lean_compile_count": 1,
+ "search_tactic_uses": 0,
+ "search_tactic_in_final": false,
+ "tool_calls": {
+  "Bash": 6
+ },
+ "proof_chars": 1090,
+ "proof_lines": 27,
+ "statement_prefix_changed": false,
+ "stop_reason": "end_turn",
+ "result_subtype": "success",
+ "terminal_reason": "completed",
+ "is_error": false,
+ "api_error_status": null,
+ "permission_denials": 0,
+ "agent_said_give_up": false,
+ "final_text": "RESULT: 231 passed, 2 skipped, 4 expected to fail; no failures.\n\nThe `PolynomialError` is fixed. `subs({1: 1.0})` on `exp(sinh(Piecewise((x, y > x), (y, True)) / z))` with real `x`, `y` now returns `exp(sinh(Piecewise((x, x < y), (y, True))/z))` instead of raising.\n\n**Cause:** In `sympy/functions/elementary/hyperbolic.py`, the `_eval_is_real` methods of `sinh`, `cosh` and `tanh` compute `im % pi` (or `im % (pi/2)`) on the imaginary part of the argument. When the argument contains a Piecewise, that imaginary part is a Piecewise, and `Mod` calls `gcd`, which rejects Piecewise generators. The assumption system reaches this path during the `subs` evaluation.\n\n**Fix:** In all three methods, if the imaginary part is not a number, return `None` (unknown) before doing the modulo. The modulo check was only meant for numeric imaginary parts, as the existing comments say. Numeric cases behave as before.\n\nI did not add a regression test, since I was asked not to touch test files. The related test suites (hyperbolic, trigonometric, arithmetic) pass. I did not run the full sympy test suite.",
+ "timed_out": false,
+ "docker_rc": 0,
+ "limits": {
+  "max_turns": 50,
+  "max_budget_usd": 2.0,
+  "timeout_min": 25.0
+ },
+ "network": "cotml-egress",
+ "proxy": true,
+ "claude_version": "2.1.296",
+ "model_usage": {
+  "claude-haiku-5-5": {
+   "inputTokens": 16,
+   "outputTokens": 3033,
+   "cacheReadInputTokens": 38673,
+   "cacheCreationInputTokens": 5377,
+   "webSearchRequests": 0,
+   "costUSD": 0.002576955,
+   "contextWindow": 1000000,
+   "maxOutputTokens": 128000,
+   "thinkingTokens": 563,
+   "canonicalModel": "claude-haiku-5-5",
+   "provider": "firstParty",
+   "costBasis": "list"
+  }
+ },
+ "started_at": "2026-10-14T07:15:05+00:00",
+ "framing": "issue",
+ "patch_files": [
+  "sympy/functions/elementary/hyperbolic.py"
+ ],
+ "touched_test_files": [],
+ "untracked_files": []
+}

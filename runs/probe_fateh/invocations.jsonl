@@ -1,0 +1,1 @@
+{"time": "2026-10-13T18:26:12", "argv": ["--bench", "fateh", "--problems", "problems/probe_fateh.txt", "--condition", "bare", "--effort", "low", "--max-turns", "60", "--max-budget-usd", "3", "--timeout-min", "30", "--parallel", "5", "--out", "runs/probe_fateh/"], "model": "claude-sonnet-5-5"}

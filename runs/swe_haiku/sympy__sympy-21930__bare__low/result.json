@@ -1,0 +1,73 @@
+{
+ "problem": "sympy__sympy-21930",
+ "bench": "swe",
+ "condition": "bare",
+ "effort": "low",
+ "model": "claude-haiku-5-5",
+ "batch": "swe_haiku",
+ "dry_run": false,
+ "outcome": "gave_up",
+ "verify_pass": false,
+ "verify_stage": "tests",
+ "verify_detail": "FAIL_TO_PASS 5/6 failing: test_Tensors; PASS_TO_PASS 45/45",
+ "num_turns": 13,
+ "input_tokens": 28,
+ "output_tokens": 5390,
+ "thinking_tokens": 2072,
+ "cache_read_tokens": 67806,
+ "cache_creation_tokens": 9514,
+ "usage_source": "result",
+ "total_cost_usd": 0.004565110000000001,
+ "duration_s": 117.3,
+ "agent_duration_ms": 116651,
+ "lean_compile_count": 1,
+ "search_tactic_uses": 0,
+ "search_tactic_in_final": false,
+ "tool_calls": {
+  "Bash": 12
+ },
+ "proof_chars": 721,
+ "proof_lines": 18,
+ "statement_prefix_changed": false,
+ "stop_reason": "end_turn",
+ "result_subtype": "success",
+ "terminal_reason": "completed",
+ "is_error": false,
+ "api_error_status": null,
+ "permission_denials": 0,
+ "agent_said_give_up": false,
+ "final_text": "The issue is fixed: `Commutator(Bd(a)**2, B(a))` now renders as `\\left[b_{0},{b^\\dagger_{0}}^{2}\\right]`, so the exponent attaches to the whole operator. The change is in `sympy/physics/secondquant.py`, where `CreateBoson._latex` and `CreateFermion._latex` now wrap their output in braces.\n\nFour existing tests in `sympy/physics/tests/test_secondquant.py` now fail (`test_create`, `test_commutation`, `test_create_f`, `test_NO`). They assert the old unbraced strings such as `b^\\dagger_{i}`, so their expected values need updating to the braced form. I left them alone because I was not allowed to modify test files. The LaTeX printer tests all pass.\n\nI also tried a broader fix in the LaTeX printer's power handling, but it changed unrelated output such as powers of sums, products, limits and matrices, so I reverted it. Nothing is committed.",
+ "timed_out": false,
+ "docker_rc": 0,
+ "limits": {
+  "max_turns": 50,
+  "max_budget_usd": 2.0,
+  "timeout_min": 25.0
+ },
+ "network": "cotml-egress",
+ "proxy": true,
+ "claude_version": "2.1.296",
+ "model_usage": {
+  "claude-haiku-5-5": {
+   "inputTokens": 28,
+   "outputTokens": 5390,
+   "cacheReadInputTokens": 67806,
+   "cacheCreationInputTokens": 9514,
+   "webSearchRequests": 0,
+   "costUSD": 0.004565110000000001,
+   "contextWindow": 1000000,
+   "maxOutputTokens": 128000,
+   "thinkingTokens": 2072,
+   "canonicalModel": "claude-haiku-5-5",
+   "provider": "firstParty",
+   "costBasis": "list"
+  }
+ },
+ "started_at": "2026-10-14T09:46:06+00:00",
+ "framing": "issue",
+ "patch_files": [
+  "sympy/physics/secondquant.py"
+ ],
+ "touched_test_files": [],
+ "untracked_files": []
+}

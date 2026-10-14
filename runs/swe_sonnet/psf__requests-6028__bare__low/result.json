@@ -1,0 +1,73 @@
+{
+ "problem": "psf__requests-6028",
+ "bench": "swe",
+ "condition": "bare",
+ "effort": "low",
+ "model": "claude-sonnet-5-5",
+ "batch": "swe_sonnet",
+ "dry_run": false,
+ "outcome": "solved",
+ "verify_pass": true,
+ "verify_stage": "ok",
+ "verify_detail": "resolved (run_id cotml-20261014025122-e681c6c9)",
+ "num_turns": 5,
+ "input_tokens": 10,
+ "output_tokens": 1137,
+ "thinking_tokens": 117,
+ "cache_read_tokens": 10172,
+ "cache_creation_tokens": 3135,
+ "usage_source": "result",
+ "total_cost_usd": 0.020244699999999997,
+ "duration_s": 15.7,
+ "agent_duration_ms": 14990,
+ "lean_compile_count": 2,
+ "search_tactic_uses": 0,
+ "search_tactic_in_final": false,
+ "tool_calls": {
+  "Bash": 4
+ },
+ "proof_chars": 446,
+ "proof_lines": 13,
+ "statement_prefix_changed": false,
+ "stop_reason": "end_turn",
+ "result_subtype": "success",
+ "terminal_reason": "completed",
+ "is_error": false,
+ "api_error_status": null,
+ "permission_denials": 0,
+ "agent_said_give_up": false,
+ "final_text": "I fixed the 407 in `prepend_scheme_if_needed` in `requests/utils.py`. I haven't run it against a real proxy, since I don't have one here.\n\nThe function rebuilds the URL from `parse_url`'s `netloc`. That `netloc` leaves out the `user:pass@` part, so the proxy credentials were being dropped and the proxy answered 407. I now add the auth back onto the `netloc` before rebuilding the URL.\n\nI checked it directly: `http://user:pass@host:80/x` now comes back unchanged, with the credentials intact.\n\n`tests/test_utils.py` gives 6 failures and 8 errors both with and without my change, so I can't tell from that run whether the change is safe for those tests. They are in the `NO_PROXY` bypass, `set_environ` and `should_bypass_proxies` tests. I didn't investigate why they fail.\n\nA URL with credentials but no scheme, such as `user:pass@host:80`, still comes out wrong (`user:///pass@host:80`). This is because the parser reads `user` as the scheme. I left that alone.",
+ "timed_out": false,
+ "docker_rc": 0,
+ "limits": {
+  "max_turns": 50,
+  "max_budget_usd": 4.0,
+  "timeout_min": 25.0
+ },
+ "network": "cotml-egress",
+ "proxy": true,
+ "claude_version": "2.1.296",
+ "model_usage": {
+  "claude-sonnet-5-5": {
+   "inputTokens": 10,
+   "outputTokens": 1137,
+   "cacheReadInputTokens": 10172,
+   "cacheCreationInputTokens": 3135,
+   "webSearchRequests": 0,
+   "costUSD": 0.020244699999999997,
+   "contextWindow": 1000000,
+   "maxOutputTokens": 128000,
+   "thinkingTokens": 117,
+   "canonicalModel": "claude-sonnet-5-5",
+   "provider": "firstParty",
+   "costBasis": "list"
+  }
+ },
+ "started_at": "2026-10-14T09:51:05+00:00",
+ "framing": "issue",
+ "patch_files": [
+  "requests/utils.py"
+ ],
+ "touched_test_files": [],
+ "untracked_files": []
+}

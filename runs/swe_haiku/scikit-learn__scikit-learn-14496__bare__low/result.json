@@ -1,0 +1,73 @@
+{
+ "problem": "scikit-learn__scikit-learn-14496",
+ "bench": "swe",
+ "condition": "bare",
+ "effort": "low",
+ "model": "claude-haiku-5-5",
+ "batch": "swe_haiku",
+ "dry_run": false,
+ "outcome": "solved",
+ "verify_pass": true,
+ "verify_stage": "ok",
+ "verify_detail": "resolved (run_id cotml-20261014001020-6a137837)",
+ "num_turns": 3,
+ "input_tokens": 8,
+ "output_tokens": 637,
+ "thinking_tokens": 0,
+ "cache_read_tokens": 8014,
+ "cache_creation_tokens": 2718,
+ "usage_source": "result",
+ "total_cost_usd": 0.00073919,
+ "duration_s": 11.5,
+ "agent_duration_ms": 10851,
+ "lean_compile_count": 1,
+ "search_tactic_uses": 0,
+ "search_tactic_in_final": false,
+ "tool_calls": {
+  "Bash": 2
+ },
+ "proof_chars": 1013,
+ "proof_lines": 21,
+ "statement_prefix_changed": false,
+ "stop_reason": "end_turn",
+ "result_subtype": "success",
+ "terminal_reason": "completed",
+ "is_error": false,
+ "api_error_status": null,
+ "permission_denials": 0,
+ "agent_said_give_up": false,
+ "final_text": "I fixed the float `min_samples` crash in OPTICS. Passing `min_samples=0.1` now works, and the OPTICS test suite passes (40 tests).\n\nThe change is in `sklearn/cluster/optics_.py`. Both places that convert a fractional `min_samples` into an absolute count, in `compute_optics_graph` and `cluster_optics_xi`, now wrap the result in `int(round(...))`. Before, the result stayed a float, and `NearestNeighbors` rejected it as `n_neighbors`.\n\nThe changes are uncommitted in the working tree.",
+ "timed_out": false,
+ "docker_rc": 0,
+ "limits": {
+  "max_turns": 50,
+  "max_budget_usd": 2.0,
+  "timeout_min": 25.0
+ },
+ "network": "cotml-egress",
+ "proxy": true,
+ "claude_version": "2.1.296",
+ "model_usage": {
+  "claude-haiku-5-5": {
+   "inputTokens": 8,
+   "outputTokens": 637,
+   "cacheReadInputTokens": 8014,
+   "cacheCreationInputTokens": 2718,
+   "webSearchRequests": 0,
+   "costUSD": 0.00073919,
+   "contextWindow": 1000000,
+   "maxOutputTokens": 128000,
+   "thinkingTokens": 0,
+   "canonicalModel": "claude-haiku-5-5",
+   "provider": "firstParty",
+   "costBasis": "list"
+  }
+ },
+ "started_at": "2026-10-14T07:10:07+00:00",
+ "framing": "issue",
+ "patch_files": [
+  "sklearn/cluster/optics_.py"
+ ],
+ "touched_test_files": [],
+ "untracked_files": []
+}

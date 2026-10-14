@@ -1,0 +1,88 @@
+spec fn ssum(n: int, g: spec_fn(int)->int) -> int decreases n {
+    if n <= 0 { 0 } else { ssum(n-1, g) + g(n-1) }
+}
+spec fn rsum(m: int, g: spec_fn(int,int)->int, i: int) -> int { ssum(m, |j: int| g(i,j)) }
+spec fn csum(n: int, g: spec_fn(int,int)->int, j: int) -> int { ssum(n, |i: int| g(i,j)) }
+spec fn rowsum(n: int, g: spec_fn(int,int)->int, u: int) -> int { ssum(n, |v: int| g(u,v)) }
+spec fn cutin(n: int, a: spec_fn(int)->bool, g: spec_fn(int,int)->int, u: int) -> int {
+    if a(u) { ssum(n, |w: int| if a(w) { 0 } else { g(u,w) }) } else { 0 }
+}
+spec fn cutsum(n: int, a: spec_fn(int)->bool, g: spec_fn(int,int)->int) -> int {
+    ssum(n, |u: int| cutin(n, a, g, u))
+}
+spec fn asum(n: int, a: spec_fn(int)->bool, r: spec_fn(int)->int) -> int {
+    ssum(n, |u: int| if a(u) { r(u) } else { 0 })
+}
+spec fn hh(a: spec_fn(int)->bool, g: spec_fn(int,int)->int, u: int, v: int) -> int {
+    if a(u) && a(v) { g(u,v) } else { 0 }
+}
+spec fn indk(h: spec_fn(int)->int, a: int, b: int, lo: int, k: int, v: int) -> int {
+    if v != a && v != b && lo <= h(v) && h(v) < lo + k { 1 } else { 0 }
+}
+spec fn occupied(n: int, h: spec_fn(int)->int, g0: int) -> bool {
+    exists |v: int| 0 <= v < n && #[trigger] h(v) == g0
+}
+spec fn good0(n: int, s: int, t: int, f: spec_fn(int,int)->int, c: spec_fn(int,int)->int,
+              h: spec_fn(int)->int, e: spec_fn(int)->int) -> bool {
+    &&& 0 <= s < n && 0 <= t < n && s != t && n <= 1000
+    &&& forall |u: int, v: int| 0 <= u < n && 0 <= v < n ==> #[trigger] f(u,v) == -f(v,u)
+    &&& forall |u: int, v: int| 0 <= u < n && 0 <= v < n ==> #[trigger] f(u,v) <= c(u,v)
+    &&& forall |u: int, v: int| 0 <= u < n && 0 <= v < n ==> 0 <= #[trigger] c(u,v) <= 100000
+    &&& forall |u: int, v: int| 0 <= u < n && 0 <= v < n && #[trigger] f(u,v) < c(u,v) ==> h(u) <= h(v) + 1
+    &&& forall |u: int| 0 <= u < n ==> #[trigger] e(u) == csum(n, f, u)
+    &&& forall |u: int| 0 <= u < n && u != s ==> #[trigger] e(u) >= 0
+    &&& forall |u: int| 0 <= u < n ==> #[trigger] h(u) >= 0
+    &&& h(s) == n
+    &&& h(t) == 0
+}
+spec fn wfs(g: Seq<Seq<(int, int)>>) -> bool {
+    &&& forall |u: int, i: int|
+        0 <= u < g.len() && 0 <= i < g[u].len()
+        ==> 0 <= #[trigger] g[u][i].0 < g.len()
+    &&& forall |u: int, i: int, j: int|
+        0 <= u < g.len()
+        && 0 <= i < g[u].len()
+        && 0 <= j < g[u].len()
+        && i != j
+        ==> #[trigger] g[u][i].0 != #[trigger] g[u][j].0
+}
+spec fn is_nbr(g: Seq<Seq<(int, int)>>, u: int, v: int) -> bool {
+    exists |i: int| 0 <= i < g[u].len() && #[trigger] g[u][i].0 == v
+}
+spec fn pfx(g: Seq<Seq<(int, int)>>, f: FlowMap, u: int, l: int, v: int) -> int {
+    if exists |i: int| 0 <= i < l && #[trigger] g[u][i].0 == v { get_flow(f, u, v) } else { 0 }
+}
+spec fn zero_off(g: Seq<Seq<(int, int)>>, f: FlowMap) -> bool {
+    forall |u: int, v: int| 0 <= u < g.len() && 0 <= v < g.len() && !is_nbr(g, u, v)
+        ==> #[trigger] get_flow(f, u, v) == 0
+}
+spec fn gnet(f: FlowMap, u: int, v: int) -> int { get_flow(f, u, v) - get_flow(f, v, u) }
+spec fn cap_ok(g: Seq<Seq<(int, int)>>, c: spec_fn(int,int)->int) -> bool {
+    forall |u: int, v: int| 0 <= u < g.len() && 0 <= v < g.len() ==>
+        (has_capacity(g, u, v, #[trigger] c(u,v))
+         || (c(u,v) == 0 && forall |cc: int| !(#[trigger] has_capacity(g, u, v, cc))))
+}
+spec fn mf(m: Seq<Vec<i64>>) -> spec_fn(int,int)->int { |u: int, v: int| m[u]@[v] as int }
+spec fn mv(x: Seq<i64>) -> spec_fn(int)->int { |i: int| x[i] as int }
+spec fn dims(m: Seq<Vec<i64>>, n: int) -> bool {
+    m.len() == n && forall |u: int| 0 <= u < n ==> #[trigger] m[u]@.len() == n
+}
+spec fn capr_at(g: Seq<Seq<(int, int)>>, c: spec_fn(int,int)->int, u: int, j: int, v: int) -> bool {
+    (exists |i: int| 0 <= i < j && #[trigger] g[u][i].0 == v && g[u][i].1 == c(u,v))
+    || (c(u,v) == 0 && forall |i: int| 0 <= i < j ==> #[trigger] g[u][i].0 != v)
+}
+spec fn capr(g: Seq<Seq<(int, int)>>, c: spec_fn(int,int)->int, u: int, j: int) -> bool {
+    forall |v: int| 0 <= v < g.len() ==> #[trigger] capr_at(g, c, u, j, v)
+}
+spec fn phi1(n: int, h: spec_fn(int)->int) -> int { ssum(n, |v: int| 2 * n - h(v)) }
+spec fn phi2t(s: int, e: spec_fn(int)->int, h: spec_fn(int)->int, v: int) -> int {
+    if v == s { 0int } else { e(v) * h(v) }
+}
+spec fn phi2(n: int, s: int, e: spec_fn(int)->int, h: spec_fn(int)->int) -> int {
+    ssum(n, |v: int| phi2t(s, e, h, v))
+}
+spec fn good(n: int, s: int, t: int, f: spec_fn(int,int)->int, c: spec_fn(int,int)->int,
+              h: spec_fn(int)->int, e: spec_fn(int)->int) -> bool {
+    &&& good0(n, s, t, f, c, h, e)
+    &&& forall |x: int| 0 <= x < n ==> #[trigger] h(x) <= 2 * n - 1
+}

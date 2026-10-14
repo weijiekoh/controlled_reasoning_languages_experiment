@@ -1,0 +1,73 @@
+{
+ "problem": "django__django-15022",
+ "bench": "swe",
+ "condition": "bare",
+ "effort": "low",
+ "model": "claude-sonnet-5-5",
+ "batch": "swe_sonnet",
+ "dry_run": false,
+ "outcome": "solved",
+ "verify_pass": true,
+ "verify_stage": "ok",
+ "verify_detail": "resolved (run_id cotml-20261014012309-5f23f52b)",
+ "num_turns": 6,
+ "input_tokens": 12,
+ "output_tokens": 805,
+ "thinking_tokens": 0,
+ "cache_read_tokens": 15029,
+ "cache_creation_tokens": 2683,
+ "usage_source": "result",
+ "total_cost_usd": 0.0162844,
+ "duration_s": 32.6,
+ "agent_duration_ms": 31967,
+ "lean_compile_count": 2,
+ "search_tactic_uses": 0,
+ "search_tactic_in_final": false,
+ "tool_calls": {
+  "Bash": 5
+ },
+ "proof_chars": 1142,
+ "proof_lines": 22,
+ "statement_prefix_changed": false,
+ "stop_reason": "end_turn",
+ "result_subtype": "success",
+ "terminal_reason": "completed",
+ "is_error": false,
+ "api_error_status": null,
+ "permission_denials": 0,
+ "agent_said_give_up": false,
+ "final_text": "I changed `get_search_results` in `django/contrib/admin/options.py` so a multi-word search no longer adds a JOIN for each word. It now collects one OR-query per word and applies them in a single `queryset.filter(...)` call, instead of chaining a `.filter()` per word.\n\nI ran `admin_changelist` and `admin_views` together: 499 tests, all passing (32 skipped). I didn't run the three target tests by name, but `test_many_search_terms` is in `admin_changelist` and the other two are most likely in `admin_changelist` as well.\n\nI didn't check the generated SQL directly, so I haven't confirmed the join count drops.",
+ "timed_out": false,
+ "docker_rc": 0,
+ "limits": {
+  "max_turns": 50,
+  "max_budget_usd": 4.0,
+  "timeout_min": 25.0
+ },
+ "network": "cotml-egress",
+ "proxy": true,
+ "claude_version": "2.1.296",
+ "model_usage": {
+  "claude-sonnet-5-5": {
+   "inputTokens": 12,
+   "outputTokens": 805,
+   "cacheReadInputTokens": 15029,
+   "cacheCreationInputTokens": 2683,
+   "webSearchRequests": 0,
+   "costUSD": 0.0162844,
+   "contextWindow": 1000000,
+   "maxOutputTokens": 128000,
+   "thinkingTokens": 0,
+   "canonicalModel": "claude-sonnet-5-5",
+   "provider": "firstParty",
+   "costBasis": "list"
+  }
+ },
+ "started_at": "2026-10-14T08:22:36+00:00",
+ "framing": "debug",
+ "patch_files": [
+  "django/contrib/admin/options.py"
+ ],
+ "touched_test_files": [],
+ "untracked_files": []
+}

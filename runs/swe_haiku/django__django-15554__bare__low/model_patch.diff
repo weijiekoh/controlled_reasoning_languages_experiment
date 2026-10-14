@@ -1,0 +1,23 @@
+diff --git a/django/db/models/sql/query.py b/django/db/models/sql/query.py
+index 54f3258eac..1fb616a5f2 100644
+--- a/django/db/models/sql/query.py
++++ b/django/db/models/sql/query.py
+@@ -1024,10 +1024,17 @@ class Query(BaseExpression):
+         sure chains like t1 LOUTER t2 INNER t3 aren't generated. All new
+         joins are created as LOUTER if the join is nullable.
+         """
++        # Plain joins may reuse any equivalent join (including one carrying a
++        # FilteredRelation, e.g. when resolving a FilteredRelation condition),
++        # but a filtered join must only reuse a join with the same filter.
++        if join.filtered_relation is None:
++            matches = lambda j: j.equals(join)
++        else:
++            matches = lambda j: j == join
+         reuse_aliases = [
+             a
+             for a, j in self.alias_map.items()
+-            if (reuse is None or a in reuse) and j.equals(join)
++            if (reuse is None or a in reuse) and matches(j)
+         ]
+         if reuse_aliases:
+             if join.table_alias in reuse_aliases:

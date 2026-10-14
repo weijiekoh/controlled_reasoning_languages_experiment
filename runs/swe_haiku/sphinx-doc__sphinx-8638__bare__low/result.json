@@ -1,0 +1,73 @@
+{
+ "problem": "sphinx-doc__sphinx-8638",
+ "bench": "swe",
+ "condition": "bare",
+ "effort": "low",
+ "model": "claude-haiku-5-5",
+ "batch": "swe_haiku",
+ "dry_run": false,
+ "outcome": "gave_up",
+ "verify_pass": false,
+ "verify_stage": "tests",
+ "verify_detail": "FAIL_TO_PASS 0/1 failing: tests/test_domain_py.py::test_info_field_list_var; PASS_TO_PASS 34/34",
+ "num_turns": 8,
+ "input_tokens": 18,
+ "output_tokens": 3853,
+ "thinking_tokens": 1851,
+ "cache_read_tokens": 45961,
+ "cache_creation_tokens": 8987,
+ "usage_source": "result",
+ "total_cost_usd": 0.003511285,
+ "duration_s": 36.2,
+ "agent_duration_ms": 35575,
+ "lean_compile_count": 3,
+ "search_tactic_uses": 0,
+ "search_tactic_in_final": false,
+ "tool_calls": {
+  "Bash": 7
+ },
+ "proof_chars": 839,
+ "proof_lines": 18,
+ "statement_prefix_changed": false,
+ "stop_reason": "end_turn",
+ "result_subtype": "success",
+ "terminal_reason": "completed",
+ "is_error": false,
+ "api_error_status": null,
+ "permission_denials": 0,
+ "agent_said_give_up": false,
+ "final_text": "Fixed in `sphinx/domains/python.py`. An instance variable documented inside a class now links to that class's own attribute, not to an unrelated global with the same name.\n\n**Cause:** when resolving a cross-reference with the class context set (`searchmode=1`), `PythonDomain.find_obj` only tried the `Class.name` lookup when a module was also set. Without a module, it skipped straight to the bare `name` lookup, so `:ivar limit:` in `Foo` linked to a global `limit`.\n\n**Change:** the class-qualified lookup now runs whenever a class is set, using `module.Class.name` if a module is present and `Class.name` otherwise.\n\n**Verification:**\n- A minimal project with a global `limit`, a class `Foo` with an attribute `limit`, and `:ivar limit:` now links the ivar to `#Foo.limit`. Before the fix it linked to `#limit`.\n- `tests/test_domain_py.py` passes. In `tests/test_ext_autodoc.py`, `test_cython` and `test_autodoc` fail, but they fail identically on the unmodified tree, so they predate this change.\n\nI did not add tests, per the rules.",
+ "timed_out": false,
+ "docker_rc": 0,
+ "limits": {
+  "max_turns": 50,
+  "max_budget_usd": 2.0,
+  "timeout_min": 25.0
+ },
+ "network": "cotml-egress",
+ "proxy": true,
+ "claude_version": "2.1.296",
+ "model_usage": {
+  "claude-haiku-5-5": {
+   "inputTokens": 18,
+   "outputTokens": 3853,
+   "cacheReadInputTokens": 45961,
+   "cacheCreationInputTokens": 8987,
+   "webSearchRequests": 0,
+   "costUSD": 0.003511285,
+   "contextWindow": 1000000,
+   "maxOutputTokens": 128000,
+   "thinkingTokens": 1851,
+   "canonicalModel": "claude-haiku-5-5",
+   "provider": "firstParty",
+   "costBasis": "list"
+  }
+ },
+ "started_at": "2026-10-14T09:38:55+00:00",
+ "framing": "issue",
+ "patch_files": [
+  "sphinx/domains/python.py"
+ ],
+ "touched_test_files": [],
+ "untracked_files": []
+}

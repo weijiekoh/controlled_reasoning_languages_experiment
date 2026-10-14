@@ -1,0 +1,73 @@
+{
+ "problem": "django__django-13297",
+ "bench": "swe",
+ "condition": "bare",
+ "effort": "low",
+ "model": "claude-sonnet-5-5",
+ "batch": "swe_sonnet",
+ "dry_run": false,
+ "outcome": "solved",
+ "verify_pass": true,
+ "verify_stage": "ok",
+ "verify_detail": "resolved (run_id cotml-20261014012214-8816173d)",
+ "num_turns": 5,
+ "input_tokens": 12,
+ "output_tokens": 902,
+ "thinking_tokens": 83,
+ "cache_read_tokens": 14642,
+ "cache_creation_tokens": 2486,
+ "usage_source": "result",
+ "total_cost_usd": 0.0167232,
+ "duration_s": 19.8,
+ "agent_duration_ms": 19002,
+ "lean_compile_count": 2,
+ "search_tactic_uses": 0,
+ "search_tactic_in_final": false,
+ "tool_calls": {
+  "Bash": 4
+ },
+ "proof_chars": 1241,
+ "proof_lines": 26,
+ "statement_prefix_changed": false,
+ "stop_reason": "end_turn",
+ "result_subtype": "success",
+ "terminal_reason": "completed",
+ "is_error": false,
+ "api_error_status": null,
+ "permission_denials": 0,
+ "agent_said_give_up": false,
+ "final_text": "I fixed the crash in `django/views/generic/base.py`. `test_template_params_filtering` now passes, and the whole `generic_views` suite passes (215 tests).\n\nThe URL kwargs that `TemplateView` hands to `get_context_data()` were wrapped in a `SimpleLazyObject`. Passing one to a database filter is what caused the \"Error binding parameter\" error. I replaced it with a lazy proxy that is typed as the kwarg's real type, using `lazy(access_value, type(value))()`. A slug kwarg now behaves as a `str` when it is filtered on. The deprecation warning about reading URL kwargs from the template context is still raised when the value is used.\n\nI didn't run the rest of Django's test suite, only `generic_views`.",
+ "timed_out": false,
+ "docker_rc": 0,
+ "limits": {
+  "max_turns": 50,
+  "max_budget_usd": 4.0,
+  "timeout_min": 25.0
+ },
+ "network": "cotml-egress",
+ "proxy": true,
+ "claude_version": "2.1.296",
+ "model_usage": {
+  "claude-sonnet-5-5": {
+   "inputTokens": 12,
+   "outputTokens": 902,
+   "cacheReadInputTokens": 14642,
+   "cacheCreationInputTokens": 2486,
+   "webSearchRequests": 0,
+   "costUSD": 0.0167232,
+   "contextWindow": 1000000,
+   "maxOutputTokens": 128000,
+   "thinkingTokens": 83,
+   "canonicalModel": "claude-sonnet-5-5",
+   "provider": "firstParty",
+   "costBasis": "list"
+  }
+ },
+ "started_at": "2026-10-14T08:21:53+00:00",
+ "framing": "debug",
+ "patch_files": [
+  "django/views/generic/base.py"
+ ],
+ "touched_test_files": [],
+ "untracked_files": []
+}

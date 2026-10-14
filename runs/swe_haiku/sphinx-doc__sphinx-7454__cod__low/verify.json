@@ -1,0 +1,1 @@
+{"pass": false, "stage": "tests", "detail": "FAIL_TO_PASS 0/1 failing: tests/test_domain_py.py::test_parse_annotation; PASS_TO_PASS 27/27", "seconds": 22.8}

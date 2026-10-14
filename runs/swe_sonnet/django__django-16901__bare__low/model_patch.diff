@@ -1,0 +1,21 @@
+diff --git a/django/db/models/sql/where.py b/django/db/models/sql/where.py
+index aaab1730b7..21456433f6 100644
+--- a/django/db/models/sql/where.py
++++ b/django/db/models/sql/where.py
+@@ -2,6 +2,7 @@
+ Code to manage the creation and SQL rendering of 'where' constraints.
+ """
+ import operator
++from django.db.models.functions import Mod
+ from functools import reduce
+ 
+ from django.core.exceptions import EmptyResultSet, FullResultSet
+@@ -135,7 +136,7 @@ class WhereNode(tree.Node):
+                 operator.add,
+                 (Case(When(c, then=1), default=0) for c in self.children),
+             )
+-            rhs = Exact(1, rhs_sum)
++            rhs = Exact(1, Mod(rhs_sum, 2))
+             return self.__class__([lhs, rhs], AND, self.negated).as_sql(
+                 compiler, connection
+             )

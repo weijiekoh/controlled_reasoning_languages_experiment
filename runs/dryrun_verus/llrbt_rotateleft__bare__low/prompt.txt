@@ -1,0 +1,10 @@
+Implement and verify the Verus function in `/work/llrbt_rotateleft.rs`. The task description is in `/work/description.md`.
+
+Rules:
+- Edit only the three marked regions: `// <helpers>` ... `// </helpers>` (helper spec and exec functions), `// <proofs>` ... `// </proofs>` (lemmas), and `// <code>` ... `// </code>` (exactly one block `{ ... }`: the body of the function under the spec). Keep every marker comment. Change nothing else: keep the `use` lines, the preamble, the function signature with its `requires` and `ensures`, and `fn main`. Keep the file name.
+- Implement the algorithm that `/work/description.md` asks for. Do not call a library function that does the task.
+- Do not use `assume`, `admit`, `unsafe`, `extern`, `macro_rules!`, `#[cfg]`, or trust attributes such as `#[verifier::external_body]`, `#[verifier::external]`, or `#[verifier::truncate]`. Do not define or import an item whose name the fixed text uses.
+- Give every `while` and `loop` a `decreases` clause. Give every recursive function a `decreases` clause. The function under the spec must not call itself; put recursion in a helper function. Do not give a helper function the name of a function or method that it calls.
+- Check with `verus /work/llrbt_rotateleft.rs`. Verus 0.2025.01.13 is installed; the vstd source is in `/opt/verus/vstd`. Network access is not available. You may create scratch files in `/work`.
+- Stop when `verus /work/llrbt_rotateleft.rs` prints `verification results:: N verified, 0 errors` and no error.
+- If you conclude that you cannot finish the proof, say "I give up" and stop.

@@ -1,0 +1,10 @@
+  have : e x ∈ (⊥ : IntermediateField ℚ K') := by
+    rw [IsGalois.mem_bot_iff_fixed]
+    intro τ
+    have := hx (e.trans (τ.trans e.symm))
+    simpa using congrArg e this
+  obtain ⟨q, hq⟩ := IntermediateField.mem_bot.1 this
+  refine ⟨q, ?_⟩
+  have := congrArg (fun y : K' => (y : ℝ)) hq
+  have h2 : ((e x : K') : ℝ) = (x:ℝ) := rfl
+  rw [← h2]; simpa using this.symm

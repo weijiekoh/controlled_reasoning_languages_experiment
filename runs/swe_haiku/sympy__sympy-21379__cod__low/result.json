@@ -1,0 +1,73 @@
+{
+ "problem": "sympy__sympy-21379",
+ "bench": "swe",
+ "condition": "cod",
+ "effort": "low",
+ "model": "claude-haiku-5-5",
+ "batch": "swe_haiku",
+ "dry_run": false,
+ "outcome": "solved",
+ "verify_pass": true,
+ "verify_stage": "ok",
+ "verify_detail": "resolved (run_id cotml-20261014001531-2735e1ab)",
+ "num_turns": 8,
+ "input_tokens": 18,
+ "output_tokens": 2635,
+ "thinking_tokens": 600,
+ "cache_read_tokens": 36944,
+ "cache_creation_tokens": 5927,
+ "usage_source": "result",
+ "total_cost_usd": 0.002429615,
+ "duration_s": 24.9,
+ "agent_duration_ms": 24017,
+ "lean_compile_count": 2,
+ "search_tactic_uses": 0,
+ "search_tactic_in_final": false,
+ "tool_calls": {
+  "Bash": 7
+ },
+ "proof_chars": 821,
+ "proof_lines": 22,
+ "statement_prefix_changed": false,
+ "stop_reason": "end_turn",
+ "result_subtype": "success",
+ "terminal_reason": "completed",
+ "is_error": false,
+ "api_error_status": null,
+ "permission_denials": 0,
+ "agent_said_give_up": false,
+ "final_text": "The `PolynomialError` no longer occurs: the issue's example now runs with `subs({1: 1.0})` on real symbols, without needing the cache cleared first.\n\n**Cause:** `sinh`/`cosh`/`tanh` evaluate `is_real` by computing `im % pi`. For this expression, that `Mod` call reaches `gcd`, which cannot handle `Piecewise` generators and raises `PolynomialError`. The gcd step is only an optimization in `Mod.eval`, so the failure should not propagate.\n\n**Fix** (in `sympy/core/mod.py`): I wrapped the `gcd(p, q)` call in `Mod.eval` in a `try`/`except PolynomialError`, falling back to `G = S.One` (no common factor). The import is local to the method to avoid a circular import at module load.\n\n**Verification:** the repro script prints `ok`. Project tests `test_arit.py`, `test_hyperbolic.py`, and `test_subs.py` pass (219 passed, 3 expected failures). I did not run the full test suite. Changes are uncommitted in the working tree.",
+ "timed_out": false,
+ "docker_rc": 0,
+ "limits": {
+  "max_turns": 50,
+  "max_budget_usd": 2.0,
+  "timeout_min": 25.0
+ },
+ "network": "cotml-egress",
+ "proxy": true,
+ "claude_version": "2.1.296",
+ "model_usage": {
+  "claude-haiku-5-5": {
+   "inputTokens": 18,
+   "outputTokens": 2635,
+   "cacheReadInputTokens": 36944,
+   "cacheCreationInputTokens": 5927,
+   "webSearchRequests": 0,
+   "costUSD": 0.002429615,
+   "contextWindow": 1000000,
+   "maxOutputTokens": 128000,
+   "thinkingTokens": 600,
+   "canonicalModel": "claude-haiku-5-5",
+   "provider": "firstParty",
+   "costBasis": "list"
+  }
+ },
+ "started_at": "2026-10-14T07:15:05+00:00",
+ "framing": "issue",
+ "patch_files": [
+  "sympy/core/mod.py"
+ ],
+ "touched_test_files": [],
+ "untracked_files": []
+}

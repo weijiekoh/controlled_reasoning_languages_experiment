@@ -1,0 +1,17 @@
+diff --git a/sympy/matrices/matrices.py b/sympy/matrices/matrices.py
+index 97cde62e2..c3eda27db 100644
+--- a/sympy/matrices/matrices.py
++++ b/sympy/matrices/matrices.py
+@@ -422,6 +422,12 @@ def det(self, method="bareiss"):
+                    - self[0, 0] * self[1, 2] * self[2, 1]
+                    - self[0, 1] * self[1, 0] * self[2, 2])
+ 
++        # Bareiss' algorithm relies on exact division by previous pivots,
++        # which is not valid for general symbolic entries (it can produce
++        # nan or raise).  Fall back to Berkowitz for symbolic matrices.
++        if method == "bareiss" and self.has(Symbol):
++            method = "berkowitz"
++
+         if method == "bareiss":
+             return self._eval_det_bareiss()
+         elif method == "berkowitz":

@@ -1,0 +1,41 @@
+import Mathlib
+
+noncomputable section
+
+open scoped Topology
+open scoped Matrix.Norms.L2Operator
+open scoped RealInnerProductSpace
+open scoped Gradient
+open scoped Matrix
+open Filter
+open scoped BigOperators
+
+namespace «CAM-Bench-402»
+
+theorem kkt_matrix_nonsingular_iff_conditions
+    {n p : ℕ} (P : Matrix (Fin n) (Fin n) ℝ) (A : Matrix (Fin p) (Fin n) ℝ)
+    (hP_symm : P.IsSymm) (hP_psd : ∀ x : Fin n → ℝ, 0 ≤ dotProduct x (P.mulVec x))
+    (hA_rank : Matrix.rank A = p) (hpn : p < n) :
+    let K := Matrix.fromBlocks P Aᵀ A (0 : Matrix (Fin p) (Fin p) ℝ)
+    let cond1 : Prop := K.det ≠ 0
+    let cond2 : Prop :=
+      ((LinearMap.ker P.toLin' : Submodule ℝ (Fin n → ℝ)) ⊓
+        (LinearMap.ker A.toLin' : Submodule ℝ (Fin n → ℝ)) = ⊥)
+    let cond3 : Prop :=
+      ∀ x : Fin n → ℝ, A.mulVec x = 0 → x ≠ 0 → 0 < dotProduct x (P.mulVec x)
+    let cond4 : Prop :=
+      ∀ F : Matrix (Fin n) (Fin (n - p)) ℝ,
+        LinearMap.range F.toLin' = LinearMap.ker A.toLin' →
+        Matrix.PosDef (Fᵀ * P * F)
+    let cond5 : Prop :=
+      ∃ Q : Matrix (Fin p) (Fin p) ℝ,
+        Q.IsSymm ∧
+        (∀ y : Fin p → ℝ, 0 ≤ dotProduct y (Q.mulVec y)) ∧
+        Matrix.PosDef (P + Aᵀ * Q * A)
+    (cond1 ↔ cond2) ∧
+    (cond1 ↔ cond3) ∧
+    (cond1 ↔ cond4) ∧
+    (cond1 ↔ cond5) := by
+  sorry
+
+end «CAM-Bench-402»

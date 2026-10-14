@@ -1,0 +1,73 @@
+{
+ "problem": "sympy__sympy-13551",
+ "bench": "swe",
+ "condition": "bare",
+ "effort": "low",
+ "model": "claude-haiku-5-5",
+ "batch": "swe_haiku",
+ "dry_run": false,
+ "outcome": "solved",
+ "verify_pass": true,
+ "verify_stage": "ok",
+ "verify_detail": "resolved (run_id cotml-20261014024308-019ec83a)",
+ "num_turns": 6,
+ "input_tokens": 14,
+ "output_tokens": 3081,
+ "thinking_tokens": 1385,
+ "cache_read_tokens": 28736,
+ "cache_creation_tokens": 6015,
+ "usage_source": "result",
+ "total_cost_usd": 0.002581135,
+ "duration_s": 102.4,
+ "agent_duration_ms": 101792,
+ "lean_compile_count": 1,
+ "search_tactic_uses": 0,
+ "search_tactic_in_final": false,
+ "tool_calls": {
+  "Bash": 5
+ },
+ "proof_chars": 977,
+ "proof_lines": 23,
+ "statement_prefix_changed": false,
+ "stop_reason": "end_turn",
+ "result_subtype": "success",
+ "terminal_reason": "completed",
+ "is_error": false,
+ "api_error_status": null,
+ "permission_denials": 0,
+ "agent_said_give_up": false,
+ "final_text": "I fixed the incorrect product evaluation in `sympy/concrete/products.py`. `Product(n + 1/2**k, [k, 0, n-1]).doit()` now gives the right value for n=2 (15/2), where it previously gave 9/2.\n\n**Cause:** In the `Add` branch of `_eval_product`, when the denominator's product was a plain number, the code summed the products of the coefficient pieces. A product of a sum is not the sum of the products of its parts, so the result was wrong.\n\n**Fix:** That case now returns `None`, so the product stays unevaluated rather than being computed incorrectly. I also made the non-number branch return `None` if its inner product fails.\n\n**Trade-off:** Some products that used to \"evaluate\" (incorrectly) will now stay as unevaluated `Product` objects. The issue's suggested closed form (a q-Pochhammer symbol) is not implemented.\n\n**Tests:** `sympy/concrete` gives 107 passed, 1 expected failure and 7 exceptions, both before and after my change. The exceptions come from the `collections.Iterable` deprecation in the environment's Python 3.9, not from this change. pytest isn't installed, so I ran the suite through `sympy.test`.",
+ "timed_out": false,
+ "docker_rc": 0,
+ "limits": {
+  "max_turns": 50,
+  "max_budget_usd": 2.0,
+  "timeout_min": 25.0
+ },
+ "network": "cotml-egress",
+ "proxy": true,
+ "claude_version": "2.1.296",
+ "model_usage": {
+  "claude-haiku-5-5": {
+   "inputTokens": 14,
+   "outputTokens": 3081,
+   "cacheReadInputTokens": 28736,
+   "cacheCreationInputTokens": 6015,
+   "webSearchRequests": 0,
+   "costUSD": 0.002581135,
+   "contextWindow": 1000000,
+   "maxOutputTokens": 128000,
+   "thinkingTokens": 1385,
+   "canonicalModel": "claude-haiku-5-5",
+   "provider": "firstParty",
+   "costBasis": "list"
+  }
+ },
+ "started_at": "2026-10-14T09:41:25+00:00",
+ "framing": "issue",
+ "patch_files": [
+  "sympy/concrete/products.py"
+ ],
+ "touched_test_files": [],
+ "untracked_files": []
+}

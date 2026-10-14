@@ -1,0 +1,16 @@
+import Mathlib
+
+noncomputable abbrev hackmath_6_1_solution : ENNReal := 3 / 4
+
+noncomputable abbrev hackmath_6_2_solution : ENNReal := 3 / 4
+
+noncomputable abbrev hackmath_6_3_solution : ENNReal := 1 / 2
+
+/--
+Two coins are tossed simultaneously. What is the probability of getting (i) At least one head? (ii) At most one tail? (iii) A head and a tail?
+-/
+theorem hackmath_6 : PMF.binomial (1/2 : NNReal) (by norm_num) 2 1 +
+    PMF.binomial (1/2 : NNReal) (by norm_num) 2 2 = hackmath_6_1_solution ∧
+    PMF.binomial (1/2 : NNReal) (by norm_num) 2 0 +
+    PMF.binomial (1/2 : NNReal) (by norm_num) 2 1 = hackmath_6_2_solution ∧
+    PMF.binomial (1/2 : NNReal) (by norm_num) 2 1 = hackmath_6_3_solution := by sorry

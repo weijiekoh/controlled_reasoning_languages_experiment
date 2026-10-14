@@ -1,0 +1,15 @@
+{
+ "id": "llrbt_rotateright",
+ "entry": "llrbt_rotateright.rs",
+ "description": "description.md",
+ "main_fn": "fixup_rotate_right",
+ "editable_regions": {
+  "helpers": "between `// <helpers>` and `// </helpers>`: helper spec fns and exec helpers",
+  "proofs": "between `// <proofs>` and `// </proofs>`: lemmas (proof fns)",
+  "code": "between `// <code>` and `// </code>`: exactly one block `{ ... }`, the body of the function under spec"
+ },
+ "fixed": "Everything outside the three editable regions is fixed: the `use` lines, the <preamble> block (definitions, spec fns, and any exec fns given there), the <spec> block (signature, requires, ensures of the function under test), fn main, and all marker comments. Compared token-wise; comments and whitespace are ignored.",
+ "source": "data/algoveri/algoveri_data/llrbt_rotateright/verus_spec.rs",
+ "source_sha256": "876494a84b22c1ac25044666f245486b6aad7fc426ab962f28b536de27d86050",
+ "patches": []
+}

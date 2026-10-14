@@ -1,0 +1,54 @@
+diff --git a/django/db/models/deletion.py b/django/db/models/deletion.py
+index ae82d26340..ccdffa7bc2 100644
+--- a/django/db/models/deletion.py
++++ b/django/db/models/deletion.py
+@@ -70,6 +70,7 @@ class Collector:
+         # fast_deletes is a list of queryset-likes that can be deleted without
+         # fetching the objects into memory.
+         self.fast_deletes = []
++        self._combinable_fast_deletes = {}
+ 
+         # Tracks deletion-order dependency for databases without transactions
+         # or ability to defer constraint checks. Only concrete model classes
+@@ -123,6 +124,22 @@ class Collector:
+             signals.post_delete.has_listeners(model)
+         )
+ 
++    def _add_fast_delete(self, qs, field):
++        """
++        Register a fast delete queryset for the given related field. Fast
++        deletes of the same model coming from different fields are combined
++        into a single query using OR to reduce database roundtrips. Batches
++        for the same field are kept separate to respect batch size limits.
++        """
++        for entry in self._combinable_fast_deletes.get(qs.model, []):
++            if field not in entry['fields']:
++                entry['qs'] = entry['qs'] | qs
++                entry['fields'].add(field)
++                return
++        entry = {'qs': qs, 'fields': {field}}
++        self._combinable_fast_deletes.setdefault(qs.model, []).append(entry)
++        self.fast_deletes.append(entry)
++
+     def can_fast_delete(self, objs, from_field=None):
+         """
+         Determine if the objects in the given queryset-like or single object
+@@ -225,7 +242,7 @@ class Collector:
+                 for batch in batches:
+                     sub_objs = self.related_objects(related, batch)
+                     if self.can_fast_delete(sub_objs, from_field=field):
+-                        self.fast_deletes.append(sub_objs)
++                        self._add_fast_delete(sub_objs, field)
+                     else:
+                         related_model = related.related_model
+                         # Non-referenced fields can be deferred if no signal
+@@ -310,7 +327,8 @@ class Collector:
+                     )
+ 
+             # fast deletes
+-            for qs in self.fast_deletes:
++            for entry in self.fast_deletes:
++                qs = entry['qs'] if isinstance(entry, dict) else entry
+                 count = qs._raw_delete(using=self.using)
+                 deleted_counter[qs.model._meta.label] += count
+ 

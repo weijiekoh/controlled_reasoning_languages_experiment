@@ -1,0 +1,59 @@
+diff --git a/sphinx/domains/std.py b/sphinx/domains/std.py
+index d820cfe5c..2c7d1a8f7 100644
+--- a/sphinx/domains/std.py
++++ b/sphinx/domains/std.py
+@@ -305,7 +305,7 @@ def make_glossary_term(env: "BuildEnvironment", textnodes: Iterable[Node], index
+         term['ids'].append(node_id)
+ 
+     std = cast(StandardDomain, env.get_domain('std'))
+-    std.note_object('term', termtext.lower(), node_id, location=term)
++    std.note_object('term', termtext, node_id, location=term)
+ 
+     # add an index entry too
+     indexnode = addnodes.index()
+@@ -931,6 +931,12 @@ class StandardDomain(Domain):
+             if (objtype, target) in self.objects:
+                 docname, labelid = self.objects[objtype, target]
+                 break
++            if objtype == 'term':
++                # glossary terms are matched case-insensitively
++                found = self._find_term_case_insensitive(target)
++                if found:
++                    docname, labelid = found
++                    break
+         else:
+             docname, labelid = '', ''
+         if not docname:
+@@ -953,7 +959,13 @@ class StandardDomain(Domain):
+         for objtype in self.object_types:
+             key = (objtype, target)
+             if objtype == 'term':
+-                key = (objtype, ltarget)
++                found = self._find_term_case_insensitive(target)
++                if found:
++                    docname, labelid = found
++                    results.append(('std:' + self.role_for_objtype(objtype),
++                                    make_refnode(builder, fromdocname, docname,
++                                                 labelid, contnode)))
++                continue
+             if key in self.objects:
+                 docname, labelid = self.objects[key]
+                 results.append(('std:' + self.role_for_objtype(objtype),
+@@ -961,6 +973,17 @@ class StandardDomain(Domain):
+                                              labelid, contnode)))
+         return results
+ 
++    def _find_term_case_insensitive(self, target: str) -> Optional[Tuple[str, str]]:
++        """Return (docname, labelid) of a glossary term matching *target*
++        ignoring case, preferring an exact match."""
++        if ('term', target) in self.objects:
++            return self.objects['term', target]
++        ltarget = target.lower()
++        for (objtype, name), info in self.objects.items():
++            if objtype == 'term' and name.lower() == ltarget:
++                return info
++        return None
++
+     def get_objects(self) -> Iterator[Tuple[str, str, str, str, str, int]]:
+         # handle the special 'doc' reference here
+         for doc in self.env.all_docs:

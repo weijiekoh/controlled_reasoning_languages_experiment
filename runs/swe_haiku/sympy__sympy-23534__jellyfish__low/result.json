@@ -1,0 +1,73 @@
+{
+ "problem": "sympy__sympy-23534",
+ "bench": "swe",
+ "condition": "jellyfish",
+ "effort": "low",
+ "model": "claude-haiku-5-5",
+ "batch": "swe_haiku",
+ "dry_run": false,
+ "outcome": "solved",
+ "verify_pass": true,
+ "verify_stage": "ok",
+ "verify_detail": "resolved (run_id cotml-20261014001646-e2e95218)",
+ "num_turns": 5,
+ "input_tokens": 12,
+ "output_tokens": 996,
+ "thinking_tokens": 80,
+ "cache_read_tokens": 22015,
+ "cache_creation_tokens": 3082,
+ "usage_source": "result",
+ "total_cost_usd": 0.0011045999999999999,
+ "duration_s": 18.2,
+ "agent_duration_ms": 12256,
+ "lean_compile_count": 1,
+ "search_tactic_uses": 0,
+ "search_tactic_in_final": false,
+ "tool_calls": {
+  "Bash": 4
+ },
+ "proof_chars": 401,
+ "proof_lines": 11,
+ "statement_prefix_changed": false,
+ "stop_reason": "end_turn",
+ "result_subtype": "success",
+ "terminal_reason": "completed",
+ "is_error": false,
+ "api_error_status": null,
+ "permission_denials": 0,
+ "agent_said_give_up": false,
+ "final_text": "The fix is in `sympy/core/symbol.py`. `symbols()` was dropping `cls` when it recursed into tuple or list inputs, so nested names such as `('q:2', 'u:2')` were created as plain `Symbol`s. The recursive call now passes `cls=cls` through.\n\nVerification:\n- The issue's example now gives `UndefinedFunction` for `q[0]` and `u[1]`.\n- `symbols(['a','b'], cls=Function)` also works.\n- `sympy/core/tests/test_symbol.py` passes (13/13), run with `bin/test` because pytest isn't installed in the environment.\n\nThe change is uncommitted in the working tree.",
+ "timed_out": false,
+ "docker_rc": 0,
+ "limits": {
+  "max_turns": 50,
+  "max_budget_usd": 2.0,
+  "timeout_min": 25.0
+ },
+ "network": "cotml-egress",
+ "proxy": true,
+ "claude_version": "2.1.296",
+ "model_usage": {
+  "claude-haiku-5-5": {
+   "inputTokens": 12,
+   "outputTokens": 996,
+   "cacheReadInputTokens": 22015,
+   "cacheCreationInputTokens": 3082,
+   "webSearchRequests": 0,
+   "costUSD": 0.0011045999999999999,
+   "contextWindow": 1000000,
+   "maxOutputTokens": 128000,
+   "thinkingTokens": 80,
+   "canonicalModel": "claude-haiku-5-5",
+   "provider": "firstParty",
+   "costBasis": "list"
+  }
+ },
+ "started_at": "2026-10-14T07:16:26+00:00",
+ "framing": "issue",
+ "patch_files": [
+  "sympy/core/symbol.py"
+ ],
+ "touched_test_files": [],
+ "untracked_files": []
+}

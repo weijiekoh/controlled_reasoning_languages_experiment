@@ -1,0 +1,73 @@
+{
+ "problem": "django__django-13033",
+ "bench": "swe",
+ "condition": "bare",
+ "effort": "low",
+ "model": "claude-haiku-5-5",
+ "batch": "swe_haiku",
+ "dry_run": false,
+ "outcome": "solved",
+ "verify_pass": true,
+ "verify_stage": "ok",
+ "verify_detail": "resolved (run_id cotml-20261013235904-f2f4e5fa)",
+ "num_turns": 5,
+ "input_tokens": 12,
+ "output_tokens": 1586,
+ "thinking_tokens": 388,
+ "cache_read_tokens": 20528,
+ "cache_creation_tokens": 6191,
+ "usage_source": "result",
+ "total_cost_usd": 0.001773355,
+ "duration_s": 20.4,
+ "agent_duration_ms": 14520,
+ "lean_compile_count": 3,
+ "search_tactic_uses": 0,
+ "search_tactic_in_final": false,
+ "tool_calls": {
+  "Bash": 4
+ },
+ "proof_chars": 885,
+ "proof_lines": 13,
+ "statement_prefix_changed": false,
+ "stop_reason": "end_turn",
+ "result_subtype": "success",
+ "terminal_reason": "completed",
+ "is_error": false,
+ "api_error_status": null,
+ "permission_denials": 0,
+ "agent_said_give_up": false,
+ "final_text": "I fixed the ordering bug in `django/db/models/sql/compiler.py`. The ordering, queries and model_inheritance test suites pass (461 tests, OK). I didn't add a regression test for the issue's exact models, and I didn't re-run the issue's queries to check the generated SQL.\n\n**Cause:** In `find_ordering_name`, the check that decides whether to apply the related model's default `Meta.ordering` compared the FK's `attname` against the full lookup path. For `record__root_id`, the path is never equal to `root_id`, so the check always failed. That caused two things:\n- The default ordering of `OneModel` (`-id`) was applied to the `root` join, which produced the unexpected DESC sort.\n- The extra join through `root` was kept, because the join trimming only happens on the non-default-ordering path.\n\n**Fix:** Compare against the last path segment (`pieces[-1]`) instead of the full name:\n\n```python\nif field.is_relation and opts.ordering and getattr(field, 'attname', None) != pieces[-1] and name != 'pk':\n```\n\nWith this change, `order_by(\"record__root_id\")` should trim to `ORDER BY \"orion_onemodel\".\"root_id\"` with a single INNER JOIN, matching the issue's expected output. Ordering by `-record__root_id` should also stay a single join with DESC applied.",
+ "timed_out": false,
+ "docker_rc": 0,
+ "limits": {
+  "max_turns": 50,
+  "max_budget_usd": 2.0,
+  "timeout_min": 25.0
+ },
+ "network": "cotml-egress",
+ "proxy": true,
+ "claude_version": "2.1.296",
+ "model_usage": {
+  "claude-haiku-5-5": {
+   "inputTokens": 12,
+   "outputTokens": 1586,
+   "cacheReadInputTokens": 20528,
+   "cacheCreationInputTokens": 6191,
+   "webSearchRequests": 0,
+   "costUSD": 0.001773355,
+   "contextWindow": 1000000,
+   "maxOutputTokens": 128000,
+   "thinkingTokens": 388,
+   "canonicalModel": "claude-haiku-5-5",
+   "provider": "firstParty",
+   "costBasis": "list"
+  }
+ },
+ "started_at": "2026-10-14T06:58:42+00:00",
+ "framing": "issue",
+ "patch_files": [
+  "django/db/models/sql/compiler.py"
+ ],
+ "touched_test_files": [],
+ "untracked_files": []
+}

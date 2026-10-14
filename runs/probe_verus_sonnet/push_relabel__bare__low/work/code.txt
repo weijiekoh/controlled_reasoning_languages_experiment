@@ -1,0 +1,136 @@
+    {
+        let n = graph.adj.len();
+        proof {
+            assert(graph.view().len() == n);
+            assert(wfs(graph.view()));
+        }
+        let cm = build_cap(graph);
+        proof {
+            assert forall |a: int, b: int| 0 <= a < n && 0 <= b < n implies 0 <= #[trigger] cm@[a]@[b] <= 100000 by {
+                cap_nonneg(graph.view(), mf(cm@), a, b);
+            }
+        }
+        let (mut f, mut e, mut h) = init_state(&cm, n, s, t);
+        let mut done = false;
+        while !done
+            invariant
+                n == graph.adj.len(), dims(cm@, n as int), cap_ok(graph.view(), mf(cm@)),
+                wfs(graph.view()), capacities_bounded(graph.view()),
+                s < n, t < n, s != t, n <= 1000,
+                forall |a: int, b: int| 0 <= a < n && 0 <= b < n ==> 0 <= #[trigger] cm@[a]@[b] <= 100000,
+                dims(f@, n as int), e@.len() == n, h@.len() == n,
+                good(n as int, s as int, t as int, mf(f@), mf(cm@), mv(h@), mv(e@)),
+                done ==> forall |x: int| 0 <= x < n && x != s && x != t ==> #[trigger] e@[x] <= 0,
+            decreases phi1(n as int, mv(h@)), phi2(n as int, s as int, mv(e@), mv(h@)), (if done { 0int } else { 1int }),
+        {
+            proof {
+                let hs = mv(h@);
+                phi1_nonneg(n as int, hs);
+                assert forall |v: int| 0 <= v < n as int && v != s as int implies #[trigger] mv(e@)(v) >= 0 && hs(v) >= 0 by {}
+                phi2_nonneg(n as int, s as int, mv(e@), hs);
+            }
+            let u = find_active(&e, n, s, t);
+            if u == n {
+                done = true;
+            } else {
+                proof {
+                    assert forall |x: int| 0 <= x < n implies 0 <= #[trigger] h@[x] <= 2000 by {
+                        assert(mv(h@)(x) <= 2 * (n as int) - 1);
+                        assert(mv(h@)(x) >= 0);
+                    }
+                }
+                let v = find_adm(&f, &cm, &h, n, u);
+                if v < n {
+                    let ghost f0 = f@;
+                    let ghost e0 = e@;
+                    proof {
+                        let ni = n as int;
+                        let fs0 = mf(f0); let cs = mf(cm@); let hs = mv(h@); let es0 = mv(e0);
+                        assert(u != v);
+                        assert(mv(e@)(u as int) > 0);
+                        e_bound(ni, s as int, t as int, fs0, cs, hs, es0, u as int);
+                        e_bound(ni, s as int, t as int, fs0, cs, hs, es0, v as int);
+                        assert(fs0(u as int, v as int) == -fs0(v as int, u as int));
+                        assert(fs0(u as int, v as int) <= cs(u as int, v as int));
+                        assert(fs0(v as int, u as int) <= cs(v as int, u as int));
+                        assert(0 <= cs(u as int, v as int) <= 100000);
+                        assert(0 <= cs(v as int, u as int) <= 100000);
+                        assert(u != s);
+                    }
+                    let fuv = f[u][v];
+                    let cuv = cm[u][v];
+                    let eu = e[u];
+                    let diff = cuv - fuv;
+                    let d = if eu < diff { eu } else { diff };
+                    proof {
+                        assert forall |x: int| 0 <= x < n implies #[trigger] e@[x] as int == csum(n as int, mf(f@), x) by { assert(mv(e@)(x) == e@[x] as int); }
+                    }
+                    apply_push(&mut f, &mut e, u, v, d);
+                    proof {
+                        let ni = n as int;
+                        let fs0 = mf(f0); let fs1 = mf(f@); let cs = mf(cm@); let hs = mv(h@);
+                        let es0 = mv(e0); let es1 = mv(e@);
+                        let ui = u as int; let vi = v as int;
+                        assert forall |a: int, b: int| 0 <= a < ni && 0 <= b < ni && !(a == ui && b == vi) && !(a == vi && b == ui)
+                            implies #[trigger] fs1(a,b) == fs0(a,b) by {}
+                        assert(fs1(ui, vi) == fs0(ui, vi) + d as int);
+                        assert(fs1(vi, ui) == fs0(vi, ui) - d as int);
+                        assert forall |x: int| 0 <= x < ni implies #[trigger] es1(x) == csum(ni, fs1, x) by {}
+                        assert(es1(ui) == es0(ui) - d as int);
+                        assert(es1(vi) == es0(vi) + d as int);
+                        assert forall |x: int| 0 <= x < ni && x != ui && x != vi implies #[trigger] es1(x) == es0(x) by {}
+                        push_good(ni, s as int, t as int, fs0, cs, hs, es0, fs1, es1, ui, vi, d as int);
+                        phi2_push(ni, s as int, es0, es1, hs, ui, vi, d as int);
+                        assert forall |x: int| 0 <= x < ni && x != s as int implies #[trigger] es1(x) >= 0 && hs(x) >= 0 by {}
+                        phi2_nonneg(ni, s as int, es1, hs);
+                        phi1_nonneg(ni, hs);
+                    }
+                } else {
+                    let b = find_min(&f, &cm, &h, n, u);
+                    proof {
+                        let ni = n as int;
+                        let fs = mf(f@); let cs = mf(cm@); let hs = mv(h@); let es = mv(e@);
+                        has_residual(ni, s as int, t as int, fs, cs, hs, es, u as int);
+                        if b == n {
+                            let w = choose |w: int| 0 <= w < ni && #[trigger] fs(u as int, w) < cs(u as int, w);
+                            assert(!(f@[u as int]@[w] < cm@[u as int]@[w]));
+                        }
+                    }
+                    let hb = h[b];
+                    let ghost h0 = h@;
+                    h.set(u, hb + 1);
+                    proof {
+                        let ni = n as int;
+                        let fs = mf(f@); let cs = mf(cm@); let hs0 = mv(h0); let hs1 = mv(h@); let es = mv(e@);
+                        let ui = u as int;
+                        assert(u != s && u != t);
+                        assert(es(ui) > 0);
+                        assert forall |w: int| 0 <= w < ni && #[trigger] fs(ui, w) < cs(ui, w) implies hb as int <= hs0(w) by {
+                            assert(h0[b as int] == hb);
+                        }
+                        assert(fs(ui, b as int) < cs(ui, b as int));
+                        assert(hs0(b as int) == hb as int);
+                        assert forall |w: int| 0 <= w < ni && #[trigger] fs(ui, w) < cs(ui, w) implies hs0(ui) != hs0(w) + 1 by {
+                            assert(h0[ui] as int != h0[w] as int + 1);
+                        }
+                        assert(hs1(ui) == hb as int + 1);
+                        assert forall |x: int| 0 <= x < ni && x != ui implies #[trigger] hs1(x) == hs0(x) by {}
+                        relabel_good(ni, s as int, t as int, fs, cs, hs0, es, hs1, ui, hb as int, b as int);
+                        phi1_relabel(ni, hs0, hs1, ui, hb as int + 1);
+                        phi1_nonneg(ni, hs1);
+                        assert forall |x: int| 0 <= x < ni && x != s as int implies #[trigger] es(x) >= 0 && hs1(x) >= 0 by {}
+                        phi2_nonneg(ni, s as int, es, hs1);
+                    }
+                }
+            }
+        }
+        proof {
+            let ni = n as int;
+            let fs = mf(f@); let cs = mf(cm@); let hs = mv(h@); let es = mv(e@);
+            assert forall |x: int| 0 <= x < ni && x != s as int && x != t as int implies #[trigger] es(x) <= 0 by {}
+            final_lemma(graph.view(), cs, fs, hs, es, s as int, t as int);
+            e_bound(ni, s as int, t as int, fs, cs, hs, es, s as int);
+        }
+        let res = 0 - e[s];
+        res
+    }

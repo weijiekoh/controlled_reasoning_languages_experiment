@@ -1,0 +1,73 @@
+{
+ "problem": "matplotlib__matplotlib-14623",
+ "bench": "swe",
+ "condition": "bare",
+ "effort": "low",
+ "model": "claude-haiku-5-5",
+ "batch": "swe_haiku",
+ "dry_run": false,
+ "outcome": "solved",
+ "verify_pass": true,
+ "verify_stage": "ok",
+ "verify_detail": "resolved (run_id cotml-20261014022317-4acd8f42)",
+ "num_turns": 15,
+ "input_tokens": 32,
+ "output_tokens": 3958,
+ "thinking_tokens": 417,
+ "cache_read_tokens": 93722,
+ "cache_creation_tokens": 8558,
+ "usage_source": "result",
+ "total_cost_usd": 0.00398917,
+ "duration_s": 244.2,
+ "agent_duration_ms": 243491,
+ "lean_compile_count": 6,
+ "search_tactic_uses": 0,
+ "search_tactic_in_final": false,
+ "tool_calls": {
+  "Bash": 14
+ },
+ "proof_chars": 902,
+ "proof_lines": 22,
+ "statement_prefix_changed": false,
+ "stop_reason": "end_turn",
+ "result_subtype": "success",
+ "terminal_reason": "completed",
+ "is_error": false,
+ "api_error_status": null,
+ "permission_denials": 0,
+ "agent_said_give_up": false,
+ "final_text": "The fix is in `lib/matplotlib/ticker.py`, and the issue's reproduction now gives the expected inverted log axis: `ax.get_ylim()` returns `(100000.0, 1.0)`.\n\n**Cause:** `LogLocator.nonsingular` sorted its endpoints so that `vmin <= vmax` and never restored the caller's order. `set_ylim` passes that result on, so an inverted limit was silently flipped back to normal for log axes. Linear axes use a different code path, which is why only the log case broke.\n\n**Fix:** `LogLocator.nonsingular` now remembers whether the input was reversed, does its work on the sorted range, and returns the endpoints in the original orientation.\n\n**Testing:** The `test_ticker.py` and `test_scale.py` runs are dominated by image-comparison failures from the PDF/PS rendering path, which needs Ghostscript and fails with `/invalidfileaccess` in this sandbox. I did not complete a before/after comparison of the full failure list because one run timed out. Some of the non-image failures could be pre-existing, so I can't confirm that my change introduced none of them. The stash I used for that comparison was restored, and `git status` shows only the `ticker.py` edit.",
+ "timed_out": false,
+ "docker_rc": 0,
+ "limits": {
+  "max_turns": 50,
+  "max_budget_usd": 2.0,
+  "timeout_min": 25.0
+ },
+ "network": "cotml-egress",
+ "proxy": true,
+ "claude_version": "2.1.296",
+ "model_usage": {
+  "claude-haiku-5-5": {
+   "inputTokens": 32,
+   "outputTokens": 3958,
+   "cacheReadInputTokens": 93722,
+   "cacheCreationInputTokens": 8558,
+   "webSearchRequests": 0,
+   "costUSD": 0.00398917,
+   "contextWindow": 1000000,
+   "maxOutputTokens": 128000,
+   "thinkingTokens": 417,
+   "canonicalModel": "claude-haiku-5-5",
+   "provider": "firstParty",
+   "costBasis": "list"
+  }
+ },
+ "started_at": "2026-10-14T09:19:11+00:00",
+ "framing": "issue",
+ "patch_files": [
+  "lib/matplotlib/ticker.py"
+ ],
+ "touched_test_files": [],
+ "untracked_files": []
+}

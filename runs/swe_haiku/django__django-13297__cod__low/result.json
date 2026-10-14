@@ -1,0 +1,73 @@
+{
+ "problem": "django__django-13297",
+ "bench": "swe",
+ "condition": "cod",
+ "effort": "low",
+ "model": "claude-haiku-5-5",
+ "batch": "swe_haiku",
+ "dry_run": false,
+ "outcome": "solved",
+ "verify_pass": true,
+ "verify_stage": "ok",
+ "verify_detail": "resolved (run_id cotml-20261014010453-bc070974)",
+ "num_turns": 6,
+ "input_tokens": 14,
+ "output_tokens": 2623,
+ "thinking_tokens": 1229,
+ "cache_read_tokens": 27827,
+ "cache_creation_tokens": 5791,
+ "usage_source": "result",
+ "total_cost_usd": 0.002315045,
+ "duration_s": 24.1,
+ "agent_duration_ms": 23439,
+ "lean_compile_count": 3,
+ "search_tactic_uses": 0,
+ "search_tactic_in_final": false,
+ "tool_calls": {
+  "Bash": 5
+ },
+ "proof_chars": 1219,
+ "proof_lines": 23,
+ "statement_prefix_changed": false,
+ "stop_reason": "end_turn",
+ "result_subtype": "success",
+ "terminal_reason": "completed",
+ "is_error": false,
+ "api_error_status": null,
+ "permission_denials": 0,
+ "agent_said_give_up": false,
+ "final_text": "Fixed. `TemplateView` no longer hands `SimpleLazyObject`s to `get_context_data()` for URL kwargs that a subclass consumes, so the `offer_slug` case from the issue gets plain strings.\n\n**Change** (`django/views/generic/base.py`):\n- `TemplateView.get()` now passes the raw URL kwargs to `get_context_data()`.\n- The deprecation wrapping moved into `TemplateView.get_context_data()`, applied only to the kwargs that reach the base context. Subclasses that take kwargs as named parameters (like `artist_name` in the test) see real values.\n- The deprecation warning on use of the wrapped context values still fires as before.\n\n**Tests:** `python runtests.py generic_views` from `tests/` runs 215 tests, all passing. That includes `test_template_params_filtering`, which was the failing one.\n\nI didn't commit anything.",
+ "timed_out": false,
+ "docker_rc": 0,
+ "limits": {
+  "max_turns": 50,
+  "max_budget_usd": 2.0,
+  "timeout_min": 25.0
+ },
+ "network": "cotml-egress",
+ "proxy": true,
+ "claude_version": "2.1.296",
+ "model_usage": {
+  "claude-haiku-5-5": {
+   "inputTokens": 14,
+   "outputTokens": 2623,
+   "cacheReadInputTokens": 27827,
+   "cacheCreationInputTokens": 5791,
+   "webSearchRequests": 0,
+   "costUSD": 0.002315045,
+   "contextWindow": 1000000,
+   "maxOutputTokens": 128000,
+   "thinkingTokens": 1229,
+   "canonicalModel": "claude-haiku-5-5",
+   "provider": "firstParty",
+   "costBasis": "list"
+  }
+ },
+ "started_at": "2026-10-14T08:04:28+00:00",
+ "framing": "debug",
+ "patch_files": [
+  "django/views/generic/base.py"
+ ],
+ "touched_test_files": [],
+ "untracked_files": []
+}

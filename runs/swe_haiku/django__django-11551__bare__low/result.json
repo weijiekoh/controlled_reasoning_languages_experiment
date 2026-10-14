@@ -1,0 +1,73 @@
+{
+ "problem": "django__django-11551",
+ "bench": "swe",
+ "condition": "bare",
+ "effort": "low",
+ "model": "claude-haiku-5-5",
+ "batch": "swe_haiku",
+ "dry_run": false,
+ "outcome": "solved",
+ "verify_pass": true,
+ "verify_stage": "ok",
+ "verify_detail": "resolved (run_id cotml-20261013235902-e196b457)",
+ "num_turns": 6,
+ "input_tokens": 14,
+ "output_tokens": 1481,
+ "thinking_tokens": 0,
+ "cache_read_tokens": 24837,
+ "cache_creation_tokens": 5794,
+ "usage_source": "result",
+ "total_cost_usd": 0.00171452,
+ "duration_s": 18.4,
+ "agent_duration_ms": 12341,
+ "lean_compile_count": 4,
+ "search_tactic_uses": 0,
+ "search_tactic_in_final": false,
+ "tool_calls": {
+  "Bash": 5
+ },
+ "proof_chars": 2499,
+ "proof_lines": 57,
+ "statement_prefix_changed": false,
+ "stop_reason": "end_turn",
+ "result_subtype": "success",
+ "terminal_reason": "completed",
+ "is_error": false,
+ "api_error_status": null,
+ "permission_denials": 0,
+ "agent_said_give_up": false,
+ "final_text": "I changed `_check_list_display_item` in `django/contrib/admin/checks.py` so that `admin.E108` is only raised when both lookups fail. The `modeladmin` and `admin_checks` test suites pass (209 tests).\n\nThe old code had an early `hasattr(obj.model, item)` gate. For a field like `PositionField` whose descriptor raises when accessed on the class, that gate returned False and the code reported E108 without ever calling `get_field`. The new logic follows the issue's proposed fix:\n\n1. If the item is callable, or an attribute of the ModelAdmin, it passes.\n2. Otherwise it tries `model._meta.get_field(item)`.\n3. If that raises `FieldDoesNotExist`, it tries `getattr(model, item)`. If that raises `AttributeError`, it returns E108.\n4. If a field was found and it is a `ManyToManyField`, it returns E109.\n\nI did not add a regression test for the `PositionField` case, and I did not run the issue's reproduction model directly.",
+ "timed_out": false,
+ "docker_rc": 0,
+ "limits": {
+  "max_turns": 50,
+  "max_budget_usd": 2.0,
+  "timeout_min": 25.0
+ },
+ "network": "cotml-egress",
+ "proxy": true,
+ "claude_version": "2.1.296",
+ "model_usage": {
+  "claude-haiku-5-5": {
+   "inputTokens": 14,
+   "outputTokens": 1481,
+   "cacheReadInputTokens": 24837,
+   "cacheCreationInputTokens": 5794,
+   "webSearchRequests": 0,
+   "costUSD": 0.00171452,
+   "contextWindow": 1000000,
+   "maxOutputTokens": 128000,
+   "thinkingTokens": 0,
+   "canonicalModel": "claude-haiku-5-5",
+   "provider": "firstParty",
+   "costBasis": "list"
+  }
+ },
+ "started_at": "2026-10-14T06:58:42+00:00",
+ "framing": "issue",
+ "patch_files": [
+  "django/contrib/admin/checks.py"
+ ],
+ "touched_test_files": [],
+ "untracked_files": []
+}

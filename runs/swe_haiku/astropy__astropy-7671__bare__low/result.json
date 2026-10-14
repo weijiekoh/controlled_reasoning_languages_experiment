@@ -1,0 +1,73 @@
+{
+ "problem": "astropy__astropy-7671",
+ "bench": "swe",
+ "condition": "bare",
+ "effort": "low",
+ "model": "claude-haiku-5-5",
+ "batch": "swe_haiku",
+ "dry_run": false,
+ "outcome": "solved",
+ "verify_pass": true,
+ "verify_stage": "ok",
+ "verify_detail": "resolved (run_id cotml-20261014021849-77f9ed74)",
+ "num_turns": 3,
+ "input_tokens": 8,
+ "output_tokens": 1060,
+ "thinking_tokens": 207,
+ "cache_read_tokens": 8206,
+ "cache_creation_tokens": 3456,
+ "usage_source": "result",
+ "total_cost_usd": 0.0010448599999999999,
+ "duration_s": 9.5,
+ "agent_duration_ms": 8681,
+ "lean_compile_count": 1,
+ "search_tactic_uses": 0,
+ "search_tactic_in_final": false,
+ "tool_calls": {
+  "Bash": 2
+ },
+ "proof_chars": 929,
+ "proof_lines": 20,
+ "statement_prefix_changed": false,
+ "stop_reason": "end_turn",
+ "result_subtype": "success",
+ "terminal_reason": "completed",
+ "is_error": false,
+ "api_error_status": null,
+ "permission_denials": 0,
+ "agent_said_give_up": false,
+ "final_text": "I fixed `minversion` in `astropy/utils/introspection.py` so `minversion('numpy', '1.14dev')` no longer raises a `TypeError`.\n\nThe cause was `distutils.version.LooseVersion`, which can't compare a version like `1.14.3` with a pre-release string like `1.14dev`. I replaced it with `pkg_resources.parse_version`, which handles these cases correctly, as the issue reports.\n\nChecks:\n- `minversion('numpy', '1.14dev')`, `minversion('numpy', '1.14.3')` and `minversion('astropy', '0.4.4')` all return `True`.\n- `astropy/utils/tests/test_introspection.py` passes (4 tests).\n\nI did not commit, and I did not run the wider test suite. The change depends on `pkg_resources` being importable, which it was in this environment.",
+ "timed_out": false,
+ "docker_rc": 0,
+ "limits": {
+  "max_turns": 50,
+  "max_budget_usd": 2.0,
+  "timeout_min": 25.0
+ },
+ "network": "cotml-egress",
+ "proxy": true,
+ "claude_version": "2.1.296",
+ "model_usage": {
+  "claude-haiku-5-5": {
+   "inputTokens": 8,
+   "outputTokens": 1060,
+   "cacheReadInputTokens": 8206,
+   "cacheCreationInputTokens": 3456,
+   "webSearchRequests": 0,
+   "costUSD": 0.0010448599999999999,
+   "contextWindow": 1000000,
+   "maxOutputTokens": 128000,
+   "thinkingTokens": 207,
+   "canonicalModel": "claude-haiku-5-5",
+   "provider": "firstParty",
+   "costBasis": "list"
+  }
+ },
+ "started_at": "2026-10-14T09:18:39+00:00",
+ "framing": "issue",
+ "patch_files": [
+  "astropy/utils/introspection.py"
+ ],
+ "touched_test_files": [],
+ "untracked_files": []
+}

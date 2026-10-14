@@ -1,0 +1,15 @@
+{
+ "id": "linear_search",
+ "entry": "linear_search.rs",
+ "description": "description.md",
+ "main_fn": "linear_search_lower_bound",
+ "editable_regions": {
+  "helpers": "between `// <helpers>` and `// </helpers>`: helper spec fns and exec helpers",
+  "proofs": "between `// <proofs>` and `// </proofs>`: lemmas (proof fns)",
+  "code": "between `// <code>` and `// </code>`: exactly one block `{ ... }`, the body of the function under spec"
+ },
+ "fixed": "Everything outside the three editable regions is fixed: the `use` lines, the <preamble> block (definitions, spec fns, and any exec fns given there), the <spec> block (signature, requires, ensures of the function under test), fn main, and all marker comments. Compared token-wise; comments and whitespace are ignored.",
+ "source": "data/algoveri/algoveri_data/linear_search/verus_spec.rs",
+ "source_sha256": "3b6a8af1be933337b7f274e060b47fde4e55e2ea456929a582d187f50f9d86e5",
+ "patches": []
+}

@@ -1,0 +1,189 @@
+import Mathlib
+
+noncomputable abbrev putnam_2024_a4_solution : Set ℕ := {7}
+/--
+Find all primes $p > 5$ for which there exists an integer $a$ and an integer $r$ satisfying $1 \le r \le p - 1$ with the following property:
+the sequence $1, a, a^2, ..., a^{p-5}$ can be rearranged to form a sequence $b_0, ..., b_{p-5}$ such that $b_n - b_{n-1} - r$ is divisible by $p$ for $1 \le n \le p - 5$.
+-/
+theorem putnam_2024_a4 :
+    {p : ℕ | p.Prime ∧ 5 < p ∧ ∃ a r : ℤ, 1 ≤ r ∧ r ≤ p - 1 ∧
+      ∃ e : ℕ → ℕ, Set.BijOn e (Set.Icc 0 (p - 5 : ℕ)) (Set.Icc 0 (p - 5 : ℕ)) ∧
+        ∀ n, 1 ≤ n ∧ n ≤ (p - 5 : ℕ) →
+          (p : ℤ) ∣ a ^ (e n : ℕ) - a ^ (e (n - 1) : ℕ) - r} =
+    putnam_2024_a4_solution := by
+  have fin : ∀ P : ℤ, 11 ≤ P → ∀ a0 a1 a2 a3 m : ℤ, 0 ≤ a0 → a0 ≤ 3 → 0 ≤ a1 → a1 ≤ 3 →
+      0 ≤ a2 → a2 ≤ 3 → 0 ≤ a3 → a3 ≤ 3 → a1 ≠ a0 → a2 ≠ a0 → a3 ≠ a0 → a1 ≠ a2 →
+      a1 ≠ a3 → a2 ≠ a3 → (a3 - a0) * (a1 - a0) - (a2 - a0) ^ 2 = P * m → False := by
+    intro P hP a0 a1 a2 a3 m h0 h0' h1 h1' h2 h2' h3 h3' d10 d20 d30 d12 d13 d23 hm
+    set_option maxHeartbeats 4000000 in
+    interval_cases a0 <;> interval_cases a1 <;> interval_cases a2 <;> interval_cases a3 <;>
+      first
+      | omega
+      | (have h5 : m = 0 ∨ m = 1 ∨ m = -1 ∨ 2 ≤ m ∨ m ≤ -2 := by omega
+         rcases h5 with h | h | h | h | h
+         · subst h; omega
+         · subst h; omega
+         · subst h; omega
+         · nlinarith
+         · nlinarith)
+  ext p
+  simp only [Set.mem_setOf_eq, putnam_2024_a4_solution, Set.mem_singleton_iff]
+  constructor
+  · rintro ⟨hp, hp5, a, r, hr1, hrp, e, hbij, hdiv⟩
+    haveI := Fact.mk hp
+    by_contra hne
+    have hp11 : 11 ≤ p := by
+      by_contra h
+      push_neg at h
+      interval_cases p <;> first | omega | exact absurd hp (by norm_num)
+    obtain ⟨q, rfl⟩ : ∃ q, p = q + 7 := ⟨p - 7, by omega⟩
+    have h5 : q + 7 - 5 = q + 2 := by omega
+    simp only [h5] at hbij hdiv
+    have hmap : ∀ n, n ≤ q + 2 → e n ≤ q + 2 := fun n hn =>
+      (hbij.mapsTo (Set.mem_Icc.mpr ⟨Nat.zero_le _, hn⟩)).2
+    have hsurj : ∀ i, i ≤ q + 2 → ∃ n, n ≤ q + 2 ∧ e n = i := fun i hi => by
+      obtain ⟨n, hn, hen⟩ := hbij.surjOn (Set.mem_Icc.mpr ⟨Nat.zero_le _, hi⟩)
+      exact ⟨n, hn.2, hen⟩
+    set A : ZMod (q + 7) := (a : ZMod (q + 7)) with hAdef
+    set R : ZMod (q + 7) := (r : ZMod (q + 7)) with hRdef
+    have hR : R ≠ 0 := by
+      intro h
+      have := (ZMod.intCast_zmod_eq_zero_iff_dvd r (q + 7)).mp h
+      have := Int.le_of_dvd (by omega) this
+      push_cast at hrp
+      omega
+    have hdiv' : ∀ n, 1 ≤ n → n ≤ q + 2 → A ^ (e n) = A ^ (e (n - 1)) + R := by
+      intro n h1 h2
+      have := (ZMod.intCast_zmod_eq_zero_iff_dvd _ (q + 7)).mpr (hdiv n ⟨h1, h2⟩)
+      push_cast at this
+      linear_combination this
+    have hstep : ∀ n, n ≤ q + 2 → A ^ (e n) = A ^ (e 0) + (n : ZMod (q + 7)) * R := by
+      intro n
+      induction n with
+      | zero => intro _; simp
+      | succ n ih =>
+        intro hn
+        rw [hdiv' (n + 1) (by omega) hn, Nat.add_sub_cancel, ih (by omega)]
+        push_cast; ring
+    have hinj : ∀ i j, i ≤ q + 2 → j ≤ q + 2 → A ^ i = A ^ j → i = j := by
+      intro i j hi hj h
+      obtain ⟨n, hn, rfl⟩ := hsurj i hi
+      obtain ⟨m, hm, rfl⟩ := hsurj j hj
+      rw [hstep n hn, hstep m hm] at h
+      have h2 : (n : ZMod (q + 7)) * R = m * R := by linear_combination h
+      have h3 := mul_right_cancel₀ hR h2
+      have h4 := (ZMod.natCast_eq_natCast_iff' n m (q + 7)).mp h3
+      rw [Nat.mod_eq_of_lt (by omega), Nat.mod_eq_of_lt (by omega)] at h4
+      rw [h4]
+    have hA0 : A ≠ 0 := by
+      intro h
+      have := hinj 1 2 (by omega) (by omega) (by rw [h]; simp)
+      omega
+    have hApow : A ^ (q + 6) = 1 := by
+      have := ZMod.pow_card_sub_one_eq_one hA0
+      rwa [show q + 7 - 1 = q + 6 by omega] at this
+    have hd : orderOf A = q + 6 := by
+      have hdv : orderOf A ∣ q + 6 := orderOf_dvd_of_pow_eq_one hApow
+      have hpos : 0 < orderOf A := Nat.pos_of_dvd_of_pos hdv (by omega)
+      have hge : q + 3 ≤ orderOf A := by
+        by_contra hlt
+        have := hinj (orderOf A) 0 (by omega) (by omega) (by rw [pow_orderOf_eq_one, pow_zero])
+        omega
+      obtain ⟨k, hk⟩ := hdv
+      rcases k with _ | _ | k
+      · omega
+      · omega
+      · nlinarith
+    have hord : ∀ i j, i ≤ q + 5 → j ≤ q + 5 → A ^ i = A ^ j → i = j := by
+      intro i j hi hj h
+      exact pow_injOn_Iio_orderOf (x := A) (by simp [hd]; omega) (by simp [hd]; omega) h
+    have ht : ∀ t : ZMod (q + 7), (∀ i, i ≤ q + 2 → t ≠ A ^ i) →
+        ∃ a : ℕ, a ≤ 3 ∧ t = A ^ (e 0) + ((q + 3 + a : ℕ) : ZMod (q + 7)) * R := by
+      intro t ht
+      have hn : (((t - A ^ (e 0)) * R⁻¹).val : ZMod (q + 7)) * R = t - A ^ (e 0) := by
+        rw [ZMod.natCast_zmod_val]
+        exact inv_mul_cancel_right₀ hR _
+      have hlt := ZMod.val_lt ((t - A ^ (e 0)) * R⁻¹)
+      generalize ((t - A ^ (e 0)) * R⁻¹).val = n at hn hlt
+      by_cases hn2 : n ≤ q + 2
+      · exfalso
+        apply ht (e n) (hmap n hn2)
+        rw [hstep n hn2]
+        linear_combination -hn
+      · refine ⟨n - (q + 3), by omega, ?_⟩
+        rw [show q + 3 + (n - (q + 3)) = n by omega]
+        linear_combination -hn
+    have hz : ∀ i, i ≤ q + 2 → (0 : ZMod (q + 7)) ≠ A ^ i := by
+      intro i _ h
+      simpa [hA0] using h.symm
+    obtain ⟨a0, ha0, hn0⟩ := ht 0 hz
+    obtain ⟨a1, ha1, hn1⟩ := ht (A ^ (q + 5)) (fun i hi h => by
+      have := hord (q + 5) i (by omega) (by omega) h; omega)
+    obtain ⟨a2, ha2, hn2⟩ := ht (A ^ (q + 4)) (fun i hi h => by
+      have := hord (q + 4) i (by omega) (by omega) h; omega)
+    obtain ⟨a3, ha3, hn3⟩ := ht (A ^ (q + 3)) (fun i hi h => by
+      have := hord (q + 3) i (by omega) (by omega) h; omega)
+    have hZ0 : A ^ (q + 5) ≠ 0 := pow_ne_zero _ hA0
+    have hY0 : A ^ (q + 4) ≠ 0 := pow_ne_zero _ hA0
+    have hX0 : A ^ (q + 3) ≠ 0 := pow_ne_zero _ hA0
+    have hZY' : A ^ (q + 5) ≠ A ^ (q + 4) := fun h => by
+      have := hord _ _ (by omega) (by omega) h; omega
+    have hZX' : A ^ (q + 5) ≠ A ^ (q + 3) := fun h => by
+      have := hord _ _ (by omega) (by omega) h; omega
+    have hYX' : A ^ (q + 4) ≠ A ^ (q + 3) := fun h => by
+      have := hord _ _ (by omega) (by omega) h; omega
+    have d10 : a1 ≠ a0 := by
+      intro h; subst h; exact hZ0 (hn1.trans hn0.symm)
+    have d20 : a2 ≠ a0 := by
+      intro h; subst h; exact hY0 (hn2.trans hn0.symm)
+    have d30 : a3 ≠ a0 := by
+      intro h; subst h; exact hX0 (hn3.trans hn0.symm)
+    have d12 : a1 ≠ a2 := by
+      intro h; subst h; exact hZY' (hn1.trans hn2.symm)
+    have d13 : a1 ≠ a3 := by
+      intro h; subst h; exact hZX' (hn1.trans hn3.symm)
+    have d23 : a2 ≠ a3 := by
+      intro h; subst h; exact hYX' (hn2.trans hn3.symm)
+    have hZY : A ^ (q + 5) * A ^ (q + 5) = A ^ (q + 4) := by
+      calc _ = A ^ (q + 6) * A ^ (q + 4) := by ring
+        _ = _ := by rw [hApow, one_mul]
+    have hZYX : A ^ (q + 5) * A ^ (q + 4) = A ^ (q + 3) := by
+      calc _ = A ^ (q + 6) * A ^ (q + 3) := by ring
+        _ = _ := by rw [hApow, one_mul]
+    generalize A ^ (q + 5) = Z at *
+    generalize A ^ (q + 4) = Y at *
+    generalize A ^ (q + 3) = X at *
+    push_cast at hn0 hn1 hn2 hn3
+    have hu : Z = (((a1 : ℤ) - a0 : ℤ) : ZMod (q + 7)) * R := by
+      push_cast; linear_combination hn1 - hn0
+    have hv : Y = (((a2 : ℤ) - a0 : ℤ) : ZMod (q + 7)) * R := by
+      push_cast; linear_combination hn2 - hn0
+    have hw : X = (((a3 : ℤ) - a0 : ℤ) : ZMod (q + 7)) * R := by
+      push_cast; linear_combination hn3 - hn0
+    have alg : ∀ U V W : ZMod (q + 7), Z = U * R → Y = V * R → X = W * R →
+        W * U - V ^ 2 = 0 := by
+      intro U V W hU hV hW
+      have h1 : V = U * U * R := mul_right_cancel₀ hR (by
+        linear_combination (-1) * hV - hZY + (Z + U * R) * hU)
+      have h2 : W = U * V * R := mul_right_cancel₀ hR (by
+        linear_combination (-1) * hW - hZYX + Y * hU + U * R * hV)
+      linear_combination U * h2 - V * h1
+    have key := alg _ _ _ hu hv hw
+    have key2 : ((((a3 : ℤ) - a0) * ((a1 : ℤ) - a0) - ((a2 : ℤ) - a0) ^ 2 : ℤ) : ZMod (q + 7)) = 0 := by
+      push_cast; push_cast at key; exact key
+    obtain ⟨m, hm⟩ := (ZMod.intCast_zmod_eq_zero_iff_dvd _ _).mp key2
+    push_cast at hm
+    exact fin (q+7) (by omega) a0 a1 a2 a3 m (by omega) (by omega) (by omega) (by omega) (by omega) (by omega) (by omega) (by omega) (by omega) (by omega) (by omega) (by omega) (by omega) (by omega) (by push_cast at hm ⊢; linarith)
+  · rintro rfl
+    refine ⟨by norm_num, by norm_num, 3, 1, by norm_num, by norm_num,
+      fun n => if n = 1 then 2 else if n = 2 then 1 else n, ?_, ?_⟩
+    · refine ⟨?_, ?_, ?_⟩
+      · intro x hx; simp at hx ⊢; split_ifs <;> omega
+      · intro x hx y hy h; simp at hx hy h; split_ifs at h <;> omega
+      · intro y hy
+        refine ⟨if y = 1 then 2 else if y = 2 then 1 else y, ?_, ?_⟩
+        · simp at hy ⊢; split_ifs <;> omega
+        · simp at hy ⊢; split_ifs <;> omega
+    · intro n hn
+      obtain ⟨h1, h2⟩ := hn
+      interval_cases n <;> norm_num

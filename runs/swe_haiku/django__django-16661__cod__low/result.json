@@ -1,0 +1,73 @@
+{
+ "problem": "django__django-16661",
+ "bench": "swe",
+ "condition": "cod",
+ "effort": "low",
+ "model": "claude-haiku-5-5",
+ "batch": "swe_haiku",
+ "dry_run": false,
+ "outcome": "solved",
+ "verify_pass": true,
+ "verify_stage": "ok",
+ "verify_detail": "resolved (run_id cotml-20261014000510-c8d30092)",
+ "num_turns": 6,
+ "input_tokens": 14,
+ "output_tokens": 2928,
+ "thinking_tokens": 943,
+ "cache_read_tokens": 24864,
+ "cache_creation_tokens": 4849,
+ "usage_source": "result",
+ "total_cost_usd": 0.0023201650000000003,
+ "duration_s": 27.1,
+ "agent_duration_ms": 21092,
+ "lean_compile_count": 4,
+ "search_tactic_uses": 0,
+ "search_tactic_in_final": false,
+ "tool_calls": {
+  "Bash": 5
+ },
+ "proof_chars": 910,
+ "proof_lines": 18,
+ "statement_prefix_changed": false,
+ "stop_reason": "end_turn",
+ "result_subtype": "success",
+ "terminal_reason": "completed",
+ "is_error": false,
+ "api_error_status": null,
+ "permission_denials": 0,
+ "agent_said_give_up": false,
+ "final_text": "I fixed `ModelAdmin.lookup_allowed()` so the issue's example now returns `True` for `restaurant__place__country`. The full `modeladmin` suite passes (162 tests), and so does a reproduction of the issue's test, which I ran from a temporary file since removed.\n\nThe cause was in the loop that builds `relation_parts`. It dropped any relation whose field was a target field of the previous relation. For a primary-key `OneToOneField` like `Restaurant.place`, that made `place` look like concrete inheritance, so the lookup was shortened to `restaurant__country`.\n\nThe fix in `django/contrib/admin/options.py` only drops a part when it is a parent link (`model._meta.parents.values()`), the auto field, or a `to_fields` name of the previous FK when the model has no auto field. I did not add a test file to the repository, and nothing is committed.",
+ "timed_out": false,
+ "docker_rc": 0,
+ "limits": {
+  "max_turns": 50,
+  "max_budget_usd": 2.0,
+  "timeout_min": 25.0
+ },
+ "network": "cotml-egress",
+ "proxy": true,
+ "claude_version": "2.1.296",
+ "model_usage": {
+  "claude-haiku-5-5": {
+   "inputTokens": 14,
+   "outputTokens": 2928,
+   "cacheReadInputTokens": 24864,
+   "cacheCreationInputTokens": 4849,
+   "webSearchRequests": 0,
+   "costUSD": 0.0023201650000000003,
+   "contextWindow": 1000000,
+   "maxOutputTokens": 128000,
+   "thinkingTokens": 943,
+   "canonicalModel": "claude-haiku-5-5",
+   "provider": "firstParty",
+   "costBasis": "list"
+  }
+ },
+ "started_at": "2026-10-14T07:04:42+00:00",
+ "framing": "issue",
+ "patch_files": [
+  "django/contrib/admin/options.py"
+ ],
+ "touched_test_files": [],
+ "untracked_files": []
+}

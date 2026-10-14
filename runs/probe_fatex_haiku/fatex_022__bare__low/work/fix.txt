@@ -1,0 +1,4 @@
+    have hinj : Function.Injective ψ := by
+      intro a b hab
+      have hg : g a = g b := congrArg Subtype.val hab
+      exact g.injective hg

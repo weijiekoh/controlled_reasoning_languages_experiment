@@ -1,0 +1,1 @@
+{"pass": false, "stage": "tests", "detail": "FAIL_TO_PASS 0/1 failing: tests/test_domain_py.py::test_info_field_list_var; PASS_TO_PASS 34/34", "seconds": 21.8}

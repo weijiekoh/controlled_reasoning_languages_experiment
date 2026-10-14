@@ -1,0 +1,1 @@
+{"time": "2026-10-13T19:28:25", "argv": ["--effort", "low", "--max-turns", "60", "--max-budget-usd", "3", "--timeout-min", "30", "--parallel", "4", "--bench", "fatex", "--problems", "problems/probe_fatex.txt", "--condition", "bare", "--model", "claude-haiku-5-5", "--out", "runs/probe_fatex_haiku/"], "model": "claude-haiku-5-5"}

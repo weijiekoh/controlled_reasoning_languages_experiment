@@ -1,0 +1,32 @@
+diff --git a/django/forms/models.py b/django/forms/models.py
+index 192d9fad94..405420dfd3 100644
+--- a/django/forms/models.py
++++ b/django/forms/models.py
+@@ -257,19 +257,20 @@ class ModelFormOptions:
+ 
+ class ModelFormMetaclass(DeclarativeFieldsMetaclass):
+     def __new__(mcs, name, bases, attrs):
+-        base_formfield_callback = None
+-        for b in bases:
+-            if hasattr(b, "Meta") and hasattr(b.Meta, "formfield_callback"):
+-                base_formfield_callback = b.Meta.formfield_callback
+-                break
+-
+-        formfield_callback = attrs.pop("formfield_callback", base_formfield_callback)
++        formfield_callback = attrs.pop("formfield_callback", None)
+ 
+         new_class = super().__new__(mcs, name, bases, attrs)
+ 
+         if bases == (BaseModelForm,):
+             return new_class
+ 
++        # Fall back to a formfield_callback defined on Meta (including one
++        # inherited from a base form's Meta).
++        if formfield_callback is None:
++            formfield_callback = getattr(
++                getattr(new_class, "Meta", None), "formfield_callback", None
++            )
++
+         opts = new_class._meta = ModelFormOptions(getattr(new_class, "Meta", None))
+ 
+         # We check if a string was passed to `fields` or `exclude`,

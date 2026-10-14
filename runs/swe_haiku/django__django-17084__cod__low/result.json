@@ -1,0 +1,73 @@
+{
+ "problem": "django__django-17084",
+ "bench": "swe",
+ "condition": "cod",
+ "effort": "low",
+ "model": "claude-haiku-5-5",
+ "batch": "swe_haiku",
+ "dry_run": false,
+ "outcome": "solved",
+ "verify_pass": true,
+ "verify_stage": "ok",
+ "verify_detail": "resolved (run_id cotml-20261014000606-e9b0265c)",
+ "num_turns": 22,
+ "input_tokens": 46,
+ "output_tokens": 7682,
+ "thinking_tokens": 1742,
+ "cache_read_tokens": 178100,
+ "cache_creation_tokens": 14605,
+ "usage_source": "result",
+ "total_cost_usd": 0.007452225,
+ "duration_s": 65.4,
+ "agent_duration_ms": 64324,
+ "lean_compile_count": 9,
+ "search_tactic_uses": 0,
+ "search_tactic_in_final": false,
+ "tool_calls": {
+  "Bash": 21
+ },
+ "proof_chars": 1060,
+ "proof_lines": 27,
+ "statement_prefix_changed": false,
+ "stop_reason": "end_turn",
+ "result_subtype": "success",
+ "terminal_reason": "completed",
+ "is_error": false,
+ "api_error_status": null,
+ "permission_denials": 0,
+ "agent_said_give_up": false,
+ "final_text": "Aggregating over a window-function annotation now works. The issue's pattern, `Sum(\"cumul\")` where `cumul` wraps a `Window(Sum(...))`, returns correct results on SQLite (`{'t': 10, 'c': 20}` for pages 1\u20134).\n\n**Cause:** `Query.get_aggregation()` only wrapped the aggregate in a subquery when there was grouping, slicing, distinct, or aggregate-based annotations. A window annotation isn't an aggregate, so the outer `SUM` was emitted directly over an expression containing a window call. PostgreSQL rejects that with `GroupingError`.\n\n**Fix** (`django/db/models/sql/query.py`): I added a `refs_window` check. When an aggregate references an annotation that contains a window (`contains_over_clause`), the query now goes through the subquery path, so the window is evaluated in the inner query before the outer aggregation.\n\nI first tried adding the window check to `has_existing_aggregation`, but that also triggered a spurious `GROUP BY` in the inner query and broke `expressions_window`'s `test_filter_count`, which expects a single query. Keeping it as a separate condition avoids both problems.\n\n**Testing:** `aggregation`, `aggregation_regress`, `expressions_window`, `queries`, and `expressions` all pass (918 tests, 23 skipped, 3 expected failures). I checked the fix on SQLite, not PostgreSQL, since no PostgreSQL server is available here. I did not add a regression test, since the rules bar changes to test files.",
+ "timed_out": false,
+ "docker_rc": 0,
+ "limits": {
+  "max_turns": 50,
+  "max_budget_usd": 2.0,
+  "timeout_min": 25.0
+ },
+ "network": "cotml-egress",
+ "proxy": true,
+ "claude_version": "2.1.296",
+ "model_usage": {
+  "claude-haiku-5-5": {
+   "inputTokens": 46,
+   "outputTokens": 7682,
+   "cacheReadInputTokens": 178100,
+   "cacheCreationInputTokens": 14605,
+   "webSearchRequests": 0,
+   "costUSD": 0.007452225,
+   "contextWindow": 1000000,
+   "maxOutputTokens": 128000,
+   "thinkingTokens": 1742,
+   "canonicalModel": "claude-haiku-5-5",
+   "provider": "firstParty",
+   "costBasis": "list"
+  }
+ },
+ "started_at": "2026-10-14T07:05:00+00:00",
+ "framing": "issue",
+ "patch_files": [
+  "django/db/models/sql/query.py"
+ ],
+ "touched_test_files": [],
+ "untracked_files": []
+}

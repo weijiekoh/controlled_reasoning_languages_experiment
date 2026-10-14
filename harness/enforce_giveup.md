@@ -1,0 +1,1 @@
+Rule check: you ended with GIVEUP after {checks} executed CHECKs; the language requires at least {min} CHECKs (tool runs: compile, #check, decide, exact?) before GIVEUP. Continue in the language: write PLAN, run CHECKs, record RESULTs. Then DONE or GIVEUP <- refuters tried.

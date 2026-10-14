@@ -1,0 +1,73 @@
+{
+ "problem": "sympy__sympy-15349",
+ "bench": "swe",
+ "condition": "bare",
+ "effort": "low",
+ "model": "claude-sonnet-5-5",
+ "batch": "swe_sonnet",
+ "dry_run": false,
+ "outcome": "solved",
+ "verify_pass": true,
+ "verify_stage": "ok",
+ "verify_detail": "resolved (run_id cotml-20261014025555-ea94cc51)",
+ "num_turns": 4,
+ "input_tokens": 10,
+ "output_tokens": 711,
+ "thinking_tokens": 0,
+ "cache_read_tokens": 10076,
+ "cache_creation_tokens": 2343,
+ "usage_source": "result",
+ "total_cost_usd": 0.0139951,
+ "duration_s": 9.7,
+ "agent_duration_ms": 9133,
+ "lean_compile_count": 1,
+ "search_tactic_uses": 0,
+ "search_tactic_in_final": false,
+ "tool_calls": {
+  "Bash": 3
+ },
+ "proof_chars": 475,
+ "proof_lines": 11,
+ "statement_prefix_changed": false,
+ "stop_reason": "end_turn",
+ "result_subtype": "success",
+ "terminal_reason": "completed",
+ "is_error": false,
+ "api_error_status": null,
+ "permission_denials": 0,
+ "agent_said_give_up": false,
+ "final_text": "I fixed the sign error in `Quaternion.to_rotation_matrix()` in `sympy/algebras/quaternion.py`. I haven't run any tests, because `pytest` isn't installed in this environment. I also didn't re-run your example.\n\nThe `m12` entry had the same expression as `m21`, `2*s*(q.c*q.d + q.b*q.a)`. For a standard rotation matrix, `m12` should have a minus sign on the `q.b*q.a` term. I changed it to `2*s*(q.c*q.d - q.b*q.a)` and left `m21` as it was.\n\nFor `Quaternion(cos(x/2), sin(x/2), 0, 0)`, `m12` should now come out as `-sin(x)`. The result should match the usual rotation about the x-axis.\n\nThe 4\u00d74 case (when a point `v` is passed) builds on `m12`, so it picks up the fix too.",
+ "timed_out": false,
+ "docker_rc": 0,
+ "limits": {
+  "max_turns": 50,
+  "max_budget_usd": 4.0,
+  "timeout_min": 25.0
+ },
+ "network": "cotml-egress",
+ "proxy": true,
+ "claude_version": "2.1.296",
+ "model_usage": {
+  "claude-sonnet-5-5": {
+   "inputTokens": 10,
+   "outputTokens": 711,
+   "cacheReadInputTokens": 10076,
+   "cacheCreationInputTokens": 2343,
+   "webSearchRequests": 0,
+   "costUSD": 0.0139951,
+   "contextWindow": 1000000,
+   "maxOutputTokens": 128000,
+   "thinkingTokens": 0,
+   "canonicalModel": "claude-sonnet-5-5",
+   "provider": "firstParty",
+   "costBasis": "list"
+  }
+ },
+ "started_at": "2026-10-14T09:55:45+00:00",
+ "framing": "issue",
+ "patch_files": [
+  "sympy/algebras/quaternion.py"
+ ],
+ "touched_test_files": [],
+ "untracked_files": []
+}

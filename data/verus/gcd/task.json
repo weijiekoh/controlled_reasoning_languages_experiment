@@ -1,0 +1,15 @@
+{
+ "id": "gcd",
+ "entry": "gcd.rs",
+ "description": "description.md",
+ "main_fn": "compute_gcd",
+ "editable_regions": {
+  "helpers": "between `// <helpers>` and `// </helpers>`: helper spec fns and exec helpers",
+  "proofs": "between `// <proofs>` and `// </proofs>`: lemmas (proof fns)",
+  "code": "between `// <code>` and `// </code>`: exactly one block `{ ... }`, the body of the function under spec"
+ },
+ "fixed": "Everything outside the three editable regions is fixed: the `use` lines, the <preamble> block (definitions, spec fns, and any exec fns given there), the <spec> block (signature, requires, ensures of the function under test), fn main, and all marker comments. Compared token-wise; comments and whitespace are ignored.",
+ "source": "data/algoveri/algoveri_data/gcd/verus_spec.rs",
+ "source_sha256": "a365808e406cb7108b85fb6a5fcb68d603c059fc430015be3f3cd91a41aa32e9",
+ "patches": []
+}

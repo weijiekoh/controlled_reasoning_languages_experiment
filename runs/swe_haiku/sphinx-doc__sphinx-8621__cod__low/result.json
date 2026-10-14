@@ -1,0 +1,73 @@
+{
+ "problem": "sphinx-doc__sphinx-8621",
+ "bench": "swe",
+ "condition": "cod",
+ "effort": "low",
+ "model": "claude-haiku-5-5",
+ "batch": "swe_haiku",
+ "dry_run": false,
+ "outcome": "solved",
+ "verify_pass": true,
+ "verify_stage": "ok",
+ "verify_detail": "resolved (run_id cotml-20261014023958-b960ac20)",
+ "num_turns": 6,
+ "input_tokens": 14,
+ "output_tokens": 4599,
+ "thinking_tokens": 2173,
+ "cache_read_tokens": 31072,
+ "cache_creation_tokens": 8362,
+ "usage_source": "result",
+ "total_cost_usd": 0.0036568699999999996,
+ "duration_s": 91.1,
+ "agent_duration_ms": 90473,
+ "lean_compile_count": 3,
+ "search_tactic_uses": 0,
+ "search_tactic_in_final": false,
+ "tool_calls": {
+  "Bash": 5
+ },
+ "proof_chars": 2434,
+ "proof_lines": 64,
+ "statement_prefix_changed": false,
+ "stop_reason": "end_turn",
+ "result_subtype": "success",
+ "terminal_reason": "completed",
+ "is_error": false,
+ "api_error_status": null,
+ "permission_denials": 0,
+ "agent_said_give_up": false,
+ "final_text": "The `:kbd:` transform now handles `-`, `+` and `^` correctly both as standalone keys and inside compound keys. I changed only `sphinx/builders/html/transforms.py`.\n\nThe old code split on every `-`, `+` or `^`, so a separator character used as a key produced empty `kbd` elements. The new `split_keys` method reads the text left to right. A separator character becomes a key when no key precedes it, and a separator is only taken after a complete key.\n\nChecked splits:\n- `-` and `+` give a single key, so one `kbd` element.\n- `Shift-+` gives `Shift`, `-`, `+`.\n- `Control-x` and `Ctrl+Alt-^` split as expected.\n\nTest results, compared against the unmodified tree:\n- `tests/test_markup.py`: 2 failures before and after (the `:pep:` cases), unrelated to this change.\n- `tests/test_build_html.py`: 76 failures before and after, so no regressions there. I did not check which tests these are or whether they relate to `kbd`.\n\nI did not add a test for the issue's three examples.",
+ "timed_out": false,
+ "docker_rc": 0,
+ "limits": {
+  "max_turns": 50,
+  "max_budget_usd": 2.0,
+  "timeout_min": 25.0
+ },
+ "network": "cotml-egress",
+ "proxy": true,
+ "claude_version": "2.1.296",
+ "model_usage": {
+  "claude-haiku-5-5": {
+   "inputTokens": 14,
+   "outputTokens": 4599,
+   "cacheReadInputTokens": 31072,
+   "cacheCreationInputTokens": 8362,
+   "webSearchRequests": 0,
+   "costUSD": 0.0036568699999999996,
+   "contextWindow": 1000000,
+   "maxOutputTokens": 128000,
+   "thinkingTokens": 2173,
+   "canonicalModel": "claude-haiku-5-5",
+   "provider": "firstParty",
+   "costBasis": "list"
+  }
+ },
+ "started_at": "2026-10-14T09:38:26+00:00",
+ "framing": "issue",
+ "patch_files": [
+  "sphinx/builders/html/transforms.py"
+ ],
+ "touched_test_files": [],
+ "untracked_files": []
+}

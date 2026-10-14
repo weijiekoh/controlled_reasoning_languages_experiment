@@ -1,0 +1,10 @@
+  let S : Set ℝ := Set.range (fun i ↦ Real.sqrt (p i))
+  let K' : IntermediateField ℚ ℝ := IntermediateField.adjoin ℚ S
+  have hK : K'.toSubalgebra = Algebra.adjoin ℚ S := by
+    apply IntermediateField.adjoin_toSubalgebra_of_isAlgebraic
+    rintro _ ⟨i, rfl⟩
+    apply IsIntegral.isAlgebraic
+    refine ⟨X^2 - C (p i : ℚ), ?_, ?_⟩
+    · exact monic_X_pow_sub_C _ (by norm_num)
+    · simp [Real.sq_sqrt]
+  let e : RS p ≃ₐ[ℚ] K' := (Subalgebra.equivOfEq _ _ hK.symm).trans (AlgEquiv.refl)

@@ -1,0 +1,73 @@
+{
+ "problem": "sympy__sympy-22714",
+ "bench": "swe",
+ "condition": "bare",
+ "effort": "low",
+ "model": "claude-haiku-5-5",
+ "batch": "swe_haiku",
+ "dry_run": false,
+ "outcome": "solved",
+ "verify_pass": true,
+ "verify_stage": "ok",
+ "verify_detail": "resolved (run_id cotml-20261014024758-918ed539)",
+ "num_turns": 6,
+ "input_tokens": 14,
+ "output_tokens": 2385,
+ "thinking_tokens": 468,
+ "cache_read_tokens": 22930,
+ "cache_creation_tokens": 5173,
+ "usage_source": "result",
+ "total_cost_usd": 0.002069825,
+ "duration_s": 19.1,
+ "agent_duration_ms": 18434,
+ "lean_compile_count": 1,
+ "search_tactic_uses": 0,
+ "search_tactic_in_final": false,
+ "tool_calls": {
+  "Bash": 5
+ },
+ "proof_chars": 1318,
+ "proof_lines": 26,
+ "statement_prefix_changed": false,
+ "stop_reason": "end_turn",
+ "result_subtype": "success",
+ "terminal_reason": "completed",
+ "is_error": false,
+ "api_error_status": null,
+ "permission_denials": 0,
+ "agent_said_give_up": false,
+ "final_text": "`with evaluate(False)` no longer crashes on `Point2D(Integer(1),Integer(2))`, and the imaginary-coordinate check still rejects `Point(1, I)`.\n\nThe cause was in `sympy/geometry/point.py`. Under `evaluate(False)`, `im(1)` stays unevaluated, and that expression is truthy, so the check wrongly reported imaginary coordinates. The fix runs that one check with evaluation switched on. The change is in `Point.__new__`, plus an aliased import of the `evaluate` context manager.\n\nThe geometry point tests pass (12/12 via `bin/test sympy/geometry/tests/test_point.py`). I did not run the wider test suite.",
+ "timed_out": false,
+ "docker_rc": 0,
+ "limits": {
+  "max_turns": 50,
+  "max_budget_usd": 2.0,
+  "timeout_min": 25.0
+ },
+ "network": "cotml-egress",
+ "proxy": true,
+ "claude_version": "2.1.296",
+ "model_usage": {
+  "claude-haiku-5-5": {
+   "inputTokens": 14,
+   "outputTokens": 2385,
+   "cacheReadInputTokens": 22930,
+   "cacheCreationInputTokens": 5173,
+   "webSearchRequests": 0,
+   "costUSD": 0.002069825,
+   "contextWindow": 1000000,
+   "maxOutputTokens": 128000,
+   "thinkingTokens": 468,
+   "canonicalModel": "claude-haiku-5-5",
+   "provider": "firstParty",
+   "costBasis": "list"
+  }
+ },
+ "started_at": "2026-10-14T09:47:38+00:00",
+ "framing": "issue",
+ "patch_files": [
+  "sympy/geometry/point.py"
+ ],
+ "touched_test_files": [],
+ "untracked_files": []
+}

@@ -1,0 +1,15 @@
+{
+ "id": "ac_automata",
+ "entry": "ac_automata.rs",
+ "description": "description.md",
+ "main_fn": "ac_automata_search",
+ "editable_regions": {
+  "helpers": "between `// <helpers>` and `// </helpers>`: helper spec fns and exec helpers",
+  "proofs": "between `// <proofs>` and `// </proofs>`: lemmas (proof fns)",
+  "code": "between `// <code>` and `// </code>`: exactly one block `{ ... }`, the body of the function under spec"
+ },
+ "fixed": "Everything outside the three editable regions is fixed: the `use` lines, the <preamble> block (definitions, spec fns, and any exec fns given there), the <spec> block (signature, requires, ensures of the function under test), fn main, and all marker comments. Compared token-wise; comments and whitespace are ignored.",
+ "source": "data/algoveri/algoveri_data/ac_automata/verus_spec.rs",
+ "source_sha256": "75c677b5fcc55ac48ea2ee8f8157cd72ee2fe8b50f63fa6dc055d710d6a5eaf7",
+ "patches": []
+}

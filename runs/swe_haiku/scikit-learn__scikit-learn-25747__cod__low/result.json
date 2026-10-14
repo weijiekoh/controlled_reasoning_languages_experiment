@@ -1,0 +1,73 @@
+{
+ "problem": "scikit-learn__scikit-learn-25747",
+ "bench": "swe",
+ "condition": "cod",
+ "effort": "low",
+ "model": "claude-haiku-5-5",
+ "batch": "swe_haiku",
+ "dry_run": false,
+ "outcome": "gave_up",
+ "verify_pass": false,
+ "verify_stage": "tests",
+ "verify_detail": "FAIL_TO_PASS 0/1 failing: sklearn/utils/tests/test_set_output.py::test_set_output_pandas_keep_index; PASS_TO_PASS 14/14",
+ "num_turns": 4,
+ "input_tokens": 10,
+ "output_tokens": 2304,
+ "thinking_tokens": 799,
+ "cache_read_tokens": 16754,
+ "cache_creation_tokens": 6759,
+ "usage_source": "result",
+ "total_cost_usd": 0.002165415,
+ "duration_s": 15.7,
+ "agent_duration_ms": 15160,
+ "lean_compile_count": 1,
+ "search_tactic_uses": 0,
+ "search_tactic_in_final": false,
+ "tool_calls": {
+  "Bash": 3
+ },
+ "proof_chars": 1086,
+ "proof_lines": 26,
+ "statement_prefix_changed": false,
+ "stop_reason": "end_turn",
+ "result_subtype": "success",
+ "terminal_reason": "completed",
+ "is_error": false,
+ "api_error_status": null,
+ "permission_denials": 0,
+ "agent_said_give_up": false,
+ "final_text": "The reproduction now runs with pandas output and returns the aggregated frame, and the related tests pass (103 passed).\n\n**Cause:** `FeatureUnion._hstack` concatenates the pandas outputs, which works here since the aggregated Series share an index. The problem is in `sklearn/utils/_set_output.py`: `_wrap_in_pandas_container` always forced the original input's index (96 rows) onto the output (4 rows), causing the length-mismatch `ValueError`.\n\n**Fix:** In `sklearn/utils/_set_output.py`, the wrapper now only overrides the index when its length matches the output's. Otherwise the output keeps its own index. This applies both to existing DataFrames and to the case where a new DataFrame is built from raw data.\n\nI didn't add a regression test, since the rules bar changes to test files. I also didn't run the full test suite, only `sklearn/utils/tests/test_set_output.py` and `sklearn/tests/test_pipeline.py`.",
+ "timed_out": false,
+ "docker_rc": 0,
+ "limits": {
+  "max_turns": 50,
+  "max_budget_usd": 2.0,
+  "timeout_min": 25.0
+ },
+ "network": "cotml-egress",
+ "proxy": true,
+ "claude_version": "2.1.296",
+ "model_usage": {
+  "claude-haiku-5-5": {
+   "inputTokens": 10,
+   "outputTokens": 2304,
+   "cacheReadInputTokens": 16754,
+   "cacheCreationInputTokens": 6759,
+   "webSearchRequests": 0,
+   "costUSD": 0.002165415,
+   "contextWindow": 1000000,
+   "maxOutputTokens": 128000,
+   "thinkingTokens": 799,
+   "canonicalModel": "claude-haiku-5-5",
+   "provider": "firstParty",
+   "costBasis": "list"
+  }
+ },
+ "started_at": "2026-10-14T09:36:53+00:00",
+ "framing": "issue",
+ "patch_files": [
+  "sklearn/utils/_set_output.py"
+ ],
+ "touched_test_files": [],
+ "untracked_files": []
+}

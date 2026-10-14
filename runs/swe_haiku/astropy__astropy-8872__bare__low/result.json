@@ -1,0 +1,73 @@
+{
+ "problem": "astropy__astropy-8872",
+ "bench": "swe",
+ "condition": "bare",
+ "effort": "low",
+ "model": "claude-haiku-5-5",
+ "batch": "swe_haiku",
+ "dry_run": false,
+ "outcome": "solved",
+ "verify_pass": true,
+ "verify_stage": "ok",
+ "verify_detail": "resolved (run_id cotml-20261014010249-791f459f)",
+ "num_turns": 5,
+ "input_tokens": 12,
+ "output_tokens": 1552,
+ "thinking_tokens": 266,
+ "cache_read_tokens": 13711,
+ "cache_creation_tokens": 5039,
+ "usage_source": "result",
+ "total_cost_usd": 0.001544185,
+ "duration_s": 19.2,
+ "agent_duration_ms": 18237,
+ "lean_compile_count": 2,
+ "search_tactic_uses": 0,
+ "search_tactic_in_final": false,
+ "tool_calls": {
+  "Bash": 4
+ },
+ "proof_chars": 1138,
+ "proof_lines": 21,
+ "statement_prefix_changed": false,
+ "stop_reason": "end_turn",
+ "result_subtype": "success",
+ "terminal_reason": "completed",
+ "is_error": false,
+ "api_error_status": null,
+ "permission_denials": 0,
+ "agent_said_give_up": false,
+ "final_text": "float16 quantities now keep their dtype. `test_preserve_dtype` passes, and `(np.float16(1) * u.km).dtype` returns `float16`.\n\n**Cause:** Two checks in `astropy/units/quantity.py` used `np.can_cast(np.float32, value.dtype)`. That asks whether float32 can be cast *to* the input dtype, which is false for float16, so float16 input was converted to float64. I added a `value.dtype.kind == 'f'` check alongside each existing test, so any floating-point input is kept as-is.\n\n**Tests:** In `test_quantity.py`, 84 tests pass and 3 fail. The three failures (`test_quantity_from_table`, `test_assign_slice_with_quantity_like`, `TestQuantityMatplotlib::test_scatter`) also fail without my change, so they are not caused by it.\n\nI did not commit; the change is only in the working tree.",
+ "timed_out": false,
+ "docker_rc": 0,
+ "limits": {
+  "max_turns": 50,
+  "max_budget_usd": 2.0,
+  "timeout_min": 25.0
+ },
+ "network": "cotml-egress",
+ "proxy": true,
+ "claude_version": "2.1.296",
+ "model_usage": {
+  "claude-haiku-5-5": {
+   "inputTokens": 12,
+   "outputTokens": 1552,
+   "cacheReadInputTokens": 13711,
+   "cacheCreationInputTokens": 5039,
+   "webSearchRequests": 0,
+   "costUSD": 0.001544185,
+   "contextWindow": 1000000,
+   "maxOutputTokens": 128000,
+   "thinkingTokens": 266,
+   "canonicalModel": "claude-haiku-5-5",
+   "provider": "firstParty",
+   "costBasis": "list"
+  }
+ },
+ "started_at": "2026-10-14T08:02:28+00:00",
+ "framing": "debug",
+ "patch_files": [
+  "astropy/units/quantity.py"
+ ],
+ "touched_test_files": [],
+ "untracked_files": []
+}

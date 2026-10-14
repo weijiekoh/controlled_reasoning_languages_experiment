@@ -1,0 +1,288 @@
+{"problem": "astropy__astropy-13977", "bench": "swe", "condition": "bare", "effort": "low", "outcome": "gave_up", "text_lines": 4, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "astropy__astropy-13977", "bench": "swe", "condition": "cod", "effort": "low", "outcome": "gave_up", "text_lines": 6, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "astropy__astropy-13977", "bench": "swe", "condition": "jellyfish", "effort": "low", "outcome": "gave_up", "text_lines": 8, "tagged_lines": 2, "compliance": 0.25, "tags": {"GOAL": 1, "PLAN": 1}}
+{"problem": "astropy__astropy-14096", "bench": "swe", "condition": "bare", "effort": "low", "outcome": "solved", "text_lines": 4, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "astropy__astropy-14096", "bench": "swe", "condition": "cod", "effort": "low", "outcome": "solved", "text_lines": 5, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "astropy__astropy-14096", "bench": "swe", "condition": "jellyfish", "effort": "low", "outcome": "solved", "text_lines": 5, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "astropy__astropy-14309", "bench": "swe", "condition": "bare", "effort": "low", "outcome": "solved", "text_lines": 3, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "astropy__astropy-14309", "bench": "swe", "condition": "cod", "effort": "low", "outcome": "solved", "text_lines": 5, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "astropy__astropy-14309", "bench": "swe", "condition": "jellyfish", "effort": "low", "outcome": "solved", "text_lines": 9, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "astropy__astropy-14369", "bench": "swe", "condition": "bare", "effort": "low", "outcome": "gave_up", "text_lines": 5, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "astropy__astropy-14369", "bench": "swe", "condition": "cod", "effort": "low", "outcome": "gave_up", "text_lines": 8, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "astropy__astropy-14369", "bench": "swe", "condition": "jellyfish", "effort": "low", "outcome": "gave_up", "text_lines": 11, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "astropy__astropy-7671", "bench": "swe", "condition": "bare", "effort": "low", "outcome": "solved", "text_lines": 7, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "astropy__astropy-7671", "bench": "swe", "condition": "cod", "effort": "low", "outcome": "solved", "text_lines": 5, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "astropy__astropy-7671", "bench": "swe", "condition": "jellyfish", "effort": "low", "outcome": "solved", "text_lines": 4, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "astropy__astropy-8872", "bench": "swe", "condition": "bare", "effort": "low", "outcome": "solved", "text_lines": 5, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "astropy__astropy-8872", "bench": "swe", "condition": "cod", "effort": "low", "outcome": "solved", "text_lines": 5, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "astropy__astropy-8872", "bench": "swe", "condition": "jellyfish", "effort": "low", "outcome": "solved", "text_lines": 9, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "django__django-11179", "bench": "swe", "condition": "bare", "effort": "low", "outcome": "solved", "text_lines": 4, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "django__django-11179", "bench": "swe", "condition": "cod", "effort": "low", "outcome": "solved", "text_lines": 3, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "django__django-11179", "bench": "swe", "condition": "jellyfish", "effort": "low", "outcome": "solved", "text_lines": 5, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "django__django-11451", "bench": "swe", "condition": "bare", "effort": "low", "outcome": "solved", "text_lines": 2, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "django__django-11451", "bench": "swe", "condition": "cod", "effort": "low", "outcome": "solved", "text_lines": 4, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "django__django-11451", "bench": "swe", "condition": "jellyfish", "effort": "low", "outcome": "solved", "text_lines": 7, "tagged_lines": 5, "compliance": 0.7142857142857143, "tags": {"GOAL": 1, "PLAN": 1, "FACT": 1, "RESULT": 1, "DONE": 1}}
+{"problem": "django__django-11551", "bench": "swe", "condition": "bare", "effort": "low", "outcome": "solved", "text_lines": 8, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "django__django-11551", "bench": "swe", "condition": "cod", "effort": "low", "outcome": "solved", "text_lines": 7, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "django__django-11551", "bench": "swe", "condition": "jellyfish", "effort": "low", "outcome": "solved", "text_lines": 9, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "django__django-11885", "bench": "swe", "condition": "bare", "effort": "low", "outcome": "solved", "text_lines": 10, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "django__django-11885", "bench": "swe", "condition": "cod", "effort": "low", "outcome": "solved", "text_lines": 11, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "django__django-11885", "bench": "swe", "condition": "jellyfish", "effort": "low", "outcome": "gave_up", "text_lines": 10, "tagged_lines": 1, "compliance": 0.1, "tags": {"GOAL": 1}}
+{"problem": "django__django-13023", "bench": "swe", "condition": "bare", "effort": "low", "outcome": "solved", "text_lines": 7, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "django__django-13023", "bench": "swe", "condition": "cod", "effort": "low", "outcome": "solved", "text_lines": 5, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "django__django-13023", "bench": "swe", "condition": "jellyfish", "effort": "low", "outcome": "solved", "text_lines": 9, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "django__django-13033", "bench": "swe", "condition": "bare", "effort": "low", "outcome": "solved", "text_lines": 7, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "django__django-13033", "bench": "swe", "condition": "cod", "effort": "low", "outcome": "solved", "text_lines": 5, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "django__django-13033", "bench": "swe", "condition": "jellyfish", "effort": "low", "outcome": "solved", "text_lines": 7, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "django__django-13297", "bench": "swe", "condition": "bare", "effort": "low", "outcome": "solved", "text_lines": 8, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "django__django-13297", "bench": "swe", "condition": "cod", "effort": "low", "outcome": "solved", "text_lines": 8, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "django__django-13297", "bench": "swe", "condition": "jellyfish", "effort": "low", "outcome": "solved", "text_lines": 4, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "django__django-13925", "bench": "swe", "condition": "bare", "effort": "low", "outcome": "solved", "text_lines": 6, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "django__django-13925", "bench": "swe", "condition": "cod", "effort": "low", "outcome": "solved", "text_lines": 5, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "django__django-13925", "bench": "swe", "condition": "jellyfish", "effort": "low", "outcome": "solved", "text_lines": 9, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "django__django-13964", "bench": "swe", "condition": "bare", "effort": "low", "outcome": "solved", "text_lines": 4, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "django__django-13964", "bench": "swe", "condition": "cod", "effort": "low", "outcome": "solved", "text_lines": 4, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "django__django-13964", "bench": "swe", "condition": "jellyfish", "effort": "low", "outcome": "solved", "text_lines": 5, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "django__django-14315", "bench": "swe", "condition": "bare", "effort": "low", "outcome": "solved", "text_lines": 5, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "django__django-14315", "bench": "swe", "condition": "cod", "effort": "low", "outcome": "solved", "text_lines": 8, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "django__django-14315", "bench": "swe", "condition": "jellyfish", "effort": "low", "outcome": "solved", "text_lines": 7, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "django__django-14351", "bench": "swe", "condition": "bare", "effort": "low", "outcome": "solved", "text_lines": 16, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "django__django-14351", "bench": "swe", "condition": "cod", "effort": "low", "outcome": "solved", "text_lines": 6, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "django__django-14351", "bench": "swe", "condition": "jellyfish", "effort": "low", "outcome": "solved", "text_lines": 18, "tagged_lines": 6, "compliance": 0.3333333333333333, "tags": {"GOAL": 1, "CHECK": 2, "OBJECTION": 1, "REPLY": 1, "DONE": 1}}
+{"problem": "django__django-14771", "bench": "swe", "condition": "bare", "effort": "low", "outcome": "solved", "text_lines": 4, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "django__django-14771", "bench": "swe", "condition": "cod", "effort": "low", "outcome": "solved", "text_lines": 4, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "django__django-14771", "bench": "swe", "condition": "jellyfish", "effort": "low", "outcome": "solved", "text_lines": 10, "tagged_lines": 9, "compliance": 0.9, "tags": {"DEF": 1, "GOAL": 1, "CHECK": 2, "FACT": 1, "PLAN": 1, "RESULT": 1, "DONE": 1, "OBJECTION": 1}}
+{"problem": "django__django-15022", "bench": "swe", "condition": "bare", "effort": "low", "outcome": "solved", "text_lines": 5, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "django__django-15022", "bench": "swe", "condition": "cod", "effort": "low", "outcome": "solved", "text_lines": 8, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "django__django-15022", "bench": "swe", "condition": "jellyfish", "effort": "low", "outcome": "solved", "text_lines": 5, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "django__django-15127", "bench": "swe", "condition": "bare", "effort": "low", "outcome": "solved", "text_lines": 7, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "django__django-15127", "bench": "swe", "condition": "cod", "effort": "low", "outcome": "solved", "text_lines": 6, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "django__django-15127", "bench": "swe", "condition": "jellyfish", "effort": "low", "outcome": "solved", "text_lines": 8, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "django__django-15554", "bench": "swe", "condition": "bare", "effort": "low", "outcome": "solved", "text_lines": 15, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "django__django-15554", "bench": "swe", "condition": "cod", "effort": "low", "outcome": "solved", "text_lines": 18, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "django__django-15554", "bench": "swe", "condition": "jellyfish", "effort": "low", "outcome": "solved", "text_lines": 28, "tagged_lines": 1, "compliance": 0.03571428571428571, "tags": {"DEF": 1}}
+{"problem": "django__django-15916", "bench": "swe", "condition": "bare", "effort": "low", "outcome": "solved", "text_lines": 7, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "django__django-15916", "bench": "swe", "condition": "cod", "effort": "low", "outcome": "solved", "text_lines": 5, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "django__django-15916", "bench": "swe", "condition": "jellyfish", "effort": "low", "outcome": "solved", "text_lines": 7, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "django__django-15930", "bench": "swe", "condition": "bare", "effort": "low", "outcome": "solved", "text_lines": 6, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "django__django-15930", "bench": "swe", "condition": "cod", "effort": "low", "outcome": "solved", "text_lines": 7, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "django__django-15930", "bench": "swe", "condition": "jellyfish", "effort": "low", "outcome": "solved", "text_lines": 10, "tagged_lines": 1, "compliance": 0.1, "tags": {"GOAL": 1}}
+{"problem": "django__django-16116", "bench": "swe", "condition": "bare", "effort": "low", "outcome": "solved", "text_lines": 4, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "django__django-16116", "bench": "swe", "condition": "cod", "effort": "low", "outcome": "solved", "text_lines": 4, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "django__django-16116", "bench": "swe", "condition": "jellyfish", "effort": "low", "outcome": "solved", "text_lines": 9, "tagged_lines": 4, "compliance": 0.4444444444444444, "tags": {"GOAL": 1, "FACT": 2, "RESULT": 1}}
+{"problem": "django__django-16642", "bench": "swe", "condition": "bare", "effort": "low", "outcome": "solved", "text_lines": 6, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "django__django-16642", "bench": "swe", "condition": "cod", "effort": "low", "outcome": "solved", "text_lines": 6, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "django__django-16642", "bench": "swe", "condition": "jellyfish", "effort": "low", "outcome": "solved", "text_lines": 12, "tagged_lines": 10, "compliance": 0.8333333333333334, "tags": {"DEF": 1, "GOAL": 1, "PLAN": 1, "FACT": 1, "RESULT": 2, "STATE": 1, "OBJECTION": 1, "REPLY": 1, "DONE": 1}}
+{"problem": "django__django-16661", "bench": "swe", "condition": "bare", "effort": "low", "outcome": "solved", "text_lines": 6, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "django__django-16661", "bench": "swe", "condition": "cod", "effort": "low", "outcome": "solved", "text_lines": 6, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "django__django-16661", "bench": "swe", "condition": "jellyfish", "effort": "low", "outcome": "solved", "text_lines": 11, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "django__django-16901", "bench": "swe", "condition": "bare", "effort": "low", "outcome": "solved", "text_lines": 4, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "django__django-16901", "bench": "swe", "condition": "cod", "effort": "low", "outcome": "solved", "text_lines": 5, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "django__django-16901", "bench": "swe", "condition": "jellyfish", "effort": "low", "outcome": "solved", "text_lines": 5, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "django__django-17084", "bench": "swe", "condition": "bare", "effort": "low", "outcome": "solved", "text_lines": 4, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "django__django-17084", "bench": "swe", "condition": "cod", "effort": "low", "outcome": "solved", "text_lines": 13, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "django__django-17084", "bench": "swe", "condition": "jellyfish", "effort": "low", "outcome": "solved", "text_lines": 12, "tagged_lines": 5, "compliance": 0.4166666666666667, "tags": {"GOAL": 1, "PLAN": 2, "FACT": 1, "DONE": 1}}
+{"problem": "matplotlib__matplotlib-14623", "bench": "swe", "condition": "bare", "effort": "low", "outcome": "solved", "text_lines": 10, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "matplotlib__matplotlib-14623", "bench": "swe", "condition": "cod", "effort": "low", "outcome": "solved", "text_lines": 7, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "matplotlib__matplotlib-14623", "bench": "swe", "condition": "jellyfish", "effort": "low", "outcome": "solved", "text_lines": 16, "tagged_lines": 11, "compliance": 0.6875, "tags": {"DEF": 1, "GOAL": 1, "CHECK": 1, "FACT": 5, "STATE": 1, "OBJECTION": 1, "REPLY": 1}}
+{"problem": "matplotlib__matplotlib-23314", "bench": "swe", "condition": "bare", "effort": "low", "outcome": "solved", "text_lines": 7, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "matplotlib__matplotlib-23314", "bench": "swe", "condition": "cod", "effort": "low", "outcome": "solved", "text_lines": 3, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "matplotlib__matplotlib-23314", "bench": "swe", "condition": "jellyfish", "effort": "low", "outcome": "solved", "text_lines": 8, "tagged_lines": 7, "compliance": 0.875, "tags": {"DEF": 1, "PLAN": 1, "CHECK": 2, "RESULT": 1, "DONE": 1, "OBJECTION": 1}}
+{"problem": "matplotlib__matplotlib-23412", "bench": "swe", "condition": "bare", "effort": "low", "outcome": "solved", "text_lines": 5, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "matplotlib__matplotlib-23412", "bench": "swe", "condition": "cod", "effort": "low", "outcome": "solved", "text_lines": 4, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "matplotlib__matplotlib-23412", "bench": "swe", "condition": "jellyfish", "effort": "low", "outcome": "solved", "text_lines": 7, "tagged_lines": 4, "compliance": 0.5714285714285714, "tags": {"DEF": 1, "GOAL": 1, "PLAN": 1, "FACT": 1}}
+{"problem": "matplotlib__matplotlib-24627", "bench": "swe", "condition": "bare", "effort": "low", "outcome": "solved", "text_lines": 11, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "matplotlib__matplotlib-24627", "bench": "swe", "condition": "cod", "effort": "low", "outcome": "solved", "text_lines": 9, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "matplotlib__matplotlib-24627", "bench": "swe", "condition": "jellyfish", "effort": "low", "outcome": "solved", "text_lines": 13, "tagged_lines": 2, "compliance": 0.15384615384615385, "tags": {"GOAL": 1, "PLAN": 1}}
+{"problem": "matplotlib__matplotlib-24870", "bench": "swe", "condition": "bare", "effort": "low", "outcome": "solved", "text_lines": 5, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "matplotlib__matplotlib-24870", "bench": "swe", "condition": "cod", "effort": "low", "outcome": "solved", "text_lines": 5, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "matplotlib__matplotlib-24870", "bench": "swe", "condition": "jellyfish", "effort": "low", "outcome": "solved", "text_lines": 5, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "matplotlib__matplotlib-24970", "bench": "swe", "condition": "bare", "effort": "low", "outcome": "solved", "text_lines": 8, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "matplotlib__matplotlib-24970", "bench": "swe", "condition": "cod", "effort": "low", "outcome": "solved", "text_lines": 6, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "matplotlib__matplotlib-24970", "bench": "swe", "condition": "jellyfish", "effort": "low", "outcome": "solved", "text_lines": 11, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "matplotlib__matplotlib-25287", "bench": "swe", "condition": "bare", "effort": "low", "outcome": "solved", "text_lines": 11, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "matplotlib__matplotlib-25287", "bench": "swe", "condition": "cod", "effort": "low", "outcome": "solved", "text_lines": 4, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "matplotlib__matplotlib-25287", "bench": "swe", "condition": "jellyfish", "effort": "low", "outcome": "solved", "text_lines": 9, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "matplotlib__matplotlib-25960", "bench": "swe", "condition": "bare", "effort": "low", "outcome": "gave_up", "text_lines": 13, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "matplotlib__matplotlib-25960", "bench": "swe", "condition": "cod", "effort": "low", "outcome": "solved", "text_lines": 16, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "matplotlib__matplotlib-25960", "bench": "swe", "condition": "jellyfish", "effort": "low", "outcome": "gave_up", "text_lines": 12, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "matplotlib__matplotlib-26113", "bench": "swe", "condition": "bare", "effort": "low", "outcome": "solved", "text_lines": 5, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "matplotlib__matplotlib-26113", "bench": "swe", "condition": "cod", "effort": "low", "outcome": "solved", "text_lines": 9, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "matplotlib__matplotlib-26113", "bench": "swe", "condition": "jellyfish", "effort": "low", "outcome": "solved", "text_lines": 12, "tagged_lines": 11, "compliance": 0.9166666666666666, "tags": {"DEF": 1, "GOAL": 1, "PLAN": 2, "FACT": 2, "RESULT": 2, "DONE": 1, "OBJECTION": 1, "REPLY": 1}}
+{"problem": "mwaskom__seaborn-3069", "bench": "swe", "condition": "bare", "effort": "low", "outcome": "solved", "text_lines": 10, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "mwaskom__seaborn-3069", "bench": "swe", "condition": "cod", "effort": "low", "outcome": "solved", "text_lines": 12, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "mwaskom__seaborn-3069", "bench": "swe", "condition": "jellyfish", "effort": "low", "outcome": "solved", "text_lines": 17, "tagged_lines": 3, "compliance": 0.17647058823529413, "tags": {"DEF": 1, "GOAL": 1, "PLAN": 1}}
+{"problem": "pallets__flask-5014", "bench": "swe", "condition": "bare", "effort": "low", "outcome": "solved", "text_lines": 2, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "pallets__flask-5014", "bench": "swe", "condition": "cod", "effort": "low", "outcome": "solved", "text_lines": 2, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "pallets__flask-5014", "bench": "swe", "condition": "jellyfish", "effort": "low", "outcome": "solved", "text_lines": 9, "tagged_lines": 6, "compliance": 0.6666666666666666, "tags": {"DEF": 1, "GOAL": 1, "CHECK": 1, "FACT": 1, "STATE": 1, "DONE": 1}}
+{"problem": "psf__requests-1724", "bench": "swe", "condition": "bare", "effort": "low", "outcome": "solved", "text_lines": 6, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "psf__requests-1724", "bench": "swe", "condition": "cod", "effort": "low", "outcome": "solved", "text_lines": 5, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "psf__requests-1724", "bench": "swe", "condition": "jellyfish", "effort": "low", "outcome": "solved", "text_lines": 9, "tagged_lines": 4, "compliance": 0.4444444444444444, "tags": {"DEF": 1, "GOAL": 1, "FACT": 2}}
+{"problem": "psf__requests-1921", "bench": "swe", "condition": "bare", "effort": "low", "outcome": "solved", "text_lines": 5, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "psf__requests-1921", "bench": "swe", "condition": "cod", "effort": "low", "outcome": "solved", "text_lines": 6, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "psf__requests-1921", "bench": "swe", "condition": "jellyfish", "effort": "low", "outcome": "solved", "text_lines": 8, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "psf__requests-6028", "bench": "swe", "condition": "bare", "effort": "low", "outcome": "solved", "text_lines": 13, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "psf__requests-6028", "bench": "swe", "condition": "cod", "effort": "low", "outcome": "solved", "text_lines": 8, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "psf__requests-6028", "bench": "swe", "condition": "jellyfish", "effort": "low", "outcome": "solved", "text_lines": 12, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "pydata__xarray-3095", "bench": "swe", "condition": "bare", "effort": "low", "outcome": "solved", "text_lines": 3, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "pydata__xarray-3095", "bench": "swe", "condition": "cod", "effort": "low", "outcome": "solved", "text_lines": 3, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "pydata__xarray-3095", "bench": "swe", "condition": "jellyfish", "effort": "low", "outcome": "solved", "text_lines": 8, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "pydata__xarray-4687", "bench": "swe", "condition": "bare", "effort": "low", "outcome": "solved", "text_lines": 17, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "pydata__xarray-4687", "bench": "swe", "condition": "cod", "effort": "low", "outcome": "solved", "text_lines": 11, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "pydata__xarray-4687", "bench": "swe", "condition": "jellyfish", "effort": "low", "outcome": "solved", "text_lines": 14, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "pydata__xarray-6744", "bench": "swe", "condition": "bare", "effort": "low", "outcome": "solved", "text_lines": 7, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "pydata__xarray-6744", "bench": "swe", "condition": "cod", "effort": "low", "outcome": "solved", "text_lines": 5, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "pydata__xarray-6744", "bench": "swe", "condition": "jellyfish", "effort": "low", "outcome": "solved", "text_lines": 3, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "pydata__xarray-6938", "bench": "swe", "condition": "bare", "effort": "low", "outcome": "gave_up", "text_lines": 8, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "pydata__xarray-6938", "bench": "swe", "condition": "cod", "effort": "low", "outcome": "gave_up", "text_lines": 8, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "pydata__xarray-6938", "bench": "swe", "condition": "jellyfish", "effort": "low", "outcome": "gave_up", "text_lines": 13, "tagged_lines": 7, "compliance": 0.5384615384615384, "tags": {"GOAL": 1, "CHECK": 1, "RESULT": 2, "DONE": 1, "OBJECTION": 1, "REPLY": 1}}
+{"problem": "pydata__xarray-7229", "bench": "swe", "condition": "bare", "effort": "low", "outcome": "gave_up", "text_lines": 11, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "pydata__xarray-7229", "bench": "swe", "condition": "cod", "effort": "low", "outcome": "gave_up", "text_lines": 7, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "pydata__xarray-7229", "bench": "swe", "condition": "jellyfish", "effort": "low", "outcome": "gave_up", "text_lines": 9, "tagged_lines": 1, "compliance": 0.1111111111111111, "tags": {"GOAL": 1}}
+{"problem": "pydata__xarray-7233", "bench": "swe", "condition": "bare", "effort": "low", "outcome": "solved", "text_lines": 4, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "pydata__xarray-7233", "bench": "swe", "condition": "cod", "effort": "low", "outcome": "solved", "text_lines": 4, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "pydata__xarray-7233", "bench": "swe", "condition": "jellyfish", "effort": "low", "outcome": "solved", "text_lines": 4, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "pylint-dev__pylint-6528", "bench": "swe", "condition": "bare", "effort": "low", "outcome": "solved", "text_lines": 7, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "pylint-dev__pylint-6528", "bench": "swe", "condition": "cod", "effort": "low", "outcome": "solved", "text_lines": 22, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "pylint-dev__pylint-6528", "bench": "swe", "condition": "jellyfish", "effort": "low", "outcome": "solved", "text_lines": 13, "tagged_lines": 4, "compliance": 0.3076923076923077, "tags": {"DEF": 1, "GOAL": 1, "PLAN": 1, "DONE": 1}}
+{"problem": "pylint-dev__pylint-7080", "bench": "swe", "condition": "bare", "effort": "low", "outcome": "solved", "text_lines": 5, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "pylint-dev__pylint-7080", "bench": "swe", "condition": "cod", "effort": "low", "outcome": "gave_up", "text_lines": 9, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "pylint-dev__pylint-7080", "bench": "swe", "condition": "jellyfish", "effort": "low", "outcome": "gave_up", "text_lines": 10, "tagged_lines": 7, "compliance": 0.7, "tags": {"DEF": 1, "GOAL": 1, "CHECK": 1, "RESULT": 2, "FACT": 1, "DONE": 1}}
+{"problem": "pylint-dev__pylint-8898", "bench": "swe", "condition": "bare", "effort": "low", "outcome": "solved", "text_lines": 10, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "pylint-dev__pylint-8898", "bench": "swe", "condition": "cod", "effort": "low", "outcome": "solved", "text_lines": 6, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "pylint-dev__pylint-8898", "bench": "swe", "condition": "jellyfish", "effort": "low", "outcome": "solved", "text_lines": 12, "tagged_lines": 2, "compliance": 0.16666666666666666, "tags": {"DEF": 1, "PLAN": 1}}
+{"problem": "pytest-dev__pytest-5631", "bench": "swe", "condition": "bare", "effort": "low", "outcome": "solved", "text_lines": 5, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "pytest-dev__pytest-5631", "bench": "swe", "condition": "cod", "effort": "low", "outcome": "solved", "text_lines": 2, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "pytest-dev__pytest-5631", "bench": "swe", "condition": "jellyfish", "effort": "low", "outcome": "solved", "text_lines": 10, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "pytest-dev__pytest-6202", "bench": "swe", "condition": "bare", "effort": "low", "outcome": "solved", "text_lines": 6, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "pytest-dev__pytest-6202", "bench": "swe", "condition": "cod", "effort": "low", "outcome": "solved", "text_lines": 6, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "pytest-dev__pytest-6202", "bench": "swe", "condition": "jellyfish", "effort": "low", "outcome": "solved", "text_lines": 9, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "pytest-dev__pytest-7236", "bench": "swe", "condition": "bare", "effort": "low", "outcome": "solved", "text_lines": 8, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "pytest-dev__pytest-7236", "bench": "swe", "condition": "cod", "effort": "low", "outcome": "solved", "text_lines": 6, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "pytest-dev__pytest-7236", "bench": "swe", "condition": "jellyfish", "effort": "low", "outcome": "solved", "text_lines": 7, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "pytest-dev__pytest-7571", "bench": "swe", "condition": "bare", "effort": "low", "outcome": "solved", "text_lines": 7, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "pytest-dev__pytest-7571", "bench": "swe", "condition": "cod", "effort": "low", "outcome": "solved", "text_lines": 4, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "pytest-dev__pytest-7571", "bench": "swe", "condition": "jellyfish", "effort": "low", "outcome": "solved", "text_lines": 7, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "scikit-learn__scikit-learn-13135", "bench": "swe", "condition": "bare", "effort": "low", "outcome": "solved", "text_lines": 4, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "scikit-learn__scikit-learn-13135", "bench": "swe", "condition": "cod", "effort": "low", "outcome": "solved", "text_lines": 4, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "scikit-learn__scikit-learn-13135", "bench": "swe", "condition": "jellyfish", "effort": "low", "outcome": "solved", "text_lines": 9, "tagged_lines": 8, "compliance": 0.8888888888888888, "tags": {"DEF": 1, "GOAL": 1, "FACT": 2, "PLAN": 1, "RESULT": 2, "DONE": 1}}
+{"problem": "scikit-learn__scikit-learn-13328", "bench": "swe", "condition": "bare", "effort": "low", "outcome": "solved", "text_lines": 3, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "scikit-learn__scikit-learn-13328", "bench": "swe", "condition": "cod", "effort": "low", "outcome": "solved", "text_lines": 4, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "scikit-learn__scikit-learn-13328", "bench": "swe", "condition": "jellyfish", "effort": "low", "outcome": "solved", "text_lines": 7, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "scikit-learn__scikit-learn-13779", "bench": "swe", "condition": "bare", "effort": "low", "outcome": "solved", "text_lines": 4, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "scikit-learn__scikit-learn-13779", "bench": "swe", "condition": "cod", "effort": "low", "outcome": "solved", "text_lines": 5, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "scikit-learn__scikit-learn-13779", "bench": "swe", "condition": "jellyfish", "effort": "low", "outcome": "solved", "text_lines": 8, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "scikit-learn__scikit-learn-14141", "bench": "swe", "condition": "bare", "effort": "low", "outcome": "solved", "text_lines": 1, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "scikit-learn__scikit-learn-14141", "bench": "swe", "condition": "cod", "effort": "low", "outcome": "solved", "text_lines": 1, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "scikit-learn__scikit-learn-14141", "bench": "swe", "condition": "jellyfish", "effort": "low", "outcome": "solved", "text_lines": 4, "tagged_lines": 3, "compliance": 0.75, "tags": {"GOAL": 1, "RESULT": 1, "FACT": 1}}
+{"problem": "scikit-learn__scikit-learn-14496", "bench": "swe", "condition": "bare", "effort": "low", "outcome": "solved", "text_lines": 4, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "scikit-learn__scikit-learn-14496", "bench": "swe", "condition": "cod", "effort": "low", "outcome": "solved", "text_lines": 2, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "scikit-learn__scikit-learn-14496", "bench": "swe", "condition": "jellyfish", "effort": "low", "outcome": "solved", "text_lines": 7, "tagged_lines": 6, "compliance": 0.8571428571428571, "tags": {"DEF": 1, "GOAL": 1, "FACT": 1, "PLAN": 1, "RESULT": 1, "DONE": 1}}
+{"problem": "scikit-learn__scikit-learn-14710", "bench": "swe", "condition": "bare", "effort": "low", "outcome": "gave_up", "text_lines": 10, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "scikit-learn__scikit-learn-14710", "bench": "swe", "condition": "cod", "effort": "low", "outcome": "gave_up", "text_lines": 7, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "scikit-learn__scikit-learn-14710", "bench": "swe", "condition": "jellyfish", "effort": "low", "outcome": "solved", "text_lines": 6, "tagged_lines": 3, "compliance": 0.5, "tags": {"GOAL": 1, "PLAN": 1, "INFER": 1}}
+{"problem": "scikit-learn__scikit-learn-25747", "bench": "swe", "condition": "bare", "effort": "low", "outcome": "gave_up", "text_lines": 5, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "scikit-learn__scikit-learn-25747", "bench": "swe", "condition": "cod", "effort": "low", "outcome": "gave_up", "text_lines": 5, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "scikit-learn__scikit-learn-25747", "bench": "swe", "condition": "jellyfish", "effort": "low", "outcome": "gave_up", "text_lines": 5, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "scikit-learn__scikit-learn-26323", "bench": "swe", "condition": "bare", "effort": "low", "outcome": "solved", "text_lines": 4, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "scikit-learn__scikit-learn-26323", "bench": "swe", "condition": "cod", "effort": "low", "outcome": "solved", "text_lines": 4, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "scikit-learn__scikit-learn-26323", "bench": "swe", "condition": "jellyfish", "effort": "low", "outcome": "solved", "text_lines": 9, "tagged_lines": 2, "compliance": 0.2222222222222222, "tags": {"DEF": 1, "GOAL": 1}}
+{"problem": "sphinx-doc__sphinx-10323", "bench": "swe", "condition": "bare", "effort": "low", "outcome": "solved", "text_lines": 5, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "sphinx-doc__sphinx-10323", "bench": "swe", "condition": "cod", "effort": "low", "outcome": "solved", "text_lines": 5, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "sphinx-doc__sphinx-10323", "bench": "swe", "condition": "jellyfish", "effort": "low", "outcome": "solved", "text_lines": 5, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "sphinx-doc__sphinx-10466", "bench": "swe", "condition": "bare", "effort": "low", "outcome": "solved", "text_lines": 2, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "sphinx-doc__sphinx-10466", "bench": "swe", "condition": "cod", "effort": "low", "outcome": "solved", "text_lines": 4, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "sphinx-doc__sphinx-10466", "bench": "swe", "condition": "jellyfish", "effort": "low", "outcome": "solved", "text_lines": 7, "tagged_lines": 5, "compliance": 0.7142857142857143, "tags": {"GOAL": 1, "FACT": 2, "PLAN": 1, "RESULT": 1}}
+{"problem": "sphinx-doc__sphinx-11445", "bench": "swe", "condition": "bare", "effort": "low", "outcome": "solved", "text_lines": 12, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "sphinx-doc__sphinx-11445", "bench": "swe", "condition": "cod", "effort": "low", "outcome": "solved", "text_lines": 5, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "sphinx-doc__sphinx-11445", "bench": "swe", "condition": "jellyfish", "effort": "low", "outcome": "solved", "text_lines": 11, "tagged_lines": 3, "compliance": 0.2727272727272727, "tags": {"DEF": 1, "PLAN": 2}}
+{"problem": "sphinx-doc__sphinx-7440", "bench": "swe", "condition": "bare", "effort": "low", "outcome": "solved", "text_lines": 9, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "sphinx-doc__sphinx-7440", "bench": "swe", "condition": "cod", "effort": "low", "outcome": "solved", "text_lines": 10, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "sphinx-doc__sphinx-7440", "bench": "swe", "condition": "jellyfish", "effort": "low", "outcome": "solved", "text_lines": 9, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "sphinx-doc__sphinx-7454", "bench": "swe", "condition": "bare", "effort": "low", "outcome": "gave_up", "text_lines": 7, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "sphinx-doc__sphinx-7454", "bench": "swe", "condition": "cod", "effort": "low", "outcome": "gave_up", "text_lines": 11, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "sphinx-doc__sphinx-7454", "bench": "swe", "condition": "jellyfish", "effort": "low", "outcome": "gave_up", "text_lines": 9, "tagged_lines": 3, "compliance": 0.3333333333333333, "tags": {"DEF": 1, "GOAL": 1, "PLAN": 1}}
+{"problem": "sphinx-doc__sphinx-7757", "bench": "swe", "condition": "bare", "effort": "low", "outcome": "solved", "text_lines": 4, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "sphinx-doc__sphinx-7757", "bench": "swe", "condition": "cod", "effort": "low", "outcome": "solved", "text_lines": 8, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "sphinx-doc__sphinx-7757", "bench": "swe", "condition": "jellyfish", "effort": "low", "outcome": "solved", "text_lines": 6, "tagged_lines": 2, "compliance": 0.3333333333333333, "tags": {"FACT": 1, "HYP": 1}}
+{"problem": "sphinx-doc__sphinx-7910", "bench": "swe", "condition": "bare", "effort": "low", "outcome": "solved", "text_lines": 4, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "sphinx-doc__sphinx-7910", "bench": "swe", "condition": "cod", "effort": "low", "outcome": "solved", "text_lines": 4, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "sphinx-doc__sphinx-7910", "bench": "swe", "condition": "jellyfish", "effort": "low", "outcome": "solved", "text_lines": 21, "tagged_lines": 10, "compliance": 0.47619047619047616, "tags": {"DEF": 1, "GOAL": 1, "PLAN": 1, "CHECK": 2, "RESULT": 1, "FACT": 1, "DONE": 1, "OBJECTION": 1, "REPLY": 1}}
+{"problem": "sphinx-doc__sphinx-8621", "bench": "swe", "condition": "bare", "effort": "low", "outcome": "solved", "text_lines": 7, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "sphinx-doc__sphinx-8621", "bench": "swe", "condition": "cod", "effort": "low", "outcome": "solved", "text_lines": 13, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "sphinx-doc__sphinx-8621", "bench": "swe", "condition": "jellyfish", "effort": "low", "outcome": "solved", "text_lines": 10, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "sphinx-doc__sphinx-8638", "bench": "swe", "condition": "bare", "effort": "low", "outcome": "gave_up", "text_lines": 9, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "sphinx-doc__sphinx-8638", "bench": "swe", "condition": "cod", "effort": "low", "outcome": "gave_up", "text_lines": 10, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "sphinx-doc__sphinx-8638", "bench": "swe", "condition": "jellyfish", "effort": "low", "outcome": "gave_up", "text_lines": 14, "tagged_lines": 1, "compliance": 0.07142857142857142, "tags": {"DEF": 1}}
+{"problem": "sphinx-doc__sphinx-9281", "bench": "swe", "condition": "bare", "effort": "low", "outcome": "solved", "text_lines": 2, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "sphinx-doc__sphinx-9281", "bench": "swe", "condition": "cod", "effort": "low", "outcome": "solved", "text_lines": 4, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "sphinx-doc__sphinx-9281", "bench": "swe", "condition": "jellyfish", "effort": "low", "outcome": "solved", "text_lines": 14, "tagged_lines": 12, "compliance": 0.8571428571428571, "tags": {"DEF": 1, "GOAL": 1, "FACT": 2, "PLAN": 2, "DONE": 1, "RESULT": 3, "OBJECTION": 1, "REPLY": 1}}
+{"problem": "sphinx-doc__sphinx-9602", "bench": "swe", "condition": "bare", "effort": "low", "outcome": "gave_up", "text_lines": 7, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "sphinx-doc__sphinx-9602", "bench": "swe", "condition": "cod", "effort": "low", "outcome": "gave_up", "text_lines": 11, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "sphinx-doc__sphinx-9602", "bench": "swe", "condition": "jellyfish", "effort": "low", "outcome": "gave_up", "text_lines": 8, "tagged_lines": 5, "compliance": 0.625, "tags": {"DEF": 1, "GOAL": 1, "OBJECTION": 1, "REPLY": 1, "DONE": 1}}
+{"problem": "sphinx-doc__sphinx-9698", "bench": "swe", "condition": "bare", "effort": "low", "outcome": "solved", "text_lines": 6, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "sphinx-doc__sphinx-9698", "bench": "swe", "condition": "cod", "effort": "low", "outcome": "solved", "text_lines": 3, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "sphinx-doc__sphinx-9698", "bench": "swe", "condition": "jellyfish", "effort": "low", "outcome": "solved", "text_lines": 7, "tagged_lines": 3, "compliance": 0.42857142857142855, "tags": {"DEF": 1, "GOAL": 1, "FACT": 1}}
+{"problem": "sympy__sympy-12481", "bench": "swe", "condition": "bare", "effort": "low", "outcome": "solved", "text_lines": 8, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "sympy__sympy-12481", "bench": "swe", "condition": "cod", "effort": "low", "outcome": "solved", "text_lines": 8, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "sympy__sympy-12481", "bench": "swe", "condition": "jellyfish", "effort": "low", "outcome": "solved", "text_lines": 15, "tagged_lines": 9, "compliance": 0.6, "tags": {"GOAL": 1, "SUBGOAL": 1, "PLAN": 1, "DONE": 1, "RESULT": 3, "OBJECTION": 1, "REPLY": 1}}
+{"problem": "sympy__sympy-12489", "bench": "swe", "condition": "bare", "effort": "low", "outcome": "gave_up", "text_lines": 13, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "sympy__sympy-12489", "bench": "swe", "condition": "cod", "effort": "low", "outcome": "gave_up", "text_lines": 10, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "sympy__sympy-12489", "bench": "swe", "condition": "jellyfish", "effort": "low", "outcome": "gave_up", "text_lines": 13, "tagged_lines": 2, "compliance": 0.15384615384615385, "tags": {"DEF": 1, "PLAN": 1}}
+{"problem": "sympy__sympy-13551", "bench": "swe", "condition": "bare", "effort": "low", "outcome": "solved", "text_lines": 7, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "sympy__sympy-13551", "bench": "swe", "condition": "cod", "effort": "low", "outcome": "solved", "text_lines": 7, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "sympy__sympy-13551", "bench": "swe", "condition": "jellyfish", "effort": "low", "outcome": "solved", "text_lines": 10, "tagged_lines": 1, "compliance": 0.1, "tags": {"DEF": 1}}
+{"problem": "sympy__sympy-13647", "bench": "swe", "condition": "bare", "effort": "low", "outcome": "solved", "text_lines": 12, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "sympy__sympy-13647", "bench": "swe", "condition": "cod", "effort": "low", "outcome": "solved", "text_lines": 11, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "sympy__sympy-13647", "bench": "swe", "condition": "jellyfish", "effort": "low", "outcome": "solved", "text_lines": 9, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "sympy__sympy-13798", "bench": "swe", "condition": "bare", "effort": "low", "outcome": "gave_up", "text_lines": 5, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "sympy__sympy-13798", "bench": "swe", "condition": "cod", "effort": "low", "outcome": "gave_up", "text_lines": 7, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "sympy__sympy-13798", "bench": "swe", "condition": "jellyfish", "effort": "low", "outcome": "gave_up", "text_lines": 9, "tagged_lines": 4, "compliance": 0.4444444444444444, "tags": {"DEF": 1, "GOAL": 1, "SUBGOAL": 1, "CHECK": 1}}
+{"problem": "sympy__sympy-13877", "bench": "swe", "condition": "bare", "effort": "low", "outcome": "solved", "text_lines": 6, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "sympy__sympy-13877", "bench": "swe", "condition": "cod", "effort": "low", "outcome": "solved", "text_lines": 6, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "sympy__sympy-13877", "bench": "swe", "condition": "jellyfish", "effort": "low", "outcome": "gave_up", "text_lines": 16, "tagged_lines": 5, "compliance": 0.3125, "tags": {"GOAL": 1, "FACT": 2, "RESULT": 2}}
+{"problem": "sympy__sympy-15017", "bench": "swe", "condition": "bare", "effort": "low", "outcome": "solved", "text_lines": 14, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "sympy__sympy-15017", "bench": "swe", "condition": "cod", "effort": "low", "outcome": "gave_up", "text_lines": 9, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "sympy__sympy-15017", "bench": "swe", "condition": "jellyfish", "effort": "low", "outcome": "solved", "text_lines": 11, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "sympy__sympy-15345", "bench": "swe", "condition": "bare", "effort": "low", "outcome": "solved", "text_lines": 7, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "sympy__sympy-15345", "bench": "swe", "condition": "cod", "effort": "low", "outcome": "solved", "text_lines": 7, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "sympy__sympy-15345", "bench": "swe", "condition": "jellyfish", "effort": "low", "outcome": "solved", "text_lines": 12, "tagged_lines": 8, "compliance": 0.6666666666666666, "tags": {"DEF": 1, "GOAL": 1, "FACT": 1, "CHECK": 1, "STATE": 1, "DONE": 1, "OBJECTION": 1, "REPLY": 1}}
+{"problem": "sympy__sympy-15349", "bench": "swe", "condition": "bare", "effort": "low", "outcome": "solved", "text_lines": 11, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "sympy__sympy-15349", "bench": "swe", "condition": "cod", "effort": "low", "outcome": "solved", "text_lines": 10, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "sympy__sympy-15349", "bench": "swe", "condition": "jellyfish", "effort": "low", "outcome": "solved", "text_lines": 11, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "sympy__sympy-15875", "bench": "swe", "condition": "bare", "effort": "low", "outcome": "solved", "text_lines": 5, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "sympy__sympy-15875", "bench": "swe", "condition": "cod", "effort": "low", "outcome": "solved", "text_lines": 4, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "sympy__sympy-15875", "bench": "swe", "condition": "jellyfish", "effort": "low", "outcome": "solved", "text_lines": 14, "tagged_lines": 5, "compliance": 0.35714285714285715, "tags": {"DEF": 1, "PLAN": 1, "FACT": 1, "HYP": 1, "REFUTER": 1}}
+{"problem": "sympy__sympy-16597", "bench": "swe", "condition": "bare", "effort": "low", "outcome": "gave_up", "text_lines": 9, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "sympy__sympy-16597", "bench": "swe", "condition": "cod", "effort": "low", "outcome": "gave_up", "text_lines": 9, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "sympy__sympy-16597", "bench": "swe", "condition": "jellyfish", "effort": "low", "outcome": "gave_up", "text_lines": 14, "tagged_lines": 1, "compliance": 0.07142857142857142, "tags": {"GOAL": 1}}
+{"problem": "sympy__sympy-16886", "bench": "swe", "condition": "bare", "effort": "low", "outcome": "solved", "text_lines": 2, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "sympy__sympy-16886", "bench": "swe", "condition": "cod", "effort": "low", "outcome": "solved", "text_lines": 2, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "sympy__sympy-16886", "bench": "swe", "condition": "jellyfish", "effort": "low", "outcome": "solved", "text_lines": 3, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "sympy__sympy-18698", "bench": "swe", "condition": "bare", "effort": "low", "outcome": "gave_up", "text_lines": 7, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "sympy__sympy-18698", "bench": "swe", "condition": "cod", "effort": "low", "outcome": "gave_up", "text_lines": 6, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "sympy__sympy-18698", "bench": "swe", "condition": "jellyfish", "effort": "low", "outcome": "gave_up", "text_lines": 23, "tagged_lines": 4, "compliance": 0.17391304347826086, "tags": {"GOAL": 1, "DEF": 1, "PLAN": 1, "DONE": 1}}
+{"problem": "sympy__sympy-20590", "bench": "swe", "condition": "bare", "effort": "low", "outcome": "solved", "text_lines": 6, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "sympy__sympy-20590", "bench": "swe", "condition": "cod", "effort": "low", "outcome": "solved", "text_lines": 10, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "sympy__sympy-20590", "bench": "swe", "condition": "jellyfish", "effort": "low", "outcome": "solved", "text_lines": 6, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "sympy__sympy-20916", "bench": "swe", "condition": "bare", "effort": "low", "outcome": "gave_up", "text_lines": 8, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "sympy__sympy-20916", "bench": "swe", "condition": "cod", "effort": "low", "outcome": "gave_up", "text_lines": 11, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "sympy__sympy-20916", "bench": "swe", "condition": "jellyfish", "effort": "low", "outcome": "gave_up", "text_lines": 6, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "sympy__sympy-21379", "bench": "swe", "condition": "bare", "effort": "low", "outcome": "gave_up", "text_lines": 7, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "sympy__sympy-21379", "bench": "swe", "condition": "cod", "effort": "low", "outcome": "solved", "text_lines": 7, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "sympy__sympy-21379", "bench": "swe", "condition": "jellyfish", "effort": "low", "outcome": "gave_up", "text_lines": 10, "tagged_lines": 3, "compliance": 0.3, "tags": {"GOAL": 1, "PLAN": 1, "RESULT": 1}}
+{"problem": "sympy__sympy-21930", "bench": "swe", "condition": "bare", "effort": "low", "outcome": "gave_up", "text_lines": 9, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "sympy__sympy-21930", "bench": "swe", "condition": "cod", "effort": "low", "outcome": "gave_up", "text_lines": 12, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "sympy__sympy-21930", "bench": "swe", "condition": "jellyfish", "effort": "low", "outcome": "gave_up", "text_lines": 14, "tagged_lines": 4, "compliance": 0.2857142857142857, "tags": {"GOAL": 1, "PLAN": 1, "CHECK": 1, "RESULT": 1}}
+{"problem": "sympy__sympy-22456", "bench": "swe", "condition": "bare", "effort": "low", "outcome": "gave_up", "text_lines": 7, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "sympy__sympy-22456", "bench": "swe", "condition": "cod", "effort": "low", "outcome": "gave_up", "text_lines": 8, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "sympy__sympy-22456", "bench": "swe", "condition": "jellyfish", "effort": "low", "outcome": "gave_up", "text_lines": 9, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "sympy__sympy-22714", "bench": "swe", "condition": "bare", "effort": "low", "outcome": "solved", "text_lines": 6, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "sympy__sympy-22714", "bench": "swe", "condition": "cod", "effort": "low", "outcome": "solved", "text_lines": 6, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "sympy__sympy-22714", "bench": "swe", "condition": "jellyfish", "effort": "low", "outcome": "solved", "text_lines": 13, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "sympy__sympy-23534", "bench": "swe", "condition": "bare", "effort": "low", "outcome": "solved", "text_lines": 7, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "sympy__sympy-23534", "bench": "swe", "condition": "cod", "effort": "low", "outcome": "solved", "text_lines": 3, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "sympy__sympy-23534", "bench": "swe", "condition": "jellyfish", "effort": "low", "outcome": "solved", "text_lines": 7, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "sympy__sympy-24562", "bench": "swe", "condition": "bare", "effort": "low", "outcome": "solved", "text_lines": 7, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "sympy__sympy-24562", "bench": "swe", "condition": "cod", "effort": "low", "outcome": "solved", "text_lines": 8, "tagged_lines": 0, "compliance": 0.0, "tags": {}}
+{"problem": "sympy__sympy-24562", "bench": "swe", "condition": "jellyfish", "effort": "low", "outcome": "solved", "text_lines": 12, "tagged_lines": 3, "compliance": 0.25, "tags": {"DEF": 1, "GOAL": 1, "FACT": 1}}

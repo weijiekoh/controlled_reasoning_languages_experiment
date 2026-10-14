@@ -1,0 +1,18 @@
+Resolve the issue below in the Git repository at `/testbed`. The repository is checked out at the commit where the issue was reported. Python and the project's dependencies are installed in the active conda environment `testbed`.
+
+Rules:
+- Change the source code in `/testbed` to resolve the issue. Do not modify or add test files under the repository's test directories. Do not commit; leave your changes in the working tree.
+- Network access is not available. Do not install packages.
+- Run the project's own tests to check your change.
+- Stop when the issue is resolved.
+- If you conclude that you cannot resolve the issue, say "I give up" and stop.
+
+<issue>
+makemigrations --check generating migrations is inconsistent with other uses of --check
+Description
+	
+To script a check for missing migrations but without actually intending to create the migrations, it is necessary to use both --check and --dry-run, which is inconsistent with migrate --check and optimizemigration --check, which just exit (after possibly logging a bit).
+I'm suggesting that makemigrations --check should just exit without making migrations.
+The choice to write the migrations anyway was not discussed AFAICT on ticket:25604 or ​https://groups.google.com/g/django-developers/c/zczdY6c9KSg/m/ZXCXQsGDDAAJ.
+Noticed when reading ​PR to adjust the documentation of migrate --check. I think the current documentation is silent on this question.
+</issue>

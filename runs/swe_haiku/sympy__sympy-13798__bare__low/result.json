@@ -1,0 +1,73 @@
+{
+ "problem": "sympy__sympy-13798",
+ "bench": "swe",
+ "condition": "bare",
+ "effort": "low",
+ "model": "claude-haiku-5-5",
+ "batch": "swe_haiku",
+ "dry_run": false,
+ "outcome": "gave_up",
+ "verify_pass": false,
+ "verify_stage": "tests",
+ "verify_detail": "FAIL_TO_PASS 0/1 failing: test_latex_basic; PASS_TO_PASS 102/102",
+ "num_turns": 6,
+ "input_tokens": 14,
+ "output_tokens": 1443,
+ "thinking_tokens": 57,
+ "cache_read_tokens": 17572,
+ "cache_creation_tokens": 3046,
+ "usage_source": "result",
+ "total_cost_usd": 0.00127937,
+ "duration_s": 13.1,
+ "agent_duration_ms": 12432,
+ "lean_compile_count": 1,
+ "search_tactic_uses": 0,
+ "search_tactic_in_final": false,
+ "tool_calls": {
+  "Bash": 5
+ },
+ "proof_chars": 934,
+ "proof_lines": 20,
+ "statement_prefix_changed": false,
+ "stop_reason": "end_turn",
+ "result_subtype": "success",
+ "terminal_reason": "completed",
+ "is_error": false,
+ "api_error_status": null,
+ "permission_denials": 0,
+ "agent_said_give_up": false,
+ "final_text": "`latex()` now accepts an arbitrary `mul_symbol` string, so `latex(3*x**2*y, mul_symbol=r'\\,')` gives `3\\,x^{2}\\,y`. The four built-in choices (`None`, `\"ldot\"`, `\"dot\"`, `\"times\"`) behave as before.\n\nThe change is in `sympy/printing/latex.py`, in the `mul_symbol` setup. Any value not in the lookup table is now used verbatim as the LaTeX separator. Both the regular and the number-specific separators use it.\n\nThe latex test file gives the same result before and after the change: 105 passed, 2 expected to fail, 9 exceptions. The exceptions are already present on the unmodified code. I did not add a test for the new behaviour, since test files were off limits.",
+ "timed_out": false,
+ "docker_rc": 0,
+ "limits": {
+  "max_turns": 50,
+  "max_budget_usd": 2.0,
+  "timeout_min": 25.0
+ },
+ "network": "cotml-egress",
+ "proxy": true,
+ "claude_version": "2.1.296",
+ "model_usage": {
+  "claude-haiku-5-5": {
+   "inputTokens": 14,
+   "outputTokens": 1443,
+   "cacheReadInputTokens": 17572,
+   "cacheCreationInputTokens": 3046,
+   "webSearchRequests": 0,
+   "costUSD": 0.00127937,
+   "contextWindow": 1000000,
+   "maxOutputTokens": 128000,
+   "thinkingTokens": 57,
+   "canonicalModel": "claude-haiku-5-5",
+   "provider": "firstParty",
+   "costBasis": "list"
+  }
+ },
+ "started_at": "2026-10-14T09:41:40+00:00",
+ "framing": "issue",
+ "patch_files": [
+  "sympy/printing/latex.py"
+ ],
+ "touched_test_files": [],
+ "untracked_files": []
+}

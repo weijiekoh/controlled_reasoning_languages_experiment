@@ -1,0 +1,73 @@
+{
+ "problem": "sphinx-doc__sphinx-11445",
+ "bench": "swe",
+ "condition": "bare",
+ "effort": "low",
+ "model": "claude-haiku-5-5",
+ "batch": "swe_haiku",
+ "dry_run": false,
+ "outcome": "solved",
+ "verify_pass": true,
+ "verify_stage": "ok",
+ "verify_detail": "resolved (run_id cotml-20261014023839-10df406b)",
+ "num_turns": 8,
+ "input_tokens": 18,
+ "output_tokens": 2356,
+ "thinking_tokens": 334,
+ "cache_read_tokens": 35116,
+ "cache_creation_tokens": 4667,
+ "usage_source": "result",
+ "total_cost_usd": 0.002114335,
+ "duration_s": 64.2,
+ "agent_duration_ms": 63522,
+ "lean_compile_count": 6,
+ "search_tactic_uses": 0,
+ "search_tactic_in_final": false,
+ "tool_calls": {
+  "Bash": 7
+ },
+ "proof_chars": 411,
+ "proof_lines": 10,
+ "statement_prefix_changed": false,
+ "stop_reason": "end_turn",
+ "result_subtype": "success",
+ "terminal_reason": "completed",
+ "is_error": false,
+ "api_error_status": null,
+ "permission_denials": 0,
+ "agent_said_give_up": false,
+ "final_text": "The fix is in place: a top-level heading that starts with a domain role such as `:mod:`mypackage2`` now renders and appears in the toctree when `rst_prolog` is set.\n\n**Cause:** `prepend_prolog` in `sphinx/util/rst.py` uses `docinfo_re` to skip docinfo fields before inserting the prolog. The pattern `:\\w+:.*?` also matches the start of `:mod:`mypackage2``, so the prolog was inserted above the heading and broke it.\n\n**Change:** I narrowed the pattern to `:\\w+:( |$)`, so a docinfo field marker must be followed by a space or end of line. That one-line edit is the only change in the working tree; nothing is committed.\n\n**Verification:**\n- I reproduced the issue's setup in `/tmp` (index with a toctree, `mypackage.rst` starting with `:mod:`mypackage2``, and an `rst_prolog`). After the fix, `mypackage2` appears in the built `index.html`.\n- `tests/test_util_rst.py`, `tests/test_intl.py`, `tests/test_markup.py` and `tests/test_build_html.py` ran with 632 passed and 2 failed.\n- `test_assets_order` fails on the original code as well, so it predates this change.\n- `test_html_copy_source` failed in the full run but passed when run alone, both with and without my change. I did not isolate why it failed in the full run.\n\nI did not add a regression test, since the rules bar changes to test files.",
+ "timed_out": false,
+ "docker_rc": 0,
+ "limits": {
+  "max_turns": 50,
+  "max_budget_usd": 2.0,
+  "timeout_min": 25.0
+ },
+ "network": "cotml-egress",
+ "proxy": true,
+ "claude_version": "2.1.296",
+ "model_usage": {
+  "claude-haiku-5-5": {
+   "inputTokens": 18,
+   "outputTokens": 2356,
+   "cacheReadInputTokens": 35116,
+   "cacheCreationInputTokens": 4667,
+   "webSearchRequests": 0,
+   "costUSD": 0.002114335,
+   "contextWindow": 1000000,
+   "maxOutputTokens": 128000,
+   "thinkingTokens": 334,
+   "canonicalModel": "claude-haiku-5-5",
+   "provider": "firstParty",
+   "costBasis": "list"
+  }
+ },
+ "started_at": "2026-10-14T09:37:34+00:00",
+ "framing": "issue",
+ "patch_files": [
+  "sphinx/util/rst.py"
+ ],
+ "touched_test_files": [],
+ "untracked_files": []
+}
